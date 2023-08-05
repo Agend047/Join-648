@@ -1,0 +1,40 @@
+#login-logo {
+    transform: none;
+    width: 60px;
+}
+
+#login-logo.splash-active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
+    transition: 1s;
+}
+
+#splash-login-bg {
+    background-color: var(--primary-bg-color);
+    height: 100vh;
+    transition: 1s;
+}
+
+#splash-login-bg.splash-moving {
+    background-color: transparent;
+}
+
+#login-logo.splash-moving {
+    top: 2em;
+    left: 2em;
+    transform: translate(0,0);
+}
+
+.d-none {
+    display: none;
+}
+
+header {
+    padding: 2em;
+}
+
+header.splash-active {
+    padding: 0;
+}
