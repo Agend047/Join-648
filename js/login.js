@@ -1,7 +1,11 @@
+const splashLoginBgEl = document.getElementById('splash-login-bg');
+const loginLogoEl = document.getElementById('login-logo');
+const headerEl = document.getElementById('header');
+
 function init() {
     checkWidth();
     if (loaded === 'desktop') {
-        document.getElementById('login-logo').src = './assets/img/join_logo_black.png';
+        loginLogoEl.src = './assets/img/join_logo_black.png';
     }
     animateSplashScreen();
 }
@@ -14,18 +18,18 @@ function animateSplashScreen() {
 }
 /**Splash screen animation: This functions starts the splash screen animation by adding the 'splash-moving' class to the logo and background container. */
 function startSplashAnimation() {
-    document.getElementById('login-logo').classList.add('splash-moving');
-    document.getElementById('splash-login-bg').classList.add('splash-moving');
+    loginLogoEl.classList.add('splash-moving');
+    splashLoginBgEl.classList.add('splash-moving');
 }
 /**Splash screen animation: This function changes the logo from the white to the black one during the splash screen animation. */
 function changeLogo() {
-    document.getElementById('login-logo').src = './assets/img/join_logo_black.png';
+    loginLogoEl.src = './assets/img/join_logo_black.png';
 }
 /**Splash screen animation: This function adds and removes classes to achieve the end result of the animation. */
 function removeSplash() {
-    document.getElementById('splash-login-bg').classList.add('d-none');
-    document.getElementById('splash-login-bg').classList.remove('splash-moving');
-    document.getElementById('login-logo').classList.remove('splash-moving');
-    document.getElementById('login-logo').classList.remove('splash-active');
-    document.getElementById('header').classList.remove('splash-active');
+    splashLoginBgEl.classList.add('d-none');
+    splashLoginBgEl.classList.remove('splash-moving');
+    loginLogoEl.classList.remove('splash-moving');
+    loginLogoEl.classList.remove('splash-active');
+    headerEl.classList.remove('splash-active');
 }
