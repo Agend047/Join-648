@@ -99,6 +99,7 @@ box-sizing: inherit;	}
 box-sizing: content-box;	}*/
 body {
     margin: 0px;
+    font-family: 'Inter';
 }
 
 
