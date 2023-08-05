@@ -42,3 +42,9 @@ header {
 header.splash-active {
     padding: 0;
 }
+
+@media (min-width: 600px) {
+    #splash-login-bg {
+        background-color: white;
+    }
+}
