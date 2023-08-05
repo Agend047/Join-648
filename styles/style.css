@@ -87,13 +87,32 @@ box-sizing: border-box;
 --subtle-bg-color: #F6F7F8;
 --accent-color: #29ABE2;
 --fs-smaller: ;
---fs-small: ;
+--fs-small: 1rem;
 --fs-normal: 1.25rem;
---fs-tall: ;
---fs-taller: ;
+--fs-tall: 2.25rem;
+--fs-taller: 2.938rem;
 }	
 *, ::before, ::after {	
 box-sizing: inherit;	}	
 /*use following template if any third-party components are used that require box-sizing: content-box	
 .third-party-component {	
 box-sizing: content-box;	}*/
+body {
+    margin: 0px;
+}
+
+
+/* Desktop Sider & Header 
+*/
+#desktop_sider {
+    position: fixed;
+    height: 100vh;
+    width: 20vw;
+    background-color: #2A3647;
+    color: #CDCDCD;
+}
+
+#Sider_Logo {
+    width: 100px;
+    height: 122px;
+}
