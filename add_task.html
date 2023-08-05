@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body onload="getHeader()">
-    <div w3-include-html="assets/templates/desktop_template.html"></div>
+<body onload="checkWidth()">
+    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
+    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
 </body>
 
 </html>
