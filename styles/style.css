@@ -1,0 +1,19 @@
+body {
+    margin: 0px;
+}
+
+
+/* Desktop Sider & Header 
+*/
+#desktop_sider {
+    position: fixed;
+    height: 100vh;
+    width: 20vw;
+    background-color: #2A3647;
+    color: #CDCDCD;
+}
+
+#Sider_Logo {
+    width: 100px;
+    height: 122px;
+}
