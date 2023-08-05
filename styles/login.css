@@ -1,3 +1,7 @@
+:root {
+    --logo-target-padding: 2em;
+}
+
 #login-logo {
     transform: none;
     width: 60px;
@@ -22,8 +26,8 @@
 }
 
 #login-logo.splash-moving {
-    top: 2em;
-    left: 2em;
+    top: var(--logo-target-padding);
+    left: var(--logo-target-padding);
     transform: translate(0,0);
 }
 
@@ -32,7 +36,7 @@
 }
 
 header {
-    padding: 2em;
+    padding: var(--logo-target-padding);
 }
 
 header.splash-active {
