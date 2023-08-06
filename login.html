@@ -9,15 +9,26 @@
     <script defer src="./js/script.js"></script>
     <script defer src="./js/login.js"></script>
   </head>
-  <body onload='init()'>
-    <header id='header' class='splash-active'>
-      <img
+  <body onload="init()">
+    <div id="splash-login-bg"></div>
+    <img
         src="./assets/img/join_logo_white.png"
         alt="Join logo"
         class="img-large splash-active"
         id="login-logo"
       />
+    <header id="header" class="splash-active">
+      <img
+        src="./assets/img/join_logo_black.png"
+        alt="Join logo"
+        class="img-large d-none"
+        id="login-logo-static"
+      />
+      <div class='login-sign-up-banner'>
+        <span>Not a Join user?</span><a href="#" class="btn-primary">Sign up</a>
+      </div>
     </header>
-    <div id="splash-login-bg"></div>
+    <main></main>
+    
   </body>
 </html>

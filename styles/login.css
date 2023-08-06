@@ -2,7 +2,18 @@
     --logo-target-padding: 2em;
 }
 
-#login-logo {
+header {
+    padding: var(--logo-target-padding);
+    position: relative;
+    opacity: 0;
+    transition: 1s;
+}
+
+header.splash-moving {
+    opacity: 1;
+}
+
+#login-logo, #login-logo-static {
     transform: none;
     width: 60px;
 }
@@ -15,9 +26,25 @@
     transition: 1s;
 }
 
+#login-logo.splash-moving {
+    top: var(--logo-target-padding);
+    left: var(--logo-target-padding);
+    transform: translate(0,0);
+}
+
+.login-sign-up-banner {
+    position: absolute;
+    top: var(--logo-target-padding);
+    right: var(--logo-target-padding);
+}
+
 #splash-login-bg {
     background-color: var(--secondary-bg-color);
-    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     transition: 1s;
 }
 
@@ -25,22 +52,8 @@
     background-color: transparent;
 }
 
-#login-logo.splash-moving {
-    top: var(--logo-target-padding);
-    left: var(--logo-target-padding);
-    transform: translate(0,0);
-}
-
 .d-none {
     display: none;
-}
-
-header {
-    padding: var(--logo-target-padding);
-}
-
-header.splash-active {
-    padding: 0;
 }
 
 @media (min-width: 600px) {

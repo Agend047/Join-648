@@ -1,5 +1,6 @@
 const splashLoginBgEl = document.getElementById('splash-login-bg');
 const loginLogoEl = document.getElementById('login-logo');
+const loginLogoStaticEl = document.getElementById('login-logo-static');
 const headerEl = document.getElementById('header');
 
 function init() {
@@ -20,6 +21,7 @@ function animateSplashScreen() {
 function startSplashAnimation() {
     loginLogoEl.classList.add('splash-moving');
     splashLoginBgEl.classList.add('splash-moving');
+    headerEl.classList.add('splash-moving');
 }
 /**Splash screen animation: This function changes the logo from the white to the black one during the splash screen animation. */
 function changeLogo() {
@@ -31,5 +33,6 @@ function removeSplash() {
     splashLoginBgEl.classList.remove('splash-moving');
     loginLogoEl.classList.remove('splash-moving');
     loginLogoEl.classList.remove('splash-active');
-    headerEl.classList.remove('splash-active');
+    loginLogoEl.classList.add('d-none');
+    loginLogoStaticEl.classList.remove('d-none');
 }
