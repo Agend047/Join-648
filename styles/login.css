@@ -32,10 +32,8 @@ header.splash-moving {
     transform: translate(0,0);
 }
 
-.login-sign-up-banner {
-    position: absolute;
-    top: var(--logo-target-padding);
-    right: var(--logo-target-padding);
+.login-sign-up-banner-desktop {
+    display: none;
 }
 
 #splash-login-bg {
@@ -59,5 +57,12 @@ header.splash-moving {
 @media (min-width: 600px) {
     #splash-login-bg {
         background-color: white;
+    }
+
+    .login-sign-up-banner-desktop {
+        display: unset;
+        position: absolute;
+        top: var(--logo-target-padding);
+        right: var(--logo-target-padding);
     }
 }
