@@ -31,10 +31,6 @@ header {
     transform: translate(0,0);
 }
 
-.login-sign-up-banner-desktop {
-    display: none;
-}
-
 #splash-login-bg {
     background-color: var(--secondary-bg-color);
     position: fixed;
@@ -49,13 +45,25 @@ header {
     background-color: transparent;
 }
 
-.d-none {
+.login-sign-up-banner-desktop {
     display: none;
+}
+
+/*Log in form*/
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (min-width: 600px) {
     #splash-login-bg {
         background-color: white;
+    }
+
+    .login-sign-up-banner-mobile {
+        display: none;
     }
 
     .login-sign-up-banner-desktop {

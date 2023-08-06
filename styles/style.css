@@ -100,6 +100,7 @@ box-sizing: content-box;	}*/
 body {
     margin: 0px;
     font-family: 'Inter', sans-serif;
+    background-color: var(--subtle-bg-color);
 }
 
 
@@ -116,4 +117,10 @@ body {
 #Sider_Logo {
     width: 100px;
     height: 122px;
+}
+
+/* Utility classes */
+
+.d-none {
+  display: none;
 }

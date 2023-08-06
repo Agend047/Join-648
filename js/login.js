@@ -10,7 +10,7 @@ function init() {
     }
     animateSplashScreen();
 }
-/**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. */
+/**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
 function animateSplashScreen() {
     const SPLASH_DURATION = 1000;
     setTimeout(startSplashAnimation, SPLASH_DURATION);
