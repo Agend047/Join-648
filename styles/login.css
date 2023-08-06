@@ -53,14 +53,39 @@ main {
     padding-inline: 1rem;
 }
 
+.horizontal-separator {
+    background-color: var(--accent-color);
+    width: 88px;
+    height: 3px;
+}
+
 /*Log in form*/
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-inline: 1em;
     background-color: white; 
     border-radius: 1.875em;
+}
+
+input {
+    border: none;
+    outline: none;
+    font-size: unset;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    border: 1px solid lightgray;
+    border-radius: 0.3em;
+}
+
+.input > input {
+    flex: 1;
 }
 
 @media (min-width: 600px) {

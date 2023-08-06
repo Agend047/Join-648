@@ -132,3 +132,7 @@ body {
 .flex-direction-col {
   flex-direction: column;
 }
+
+.p-relative {
+  position: relative;
+}
