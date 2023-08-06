@@ -4,13 +4,12 @@
 
 header {
     padding: var(--logo-target-padding);
-    position: relative;
-    opacity: 0;
-    transition: 1s;
+    display: flex;
+    justify-content: space-between;
 }
 
-header.splash-moving {
-    opacity: 1;
+#login-logo-static.splash-active {
+    visibility: hidden;
 }
 
 #login-logo, #login-logo-static {
@@ -61,8 +60,5 @@ header.splash-moving {
 
     .login-sign-up-banner-desktop {
         display: unset;
-        position: absolute;
-        top: var(--logo-target-padding);
-        right: var(--logo-target-padding);
     }
 }
