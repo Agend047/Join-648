@@ -49,12 +49,18 @@ header {
     display: none;
 }
 
+main {
+    padding-inline: 1rem;
+}
+
 /*Log in form*/
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white; 
+    border-radius: 1.875em;
 }
 
 @media (min-width: 600px) {

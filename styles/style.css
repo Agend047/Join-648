@@ -124,3 +124,11 @@ body {
 .d-none {
   display: none;
 }
+
+.d-flex {
+  display: flex;
+}
+
+.flex-direction-col {
+  flex-direction: column;
+}
