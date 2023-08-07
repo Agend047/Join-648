@@ -1,0 +1,154 @@
+#helloPageMobile {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.188em;
+    font-size: 2.25rem;
+    color: #2A3647;
+    overflow: hidden;
+}
+
+.fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 2s 2s, opacity 1s linear;
+}
+
+h1 {
+    font-size: 2.938rem;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+p {
+    margin: 0;
+}
+
+.blue-text {
+    color: #29ABE2;
+}
+
+.gap18 {
+    gap: 18px;
+}
+
+.gap10 {
+    gap: 10px;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    overflow: hidden;
+    margin-top: 128px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.summary-headline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.subheadline {
+    font-size: 1.25rem;
+}
+
+.seperator-mobile {
+    background-color: #29ABE2;
+    height: 3px;
+    width: 90px;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+}
+
+.seperator-desktop {
+    background-color: #29ABE2;
+    height: 40px;
+    width: 20px;
+    margin-left: 16px;
+    margin-right: 16px;
+    display: none;
+}
+
+.summary-container {
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 14px;
+    color: var(--secondary-bg-color) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+}
+
+button img {
+    height: 40px;
+    width: 40px;
+}
+
+.number {
+    font-size: 2.938rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 13px;
+}
+
+.square-box {
+    width: calc(100 / 3);
+    padding: 0px 25px 0px 25px;
+    height: 110px;
+}
+
+.middle-row {
+    align-items: center;
+    padding: 28px 0 28px 0;
+    height: 110px;
+    gap: 20px;
+}
+
+.seperator-grey {
+    width: 2px;
+    height: 68px;
+    background-color: #D1D1D1;
+}
+
+#date {
+    font-weight: 700;
+    font-size: 16px;
+    padding-bottom: 8px;
+}
+
+.bottom-row {
+    display: flex;
+    gap: 20px;
+}
+
+.rectangular-box {
+    padding: 38px 19px 38px 19px;
+    gap: 10px;
+    height: 110px;
+    width: 50%;
+}

@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="scripte/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/summary.js"></script>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/style_summary.css">
+    <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body>
+<body onload="removeHelloPageMobile()">
     <div w3-include-html="includes/header.html"></div>
 
     <div id="helloPageMobile" class="">
@@ -19,22 +20,51 @@
     </div>
 
     <main>
-        <article>
+        <div class="summary-headline-container">
             <h1>Summary</h1>
+            <div class="seperator-desktop"></div>
             <p class="subheadline">Everything in a nutshell!</p>
-            <div class="seperator"></div>
-        </article>
+            <div class="seperator-mobile"></div>
+        </div>
 
-        <article class="">
-            <div class="">
-                <div>5</div>
-                <div>2</div>
-                <div>2</div>
+        <article class="summary-container">
+
+            <div class="top-row">
+                <button class="square-box flex-direction-col"><div class="number">5</div><span>Tasks in<br>Board</span></button>
+                <button class="square-box flex-direction-col"><div class="number">2</div><span>Tasks In<br>Progress</span></button>
+                <button class="square-box flex-direction-col"><div class="number">2</div><span>Awaiting<br>feedback</span></button>
             </div>
-            <div>1</div>
-            <div>
-                <div>1</div>
-                <div>1</div>
+
+            <button class="middle-row">
+                <div class="d-flex gap18 align-items-center">
+                    <img src="./assets/img/sum_urgent_icon.png">
+                    <div class="d-flex flex-direction-col">
+                        <div class="number">1</div>
+                        <span>Urgent</span>
+                    </div>
+                </div>
+                <div class="seperator-grey"></div>
+                <div>
+                    <div id="date">August 07, 2023</div>
+                    <div class="deadline">Upcoming Deadline</div>
+                </div>
+            </button>
+
+            <div class="bottom-row">
+                <button class="rectangular-box">
+                    <img src="./assets/img/sum_todo_icon.png">
+                    <div class="d-flex flex-direction-col">
+                        <div class="number">1</div>
+                        <span>To-do</span>
+                    </div>
+                </button>
+                <button class="rectangular-box">
+                    <img src="./assets/img/sum_done_icon.png">
+                    <div class="d-flex flex-direction-col">
+                        <div class="number">1</div>
+                        <span> Done</span>
+                    </div>
+                </button>
             </div>
         </article>
 

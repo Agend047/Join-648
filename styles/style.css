@@ -101,6 +101,7 @@ body {
     margin: 0px;
     font-family: 'Inter', sans-serif;
     background-color: var(--subtle-bg-color);
+    color: var(--secondary-bg-color);
 }
 
 
@@ -135,4 +136,8 @@ body {
 
 .p-relative {
   position: relative;
+}
+
+.align-items-center {
+  align-items: center;
 }
