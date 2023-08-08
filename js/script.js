@@ -8,10 +8,10 @@ function checkWidth() {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 600) {
-        getMatchingTemplate('mobile-template', 'desktop-template') //HERE
+        getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile'
     } else if (docWidth > 600) {
-        getMatchingTemplate('desktop-template', 'mobile-template') //HERE
+        getMatchingTemplate('desktop-template', 'mobile-template')
         loaded = 'desktop'
     }
 }
@@ -23,18 +23,18 @@ window.onresize = function () {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 600 && loaded == 'desktop') {
-        getMatchingTemplate('mobile-template', 'desktop-template') //HERE
-        // getMobileTemplates()
+        getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile';
     } else if (docWidth > 600 && loaded == 'mobile') {
-        getMatchingTemplate('desktop-template', 'mobile-template') //HERE
-        // getDesktopTemplates()
+        getMatchingTemplate('desktop-template', 'mobile-template')
         loaded = 'desktop';
     }
 }
 
 /**
  * Loads in templates for needed Version, (Mobile or Desktop) unloads the other templates, if needed.
+ * @param {toLoadID} *The ID of the html-template, that has to be loaded.
+ * @param {toUnloadID} *The ID of that html-template, that has to be unloaded.
  */
 async function getMatchingTemplate(toLoadID, toUnloadID) {
     let includeElement = document.getElementById(toLoadID);
