@@ -181,6 +181,30 @@ body {
   background-color: #FFFFFF;
   position: fixed;
   width: 100vw;
+  height: 96px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#desktop_header p {
+  padding-left: 300px;
+}
+
+.Desktop_header_rightArea {
+  padding-right: 2vw;
+  align-items: center;
+  justify-content: space-between;
+  width: 123px;
+  height: 56px;
+}
+
+#header_help_icon {
+  width: 20px;
+  height: 20px;
+}
+
+#header_help_icon:hover {
+  cursor: pointer;
 }
 
 /* Utility classes */
