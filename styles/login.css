@@ -105,6 +105,16 @@ textarea {
     object-fit: contain;
 }
 
+.forgot-password {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    margin-block-start: 2em;
+    padding-inline: 0.5em;
+    font-size: var(--fs-small);
+}
+
 h1 {
     font-size: var(--fs-taller);
     margin-block: 0.5em 0.25em;

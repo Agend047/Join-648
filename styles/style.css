@@ -130,7 +130,29 @@ body {
   color: var(--secondary-bg-color);
 }
 
+.text-link {
+  color: var(--accent-color);
+  text-decoration: none;
+}
 
+.btn {
+  border: none;
+  padding: 1em 2em;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  border-radius: 0.5em;
+}
+
+.btn-primary {
+  color:white;
+  background-color: var(--primary-bg-color);
+}
+
+.btn-secondary {
+  color: var(--primary-bg-color);
+  background-color: white;
+  border: 1px solid var(--primary-bg-color);
+}
 /* Desktop Sider & Header */
 
 #desktop_header {
