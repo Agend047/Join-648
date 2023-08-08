@@ -154,6 +154,7 @@ a {
   font-size: var(--fs-small);
   font-weight: 700;
   border-radius: 0.5em;
+  cursor: pointer;
 }
 
 .btn-primary {
