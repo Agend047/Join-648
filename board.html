@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="scripte/script.js"></script>
+    <script src="js/script.js"></script>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body>
-    <div w3-include-html="includes/header.html"></div>
-    
+<body onload="checkWidth()">
+    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
+    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
 </body>
 
 </html>

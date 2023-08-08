@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body onload="removeHelloPageMobile()">
-    <div w3-include-html="includes/header.html"></div>
+<body onload="removeHelloPageMobile(), checkWidth()">
+    <!-- <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
+    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div> -->
 
     <div id="helloPageMobile" class="">
         <p>Good morning,</p>
@@ -30,9 +31,15 @@
         <article class="summary-container">
 
             <div class="top-row">
-                <button class="flex-direction-col"><div class="number">5</div><span>Tasks in<br>Board</span></button>
-                <button class="flex-direction-col"><div class="number">2</div><span>Tasks In<br>Progress</span></button>
-                <button class="flex-direction-col"><div class="number">2</div><span>Awaiting<br>feedback</span></button>
+                <button class="flex-direction-col">
+                    <div class="number">5</div><span>Tasks in<br>Board</span>
+                </button>
+                <button class="flex-direction-col">
+                    <div class="number">2</div><span>Tasks In<br>Progress</span>
+                </button>
+                <button class="flex-direction-col">
+                    <div class="number">2</div><span>Awaiting<br>feedback</span>
+                </button>
             </div>
 
             <button class="middle-row">
@@ -51,14 +58,16 @@
             </button>
 
             <div class="bottom-row">
-                <button onmouseover="changeIcon('todoIcon', 'sum_todo_icon_white.svg')" onmouseout="changeIcon('todoIcon', 'sum_todo_icon.png')">
+                <button onmouseover="changeIcon('todoIcon', 'sum_todo_icon_white.svg')"
+                    onmouseout="changeIcon('todoIcon', 'sum_todo_icon.png')">
                     <img id="todoIcon" src="./assets/img/sum_todo_icon.png">
                     <div class="d-flex flex-direction-col">
                         <div class="number">1</div>
                         <span>To-do</span>
                     </div>
                 </button>
-                <button onmouseover="changeIcon('doneIcon', 'sum_done_icon_white.svg')" onmouseout="changeIcon('doneIcon', 'sum_done_icon.png')">
+                <button onmouseover="changeIcon('doneIcon', 'sum_done_icon_white.svg')"
+                    onmouseout="changeIcon('doneIcon', 'sum_done_icon.png')">
                     <img id="doneIcon" src="./assets/img/sum_done_icon.png">
                     <div class="d-flex flex-direction-col">
                         <div class="number">1</div>
@@ -68,7 +77,7 @@
             </div>
         </article>
 
-        
+
     </main>
 </body>
 

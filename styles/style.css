@@ -158,7 +158,7 @@ a {
 }
 
 .btn-primary {
-  color:white;
+  color: white;
   background-color: var(--primary-bg-color);
 }
 
@@ -167,6 +167,7 @@ a {
   background-color: white;
   border: 1px solid var(--primary-bg-color);
 }
+
 /* Desktop Sider & Header */
 
 #desktop_header {
@@ -240,7 +241,7 @@ a {
   width: 25px;
   height: 25px;
   position: relative;
-  top: 12px;
+  top: 20px;
   right: 12px;
 }
 
@@ -344,5 +345,5 @@ a {
 }
 
 .p-inline-1 {
-  padding-inline: 0.5em; 
+  padding-inline: 0.5em;
 }
