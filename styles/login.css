@@ -1,103 +1,125 @@
 :root {
-    --logo-target-padding: 2em;
+  --logo-target-padding: 2em;
 }
 
 header {
-    padding: var(--logo-target-padding);
-    display: flex;
-    justify-content: space-between;
+  padding: var(--logo-target-padding);
+  display: flex;
+  justify-content: space-between;
 }
 
 #login-logo-static.splash-active {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-#login-logo, #login-logo-static {
-    transform: none;
-    width: 60px;
+#login-logo,
+#login-logo-static {
+  transform: none;
+  width: 60px;
 }
 
 #login-logo.splash-active {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5);
-    transition: 1s;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  transition: 1s;
 }
 
 #login-logo.splash-moving {
-    top: var(--logo-target-padding);
-    left: var(--logo-target-padding);
-    transform: translate(0,0);
+  top: var(--logo-target-padding);
+  left: var(--logo-target-padding);
+  transform: translate(0, 0);
 }
 
 #splash-login-bg {
-    background-color: var(--secondary-bg-color);
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    transition: 1s;
+  background-color: var(--secondary-bg-color);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: 1s;
 }
 
 #splash-login-bg.splash-moving {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .login-sign-up-banner-desktop {
-    display: none;
+  display: none;
 }
 
 main {
-    padding-inline: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 1rem;
 }
 
 .horizontal-separator {
-    background-color: var(--accent-color);
-    width: 88px;
-    height: 3px;
+  background-color: var(--accent-color);
+  width: 88px;
+  height: 3px;
 }
 
 /*Log in form*/
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-inline: 1em;
-    background-color: white; 
-    border-radius: 1.875em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(300px, 60vw, 652px);
+  padding-inline: 1em;
+  background-color: white;
+  border-radius: 1.875em;
 }
 
-input {
-    border: none;
-    outline: none;
-    font-size: unset;
+input,
+textarea {
+  border: none;
+  outline: none;
+  font-size: unset;
+  font-family: unset;
+  min-width: 0;
 }
 
 .input {
-    display: flex;
-    align-items: center;
-    padding: 0.5em;
-    border: 1px solid lightgray;
-    border-radius: 0.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 422px;
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid lightgray;
+  border-radius: 0.3em;
+  margin-block-start: 1em;
 }
 
 .input > input {
     flex: 1;
 }
 
+.input-icon {
+    width: 20px;
+    object-fit: contain;
+}
+
+h1 {
+    font-size: var(--fs-taller);
+    margin-block: 0.5em 0.25em;
+}
+
 @media (min-width: 600px) {
-    #splash-login-bg {
-        background-color: white;
-    }
+  #splash-login-bg {
+    background-color: white;
+  }
 
-    .login-sign-up-banner-mobile {
-        display: none;
-    }
+  .login-sign-up-banner-mobile {
+    display: none;
+  }
 
-    .login-sign-up-banner-desktop {
-        display: unset;
-    }
+  .login-sign-up-banner-desktop {
+    display: unset;
+  }
 }
