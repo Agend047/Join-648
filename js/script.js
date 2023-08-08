@@ -58,3 +58,7 @@ function unloadTemplate(toUnloadID) {
     let toUnload = document.getElementById(toUnloadID);
     toUnload.innerHTML = '';
 }
+
+function openHelp() {
+    alert("Help div is not ready!")
+}

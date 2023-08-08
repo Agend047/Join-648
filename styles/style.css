@@ -129,36 +129,76 @@ body {
 }
 
 
-/* Desktop Sider & Header 
-*/
+/* Desktop Sider & Header */
+
+#desktop_header {
+  position: fixed;
+  background-color: #FFFFFF;
+  width: 100vw;
+  height: 96px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#desktop_header p {
+  padding-left: 300px;
+}
+
+.Header_rightArea_d {
+  padding-right: 2vw;
+  align-items: center;
+  justify-content: space-between;
+  width: 123px;
+  height: 56px;
+}
+
+#header_help_icon_d {
+  width: 20px;
+  height: 20px;
+}
+
+#header_help_icon:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+
+  #desktop_header p {
+    padding-left: 242px;
+  }
+}
+
 #desktop_sider {
-  z-index: 2;
   position: fixed;
   height: 100vh;
   width: 232px;
+  z-index: 2;
   background-color: #2A3647;
   color: #CDCDCD;
   justify-content: space-around;
   align-items: center;
 }
 
-.Sider_Logo {
+.Sider_Logo_d {
   width: 100px;
   height: 122px;
 }
 
-.Sider_Main_Links {
+.Sider_main_links_d {
   margin-bottom: 100px;
   height: 229px;
 }
 
-.Sider_Main_Links a {
-  color: white;
-  text-decoration: none;
+.Sider_main_links_d a {
   justify-content: left;
 }
 
-.Sider_Icons {
+.Sider_footer_links {
+  color: white;
+  text-decoration: none;
+}
+
+.Sider_Icons_d {
   width: 25px;
   height: 25px;
   position: relative;
@@ -166,21 +206,69 @@ body {
   right: 12px;
 }
 
-.Sider_Lower_links {
+.Sider_lower_links_d {
   bottom: -24px;
 }
 
-.Sider_Lower_links a {
+.Sider_lower_links_d a {
   text-decoration: none;
   color: #a8a8a8;
   margin-bottom: 14px;
 }
 
 
-#desktop_header {
+/* Mobile Header & Footer */
+
+#mobile_header {
   background-color: #FFFFFF;
-  position: fixed;
+  justify-content: space-between;
+  height: 80px;
   width: 100vw;
+  padding: 20px 16px 20px 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#header_logo_m {
+  width: 32px;
+  height: 40px;
+}
+
+
+#mobile_footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 80px;
+  background-color: #2A3647;
+  color: #CDCDCD;
+  justify-content: space-around;
+}
+
+
+
+.Footer_link_pack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Footer_link_pack a {
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer_link_pack p {
+  margin: 8px;
+}
+
+.Footer_icon_m {
+  width: 22px;
+  height: 22px;
 }
 
 /* Utility classes */
