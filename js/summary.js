@@ -6,3 +6,7 @@ function removeHelloPageMobile() {
     helloPage.style.display = "none";
     });
 }
+
+function changeIcon(Id, url) {
+    document.getElementById(Id).src = `./assets/img/${url}`;
+}
