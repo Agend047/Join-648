@@ -24,7 +24,7 @@ header {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.5);
+  transform: translate(-50%, -50%) scale(1.67);
   transition: 1s;
 }
 
@@ -185,5 +185,9 @@ form .btn {
 
   form .btn {
     width: fit-content;
+  }
+
+  #login-logo.splash-active {
+    transform: scale(4.57)
   }
 }
