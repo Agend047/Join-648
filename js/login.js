@@ -55,6 +55,7 @@ function togglePasswordIcon() {
         inputEl.classList.add('hidden');
         iconEl.src = './assets/img/visibility_off.png';
         iconEl.onclick = () => togglePasswordIcon('password-icon');
+        exit;
     }
     if (inputEl.classList.contains('hidden')) {
         iconEl.classList.remove('hidden');
