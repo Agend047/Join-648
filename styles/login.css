@@ -28,6 +28,9 @@ header {
   transition: 1s;
 }
 
+.checkbox:hover {
+  fill: var(--hover-color-checkbox);
+}
 
 
 #splash-login-bg {
@@ -160,7 +163,7 @@ form .btn {
   padding-block-end: 1em;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 820px) {
   #login-logo,
 #login-logo-static {
   width: 100px;
@@ -181,6 +184,7 @@ form .btn {
   .forgot-password {
     flex-direction: row-reverse;
     justify-content: center;
+    align-items: center;
     gap: 3em;
   }
 
