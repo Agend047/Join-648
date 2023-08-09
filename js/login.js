@@ -36,7 +36,7 @@ function removeSplash() {
     loginLogoStaticEl.classList.remove('splash-active');
 }
 /**Toggle checkbox: replaces svg code based on the checked class attribute. */
-function toggleCheckbox(event) {
+function toggleCheckbox() {
     const checkboxEl = document.getElementById('remember-me');
     if (checkboxEl.classList.contains('checked')) {
         checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
