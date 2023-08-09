@@ -65,6 +65,11 @@ footer {
   color: var(--decent-color);
 }
 
+footer a:hover {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
 .horizontal-separator {
   background-color: var(--accent-color);
   width: 88px;
@@ -121,6 +126,11 @@ textarea {
   margin-block: 2em;
   padding-inline: 0.5em;
   font-size: var(--fs-small);
+}
+
+.forgot-password a:hover {
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 h1 {
