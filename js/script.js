@@ -70,11 +70,7 @@ function unloadTemplate(toUnloadID) {
  */
 function showInitialsHeader(initials) {
     let svgText = document.getElementById('svg_text');
-    if (initials) {
-        svgText.textContent = initials;
-    } else {
-        svgText.textContent = 'G';
-    }
+    if (initials) { svgText.textContent = initials; } else { svgText.textContent = 'G'; }
 }
 
 /**
@@ -84,3 +80,24 @@ function openHelp() {
     alert("Help div is not ready!")
 }
 
+/**
+ * @param {Number} i - Index of the Menu Point, that is choosen.
+ */
+function changeMenuColor(i) {
+    removechoosen()
+    giveChoosen(i)
+}
+
+function removechoosen() {
+    let notAnymoreArray = document.getElementsByClassName('Choosen_field')
+    if (notAnymoreArray.length > 0) {
+        for (i in notAnymoreArray) {
+            notAnymoreArray[i].classList.remove('Choosen_field')
+        }
+    }
+}
+
+function giveChoosen(i) {
+    let choosenField = document.getElementById('menuPoint' + i);
+    choosenField.classList.add('Choosen_field')
+}
