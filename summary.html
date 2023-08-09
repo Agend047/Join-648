@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+    <link rel="icon" href="./assets/img/join_logo_black.png">
     <script src="./js/script.js"></script>
     <script src="./js/summary.js"></script>
     <link rel="stylesheet" href="styles/style.css">
@@ -12,8 +13,9 @@
 </head>
 
 <body onload="removeHelloPageMobile(), checkWidth()">
-    <!-- <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
-    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div> -->
+    
+    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
+    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
 
     <div id="helloPageMobile" class="">
         <p>Good morning,</p>
@@ -30,6 +32,7 @@
 
         <article class="summary-container">
 
+            <div class="boxes-container">
             <div class="top-row">
                 <button class="flex-direction-col">
                     <div class="number">5</div><span>Tasks in<br>Board</span>
@@ -75,6 +78,11 @@
                     </div>
                 </button>
             </div>
+        </div>
+        <div id="helloDesktop" class="">
+            <p>Good morning,</p>
+            <h1 class="blue-text">Sofia Müller</h1>
+        </div>
         </article>
 
 
