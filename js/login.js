@@ -46,3 +46,20 @@ function toggleCheckbox() {
         checkboxEl.classList.add('checked');
     }
 }
+
+function togglePasswordIcon() {
+    const iconEl = document.getElementById('password-icon');
+    const inputEl = document.getElementById('password-input');
+    if (inputEl.classList.contains('initial')) {
+        inputEl.classList.remove('initial');
+        inputEl.classList.add('hidden');
+        iconEl.src = './assets/img/visibility_off.png';
+        iconEl.onclick = () => togglePasswordIcon('password-icon');
+    }
+    if (inputEl.classList.contains('hidden')) {
+        iconEl.classList.remove('hidden');
+        iconEl.classList.add('password-visible');
+        document.getElementById('password-input').type = 'text';
+        iconEl.src = './assets/img/visibility.png';
+    }    
+}

@@ -29,8 +29,8 @@
           alt="" />
       </div>
       <div class="input">
-        <input type="password" placeholder="Password" />
-        <img src="./assets/img/lock.png" class="input-icon" alt="" />
+        <input id='password-input' class='initial' type="password" placeholder="Password" onkeypress='togglePasswordIcon("password-icon")'/>
+        <img src="./assets/img/lock.png" class="input-icon" alt="" id='password-icon'/>
       </div>
       <div class="forgot-password">
         <a href="#" class="text-link">Forgot my password</a>

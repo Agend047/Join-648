@@ -108,6 +108,10 @@ textarea {
   margin-block-start: 1em;
 }
 
+::placeholder {
+  color: lightgray;
+}
+
 .input>input {
   flex: 1;
 }

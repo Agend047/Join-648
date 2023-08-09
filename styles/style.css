@@ -112,7 +112,12 @@
   --fs-normal: 1.25rem;
   --fs-tall: 2.25rem;
   --fs-taller: 2.938rem;
-  --fs-tallest: 3.813rem;
+}
+
+@media (min-width: 820px) {
+  :root {
+    --fs-taller: 3.813rem;
+  }
 }
 
 *,
@@ -153,7 +158,7 @@ a {
   border: none;
   padding: 1em 2em;
   font-size: var(--fs-small);
-  font-weight: 400;
+  font-weight: 700;
   border-radius: 0.5em;
   cursor: pointer;
 }
