@@ -1,5 +1,6 @@
 let docWidth;
 let loaded;
+let initials = 'SM'
 
 /**
  * Checks width of shown screen, loads templates as needed and saves wich version has been loaded in global Variable.
@@ -33,8 +34,8 @@ window.onresize = function () {
 
 /**
  * Loads in templates for needed Version, (Mobile or Desktop) unloads the other templates, if needed.
- * @param {toLoadID} *The ID of the html-template, that has to be loaded.
- * @param {toUnloadID} *The ID of that html-template, that has to be unloaded.
+ * @param {string} toLoadID - The ID of the html-template, that has to be loaded.
+ * @param {string} toUnloadID - The ID of that html-template, that has to be unloaded.
  */
 async function getMatchingTemplate(toLoadID, toUnloadID) {
     let includeElement = document.getElementById(toLoadID);
@@ -47,6 +48,7 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
         element.innerHTML = 'Page not found';
     }
     unloadTemplate(toUnloadID)
+    showInitialsHeader(initials)
 }
 
 
@@ -59,6 +61,26 @@ function unloadTemplate(toUnloadID) {
     toUnload.innerHTML = '';
 }
 
+
+/**
+ * Initials of current User are going to be written into the Header Circle.
+ * If there are no, then its a "G" for "Guest User".
+ * @param {string} initials - Initials of current User.
+ * 
+ */
+function showInitialsHeader(initials) {
+    let svgText = document.getElementById('svg_text');
+    if (initials) {
+        svgText.textContent = initials;
+    } else {
+        svgText.textContent = 'G';
+    }
+}
+
+/**
+ * Shows helb Document
+ */
 function openHelp() {
     alert("Help div is not ready!")
 }
+
