@@ -5,13 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="js/script.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./assets/img/join_logo_black.png">
+    <script src="./js/script.js"></script>
+    <script src="./js/summary.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/summary.css">
+    <link rel="stylesheet" href="./styles/board.css">
 </head>
 
 <body onload="checkWidth()">
     <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
     <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
+
+    <main>
+
+        <div class="board-headline-container">
+            <div>
+                <h1>Board</h1>
+                <button><img id="addTask" src="./assets/img/board_addTask.svg"></button>
+            </div>
+            <div>
+                <input type="text" placeholder="Find Task">
+            </div>
+        </div>
+
+        <article>
+            
+        </article>
+
+
+
+    </main>
+
 </body>
 
 </html>
