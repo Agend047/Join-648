@@ -164,7 +164,7 @@ a {
 
 .btn-primary:hover {
   background-color: var(--accent-color);
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: ease-in-out 100ms;
 }
 
@@ -177,7 +177,7 @@ a {
 .btn-secondary:hover {
   color: var(--accent-color);
   border-color: var(--accent-color);
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: ease-in-out 100ms;
 }
 
