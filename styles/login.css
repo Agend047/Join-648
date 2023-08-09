@@ -16,7 +16,7 @@ header {
 #login-logo,
 #login-logo-static {
   transform: none;
-  width: 60px;
+  width: 64px;
   object-fit: contain;
 }
 
@@ -24,7 +24,7 @@ header {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(2);
+  transform: translate(-50%, -50%) scale(1.56);
   transition: 1s;
 }
 
@@ -161,6 +161,11 @@ form .btn {
 }
 
 @media (min-width: 600px) {
+  #login-logo,
+#login-logo-static {
+  width: 100px;
+}
+  
   #splash-login-bg {
     background-color: white;
   }
@@ -184,7 +189,7 @@ form .btn {
   }
 
   #login-logo.splash-active {
-    transform: scale(4.5);
+    transform: translate(-50%, -50%) scale(2.74);
   }
 }
 
