@@ -8,10 +8,10 @@ let initials = 'SM'
 function checkWidth() {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
-    if (docWidth < 600) {
+    if (docWidth < 820) {
         getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile'
-    } else if (docWidth > 600) {
+    } else if (docWidth > 820) {
         getMatchingTemplate('desktop-template', 'mobile-template')
         loaded = 'desktop'
     }
@@ -23,10 +23,10 @@ function checkWidth() {
 window.onresize = function () {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
-    if (docWidth < 600 && loaded == 'desktop') {
+    if (docWidth < 820 && loaded == 'desktop') {
         getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile';
-    } else if (docWidth > 600 && loaded == 'mobile') {
+    } else if (docWidth > 820 && loaded == 'mobile') {
         getMatchingTemplate('desktop-template', 'mobile-template')
         loaded = 'desktop';
     }
