@@ -109,7 +109,7 @@ textarea {
   margin-block-start: 1em;
 }
 
-.input > input {
+.input>input {
   flex: 1;
 }
 
