@@ -162,12 +162,10 @@ a {
   background-color: var(--primary-bg-color);
 }
 
-.btn:hover {
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
-}
-
 .btn-primary:hover {
   background-color: var(--accent-color);
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  transition: ease-in-out 100ms;
 }
 
 .btn-secondary {
@@ -179,6 +177,8 @@ a {
 .btn-secondary:hover {
   color: var(--accent-color);
   border-color: var(--accent-color);
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  transition: ease-in-out 100ms;
 }
 
 /* Desktop Sider & Header */
