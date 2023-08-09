@@ -152,7 +152,7 @@ a {
   border: none;
   padding: 1em 2em;
   font-size: var(--fs-small);
-  font-weight: 700;
+  font-weight: 400;
   border-radius: 0.5em;
   cursor: pointer;
 }
