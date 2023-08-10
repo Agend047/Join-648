@@ -1,18 +1,20 @@
 let docWidth;
 let loaded;
 let initials = 'SM'
+let currentPage = 'summary.html';
+
 
 /**
  * Checks width of shown screen, loads templates as needed and saves wich version has been loaded in global Variable.
  */
-function checkWidth() {
+async function loadCorrectMenu() {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820) {
-        getMatchingTemplate('mobile-template', 'desktop-template')
+        await getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile'
     } else if (docWidth > 820) {
-        getMatchingTemplate('desktop-template', 'mobile-template')
+        await getMatchingTemplate('desktop-template', 'mobile-template')
         loaded = 'desktop'
     }
 }
@@ -34,6 +36,7 @@ window.onresize = function () {
 
 /**
  * Loads in templates for needed Version, (Mobile or Desktop) unloads the other templates, if needed.
+ * Then triggers a function to mark the actual Side on the template.
  * @param {string} toLoadID - The ID of the html-template, that has to be loaded.
  * @param {string} toUnloadID - The ID of that html-template, that has to be unloaded.
  */
@@ -49,6 +52,7 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
     }
     unloadTemplate(toUnloadID)
     showInitialsHeader(initials)
+    markCorrectMenuPoint()
 }
 
 
@@ -80,24 +84,35 @@ function openHelp() {
     alert("Help div is not ready!")
 }
 
-/**
- * @param {Number} i - Index of the Menu Point, that is choosen.
- */
-function changeMenuColor(i) {
-    removechoosen()
-    giveChoosen(i)
-}
 
-function removechoosen() {
-    let notAnymoreArray = document.getElementsByClassName('Choosen_field')
-    if (notAnymoreArray.length > 0) {
-        for (i in notAnymoreArray) {
-            notAnymoreArray[i].classList.remove('Choosen_field')
-        }
+/**  
+ * Marks Point on the Sider/Footer that is currently open.
+ */
+function markCorrectMenuPoint() {
+    let activeSide = getDocumentName()
+
+    let toChoose = document.getElementById(activeSide + "ID");
+    if (toChoose) {
+        toChoose.classList.add('Choosen_field')
     }
 }
 
-function giveChoosen(i) {
-    let choosenField = document.getElementById('menuPoint' + i);
-    choosenField.classList.add('Choosen_field')
+/**  
+ * Returns name of actual page, for marking the right Spot on header/footer in "markCorrectMenuPoint()"
+ */
+function getDocumentName() {
+    var path = window.location.pathname;
+    var path = path.split("/").pop();
+    let page = path.split(".html");
+    return page[0];
 }
+
+
+
+
+
+
+
+
+
+
