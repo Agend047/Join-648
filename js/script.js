@@ -77,13 +77,6 @@ function showInitialsHeader(initials) {
     if (initials) { svgText.textContent = initials; } else { svgText.textContent = 'G'; }
 }
 
-/**
- * Shows helb Document
- */
-function openHelp() {
-    alert("Help div is not ready!")
-}
-
 
 /**  
  * Marks Point on the Sider/Footer that is currently open.
@@ -94,6 +87,9 @@ function markCorrectMenuPoint() {
     let toChoose = document.getElementById(activeSide + "ID");
     if (toChoose) {
         toChoose.classList.add('Choosen_field')
+    } else {
+        let helpIcon = document.getElementById('header_help_icon_d');
+        helpIcon.classList.add('d-none')
     }
 }
 
@@ -106,7 +102,6 @@ function getDocumentName() {
     let page = path.split(".html");
     return page[0];
 }
-
 
 
 
