@@ -6,21 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <link rel="icon" href="./assets/img/join_logo_black.png">
-    <script src="./js/script.js"></script>
-    <script src="./js/summary.js"></script>
+    <script defer src="./js/script.js"></script>
+    <script defer src="./js/summary.js"></script>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/summary.css">
 </head>
 
-<body onload="removeHelloPageMobile(), loadCorrectMenu()">
+<body onload="loadHelloPageMobile(), loadCorrectMenu()">
 
     <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
     <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
-
-    <div id="helloPageMobile" class="">
-        <p>Good morning,</p>
-        <h1 class="blue-text">Sofia Müller</h1>
-    </div>
 
     <main>
         <div class="summary-headline-container">
