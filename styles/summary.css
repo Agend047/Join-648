@@ -10,7 +10,14 @@
     color: #2A3647;
 }
 
-#helloDesktop {
+#helloPageMobile h1 {
+    font-size: 2.9375rem;
+    font-weight: 700;
+    line-height: 120%;
+    margin: 0;
+}
+
+#helloPageDesktop {
     display: none;
 }
 
@@ -18,13 +25,6 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.4s, opacity 0.6s ease-in-out;
-}
-
-h1 {
-    font-size: 2.938rem;
-    font-weight: 600;
-    margin: 0;
-    color: #000000;
 }
 
 .blue-text {
@@ -45,6 +45,7 @@ main {
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    align-items: center;
     font-size: 1rem;
     overflow: hidden;
     margin-top: 8rem;
@@ -54,8 +55,17 @@ main {
 
 .summary-headline-container {
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     gap: 0.5em;
+}
+
+.summary-headline-container h1 {
+    color: #000;
+    font-size: 2.9375rem;
+    font-weight: 700;
+    line-height: 120%;
+    margin: 0;
 }
 
 .subheadline {
@@ -89,7 +99,7 @@ main {
     gap: 1.5rem;
 }
 
-button {
+.boxes-container button {
     border: none;
     border-radius: 1.25rem;
     background-color: white;
@@ -102,7 +112,7 @@ button {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
+.boxes-container button:hover {
     cursor: pointer;
     color: white !important;
     background-color: var(--secondary-bg-color);
@@ -111,11 +121,11 @@ button:hover {
     box-shadow: none;
 }
 
-button:hover .number {
+.boxes-container button:hover .number {
     color: white !important;
 }
 
-button img {
+.boxes-container button img {
     height: 40px;
     width: 40px;
 }
@@ -175,6 +185,10 @@ button img {
 
 @media (min-width: 820px) {
 
+    main {
+        align-items: flex-start;
+    }
+
     .summary-headline-container {
         display: flex;
         align-items: center;
@@ -200,7 +214,7 @@ button img {
         margin-right: 4rem;
     }
 
-    .summary-container {
+    .summary-desktop-layout {
         max-width: calc(100% - 25.94rem);
         margin-left: 26.5vw;
         display: flex;
@@ -227,7 +241,7 @@ button img {
         gap: 2rem;
     }
 
-    #helloDesktop {
+    #helloPageDesktop {
         display: block;
         width: 40%;
         font-size: 2.9375rem;
@@ -238,7 +252,7 @@ button img {
         margin-left: 5rem;
     }
 
-    #helloDesktop h1 {
+    #helloPageDesktop h1 {
         font-size: 4rem;
         font-style: normal;
         font-weight: 700;
