@@ -65,20 +65,26 @@ function validateLoginForm(e) {
     const formElements = form.querySelectorAll('input, textarea, select');
     for (let i = 0; i < formElements.length; i++) {
         const formElement = formElements[i];
+        if (formElement.id === 'password-input') {
+            validatePassword(formElement);
+        }
         formElement.checkValidity();
         if (!formElement.validity.valid) {
             formIsValid = false;
-            if (formElement.id === 'password-input') {
-                formElement.setCustomValidity('Wrong password. Ups! Try again.');
-                document.getElementById('password-input-error').textContent = formElement.validationMessage;
-            } else {
-                document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
-            }
+            document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
         }
     }
     if (!formIsValid) {
         e.preventDefault();
         form.classList.toggle('is-validated');
+    }
+}
+
+function validatePassword(formElement) {
+    if (formElement.value === '') {
+        formElement.setCustomValidity('Wrong password. Ups! Try again.');
+    } else {
+        formElement.setCustomValidity('');
     }
 }
 
