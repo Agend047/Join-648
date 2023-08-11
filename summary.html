@@ -23,7 +23,7 @@
 
     <main class="summary-main">
       <div class="summary-content">
-        <div class="summary-headline-container">
+        <div class="summary-heading">
           <h1>Summary</h1>
           <div class="seperator-desktop"></div>
           <span class="subheadline">Everything in a nutshell!</span>
@@ -31,23 +31,23 @@
         </div>
 
         <article class="summary-desktop-layout">
-          <div class="boxes-container">
+          <div class="card-container">
             <div class="top-row">
-              <button class="tasks-board flex-direction-col">
+              <a href="/board.html" class="tasks-board flex-direction-col">
                 <div class="number">5</div>
                 <span>Tasks in<br />Board</span>
-              </button>
-              <button class="tasks-progress flex-direction-col">
+              </a>
+              <a href="/board.html" class="tasks-progress flex-direction-col">
                 <div class="number">2</div>
                 <span>Tasks In<br />Progress</span>
-              </button>
-              <button class="tasks-feedback flex-direction-col">
+              </a>
+              <a href="/board.html" class="tasks-feedback flex-direction-col">
                 <div class="number">2</div>
                 <span>Awaiting<br />feedback</span>
-              </button>
+              </a>
             </div>
 
-            <button class="middle-row">
+            <a href="/board.html" class="middle-row">
               <div class="d-flex gap18 align-items-center">
                 <img src="./assets/img/sum_urgent_icon.png" />
                 <div class="d-flex flex-direction-col">
@@ -60,10 +60,11 @@
                 <div id="deadline">August 07, 2023</div>
                 <div class="deadline">Upcoming Deadline</div>
               </div>
-            </button>
+            </a>
 
             <div class="bottom-row">
-              <button
+              <a
+                href="/board.html"
                 class="tasks-todo"
                 onmouseover="changeIcon('todoIcon', 'sum_todo_icon_white.svg')"
                 onmouseout="changeIcon('todoIcon', 'sum_todo_icon.png')"
@@ -73,8 +74,8 @@
                   <div class="number">1</div>
                   <span>To-do</span>
                 </div>
-              </button>
-              <button
+              </a>
+              <a
                 class="tasks-done"
                 onmouseover="changeIcon('doneIcon', 'sum_done_icon_white.svg')"
                 onmouseout="changeIcon('doneIcon', 'sum_done_icon.png')"
@@ -84,7 +85,7 @@
                   <div class="number">1</div>
                   <span> Done</span>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
 
