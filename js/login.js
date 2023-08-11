@@ -4,7 +4,7 @@ const loginLogoStaticEl = document.getElementById('login-logo-static');
 const headerEl = document.getElementById('header');
 
 function init() {
-    checkWidth();
+    checkWidth(true);
     if (loaded === 'desktop') {
         loginLogoEl.src = './assets/img/join_logo_black.png';
     }
@@ -62,5 +62,5 @@ function togglePasswordIcon() {
         iconEl.classList.add('password-visible');
         document.getElementById('password-input').type = 'text';
         iconEl.src = './assets/img/visibility.png';
-    }    
+    }
 }

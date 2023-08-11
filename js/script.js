@@ -6,15 +6,17 @@ let currentPage = 'summary.html';
 
 /**
  * Checks width of shown screen, loads templates as needed and saves wich version has been loaded in global Variable.
+ *
+ * @param {boolean} trigger - Only used, if the templates shall not be loaded in. In that case, trigger is true.
  */
-async function checkWidth() {
+async function checkWidth(trigger) {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820) {
-        await getMatchingTemplate('mobile-template', 'desktop-template')
+        if (!trigger) { await getMatchingTemplate('mobile-template', 'desktop-template') }
         loaded = 'mobile'
     } else if (docWidth > 820) {
-        await getMatchingTemplate('desktop-template', 'mobile-template')
+        if (!trigger) { await getMatchingTemplate('desktop-template', 'mobile-template') }
         loaded = 'desktop'
     }
 }
@@ -26,6 +28,7 @@ window.onresize = function () {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820 && loaded == 'desktop') {
+        console.log('test')
         getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile';
     } else if (docWidth > 820 && loaded == 'mobile') {
