@@ -59,16 +59,20 @@ function togglePasswordIcon(e) {
     const iconEl = document.getElementById('password-icon');
     const inputEl = this;
     if (e.type === 'focus'  && inputEl.value === '') {
-        iconEl.src = './assets/img/visibility_off.png';
-        iconEl.addEventListener('click', togglePasswordVisiblity);
+        iconEl.addEventListener('click', togglePasswordVisibility);
+        if (inputEl.type === 'password') {
+            iconEl.src = './assets/img/visibility_off.png';
+        } else {
+            iconEl.src = './assets/img/visibility.png';
+        }
     }
     else if (e.type === 'blur' && this.value === '') {
         iconEl.src = './assets/img/lock.png';
-        iconEl.removeEventListener('click', togglePasswordVisiblity);
+        iconEl.removeEventListener('click', togglePasswordVisibility);
     }
 }
 
-function togglePasswordVisiblity() {
+function togglePasswordVisibility() {
     const inputEl = document.getElementById('password-input');
     const iconEl = this;
     if (inputEl.type === 'password') {
