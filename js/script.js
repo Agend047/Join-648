@@ -7,7 +7,7 @@ let currentPage = 'summary.html';
 /**
  * Checks width of shown screen, loads templates as needed and saves wich version has been loaded in global Variable.
  */
-async function loadCorrectMenu() {
+async function checkWidth() {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820) {
