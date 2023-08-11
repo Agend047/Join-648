@@ -80,20 +80,23 @@ footer a:hover {
   height: 3px;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background-color: white;
+  border-radius: 1.875em;
+  box-shadow: 0 0 14px 3px rgba(0,0,0,0.03);
+}
+
 /*Log in form*/
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: clamp(280px, 60vw, 652px);
-  padding: 1em;
-  background-color: white;
-  border-radius: 1.875em;
-}
-
-.form {
-  box-shadow: 0 0 14px 3px rgba(0,0,0,0.03);
+  width: clamp(calc(320px - 3rem), 60vw, 652px);
 }
 
 input,
@@ -153,7 +156,7 @@ textarea {
 }
 
 .forgot-password a:hover {
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline;
 }
 
