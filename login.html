@@ -1,59 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="./assets/img/join_logo_black.png" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <script defer src="./js/script.js"></script>
+    <script defer src="./js/login.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join</title>
-  <link rel="icon" href="./assets/img/join_logo_black.png">
-  <link rel="stylesheet" href="./styles/style.css" />
-  <link rel="stylesheet" href="./styles/login.css" />
-  <script defer src="./js/script.js"></script>
-  <script defer src="./js/login.js"></script>
-</head>
-
-<body onload="init()">
-  <header id="header">
-    <img src="./assets/img/join_logo_black.png" alt="Join logo" class="img-large splash-active"
-      id="login-logo-static" />
-    <div class="login-sign-up-banner login-sign-up-banner-desktop">
-      <span>Not a Join user?</span><a href="#" class="btn btn-primary">Sign up</a>
-    </div>
-  </header>
-  <main>
-    <form action="" class="login-form">
-      <h1>Log in</h1>
-      <div class="horizontal-separator"></div>
-      <div class="input">
-        <input type="email" placeholder="Email" /><img src="./assets/img/contacts_AddMail_icon.png" class="input-icon"
-          alt="" />
+  <body onload="init()">
+    <header id="header">
+      <img
+        src="./assets/img/join_logo_black.png"
+        alt="Join logo"
+        class="img-large splash-active"
+        id="login-logo-static"
+      />
+      <div class="login-sign-up-banner login-sign-up-banner-desktop">
+        <span>Not a Join user?</span
+        ><a href="#" class="btn btn-primary">Sign up</a>
       </div>
-      <div class="input">
-        <input id='password-input' class='initial' type="password" placeholder="Password"
-          onkeypress='togglePasswordIcon("password-icon")' />
-        <img src="./assets/img/lock.png" class="input-icon" alt="" id='password-icon' />
+    </header>
+    <main>
+      <form id="login-form" action="./summary.html" class="form login-form">
+        <h1>Log in</h1>
+        <div class="horizontal-separator"></div>
+        <div class="input">
+          <input
+            required
+            type="email"
+            placeholder="Email"
+            id="email-input"
+          /><img
+            src="./assets/img/contacts_AddMail_icon.png"
+            class="input-icon"
+            alt=""
+          />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="email-input-error"></div>
+        </div>
+        <div class="input">
+          <input
+            required
+            id="password-input"
+            type="password"
+            placeholder="Password"
+          />
+          <img
+            src="./assets/img/lock.png"
+            class="input-icon"
+            alt=""
+            id="password-icon"
+          />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="password-input-error"></div>
+        </div>
+        <div class="forgot-password">
+          <a href="#" class="text-link">Forgot my password</a>
+          <div
+            class="d-flex align-items-center"
+            id="remember-me-container"
+            onclick="toggleCheckbox()"
+          >
+            <svg
+              id="remember-me"
+              class="checkbox"
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="4"
+                y="4.96582"
+                width="16"
+                height="16"
+                rx="3"
+                stroke="#2A3647"
+                stroke-width="2"
+              />
+            </svg>
+            <span>Remember me</span>
+          </div>
+        </div>
+        <div class="login-buttons">
+          <button class="btn btn-primary" type="submit">Log in</button>
+          <a href="./summary.html" class="btn btn-secondary">Guest Log in</a>
+        </div>
+      </form>
+      <div class="login-sign-up-banner login-sign-up-banner-mobile">
+        <span>Not a Join user?</span
+        ><a href="#" class="btn btn-primary">Sign up</a>
       </div>
-      <div class="forgot-password">
-        <a href="#" class="text-link">Forgot my password</a>
-        <div class='d-flex align-items-center'><svg id='remember-me' class='checkbox' width="24" height="25"
-            viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" onclick='toggleCheckbox()'>
-            <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2" />
-          </svg><span>Remember me</span></div>
-      </div>
-      <div class="login-buttons">
-        <button class="btn btn-primary" type="submit">Log in</button>
-        <button class="btn btn-secondary">Guest Log in</button>
-      </div>
-    </form>
-    <div class="login-sign-up-banner login-sign-up-banner-mobile">
-      <span>Not a Join user?</span><a href="#" class="btn btn-primary">Sign up</a>
-    </div>
-  </main>
-  <footer>
-    <a href="#" class="footer-link">Privacy Policy</a><a href="#" class="footer-link">Legal notice</a>
-  </footer>
-  <div id="splash-login-bg"></div>
-  <img src="./assets/img/join_logo_white.png" alt="Join logo" class="img-large splash-active" id="login-logo" />
-</body>
-
+    </main>
+    <footer>
+      <a href="#" class="footer-link">Privacy Policy</a
+      ><a href="#" class="footer-link">Legal notice</a>
+    </footer>
+    <div id="splash-login-bg"></div>
+    <img
+      src="./assets/img/join_logo_white.png"
+      alt="Join logo"
+      class="img-large splash-active"
+      id="login-logo"
+    />
+  </body>
 </html>

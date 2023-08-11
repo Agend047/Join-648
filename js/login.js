@@ -9,6 +9,7 @@ function init() {
         loginLogoEl.src = './assets/img/join_logo_black.png';
     }
     animateSplashScreen();
+    initLoginForm();
 }
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
 function animateSplashScreen() {
@@ -38,6 +39,7 @@ function removeSplash() {
 /**Toggle checkbox: replaces svg code based on the checked class attribute. */
 function toggleCheckbox() {
     const checkboxEl = document.getElementById('remember-me');
+    // const containerEl = document.getElementById('remember-me-container');
     if (checkboxEl.classList.contains('checked')) {
         checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
     } else {
@@ -46,20 +48,72 @@ function toggleCheckbox() {
     checkboxEl.classList.toggle('checked');
 }
 
-function togglePasswordIcon() {
-    const iconEl = document.getElementById('password-icon');
-    const inputEl = document.getElementById('password-input');
-    if (inputEl.classList.contains('initial')) {
-        inputEl.classList.remove('initial');
-        inputEl.classList.add('hidden');
-        iconEl.src = './assets/img/visibility_off.png';
-        iconEl.onclick = () => togglePasswordIcon('password-icon');
-        exit;
+
+function initLoginForm() {
+    const loginForm = document.getElementById('login-form');
+    loginForm.noValidate = true;
+    loginForm.addEventListener('submit', validateLoginForm);
+    const passwordInput = document.getElementById('password-input');
+    passwordInput.addEventListener('focus', togglePasswordIcon);
+    passwordInput.addEventListener('blur', togglePasswordIcon);
+}
+
+function validateLoginForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        if (formElement.id === 'password-input') {
+            validatePassword(formElement);
+        }
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+            document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+        }
     }
-    if (inputEl.classList.contains('hidden')) {
-        iconEl.classList.remove('hidden');
-        iconEl.classList.add('password-visible');
-        document.getElementById('password-input').type = 'text';
+    if (!formIsValid) {
+        e.preventDefault();
+        form.classList.toggle('is-validated');
+    }
+}
+
+function validatePassword(formElement) {
+    if (formElement.value === '') {
+        formElement.setCustomValidity('Wrong password. Ups! Try again.');
+    } else {
+        formElement.setCustomValidity('');
+    }
+}
+
+function togglePasswordIcon(e) {
+    const iconEl = document.getElementById('password-icon');
+    const inputEl = this;
+    if (e.type === 'focus' && inputEl.value === '') {
+        iconEl.addEventListener('click', togglePasswordVisibility);
+        iconEl.classList.toggle('cursor-pointer');
+        if (inputEl.type === 'password') {
+            iconEl.src = './assets/img/visibility_off.png';
+        } else {
+            iconEl.src = './assets/img/visibility.png';
+        }
+    }
+    else if (e.type === 'blur' && this.value === '') {
+        iconEl.src = './assets/img/lock.png';
+        iconEl.removeEventListener('click', togglePasswordVisibility);
+        iconEl.classList.toggle('cursor-pointer');
+    }
+}
+
+function togglePasswordVisibility() {
+    const inputEl = document.getElementById('password-input');
+    const iconEl = this;
+    if (inputEl.type === 'password') {
+        inputEl.type = 'text';
         iconEl.src = './assets/img/visibility.png';
+    } else {
+        inputEl.type = 'password';
+        iconEl.src = './assets/img/visibility_off.png';
     }
 }
