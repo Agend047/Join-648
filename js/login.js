@@ -56,7 +56,6 @@ function initLoginForm() {
     const passwordInput = document.getElementById('password-input');
     passwordInput.addEventListener('focus', togglePasswordIcon);
     passwordInput.addEventListener('blur', togglePasswordIcon);
-
 }
 
 function validateLoginForm(e) {
