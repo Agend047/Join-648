@@ -1,3 +1,5 @@
+/*Contact List */
+
 .Main_container {
     margin: 96px 40px 16px 232px;
     padding: 16px;
@@ -38,6 +40,8 @@
 }
 
 
+/*Contacts display */
+
 .Contacs_Display {
     margin-top: 96px;
 }
@@ -54,6 +58,10 @@
     justify-content: space-between;
 }
 
+.side_header {
+    margin-right: 12px;
+}
+
 .Vertical_stroke {
     width: 3px;
     height: 60px;
@@ -67,6 +75,23 @@
 .Divider {
     background-color: #29ABE2;
 }
+
+#initial_ball {
+    width: 120px;
+    height: 120px;
+    border-radius: 70px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: orange;
+    font-size: var(--fs-tall);
+}
+
+#contact_name {
+    font-size: var(--fs-taller);
+    margin: 16px;
+}
+
 
 @media (max-width: 900px) {
 
