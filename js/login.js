@@ -9,6 +9,7 @@ function init() {
         loginLogoEl.src = './assets/img/join_logo_black.png';
     }
     animateSplashScreen();
+    initLoginForm();
 }
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
 function animateSplashScreen() {
@@ -46,20 +47,36 @@ function toggleCheckbox() {
     checkboxEl.classList.toggle('checked');
 }
 
-function togglePasswordIcon() {
+
+function initLoginForm() {
+    const passwordInput = document.getElementById('password-input');
+    passwordInput.addEventListener('focus', togglePasswordIcon);
+    passwordInput.addEventListener('blur', togglePasswordIcon);
+
+}
+
+function togglePasswordIcon(e) {
     const iconEl = document.getElementById('password-icon');
-    const inputEl = document.getElementById('password-input');
-    if (inputEl.classList.contains('initial')) {
-        inputEl.classList.remove('initial');
-        inputEl.classList.add('hidden');
+    const inputEl = this;
+    if (e.type === 'focus'  && inputEl.value === '') {
         iconEl.src = './assets/img/visibility_off.png';
-        iconEl.onclick = () => togglePasswordIcon('password-icon');
-        exit;
+        iconEl.addEventListener('click', togglePasswordVisiblity);
     }
-    if (inputEl.classList.contains('hidden')) {
-        iconEl.classList.remove('hidden');
-        iconEl.classList.add('password-visible');
-        document.getElementById('password-input').type = 'text';
+    else if (e.type === 'blur' && this.value === '') {
+        iconEl.src = './assets/img/lock.png';
+        iconEl.removeEventListener('click', togglePasswordVisiblity);
+    }
+}
+
+function togglePasswordVisiblity() {
+    const inputEl = document.getElementById('password-input');
+    const iconEl = this;
+    if (inputEl.type === 'password') {
+        inputEl.type = 'text';
         iconEl.src = './assets/img/visibility.png';
+    } else {
+        inputEl.type = 'password';
+        iconEl.src = './assets/img/visibility_off.png';
     }
+    
 }
