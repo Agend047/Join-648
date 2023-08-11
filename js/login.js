@@ -124,15 +124,14 @@ function renderMainContent(content) {
     const mainContainer = document.getElementById('content');
     const headingEl = document.getElementById('heading');
     const newContent = getContent(content);
+    headingEl.innerHTML = newContent['heading'];
     mainContainer.removeChild(oldContent);
     mainContainer.innerHTML += newContent['html'];
-    headingEl.innerHTML += newContent['heading'];
 }
 
 function getContent(contentKey) {
     const result = mainContents.filter(el => {
         return el['key'] === contentKey;
     })
-    console.log(result[0]['heading']);
     return result[0];
 }
