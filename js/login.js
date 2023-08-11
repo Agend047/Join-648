@@ -50,16 +50,42 @@ function toggleCheckbox() {
 
 
 function initLoginForm() {
+    const loginForm = document.getElementById('login-form');
+    loginForm.noValidate = true;
+    loginForm.addEventListener('submit', validateLoginForm);
     const passwordInput = document.getElementById('password-input');
     passwordInput.addEventListener('focus', togglePasswordIcon);
     passwordInput.addEventListener('blur', togglePasswordIcon);
 
 }
 
+function validateLoginForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+            if (formElement.id === 'password-input') {
+                formElement.setCustomValidity('Wrong password. Ups! Try again.');
+                document.getElementById('password-input-error').textContent = formElement.validationMessage;
+            } else {
+                document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+            }
+        }
+    }
+    if (!formIsValid) {
+        e.preventDefault();
+        form.classList.toggle('is-validated');
+    }
+}
+
 function togglePasswordIcon(e) {
     const iconEl = document.getElementById('password-icon');
     const inputEl = this;
-    if (e.type === 'focus'  && inputEl.value === '') {
+    if (e.type === 'focus' && inputEl.value === '') {
         iconEl.addEventListener('click', togglePasswordVisibility);
         iconEl.classList.toggle('cursor-pointer');
         if (inputEl.type === 'password') {
@@ -85,5 +111,4 @@ function togglePasswordVisibility() {
         inputEl.type = 'password';
         iconEl.src = './assets/img/visibility_off.png';
     }
-    
 }

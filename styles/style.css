@@ -107,6 +107,8 @@
   --accent-color: #29ABE2;
   --decent-color: #A8A8A8;
   --hover-color-checkbox: #EDF2FA;
+  --error-color: #FF001F;
+  --error-color-subtle: #FF8190;
   --fs-smaller: ;
   --fs-small: 1rem;
   --fs-normal: 1.25rem;

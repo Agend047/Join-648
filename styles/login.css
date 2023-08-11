@@ -92,6 +92,10 @@ form {
   border-radius: 1.875em;
 }
 
+.form {
+  box-shadow: 0 0 14px 3px rgba(0,0,0,0.03);
+}
+
 input,
 textarea {
   border: none;
@@ -111,6 +115,18 @@ textarea {
   border: 1px solid lightgray;
   border-radius: 0.3em;
   margin-block-start: 1em;
+}
+
+.error-container {
+  max-width: 422px;
+  width: 100%;
+  color: var(--error-color-subtle);
+  font-size: 13px;
+  margin-top: 0.5em;
+}
+
+.is-validated .input:has(input:invalid) {
+  border: 1px solid var(--error-color);
 }
 
 ::placeholder {
