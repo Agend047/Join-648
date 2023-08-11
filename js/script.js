@@ -28,7 +28,6 @@ window.onresize = function () {
     let htmlDocument = document.getElementsByTagName('html');
     docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820 && loaded == 'desktop') {
-        console.log('test')
         getMatchingTemplate('mobile-template', 'desktop-template')
         loaded = 'mobile';
     } else if (docWidth > 820 && loaded == 'mobile') {
