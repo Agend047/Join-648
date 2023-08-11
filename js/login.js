@@ -40,11 +40,10 @@ function toggleCheckbox() {
     const checkboxEl = document.getElementById('remember-me');
     if (checkboxEl.classList.contains('checked')) {
         checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
-        checkboxEl.classList.remove('checked');
     } else {
         checkboxEl.innerHTML = '<path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/><path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-        checkboxEl.classList.add('checked');
     }
+    checkboxEl.classList.toggle('checked');
 }
 
 function togglePasswordIcon() {
