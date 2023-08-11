@@ -10,9 +10,16 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body onload="loadCorrectMenu()">
+<body onload="checkWidth()">
     <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
     <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
+
+    <section>
+        <button onclick="startAddContact()">Add new contact <img src="assets/img/contacts_newContact_icon.png"
+                alt="+"></button>
+        <main id="contacts_list"></main>
+
+    </section>
 </body>
 
 </html>
