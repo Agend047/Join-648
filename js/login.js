@@ -10,6 +10,7 @@ function init() {
     }
     animateSplashScreen();
     initLoginForm();
+    document.getElementById('sign-up-button').addEventListener('click', () => renderMainContent('signup'))
 }
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
 function animateSplashScreen() {
@@ -116,4 +117,22 @@ function togglePasswordVisibility() {
         inputEl.type = 'password';
         iconEl.src = './assets/img/visibility_off.png';
     }
+}
+
+function renderMainContent(content) {
+    const oldContent = document.forms.item(0);
+    const mainContainer = document.getElementById('content');
+    const headingEl = document.getElementById('heading');
+    const newContent = getContent(content);
+    mainContainer.removeChild(oldContent);
+    mainContainer.innerHTML += newContent['html'];
+    headingEl.innerHTML += newContent['heading'];
+}
+
+function getContent(contentKey) {
+    const result = mainContents.filter(el => {
+        return el['key'] === contentKey;
+    })
+    console.log(result[0]['heading']);
+    return result[0];
 }

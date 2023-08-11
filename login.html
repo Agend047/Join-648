@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/login.css" />
     <script defer src="./js/script.js"></script>
     <script defer src="./js/login.js"></script>
+    <script defer src="./js/loginHtmlTemplates.js"></script>
   </head>
 
   <body onload="init()">
@@ -26,7 +27,7 @@
     </header>
     <main>
       <div class="content" id="content">
-        <h1>Log in</h1>
+        <h1 id="heading">Log in</h1>
         <div class="horizontal-separator"></div>
         <form id="login-form" action="./summary.html" class="form login-form">
           <div class="input">
@@ -98,7 +99,7 @@
       </div>
       <div class="login-sign-up-banner login-sign-up-banner-mobile">
         <span>Not a Join user?</span
-        ><a href="#" class="btn btn-primary">Sign up</a>
+        ><button id="sign-up-button" class="btn btn-primary">Sign up</button>
       </div>
     </main>
     <footer>
