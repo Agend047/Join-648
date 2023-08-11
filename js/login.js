@@ -39,6 +39,7 @@ function removeSplash() {
 /**Toggle checkbox: replaces svg code based on the checked class attribute. */
 function toggleCheckbox() {
     const checkboxEl = document.getElementById('remember-me');
+    // const containerEl = document.getElementById('remember-me-container');
     if (checkboxEl.classList.contains('checked')) {
         checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
     } else {
@@ -60,6 +61,7 @@ function togglePasswordIcon(e) {
     const inputEl = this;
     if (e.type === 'focus'  && inputEl.value === '') {
         iconEl.addEventListener('click', togglePasswordVisibility);
+        iconEl.classList.toggle('cursor-pointer');
         if (inputEl.type === 'password') {
             iconEl.src = './assets/img/visibility_off.png';
         } else {
@@ -69,6 +71,7 @@ function togglePasswordIcon(e) {
     else if (e.type === 'blur' && this.value === '') {
         iconEl.src = './assets/img/lock.png';
         iconEl.removeEventListener('click', togglePasswordVisibility);
+        iconEl.classList.toggle('cursor-pointer');
     }
 }
 

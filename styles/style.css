@@ -413,3 +413,7 @@ a {
 .p-inline-1 {
   padding-inline: 0.5em;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

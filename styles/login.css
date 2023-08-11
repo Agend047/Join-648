@@ -28,8 +28,13 @@ header {
   transition: 1s;
 }
 
+#remember-me-container {
+  cursor: pointer;
+}
+
 .checkbox:hover {
   fill: var(--hover-color-checkbox);
+  cursor: pointer;
 }
 
 
