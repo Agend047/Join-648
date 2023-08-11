@@ -213,6 +213,7 @@ a {
 #header_help_icon_d {
   width: 20px;
   height: 20px;
+  margin-right: 20px;
 }
 
 #header_help_icon:hover {

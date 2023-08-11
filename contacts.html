@@ -6,20 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <script src="js/script.js"></script>
+    <script src="js/contacts.js"></script>
 
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/contacts.css">
 </head>
 
 <body onload="checkWidth()">
     <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
     <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
 
-    <section>
-        <button onclick="startAddContact()">Add new contact <img src="assets/img/contacts_newContact_icon.png"
-                alt="+"></button>
-        <main id="contacts_list"></main>
+    <div class="d-flex">
+        <main class="Main_container d-flex flex-direction-col">
+            <button class="Primary_contacts_btn btn-primary d-flex" onclick="startAddContact()">
+                <t>Add new contact</t>
+                <img src="assets/img/contacts_newContact_icon.png" alt="+">
+            </button>
+            <article id="contacts_list" class="d-flex flex-direction-col align-items-center">
+                <figure class="letter_div">A</figure>
+                <figure class="seperate_div"></figure>
+            </article>
+        </main>
+        <section class="Contacs_Display">
+            <span class="side_header d-flex align-items-center">
+                <h1>Contacts</h1>
+                <div class="Vertical_stroke Divider"></div>
+                <p>Better with a team</p>
+                <div class="Horizontal_stroke Divider"></div>
+            </span>
+            <article id="Contacts_stage">
 
-    </section>
+            </article>
+        </section>
+    </div>
 </body>
 
 </html>

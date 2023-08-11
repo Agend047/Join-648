@@ -1,0 +1,3 @@
+function startAddContact() {
+    alert('Patience!')
+}
