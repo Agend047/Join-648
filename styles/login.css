@@ -28,15 +28,10 @@ header {
   transition: 1s;
 }
 
-#remember-me-container {
-  cursor: pointer;
-}
-
 .checkbox:hover {
   fill: var(--hover-color-checkbox);
   cursor: pointer;
 }
-
 
 #splash-login-bg {
   background-color: var(--secondary-bg-color);
@@ -56,7 +51,6 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-inline: 1rem;
 }
 
 footer {
@@ -87,7 +81,15 @@ footer a:hover {
   padding: 1em;
   background-color: white;
   border-radius: 1.875em;
-  box-shadow: 0 0 14px 3px rgba(0,0,0,0.03);
+  box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.03);
+}
+
+.back-navigation-img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(clamp(-400%, -11vw, -200%), -50%);
+  cursor: pointer;
 }
 
 /*Log in form*/
@@ -136,7 +138,7 @@ textarea {
   color: lightgray;
 }
 
-.input>input {
+.input > input {
   flex: 1;
 }
 
@@ -155,9 +157,18 @@ textarea {
   font-size: var(--fs-small);
 }
 
+.text-checkbox {
+  font-size: var(--fs-small);
+  margin-block: 2em;
+}
+
 .forgot-password a:hover {
   font-weight: 600;
   text-decoration: underline;
+}
+
+.heading-container {
+  position: relative;
 }
 
 h1 {
@@ -193,10 +204,10 @@ form .btn {
 
 @media (min-width: 820px) {
   #login-logo,
-#login-logo-static {
-  width: 100px;
-}
-  
+  #login-logo-static {
+    width: 100px;
+  }
+
   #splash-login-bg {
     background-color: white;
   }

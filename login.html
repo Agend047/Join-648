@@ -27,80 +27,89 @@
     </header>
     <main>
       <div class="content" id="content">
-        <h1 id="heading">Log in</h1>
+        <div class="heading-container" id="heading-container">
+          <img
+              src="./assets/img/arrow-left-line.png"
+              alt="navigate to previous screen"
+              class="back-navigation-img"
+              id="back-navigation-img"
+            />
+          <h1 id="heading"></h1>
+        </div>
         <div class="horizontal-separator"></div>
         <div id="form">
-        <form action="">
-          <div class="input">
-            <input
-              required
-              type="text"
-              placeholder="Name"
-              id="name-input"
-            /><img
-              src="./assets/img/person.png"
-              class="input-icon"
-              alt=""
-            />
-          </div>
-          <div class="error-container">
-            <div class="error-message" id="name-input-error"></div>
-          </div>
-          <div class="input">
-            <input
-              required
-              type="email"
-              placeholder="Email"
-              id="email-input"
-            /><img
-              src="./assets/img/mail.png"
-              class="input-icon"
-              alt=""
-            />
-          </div>
-          <div class="error-container">
-            <div class="error-message" id="email-input-error"></div>
-          </div>
-          <div class="input">
-            <input
-              required
-              id="password-input"
-              type="password"
-              placeholder="Password"
-            />
-            <img
-              src="./assets/img/lock.png"
-              class="input-icon"
-              alt=""
-              id="password-icon"
-            />
-          </div>
-          <div class="error-container">
-            <div class="error-message" id="password-input-error"></div>
-          </div>
-          <div class="input">
-            <input
-              required
-              id="confirm-password-input"
-              type="password"
-              placeholder="Confirm Password"
-            />
-            <img
-              src="./assets/img/lock.png"
-              class="input-icon"
-              alt=""
-              id="confirm-password-icon"
-            />
-          </div>
-          <div class="error-container">
-            <div class="error-message" id="confirm-password-input-error"></div>
-          </div>
-        </form>
+          <form action="">
+            <div class="input">
+              <input
+                required
+                type="text"
+                placeholder="Name"
+                id="name-input"
+              /><img src="./assets/img/person.png" class="input-icon" alt="" />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="name-input-error"></div>
+            </div>
+            <div class="input">
+              <input
+                required
+                type="email"
+                placeholder="Email"
+                id="email-input"
+              /><img src="./assets/img/mail.png" class="input-icon" alt="" />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="email-input-error"></div>
+            </div>
+            <div class="input">
+              <input
+                required
+                id="password-input"
+                type="password"
+                placeholder="Password"
+              />
+              <img
+                src="./assets/img/lock.png"
+                class="input-icon"
+                alt=""
+                id="password-icon"
+              />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="password-input-error"></div>
+            </div>
+            <div class="input">
+              <input
+                required
+                id="confirm-password-input"
+                type="password"
+                placeholder="Confirm Password"
+              />
+              <img
+                src="./assets/img/lock.png"
+                class="input-icon"
+                alt=""
+                id="confirm-password-icon"
+              />
+            </div>
+            <div class="error-container">
+              <div
+                class="error-message"
+                id="confirm-password-input-error"
+              ></div>
+            </div>
+            <div class="login-buttons">
+              <button class="btn btn-primary" type="submit">Log in</button>
+              <a href="./summary.html" class="btn btn-secondary">Guest Log in</a>
+            </div>
+          </form>
         </div>
       </div>
       <div class="login-sign-up-banner login-sign-up-banner-mobile">
         <span>Not a Join user?</span
-        ><button id="sign-up-button" class="btn btn-primary sign-up-btn">Sign up</button>
+        ><button id="sign-up-button" class="btn btn-primary sign-up-btn">
+          Sign up
+        </button>
       </div>
     </main>
     <footer>
