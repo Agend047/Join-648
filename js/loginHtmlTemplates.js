@@ -10,7 +10,7 @@ const mainContents = [
         placeholder="Email"
         id="email-input"
       /><img
-        src="./assets/img/contacts_AddMail_icon.png"
+        src="./assets/img/mail.png"
         class="input-icon"
         alt=""
       />
@@ -40,7 +40,6 @@ const mainContents = [
       <div
         class="d-flex align-items-center"
         id="remember-me-container"
-        onclick="toggleCheckbox()"
       >
         <svg
           id="remember-me"

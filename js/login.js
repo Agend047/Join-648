@@ -11,6 +11,11 @@ function init() {
     animateSplashScreen();
     initLoginForm();
     initSignUpBtns();
+    initRememberMeCheckbox();
+}
+
+function initRememberMeCheckbox() {
+    document.getElementById('remember-me-container').addEventListener('click', toggleCheckbox);
 }
 
 function initSignUpBtns() {
