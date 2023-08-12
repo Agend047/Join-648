@@ -10,8 +10,17 @@ function init() {
     }
     animateSplashScreen();
     initLoginForm();
-    document.getElementById('sign-up-button').addEventListener('click', () => renderMainContent('signup'))
+    initSignUpBtns();
 }
+
+function initSignUpBtns() {
+    const signUpBtns = document.getElementsByClassName('sign-up-btn');
+    for (let i = 0; i < signUpBtns.length; i++) {
+        const signUpBtn = signUpBtns[i];
+        signUpBtn.addEventListener('click', () => renderMainContent('signup'));
+    } 
+}
+
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
 function animateSplashScreen() {
     const SPLASH_DURATION = 1000;
@@ -120,13 +129,11 @@ function togglePasswordVisibility() {
 }
 
 function renderMainContent(content) {
-    const oldContent = document.forms.item(0);
-    const mainContainer = document.getElementById('content');
+    const formContainer = document.getElementById('form');
     const headingEl = document.getElementById('heading');
     const newContent = getContent(content);
     headingEl.innerHTML = newContent['heading'];
-    mainContainer.removeChild(oldContent);
-    mainContainer.innerHTML += newContent['html'];
+    formContainer.innerHTML = newContent['html'];
 }
 
 function getContent(contentKey) {
@@ -135,3 +142,5 @@ function getContent(contentKey) {
     })
     return result[0];
 }
+
+window.onload = init;
