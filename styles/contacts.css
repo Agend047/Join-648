@@ -56,10 +56,19 @@
 
 .side_header {
     justify-content: space-between;
+    margin-bottom: -40px;
 }
 
 .side_header {
     margin-right: 12px;
+}
+
+/* Contacts Stage */
+
+.Stage_head {}
+
+#stage_head_right {
+    margin-left: 2vw;
 }
 
 .Vertical_stroke {
@@ -77,19 +86,24 @@
 }
 
 #initial_ball {
-    width: 120px;
-    height: 120px;
+    min-width: 120px;
+    min-height: 120px;
     border-radius: 70px;
     justify-content: center;
     align-items: center;
     color: white;
     background-color: orange;
     font-size: var(--fs-tall);
+    margin: 20px;
 }
 
 #contact_name {
     font-size: var(--fs-taller);
     margin: 16px;
+}
+
+#delete_contact_button {
+    padding-left: 80px;
 }
 
 

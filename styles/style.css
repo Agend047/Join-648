@@ -297,7 +297,7 @@ a {
   justify-content: space-between;
   height: 80px;
   width: 100vw;
-  padding: 20px 16px 20px 16px;
+  padding: 20px 40px 20px 40px;
   position: fixed;
   top: 0;
   left: 0;
@@ -380,6 +380,11 @@ a {
 
   .Help_Container {
     margin-left: 36px;
+    margin-right: 36px;
+  }
+
+  .Back_Arrow {
+    right: 50px;
   }
 }
 

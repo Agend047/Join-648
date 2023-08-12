@@ -108,7 +108,9 @@ function getDocumentName() {
 }
 
 
-
+/**
+ * Saves current Page in local Storage, so its possible to return later.
+ */
 function getHelp() {
     let originSide = getDocumentName()
     localStorage.setItem('originSide', JSON.stringify(originSide));
