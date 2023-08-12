@@ -249,9 +249,11 @@
 @media (min-width: 820px) {
   .summary-main {
     align-items: flex-start;
-    margin-left: clamp(calc(232px + 6em), 20%, 450px);
+    margin-left: clamp(calc(232px + 2em), 22%, 450px);
     margin-top: clamp(180px, 19vh, 300px);
     margin-right: clamp(50px, 10%, 80px);
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .summary-content {
@@ -339,7 +341,6 @@
     max-height: 10.5rem;
     padding: 2.375rem 1.1875rem;
     gap: 1.125rem;
-    flex-shrink: 0;
   }
 
   #helloPageDesktop {
@@ -354,5 +355,68 @@
     font-weight: 700;
     line-height: 120%;
     margin: 0;
+  }
+}
+
+@media (max-width: 1190px) and (min-width: 820px) {
+  .card-container {
+    max-width: 45vw;
+    height: 35.0625rem;
+    gap: 1.5rem;
+  }
+
+  #helloPageDesktop {
+    margin-left: 4vw;
+  }
+
+  .summary-main {
+    margin-right: 1%;
+  }
+}
+
+@media (max-width: 1040px) and (min-width: 820px) {
+  #helloPageDesktop {
+    display: none;
+  }
+
+  .card-container {
+    max-width: 59vw;
+  }
+
+  .summary-main {
+    margin-right: 2%;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 820px) {
+  .card-container {
+    max-width: 55vw;
+  }
+
+  .summary-main {
+    margin-left: clamp(calc(150px + 2em), 25%, 250px);
+    padding-left: 8px;
+    align-items: center;
+  }
+
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    padding-bottom: 1em;
+  }
+
+  .seperator-mobile {
+    display: block;
+  }
+
+  .seperator-desktop {
+    display: none;
   }
 }
