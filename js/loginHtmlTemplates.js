@@ -72,7 +72,95 @@ const mainContents = [
     },
     {
         key: 'signup',
-        html: `Blablabla`,
+        html: `<form action="">
+        <div class="input">
+          <input
+            required
+            type="text"
+            placeholder="Name"
+            id="name-input"
+          /><img src="./assets/img/person.png" class="input-icon" alt="" />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="name-input-error"></div>
+        </div>
+        <div class="input">
+          <input
+            required
+            type="email"
+            placeholder="Email"
+            id="email-input"
+          /><img src="./assets/img/mail.png" class="input-icon" alt="" />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="email-input-error"></div>
+        </div>
+        <div class="input">
+          <input
+            required
+            id="password-input"
+            type="password"
+            placeholder="Password"
+          />
+          <img
+            src="./assets/img/lock.png"
+            class="input-icon"
+            alt=""
+            id="password-icon"
+          />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="password-input-error"></div>
+        </div>
+        <div class="input">
+          <input
+            required
+            id="confirm-password-input"
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <img
+            src="./assets/img/lock.png"
+            class="input-icon"
+            alt=""
+            id="confirm-password-icon"
+          />
+        </div>
+        <div class="error-container">
+          <div
+            class="error-message"
+            id="confirm-password-input-error"
+          ></div>
+        </div>
+        <div
+        class="d-flex align-items-center text-checkbox"
+        id="accept-privacy-policy-container"
+      >
+        <svg
+          id="accept-privacy-policy"
+          class="checkbox"
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="4"
+            y="4.96582"
+            width="16"
+            height="16"
+            rx="3"
+            stroke="#2A3647"
+            stroke-width="2"
+          />
+        </svg>
+        <span>I accept the <a href="#" class="text-link">Privacy policy</a></span>
+      </div>
+        <div class="login-buttons">
+      <button class="btn btn-primary disabled" type="submit">Sign up</button>
+    </div>
+      </form>`,
         heading: `Sign up`
     },
     {

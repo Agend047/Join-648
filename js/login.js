@@ -2,6 +2,7 @@ const splashLoginBgEl = document.getElementById('splash-login-bg');
 const loginLogoEl = document.getElementById('login-logo');
 const loginLogoStaticEl = document.getElementById('login-logo-static');
 const headerEl = document.getElementById('header');
+let currentFormKey = 'login';
 
 function init() {
     checkWidth(true);
@@ -9,13 +10,19 @@ function init() {
         loginLogoEl.src = './assets/img/join_logo_black.png';
     }
     animateSplashScreen();
+    renderMainContent(currentFormKey, true);
     initLoginForm();
     initSignUpBtns();
-    initRememberMeCheckbox();
+    initCheckboxes();
+    initBackNavIcon();
 }
 
-function initRememberMeCheckbox() {
-    document.getElementById('remember-me-container').addEventListener('click', toggleCheckbox);
+function initCheckboxes() {
+    const checkboxes = document.getElementsByClassName('checkbox');
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        checkbox.addEventListener('click', toggleCheckbox);
+    }
 }
 
 function initSignUpBtns() {
@@ -23,7 +30,7 @@ function initSignUpBtns() {
     for (let i = 0; i < signUpBtns.length; i++) {
         const signUpBtn = signUpBtns[i];
         signUpBtn.addEventListener('click', () => renderMainContent('signup'));
-    } 
+    }
 }
 
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
@@ -51,16 +58,29 @@ function removeSplash() {
     loginLogoEl.classList.add('d-none');
     loginLogoStaticEl.classList.remove('splash-active');
 }
-/**Toggle checkbox: replaces svg code based on the checked class attribute. */
+/**Toggle checkbox: replaces svg code based on the checked class attribute and toggles the checked class attribute. */
 function toggleCheckbox() {
-    const checkboxEl = document.getElementById('remember-me');
-    // const containerEl = document.getElementById('remember-me-container');
+    const checkboxEl = this;
     if (checkboxEl.classList.contains('checked')) {
         checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
     } else {
         checkboxEl.innerHTML = '<path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/><path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
     }
     checkboxEl.classList.toggle('checked');
+}
+
+function initBackNavIcon() {
+    const backIcn = document.getElementById('back-navigation-img');
+    backIcn.addEventListener('click', setNavTarget);
+    backIcn.classList.toggle('d-none');
+}
+
+function setNavTarget() {
+    if (currentFormKey === 'resetpassword') {
+        renderMainContent('forgotpassword')
+    } else {
+        renderMainContent('login');
+    }
 }
 
 
@@ -133,19 +153,29 @@ function togglePasswordVisibility() {
     }
 }
 
-function renderMainContent(content) {
+function renderMainContent(content, isInit = false) {
     const formContainer = document.getElementById('form');
     const headingEl = document.getElementById('heading');
     const newContent = getContent(content);
     headingEl.innerHTML = newContent['heading'];
     formContainer.innerHTML = newContent['html'];
+    isInit ? false : toggleBackIcon(content);
+    currentFormKey = content;
+    initCheckboxes();
+}
+
+function toggleBackIcon(contentKey) {
+    const backIcn = document.getElementById('back-navigation-img');
+    if (contentKey !== 'forgotpassword') {
+        backIcn.classList.toggle('d-none');
+    }
 }
 
 function getContent(contentKey) {
-    const result = mainContents.filter(el => {
+    const result = mainContents.find(el => {
         return el['key'] === contentKey;
     })
-    return result[0];
+    return result;
 }
 
 window.onload = init;
