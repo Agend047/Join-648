@@ -162,7 +162,7 @@ textarea {
   margin-block: 2em;
 }
 
-.forgot-password a:hover {
+.text-link:hover {
   font-weight: 600;
   text-decoration: underline;
 }
