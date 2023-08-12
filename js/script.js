@@ -1,7 +1,8 @@
 let docWidth;
 let loaded;
-let initials = 'SM'
+let initials = 'SM';
 let currentPage = 'summary.html';
+let STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
 
 
 /**
@@ -129,5 +130,13 @@ function backToOrigin() {
 }
 
 
+async function setItemInBackend(key, value) {
+    const payload = { key, value, token: STORAGE_TOKEN };
+    return fetch('https://remote-storage.developerakademie.org/', { method: 'POST', body: JSON.stringify(payload) })
+        .then(res => res.json());
+}
 
-
+async function getItemInBackend(key) {
+    const url = `https://remote-storage.developerakademie.org/?key=${key}&token=${STORAGE_TOKEN}`;
+    return fetch(url).then(res => res.json());
+}
