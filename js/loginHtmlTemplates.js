@@ -158,7 +158,7 @@ const mainContents = [
         <span>I accept the <a href="#" class="text-link">Privacy policy</a></span>
       </div>
         <div class="login-buttons">
-      <button class="btn btn-primary" type="submit">Sign up</button>
+      <button class="btn btn-primary disabled" type="submit">Sign up</button>
     </div>
       </form>`,
         heading: `Sign up`
