@@ -10,11 +10,11 @@ function init() {
         loginLogoEl.src = './assets/img/join_logo_black.png';
     }
     animateSplashScreen();
-    renderMainContent(currentFormKey, true);
+    // renderMainContent(currentFormKey, true);
     initLoginForm();
     initSignUpBtns();
     initCheckboxes();
-    initBackNavIcon();
+    // initBackNavIcon();
 }
 
 function initCheckboxes() {
@@ -160,8 +160,19 @@ function renderMainContent(content, isInit = false) {
     headingEl.innerHTML = newContent['heading'];
     formContainer.innerHTML = newContent['html'];
     isInit ? false : toggleBackIcon(content);
+    toggleSignUpBtnVisibility(content);
     currentFormKey = content;
     initCheckboxes();
+}
+
+function toggleSignUpBtnVisibility(contentKey) {
+    if (contentKey === 'login' || contentKey === 'signup') {
+        const signUpBtns = document.getElementsByClassName('sign-up-btn');
+        for (let i = 0; i < signUpBtns.length; i++) {
+            const signUpBtn = signUpBtns[i];
+            signUpBtn.classList.toggle('d-none');
+        }
+    }
 }
 
 function toggleBackIcon(contentKey) {
