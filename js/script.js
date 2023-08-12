@@ -21,6 +21,8 @@ async function checkWidth(trigger) {
     }
 }
 
+
+
 /**
  * When Window gets resized, checks if the other template may have to be loaded.
  */
@@ -107,8 +109,22 @@ function getDocumentName() {
 
 
 
+function getHelp() {
+    let originSide = getDocumentName()
+    localStorage.setItem('originSide', JSON.stringify(originSide));
+    window.location.href = "/help.html";
+}
 
+function backToOrigin() {
+    let originSideFromLocalStorage = localStorage.getItem('originSide');
 
+    if (originSideFromLocalStorage) {
+        let test = JSON.parse(originSideFromLocalStorage)
+        originSide = test
+        localStorage.removeItem(originSide);
+        window.location.href = "/" + originSide + ".html";
+    }
+}
 
 
 
