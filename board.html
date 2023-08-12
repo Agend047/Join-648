@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" href="./assets/img/join_logo_black.png">
+    <link rel="icon" href="./assets/img/join_logo_black.png" />
     <script defer src="./js/script.js"></script>
-    <script defer src="./js/summary.js"></script>
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/summary.css">
-    <link rel="stylesheet" href="./styles/board.css">
-</head>
+    <script defer src="./js/board.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/summary.css" />
+    <link rel="stylesheet" href="./styles/board.css" />
+  </head>
 
-<body onload="checkWidth()">
-    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
-    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
+  <body onload="checkWidth()">
+    <div
+      id="desktop-template"
+      include-templates="assets/templates/desktop_template.html"
+    ></div>
+    <div
+      id="mobile-template"
+      include-templates="assets/templates/mobile_template.html"
+    ></div>
 
     <main>
+      <div>
+        <div class="board-heading">
+          <div class="board-heading-mobile">
+            <h1>Board</h1>
+            <button>
+              <img id="addTask" src="./assets/img/board_addTask.svg" />
+            </button>
+          </div>
 
-        <div class="board-headline-container">
-            <div class="add-task-mobile">
-                <h1>Board</h1>
-                <button><img id="addTask" src="./assets/img/board_addTask.svg"></button>
+          <div class="input">
+            <input placeholder="Find Task" id="findTask" />
+            <div class="d-flex align-items-center gap1em">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2"
+                height="32"
+                viewBox="0 0 2 32"
+                fill="none"
+              >
+                <path d="M1 0.5V31.5" stroke="#D1D1D1" />
+              </svg>
+              <img
+                src="./assets/img/board_search.png"
+                class="input-icon"
+                alt=""
+              />
             </div>
-            <div>
-                <input id="search" type="text" placeholder="Find Task">
-            </div>
+          </div>
         </div>
 
-        <article>
-            <div>
-                <h2>To do</h2>
-                <div id=""></div>
-            </div>
-            <div>
-                <h2>In progress</h2>
-                <div id=""></div>
-            </div>
-            <div>
-                <h2>Await feedback</h2>
-                <div id=""></div>
-            </div>
-            <div>
-                <h2>Done</h2>
-                <div id=""></div>
-            </div>
-
-        </article>
-
-
-
+        <div class="card-container">
+          <div>
+            <h2>To do</h2>
+            <div id="rowToDo"></div>
+          </div>
+          <div>
+            <h2>In progress</h2>
+            <div id="RowProgress"></div>
+          </div>
+          <div>
+            <h2>Await feedback</h2>
+            <div id="RowFeedback"></div>
+          </div>
+          <div>
+            <h2>Done</h2>
+            <div id="RowDone"></div>
+          </div>
+        </div>
+      </div>
     </main>
-
-</body>
-
+  </body>
 </html>
