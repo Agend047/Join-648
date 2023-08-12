@@ -13,6 +13,22 @@ function init() {
     }
     initLoginForm();
     initCheckboxes();
+    initBackNavigator();
+}
+
+function initBackNavigator() {
+    const backNavigator = document.getElementById('back-navigation-img');
+    if (!backNavigator) { return; }
+    backNavigator.addEventListener('mouseover', toggleBackIconOnHover);
+    backNavigator.addEventListener('mouseout', toggleBackIconOnHover);
+}
+
+function toggleBackIconOnHover(ev) {
+    if (ev.type === 'mouseover') {
+        this.src = './assets/img/arrow-left-hover.png';
+    } else {
+        this.src = './assets/img/arrow-left-line.png';
+    }
 }
 
 function getAnimationHtml() {
@@ -36,6 +52,24 @@ function initCheckboxes() {
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         checkbox.addEventListener('click', toggleCheckbox);
+        checkbox.addEventListener('mouseover', toggleCheckboxHover);
+        checkbox.addEventListener('mouseout', toggleCheckboxHover);
+    }
+}
+
+function toggleCheckboxHover(ev) {
+    if (ev.type === 'mouseover') {
+        if (this.classList.contains('checked')) {
+            this.src = './assets/img/checkbox-checked-hover.png';
+        } else {
+            this.src = './assets/img/checkbox-unchecked-hover.png';
+        }
+    } else {
+        if (this.classList.contains('checked')) {
+            this.src = './assets/img/checkbox-checked.svg';
+        } else {
+            this.src = './assets/img/checkbox-unchecked.svg';
+        }
     }
 }
 
@@ -76,15 +110,16 @@ function removeSplash() {
 function toggleCheckbox() {
     const checkboxEl = this;
     if (checkboxEl.classList.contains('checked')) {
-        checkboxEl.innerHTML = '<rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>';
+        checkboxEl.src = './assets/img/checkbox-unchecked.svg';
     } else {
-        checkboxEl.innerHTML = '<path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/><path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+        checkboxEl.src = './assets/img/checkbox-checked.svg';
     }
     checkboxEl.classList.toggle('checked');
 }
 
 function initLoginForm() {
     const loginForm = document.getElementById('login-form');
+    if (!loginForm) {return};
     loginForm.noValidate = true;
     loginForm.addEventListener('submit', validateLoginForm);
     const passwordInput = document.getElementById('password-input');

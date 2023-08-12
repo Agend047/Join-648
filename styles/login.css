@@ -28,8 +28,7 @@ header {
   transition: 1s;
 }
 
-.checkbox:hover {
-  fill: var(--hover-color-checkbox);
+.checkbox {
   cursor: pointer;
 }
 
@@ -200,6 +199,10 @@ form .btn {
   justify-content: center;
   gap: 1em;
   padding-block-end: 1em;
+}
+
+.error-container + .login-buttons {
+  margin-block-start: 1.5em;
 }
 
 @media (min-width: 820px) {
