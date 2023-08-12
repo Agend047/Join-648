@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="./styles/board.css" />
   </head>
 
-  <body onload="checkWidth()">
+  <body
+    onload="checkWidth(), noTasksPlaceholder('rowToDo', 'To do'), noTasksPlaceholder('rowProgress', 'in Progress'), noTasksPlaceholder('rowFeedback', 'awaiting feedback')"
+  >
     <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
@@ -54,21 +56,33 @@
         </div>
 
         <div class="card-container">
-          <div>
-            <h2>To do</h2>
+          <div class="row">
+            <div class="row-title">
+              <h2>To do</h2>
+              <img id="addToDo" src="./assets/img/board_plus_button.png" />
+            </div>
             <div id="rowToDo"></div>
           </div>
-          <div>
-            <h2>In progress</h2>
-            <div id="RowProgress"></div>
+
+          <div class="row">
+            <div class="row-title">
+              <h2>In progress</h2>
+              <img id="addProgress" src="./assets/img/board_plus_button.png" />
+            </div>
+            <div id="rowProgress"></div>
           </div>
-          <div>
-            <h2>Await feedback</h2>
-            <div id="RowFeedback"></div>
+
+          <div class="row">
+            <div class="row-title">
+              <h2>Await feedback</h2>
+              <img id="addFeedback" src="./assets/img/board_plus_button.png" />
+            </div>
+            <div id="rowFeedback"></div>
           </div>
+
           <div>
             <h2>Done</h2>
-            <div id="RowDone"></div>
+            <div id="rowDone"></div>
           </div>
         </div>
       </div>

@@ -95,3 +95,33 @@ img.input-icon {
   font-weight: 700;
   line-height: 120%;
 }
+
+.card-container img {
+  width: 24px;
+  object-fit: contain;
+}
+
+.row {
+  width: 100%;
+}
+
+.row-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.placeholder {
+  display: flex;
+  width: 24.5rem;
+  height: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.625rem;
+  border: 1px dashed #a8a8a8;
+  background: #e7e7e7;
+  border-radius: 0.625rem;
+  border: 1px dashed #a8a8a8;
+  background: #e7e7e7;
+}
