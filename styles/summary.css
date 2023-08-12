@@ -31,7 +31,7 @@
   color: #29abe2;
 }
 
-.gap18 {
+.gap-medium {
   gap: 18px;
 }
 
@@ -108,8 +108,6 @@
   border: none;
   border-radius: 1.25rem;
   background-color: white;
-  font-size: 0.875rem;
-  line-height: 120%;
   color: var(--secondary-bg-color) !important;
   display: flex;
   justify-content: center;
@@ -133,6 +131,11 @@
 .card-container a img {
   height: 40px;
   width: 40px;
+}
+
+.card-container span {
+  font-size: 0.875rem;
+  line-height: 120%;
 }
 
 .number {
@@ -246,17 +249,26 @@
 @media (min-width: 820px) {
   .summary-main {
     align-items: flex-start;
-    margin-top: clamp(120px, 18%, 250px);
+    margin-left: clamp(calc(232px + 6em), 20%, 450px);
+    margin-top: clamp(180px, 19vh, 300px);
+    margin-right: clamp(50px, 10%, 80px);
+  }
+
+  .summary-content {
+    display: block;
   }
 
   .summary-heading {
     display: flex;
     align-items: center;
     flex-direction: unset;
-    gap: 1.875rem;
+    gap: 1.88em;
     line-height: 120%;
-    margin-left: 26.5vw;
-    padding-bottom: 3.56rem;
+    padding-bottom: 3.56em;
+  }
+
+  .summary-heading h1 {
+    font-size: 3.8125rem;
   }
 
   .seperator-mobile {
@@ -269,51 +281,78 @@
 
   .subheadline {
     font-size: 1.6875rem;
-    line-height: 120%;
     margin-right: 4rem;
   }
 
   .summary-desktop-layout {
-    max-width: calc(100% - 25.94rem);
-    margin-left: 26.5vw;
     display: flex;
     align-items: center;
-    margin-right: 5.44rem;
   }
 
   .summary-main a {
     border-radius: 1.88rem;
   }
 
-  .boxes-container {
-    width: 60%;
-    max-width: 25.5rem;
-  }
-
-  .top-row {
-    width: 100%;
+  .card-container {
+    width: clamp(35rem, 15vw, 50rem);
+    height: 35.0625rem;
     gap: 1.75rem;
   }
 
-  .bottom-row {
+  .card-container span {
+    font-size: 1.25rem;
+  }
+
+  .card-container a img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .number {
+    font-size: 4rem;
+  }
+
+  .top-row {
+    gap: 1.75em;
+  }
+
+  .top-row a {
+    width: 10.5rem;
+    height: 10.5rem;
+    padding: 1.5625em 0.2em;
+  }
+
+  .middle-row {
     width: 100%;
-    gap: 2rem;
+    max-height: 10.5rem;
+    padding: 1.75em 3em;
+    gap: 3.8125em;
+  }
+
+  #deadline {
+    font-size: 1.3125rem;
+    padding-bottom: 0.8em;
+  }
+
+  .bottom-row a {
+    width: 16.5rem;
+    max-height: 10.5rem;
+    padding: 2.375rem 1.1875rem;
+    gap: 1.125rem;
+    flex-shrink: 0;
   }
 
   #helloPageDesktop {
     display: block;
-    width: 40%;
     font-size: 2.9375rem;
-    font-style: normal;
     font-weight: 500;
-    line-height: 120%;
     margin-left: 5rem;
   }
 
   #helloPageDesktop h1 {
     font-size: 4rem;
-    font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    margin: 0;
   }
 }
