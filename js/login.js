@@ -16,19 +16,10 @@ function init() {
     initBackNavigator();
 }
 
-function initBackNavigator() {
-    const backNavigator = document.getElementById('back-navigation-img');
-    if (!backNavigator) { return; }
-    backNavigator.addEventListener('mouseover', toggleBackIconOnHover);
-    backNavigator.addEventListener('mouseout', toggleBackIconOnHover);
-}
-
-function toggleBackIconOnHover(ev) {
-    if (ev.type === 'mouseover') {
-        this.src = './assets/img/arrow-left-hover.png';
-    } else {
-        this.src = './assets/img/arrow-left-line.png';
-    }
+function getSessionData() {
+    const appStarted = JSON.parse(sessionStorage.getItem('appStarted'));
+    if (!appStarted) { sessionStorage.setItem('appStarted', 'true'); }
+    return appStarted;
 }
 
 function getAnimationHtml() {
@@ -41,10 +32,14 @@ function getAnimationHtml() {
     />`;
 }
 
-function getSessionData() {
-    const appStarted = JSON.parse(sessionStorage.getItem('appStarted'));
-    if (!appStarted) { sessionStorage.setItem('appStarted', 'true'); }
-    return appStarted;
+function initLoginForm() {
+    const loginForm = document.getElementById('login-form');
+    if (!loginForm) {return};
+    loginForm.noValidate = true;
+    loginForm.addEventListener('submit', validateLoginForm);
+    const passwordInput = document.getElementById('password-input');
+    passwordInput.addEventListener('focus', togglePasswordIcon);
+    passwordInput.addEventListener('blur', togglePasswordIcon);
 }
 
 function initCheckboxes() {
@@ -57,20 +52,11 @@ function initCheckboxes() {
     }
 }
 
-function toggleCheckboxHover(ev) {
-    if (ev.type === 'mouseover') {
-        if (this.classList.contains('checked')) {
-            this.src = './assets/img/checkbox-checked-hover.png';
-        } else {
-            this.src = './assets/img/checkbox-unchecked-hover.png';
-        }
-    } else {
-        if (this.classList.contains('checked')) {
-            this.src = './assets/img/checkbox-checked.svg';
-        } else {
-            this.src = './assets/img/checkbox-unchecked.svg';
-        }
-    }
+function initBackNavigator() {
+    const backNavigator = document.getElementById('back-navigation-img');
+    if (!backNavigator) { return; }
+    backNavigator.addEventListener('mouseover', toggleBackIconOnHover);
+    backNavigator.addEventListener('mouseout', toggleBackIconOnHover);
 }
 
 /**Splash screen animation: This function coordinates the splash screen animation by calling three sub-functions with increasing timeouts. Change of delay requires change of login.css rules (transition property) as well */
@@ -106,6 +92,31 @@ function removeSplash() {
     loginLogoEl.classList.add('d-none');
     loginLogoStaticEl.classList.remove('splash-active');
 }
+
+function toggleBackIconOnHover(ev) {
+    if (ev.type === 'mouseover') {
+        this.src = './assets/img/arrow-left-hover.png';
+    } else {
+        this.src = './assets/img/arrow-left-line.png';
+    }
+}
+
+function toggleCheckboxHover(ev) {
+    if (ev.type === 'mouseover') {
+        if (this.classList.contains('checked')) {
+            this.src = './assets/img/checkbox-checked-hover.png';
+        } else {
+            this.src = './assets/img/checkbox-unchecked-hover.png';
+        }
+    } else {
+        if (this.classList.contains('checked')) {
+            this.src = './assets/img/checkbox-checked.svg';
+        } else {
+            this.src = './assets/img/checkbox-unchecked.svg';
+        }
+    }
+}
+
 /**Toggle checkbox: replaces svg code based on the checked class attribute and toggles the checked class attribute. */
 function toggleCheckbox() {
     const checkboxEl = this;
@@ -117,15 +128,6 @@ function toggleCheckbox() {
     checkboxEl.classList.toggle('checked');
 }
 
-function initLoginForm() {
-    const loginForm = document.getElementById('login-form');
-    if (!loginForm) {return};
-    loginForm.noValidate = true;
-    loginForm.addEventListener('submit', validateLoginForm);
-    const passwordInput = document.getElementById('password-input');
-    passwordInput.addEventListener('focus', togglePasswordIcon);
-    passwordInput.addEventListener('blur', togglePasswordIcon);
-}
 
 function validateLoginForm(e) {
     const form = e.target;
