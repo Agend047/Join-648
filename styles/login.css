@@ -75,21 +75,20 @@ footer a:hover {
 }
 
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1em;
+  padding: 1em 3rem;
   background-color: white;
   border-radius: 1.875em;
   box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.03);
 }
 
-.back-navigation-img {
+.back-navigation-link {
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(clamp(-400%, -11vw, -200%), -50%);
-  cursor: pointer;
+  top: 3rem;
+  left: 1rem;
 }
 
 /*Log in form*/
@@ -167,13 +166,14 @@ textarea {
   text-decoration: underline;
 }
 
-.heading-container {
-  position: relative;
-}
-
 h1 {
   font-size: var(--fs-taller);
   margin-block: 0.5em 0.25em;
+  text-align: center;
+}
+
+p {
+  text-align: center;
 }
 
 form .btn {

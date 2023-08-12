@@ -1,5 +1,4 @@
 const headerEl = document.getElementById('header');
-let currentFormKey = 'login';
 
 function init() {
     const appStarted = getSessionData();
@@ -12,11 +11,8 @@ function init() {
         }
         animateSplashScreen();
     }
-    // renderMainContent(currentFormKey, true);
     initLoginForm();
-    initSignUpBtns();
     initCheckboxes();
-    // initBackNavIcon();
 }
 
 function getAnimationHtml() {
@@ -40,14 +36,6 @@ function initCheckboxes() {
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         checkbox.addEventListener('click', toggleCheckbox);
-    }
-}
-
-function initSignUpBtns() {
-    const signUpBtns = document.getElementsByClassName('sign-up-btn');
-    for (let i = 0; i < signUpBtns.length; i++) {
-        const signUpBtn = signUpBtns[i];
-        signUpBtn.addEventListener('click', () => renderMainContent('signup'));
     }
 }
 
@@ -95,21 +83,6 @@ function toggleCheckbox() {
     checkboxEl.classList.toggle('checked');
 }
 
-function initBackNavIcon() {
-    const backIcn = document.getElementById('back-navigation-img');
-    backIcn.addEventListener('click', setNavTarget);
-    backIcn.classList.toggle('d-none');
-}
-
-function setNavTarget() {
-    if (currentFormKey === 'resetpassword') {
-        renderMainContent('forgotpassword')
-    } else {
-        renderMainContent('login');
-    }
-}
-
-
 function initLoginForm() {
     const loginForm = document.getElementById('login-form');
     loginForm.noValidate = true;
@@ -131,8 +104,8 @@ function validateLoginForm(e) {
         formElement.checkValidity();
         if (!formElement.validity.valid) {
             formIsValid = false;
-            document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
         }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
     }
     if (!formIsValid) {
         e.preventDefault();
@@ -177,42 +150,6 @@ function togglePasswordVisibility() {
         inputEl.type = 'password';
         iconEl.src = './assets/img/visibility_off.png';
     }
-}
-
-function renderMainContent(content, isInit = false) {
-    const formContainer = document.getElementById('form');
-    const headingEl = document.getElementById('heading');
-    const newContent = getContent(content);
-    headingEl.innerHTML = newContent['heading'];
-    formContainer.innerHTML = newContent['html'];
-    isInit ? false : toggleBackIcon(content);
-    toggleSignUpBtnVisibility(content);
-    currentFormKey = content;
-    initCheckboxes();
-}
-
-function toggleSignUpBtnVisibility(contentKey) {
-    if (contentKey === 'login' || contentKey === 'signup') {
-        const signUpBtns = document.getElementsByClassName('sign-up-btn');
-        for (let i = 0; i < signUpBtns.length; i++) {
-            const signUpBtn = signUpBtns[i];
-            signUpBtn.classList.toggle('d-none');
-        }
-    }
-}
-
-function toggleBackIcon(contentKey) {
-    const backIcn = document.getElementById('back-navigation-img');
-    if (contentKey !== 'forgotpassword') {
-        backIcn.classList.toggle('d-none');
-    }
-}
-
-function getContent(contentKey) {
-    const result = mainContents.find(el => {
-        return el['key'] === contentKey;
-    })
-    return result;
 }
 
 window.onload = init;
