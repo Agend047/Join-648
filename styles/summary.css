@@ -232,20 +232,6 @@
   transform: scale(1.03);
 }
 
-@media (max-width: 430px) {
-  .top-row {
-    gap: 6%;
-  }
-
-  .bottom-row {
-    gap: 6%;
-  }
-
-  .card-container {
-    gap: 1.2em;
-  }
-}
-
 @media (min-width: 820px) {
   .summary-main {
     align-items: flex-start;
@@ -418,5 +404,19 @@
 
   .seperator-desktop {
     display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .top-row {
+    gap: 6%;
+  }
+
+  .bottom-row {
+    gap: 6%;
+  }
+
+  .card-container {
+    gap: 1.2em;
   }
 }

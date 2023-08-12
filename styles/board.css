@@ -27,14 +27,11 @@ main {
 }
 
 .board-heading button {
-  width: 2.5rem;
-  height: 2.5rem;
   border: none;
   border-radius: 0.63rem;
   padding: 0.19rem;
   background-color: var(--secondary-bg-color);
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -42,6 +39,16 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.board-heading-mobile button {
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: center;
+}
+
+.board-heading-desktop button {
+  display: none;
 }
 
 input {
@@ -124,4 +131,33 @@ img.input-icon {
   border-radius: 0.625rem;
   border: 1px dashed #a8a8a8;
   background: #e7e7e7;
+}
+
+@media (min-width: 820px) {
+  .board-heading {
+    display: flex;
+    flex-direction: unset;
+    justify-content: space-between;
+  }
+
+  .board-heading h1 {
+    font-size: 3.8125rem;
+  }
+
+  .board-heading-mobile button {
+    display: none;
+  }
+
+  .board-heading-desktop {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .heading-desktop-rightSide {
+    display: flex;
+  }
+
+  .heading-desktop-rightSide button {
+    display: flex;
+  }
 }
