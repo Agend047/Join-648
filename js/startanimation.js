@@ -3,8 +3,7 @@ function handleStartAnimation() {
     if (!appStarted) {
         getAnimationHtml();
         const loginLogoEl = document.getElementById('login-logo');
-        checkWidth(true);
-        if (loaded === 'desktop') {
+        if (getScreenType() === 'desktop') {
             loginLogoEl.src = './assets/img/join_logo_black.png';
         }
         animateSplashScreen();

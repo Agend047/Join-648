@@ -1,4 +1,5 @@
 let docWidth;
+let screenType;
 let loaded;
 let initials = 'SM';
 let currentPage = 'summary.html';
@@ -6,36 +7,47 @@ let STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
 
 
 /**
- * Checks width of shown screen, loads templates as needed and saves wich version has been loaded in global Variable.
- *
- * @param {boolean} trigger - Only used, if the templates shall not be loaded in. In that case, trigger is true.
+ * Inits getting the Templates
  */
-async function checkWidth(trigger) {
+function initTemplates() {
+    getTemplates()
+}
+
+/**
+ * Checks Screen Width and sets the global variable loaded to 'mobile' or 'desktop'.
+ * @returns  form of actual Screen.
+ */
+function getScreenType() {
     let htmlDocument = document.getElementsByTagName('html');
-    docWidth = htmlDocument[0].offsetWidth;
+    let docWidth = htmlDocument[0].offsetWidth;
     if (docWidth < 820) {
-        if (!trigger) { await getMatchingTemplate('mobile-template', 'desktop-template') }
-        loaded = 'mobile'
+        screenType = 'mobile';
     } else if (docWidth > 820) {
-        if (!trigger) { await getMatchingTemplate('desktop-template', 'mobile-template') }
-        loaded = 'desktop'
+        screenType = 'desktop';
+    }
+    return screenType;
+}
+
+/**
+ * Loads in the needed Templates for Desktop or Mobile Version
+ */
+async function getTemplates() {
+    getScreenType()
+    if (screenType == 'mobile') {
+        await getMatchingTemplate('mobile-template', 'desktop-template')
+        loaded = 'mobile';
+    } else if (screenType == 'desktop') {
+        await getMatchingTemplate('desktop-template', 'mobile-template')
+        loaded = 'desktop';
     }
 }
 
-
-
 /**
- * When Window gets resized, checks if the other template may have to be loaded.
+ * Checks, if Screentyoe still matches the actual loaded Template Versions.
  */
 window.onresize = function () {
-    let htmlDocument = document.getElementsByTagName('html');
-    docWidth = htmlDocument[0].offsetWidth;
-    if (docWidth < 820 && loaded == 'desktop') {
-        getMatchingTemplate('mobile-template', 'desktop-template')
-        loaded = 'mobile';
-    } else if (docWidth > 820 && loaded == 'mobile') {
-        getMatchingTemplate('desktop-template', 'mobile-template')
-        loaded = 'desktop';
+    if (getScreenType() != loaded) {
+        getTemplates()
     }
 }
 
@@ -60,7 +72,6 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
     markCorrectMenuPoint()
 }
 
-
 /**
  * Undloads the not needed Template.
  * @param {*} toUnloadID ID of to unload Template
@@ -69,7 +80,6 @@ function unloadTemplate(toUnloadID) {
     let toUnload = document.getElementById(toUnloadID);
     toUnload.innerHTML = '';
 }
-
 
 /**
  * Initials of current User are going to be written into the Header Circle.
@@ -82,7 +92,6 @@ function showInitialsHeader(initials) {
     if (initials) { svgText.textContent = initials; } else { svgText.textContent = 'G'; }
 }
 
-
 /**  
  * Marks Point on the Sider/Footer that is currently open.
  */
@@ -91,10 +100,10 @@ function markCorrectMenuPoint() {
 
     let toChoose = document.getElementById(activeSide + "ID");
     if (toChoose) {
-        toChoose.classList.add('Choosen_field')
+        toChoose.classList.add('Choosen_field');
     } else {
         let helpIcon = document.getElementById('header_help_icon_d');
-        helpIcon.classList.add('d-none')
+        helpIcon.classList.add('d-none');
     }
 }
 
@@ -108,12 +117,11 @@ function getDocumentName() {
     return page[0];
 }
 
-
 /**
  * Saves current Page in local Storage, so its possible to return later.
  */
 function getHelp() {
-    let originSide = getDocumentName()
+    let originSide = getDocumentName();
     localStorage.setItem('originSide', JSON.stringify(originSide));
     window.location.href = "/help.html";
 }
@@ -122,13 +130,12 @@ function backToOrigin() {
     let originSideFromLocalStorage = localStorage.getItem('originSide');
 
     if (originSideFromLocalStorage) {
-        let test = JSON.parse(originSideFromLocalStorage)
-        originSide = test
+        let test = JSON.parse(originSideFromLocalStorage);
+        originSide = test;
         localStorage.removeItem(originSide);
         window.location.href = "/" + originSide + ".html";
     }
 }
-
 
 async function setItemInBackend(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
