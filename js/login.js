@@ -47,15 +47,12 @@ function initForm() {
         case 'signup-form':
             validationFunction = validateSignUpForm;
             break;
-        case 'forgotpassword-form':
-            validationFunction = validateForgotPasswordForm;
-            break;
-        case 'resetpassword-form':
-            validationFunction = validateResetPasswordForm;
+        default:
+            validationFunction = validateStandardForm;
             break;
     }
     form.addEventListener('submit', validationFunction);
-    const passwordInputs = form.querySelectorAll('[type="password"]');
+    const passwordInputs = form.querySelectorAll('[type="password"]:has(+ img)');
     for (let i = 0; i < passwordInputs.length; i++) {
         const passwordInput = passwordInputs[i];
         passwordInput.addEventListener('focus', togglePasswordIcon);
@@ -181,6 +178,24 @@ function validateSignUpForm(e) {
         if (formElement.id === 'password-input') {
             validatePassword(formElement);
         }
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+        }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+    }
+    if (!formIsValid) {
+        e.preventDefault();
+        form.classList.toggle('is-validated');
+    }
+}
+
+function validateStandardForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
         formElement.checkValidity();
         if (!formElement.validity.valid) {
             formIsValid = false;
