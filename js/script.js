@@ -147,3 +147,11 @@ async function getItemInBackend(key) {
     const url = `https://remote-storage.developerakademie.org/?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(res => res.json());
 }
+
+function showNotification(elementId, targetHref) {   
+    document.documentElement.style.setProperty('--notification-top-target', '80vh');
+    document.getElementById(elementId).classList.add('triggered');
+    setTimeout(() => {
+        window.location.href = targetHref;
+    }, 800);
+}

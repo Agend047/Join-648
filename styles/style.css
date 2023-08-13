@@ -199,6 +199,7 @@ a {
   justify-content: center;
   align-items: center;
   position: fixed;
+  gap: 0.5em;
   top: 100vh;
   left: 50vw;
   transform: translate(-50%, 0);
