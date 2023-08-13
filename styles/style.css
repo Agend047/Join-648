@@ -189,6 +189,25 @@ a {
   transition: ease-in-out 100ms;
 }
 
+.notification {
+  background-color: var(--primary-bg-color);
+  color: white;
+  padding: 0.5em 1em;
+  min-width: 371px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 50vw;
+  transform: translate(-50%, 100%);
+}
+
+.notification.triggered {
+  bottom: 10vh;
+  transform: translate(-50%, -100%);
+  transition: 200ms;
+}
+
 /* Desktop Sider & Header */
 
 #desktop_header {
