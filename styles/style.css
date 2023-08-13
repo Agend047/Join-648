@@ -173,7 +173,7 @@ a {
 
 .btn-primary:disabled, .btn-primary:disabled:hover {
   background-color: var(--decent-color);
-  color: black;
+  color: rgba(0,0,0,0.6);
   box-shadow: none;
   cursor: auto;
 }
