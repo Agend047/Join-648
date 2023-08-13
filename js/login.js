@@ -47,6 +47,9 @@ function initForm() {
         case 'signup-form':
             validationFunction = validateSignUpForm;
             break;
+        case 'resetpassword-form':
+            validationFunction = validateResetPasswordForm;
+            break;
         default:
             validationFunction = validateStandardForm;
             break;
@@ -190,6 +193,27 @@ function validateSignUpForm(e) {
     }
 }
 
+function validateResetPasswordForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        if (formElement.id === 'confirm-password-input') {
+            validatePasswordConfirmation(formElement);
+        }
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+        }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+    }
+    if (!formIsValid) {
+        e.preventDefault();
+        form.classList.toggle('is-validated');
+    }
+}
+
 function validateStandardForm(e) {
     const form = e.target;
     let formIsValid = true;
@@ -216,6 +240,16 @@ function validatePassword(formElement) {
     }
 }
 
+function validatePasswordConfirmation(formElement) {
+    const password1 = document.getElementById('password-input').value;
+    const password2 = document.getElementById('confirm-password-input').value;
+    if (password1 !== password2) {
+        formElement.setCustomValidity("Your passwords don't match. Try again.");
+    } else {
+        formElement.setCustomValidity("");
+    }
+}
+
 function togglePasswordIcon(e) {
     const inputEl = this;
     const iconEl = inputEl.nextElementSibling;
@@ -237,7 +271,7 @@ function togglePasswordIcon(e) {
 
 function togglePasswordVisibility() {
     const iconEl = this;
-    const inputEl = iconEl.previousElementSibling;    
+    const inputEl = iconEl.previousElementSibling;
     if (inputEl.type === 'password') {
         inputEl.type = 'text';
         iconEl.src = './assets/img/visibility.png';
