@@ -147,7 +147,3 @@ async function getItemInBackend(key) {
     const url = `https://remote-storage.developerakademie.org/?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(res => res.json());
 }
-
-function showNotification(elementId) {
-    document.getElementById(elementId).classList.add('triggered');
-}
