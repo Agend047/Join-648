@@ -1,6 +1,13 @@
 const headerEl = document.getElementById('header');
 
 function init() {
+    handleStartAnimation();
+    initForm();
+    initCheckboxes();
+    initBackNavigator();
+}
+
+function handleStartAnimation() {
     const appStarted = getSessionData();
     if (!appStarted) {
         getAnimationHtml();
@@ -11,9 +18,6 @@ function init() {
         }
         animateSplashScreen();
     }
-    initLoginForm();
-    initCheckboxes();
-    initBackNavigator();
 }
 
 function getSessionData() {
@@ -32,15 +36,33 @@ function getAnimationHtml() {
     />`;
 }
 
-function initLoginForm() {
-    const loginForm = document.getElementById('login-form');
-    if (!loginForm) {return};
-    loginForm.noValidate = true;
-    loginForm.addEventListener('submit', validateLoginForm);
-    const passwordInput = document.getElementById('password-input');
-    passwordInput.addEventListener('focus', togglePasswordIcon);
-    passwordInput.addEventListener('blur', togglePasswordIcon);
+function initForm() {
+    const form = document.forms[0];
+    form.noValidate = true;
+    let validationFunction;
+    switch (form.id) {
+        case 'login-form':
+            validationFunction = validateLoginForm;
+            break;
+        case 'signup-form':
+            validationFunction = validateSignUpForm;
+            break;
+        case 'forgotpassword-form':
+            validationFunction = validateForgotPasswordForm;
+            break;
+        case 'resetpassword-form':
+            validationFunction = validateResetPasswordForm;
+            break;
+    }
+    form.addEventListener('submit', validationFunction);
+    const passwordInputs = form.querySelectorAll('[type="password"]');
+    for (let i = 0; i < passwordInputs.length; i++) {
+        const passwordInput = passwordInputs[i];
+        passwordInput.addEventListener('focus', togglePasswordIcon);
+        passwordInput.addEventListener('blur', togglePasswordIcon);
+    }
 }
+
 
 function initCheckboxes() {
     const checkboxes = document.getElementsByClassName('checkbox');
@@ -117,7 +139,7 @@ function toggleCheckboxHover(ev) {
     }
 }
 
-/**Toggle checkbox: replaces svg code based on the checked class attribute and toggles the checked class attribute. */
+/**Toggle checkbox: changes src attribute of checkbox img based on the checked class attribute and toggles the checked class attribute. */
 function toggleCheckbox() {
     const checkboxEl = this;
     if (checkboxEl.classList.contains('checked')) {
@@ -150,6 +172,27 @@ function validateLoginForm(e) {
     }
 }
 
+function validateSignUpForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        if (formElement.id === 'password-input') {
+            validatePassword(formElement);
+        }
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+        }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+    }
+    if (!formIsValid) {
+        e.preventDefault();
+        form.classList.toggle('is-validated');
+    }
+}
+
 function validatePassword(formElement) {
     if (formElement.value === '') {
         formElement.setCustomValidity('Wrong password. Ups! Try again.');
@@ -159,8 +202,8 @@ function validatePassword(formElement) {
 }
 
 function togglePasswordIcon(e) {
-    const iconEl = document.getElementById('password-icon');
     const inputEl = this;
+    const iconEl = inputEl.nextElementSibling;
     if (e.type === 'focus' && inputEl.value === '') {
         iconEl.addEventListener('click', togglePasswordVisibility);
         iconEl.classList.toggle('cursor-pointer');
@@ -178,8 +221,8 @@ function togglePasswordIcon(e) {
 }
 
 function togglePasswordVisibility() {
-    const inputEl = document.getElementById('password-input');
     const iconEl = this;
+    const inputEl = iconEl.previousElementSibling;    
     if (inputEl.type === 'password') {
         inputEl.type = 'text';
         iconEl.src = './assets/img/visibility.png';
