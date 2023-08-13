@@ -178,8 +178,8 @@ function validateSignUpForm(e) {
     const formElements = form.querySelectorAll('input, textarea, select');
     for (let i = 0; i < formElements.length; i++) {
         const formElement = formElements[i];
-        if (formElement.id === 'password-input') {
-            validatePassword(formElement);
+        if (formElement.id === 'confirm-password-input') {
+            validatePasswordConfirmation(formElement);
         }
         formElement.checkValidity();
         if (!formElement.validity.valid) {
