@@ -37,10 +37,10 @@ function validateStandardForm(e) {
         }
         document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
     }
+    e.preventDefault();
     if (!formIsValid) {
-        e.preventDefault();
         form.classList.toggle('is-validated');
-    }
+    } else { showNotification('notification', form.action); }
 }
 
 function validatePassword(formElement) {

@@ -2,6 +2,7 @@ function init() {
     initForm();
     initCheckboxes();
     initBackNavigator();
+    initPolicyCheckbox(); //MUST be excecuted after initCheckboxes!
 }
 
 function validateSignUpForm(e) {
@@ -32,6 +33,15 @@ function showSignUpNotification(elementId, refElementId) {
     setTimeout(() => {
         window.location.href = './login.html';
     }, 800);
+}
+
+function initPolicyCheckbox() {
+    document.getElementById('accept-privacy-policy').addEventListener('click', toggleSignUpBtn);
+    document.getElementById('sign-up-btn').disabled = true;
+}
+
+function toggleSignUpBtn(e) {
+    document.getElementById('sign-up-btn').disabled = !e.target.classList.contains('checked');
 }
 
 window.onload = init;
