@@ -114,6 +114,7 @@
   --fs-normal: 1.25rem;
   --fs-tall: 2.25rem;
   --fs-taller: 2.938rem;
+  --notification-top-target: 0;
 }
 
 @media (min-width: 820px) {
@@ -167,7 +168,7 @@ a {
 
 .btn-primary {
   color: white;
-  background-color: var(--primary-bg-color);
+  background-color: var(--secondary-bg-color);
 }
 
 .btn-primary:hover {
@@ -190,21 +191,22 @@ a {
 }
 
 .notification {
-  background-color: var(--primary-bg-color);
+  background-color: var(--secondary-bg-color);
   color: white;
-  padding: 0.5em 1em;
+  padding: 1em 0.5em;
   min-width: 371px;
   display: flex;
+  justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 0;
+  top: 100vh;
   left: 50vw;
-  transform: translate(-50%, 100%);
+  transform: translate(-50%, 0);
+  border-radius: 1em;
 }
 
 .notification.triggered {
-  bottom: 10vh;
-  transform: translate(-50%, -100%);
+  top: var(--notification-top-target);
   transition: 200ms;
 }
 
