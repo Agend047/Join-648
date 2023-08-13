@@ -120,6 +120,10 @@ textarea {
   margin-block-start: 1em;
 }
 
+.input:focus-within {
+  border-color: var(--accent-color);
+}
+
 .error-container {
   max-width: 422px;
   width: 100%;
