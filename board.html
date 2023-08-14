@@ -8,12 +8,19 @@
     <script defer src="./js/script.js"></script>
     <script defer src="./js/board.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="stylesheet" href="./styles/summary.css" />
     <link rel="stylesheet" href="./styles/board.css" />
   </head>
 
   <body
-    onload="initTemplates(), noTasksPlaceholder('rowToDo', 'To do'), noTasksPlaceholder('rowProgress', 'in Progress'), noTasksPlaceholder('rowFeedback', 'awaiting feedback'), noTasksPlaceholder('rowDone', 'done')"
+    onload="initTemplates(), 
+    noTasksPlaceholder('colToDoDesktop', 'To do'), 
+    noTasksPlaceholder('colProgressDesktop', 'in Progress'), 
+    noTasksPlaceholder('colFeedbackDesktop', 'awaiting feedback'), 
+    noTasksPlaceholder('colDoneDesktop', 'done'),
+    noTasksPlaceholder('colToDoMobile', 'To do'), 
+    noTasksPlaceholder('colProgressMobile', 'in Progress'), 
+    noTasksPlaceholder('colFeedbackMobile', 'awaiting feedback'), 
+    noTasksPlaceholder('colDoneMobile', 'done')"
   >
     <div
       id="desktop-template"
@@ -30,7 +37,7 @@
           <div class="board-heading-mobile">
             <h1>Board</h1>
             <button>
-              <img id="addTask" src="./assets/img/board_addTask.svg" />
+              <img id="addTaskSmall" src="./assets/img/board_addTask.svg" />
             </button>
           </div>
 
@@ -55,9 +62,8 @@
               </div>
             </div>
             <button>
-              <span>Add task</span>
               <svg
-                id="addTask"
+                id="addTaskLarge"
                 width="32"
                 height="32"
                 viewBox="0 0 32 32"
@@ -87,35 +93,36 @@
         </div>
 
         <div class="content">
-          <div class="row">
-            <div class="row-title">
+          <div class="title-row">
+            <div class="col-title">
               <h2>To do</h2>
               <img id="addToDo" src="./assets/img/board_plus_button.png" />
             </div>
-            <div id="rowToDo"></div>
-          </div>
+            <div class="margin-bottom" id="colToDoMobile"></div>
 
-          <div class="row">
-            <div class="row-title">
+            <div class="col-title">
               <h2>In progress</h2>
               <img id="addProgress" src="./assets/img/board_plus_button.png" />
             </div>
-            <div id="rowProgress"></div>
-          </div>
+            <div class="margin-bottom" id="colProgressMobile"></div>
 
-          <div class="row">
-            <div class="row-title">
+            <div class="col-title">
               <h2>Await feedback</h2>
               <img id="addFeedback" src="./assets/img/board_plus_button.png" />
             </div>
-            <div id="rowFeedback"></div>
-          </div>
+            <div class="margin-bottom" id="colFeedbackMobile"></div>
 
-          <div class="row">
-            <div class="row-title">
+            <div class="col-title">
               <h2>Done</h2>
             </div>
-            <div id="rowDone"></div>
+            <div id="colDoneMobile"></div>
+          </div>
+
+          <div class="columns">
+            <div id="colToDoDesktop"></div>
+            <div id="colProgressDesktop"></div>
+            <div id="colFeedbackDesktop"></div>
+            <div id="colDoneDesktop"></div>
           </div>
         </div>
       </div>

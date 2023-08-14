@@ -1,9 +1,9 @@
-function noTasksPlaceholder(rowID, rowTitle) {
-  let content = document.getElementById(rowID);
+function noTasksPlaceholder(colID, colTitle) {
+  let content = document.getElementById(colID);
 
   if (content.innerHTML === "") {
     content.innerHTML = `
-    <div class="placeholder">No tasks ${rowTitle}</div>
+    <div class="placeholder">No tasks ${colTitle}</div>
 `;
   }
 }
