@@ -34,6 +34,10 @@ form {
   max-width: 440px;
 }
 
+select {
+  margin-inline-end: 1em;
+}
+
 .input {
   margin-block-start: 0.5em;
   margin-block-end: 1.5em;
