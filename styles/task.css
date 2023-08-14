@@ -45,6 +45,7 @@ form {
   border: none;
   padding: 0;
   flex-wrap: wrap;
+  gap: 8px;
 }
 
 .radio-button.prio-urgent:has(input[type='radio']:checked) {
