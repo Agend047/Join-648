@@ -100,7 +100,8 @@ form {
 }
 
 input,
-textarea {
+textarea,
+select {
   border: none;
   outline: none;
   font-size: unset;
