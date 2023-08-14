@@ -25,6 +25,10 @@ function startAddContact() {
     alert('Patience!')
 }
 
+function openContact(i) {
+    alert('Soon')
+}
+
 function editContact() {
     alert('Edit')
 }
@@ -33,3 +37,16 @@ function deleteContact() {
     alert('Delete!')
 }
 
+
+
+/**
+ * Checks, if the Phone NUmber is an actual number, or wont allow it as part of the Phone Number.
+ * @param {object} evt -Typed Key at the "Phone Number" field.
+ * @returns true, if the typed Key was a Numbers Key, or false, if not.
+ */
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; }
+
+    return true;
+}

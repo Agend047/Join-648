@@ -9,6 +9,11 @@
     background-color: white;
 }
 
+#contacts_list {
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
 
 .Primary_contacts_btn {
     width: 100%;
@@ -29,28 +34,50 @@
 .letter_div {
     width: 90%;
     justify-content: left;
-    padding: 17px 36px 17px 36px;
-    margin: 8px;
+    padding: 10px 36px 0px 36px;
 }
 
 .seperate_div {
     width: 90%;
     height: 1px;
     background-color: #D1D1D1;
+    margin: 0;
+}
+
+.Contact_div {
+    width: 100%;
+    padding: 8px 16px 8px 16px;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+.Contact_div:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #2A3647;
+}
+
+.Name_Mail_div p {
+    margin: 0;
+}
+
+.Mail_text {
+    color: #007CEE;
+
 }
 
 
 /*Contacts display */
 
-.Contacs_Display {
-    margin-top: 96px;
+.Contacs_Display_big {
+    margin-top: 70px;
 }
 
-.Contacs_Display h1 {
+.Contacs_Display_big h1 {
     font-size: var(--fs-taller);
 }
 
-.Contacs_Display p {
+.Contacs_Display_big p {
     font-size: var(--fs-normal);
 }
 
@@ -64,6 +91,10 @@
 }
 
 /* Contacts Stage */
+
+#contacts_stage {
+    overflow-y: auto;
+}
 
 .Stage_head {}
 
@@ -85,9 +116,9 @@
     background-color: #29ABE2;
 }
 
-#initial_ball {
-    min-width: 120px;
-    min-height: 120px;
+#initial_ball_big {
+    min-width: 100px;
+    min-height: 100px;
     border-radius: 70px;
     justify-content: center;
     align-items: center;
@@ -95,17 +126,30 @@
     background-color: orange;
     font-size: var(--fs-tall);
     margin: 20px;
+    border-style: solid;
 }
 
 #contact_name {
-    font-size: var(--fs-taller);
+    font-size: var(--fs-tall);
     margin: 16px;
 }
 
-#delete_contact_button {
+#delete_contact_btn {
     padding-left: 80px;
 }
 
+.Contact_stage_btn:hover {
+    color: #29ABE2;
+}
+
+#delete_contact_btn:hover img {
+    content: url('/assets/img/contacts_deleteContacts-active_icon.png');
+
+}
+
+#edit_contact_btn:hover img {
+    content: url('/assets/img/contacts_editContacts-active_icon.png');
+}
 
 @media (max-width: 900px) {
 
@@ -133,10 +177,12 @@
 
         .Main_container {
             margin-left: 0;
+            margin-right: 0;
             width: 100vw;
+            max-width: 1000vw;
         }
 
-        .Contacs_Display {
+        .Contacs_Display_big {
             display: none;
         }
 
@@ -149,4 +195,26 @@
             height: 3px;
         }
     }
+}
+
+
+/*Add & edit Contacts */
+
+#shader_div {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.7;
+    z-index: 10;
+    background-color: white;
+    display: none;
+}
+
+.edit_and_addContact_div {
+    z-index: 11;
+    display: none;
 }
