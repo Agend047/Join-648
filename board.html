@@ -1,92 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="./assets/img/join_logo_black.png" />
+    <script defer src="./js/script.js"></script>
+    <script defer src="./js/board.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/summary.css" />
+    <link rel="stylesheet" href="./styles/board.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join</title>
-  <link rel="icon" href="./assets/img/join_logo_black.png" />
-  <script defer src="./js/script.js"></script>
-  <script defer src="./js/board.js"></script>
-  <link rel="stylesheet" href="./styles/style.css" />
-  <link rel="stylesheet" href="./styles/summary.css" />
-  <link rel="stylesheet" href="./styles/board.css" />
-</head>
+  <body
+    onload="initTemplates(), noTasksPlaceholder('rowToDo', 'To do'), noTasksPlaceholder('rowProgress', 'in Progress'), noTasksPlaceholder('rowFeedback', 'awaiting feedback'), noTasksPlaceholder('rowDone', 'done')"
+  >
+    <div
+      id="desktop-template"
+      include-templates="assets/templates/desktop_template.html"
+    ></div>
+    <div
+      id="mobile-template"
+      include-templates="assets/templates/mobile_template.html"
+    ></div>
 
-<body
-  onload="initTemplates(), noTasksPlaceholder('rowToDo', 'To do'), noTasksPlaceholder('rowProgress', 'in Progress'), noTasksPlaceholder('rowFeedback', 'awaiting feedback')">
-  <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
-  <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
+    <main>
+      <div class="board-heading-desktop">
+        <div class="board-heading">
+          <div class="board-heading-mobile">
+            <h1>Board</h1>
+            <button>
+              <img id="addTask" src="./assets/img/board_addTask.svg" />
+            </button>
+          </div>
 
-  <main>
-    <div class="board-heading-desktop">
-      <div class="board-heading">
-        <div class="board-heading-mobile">
-          <h1>Board</h1>
-          <button>
-            <img id="addTask" src="./assets/img/board_addTask.svg" />
-          </button>
-        </div>
-
-        <div class="heading-desktop-rightSide">
-          <div class="input">
-            <input placeholder="Find Task" id="findTask" />
-            <div class="d-flex align-items-center gap1em">
-              <svg xmlns="http://www.w3.org/2000/svg" width="2" height="32" viewBox="0 0 2 32" fill="none">
-                <path d="M1 0.5V31.5" stroke="#D1D1D1" />
-              </svg>
-              <img src="./assets/img/board_search.png" class="input-icon" alt="" />
+          <div class="heading-desktop-rightSide">
+            <div class="input">
+              <input placeholder="Find Task" id="findTask" />
+              <div class="d-flex align-items-center gap1em">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="2"
+                  height="32"
+                  viewBox="0 0 2 32"
+                  fill="none"
+                >
+                  <path d="M1 0.5V31.5" stroke="#D1D1D1" />
+                </svg>
+                <img
+                  src="./assets/img/board_search.png"
+                  class="input-icon"
+                  alt=""
+                />
+              </div>
             </div>
+            <button>
+              <span>Add task</span>
+              <svg
+                id="addTask"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <mask
+                  id="mask0_75964_3852"
+                  style="mask-type: alpha"
+                  maskUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="32"
+                  height="32"
+                >
+                  <rect width="32" height="32" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_75964_3852)">
+                  <path
+                    d="M14.666 17.3327H6.66602V14.666H14.666V6.66602H17.3327V14.666H25.3327V17.3327H17.3327V25.3327H14.666V17.3327Z"
+                    fill="white"
+                  />
+                </g>
+              </svg>
+            </button>
           </div>
-          <button>
-            <span>Add task</span>
-            <svg id="addTask" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <mask id="mask0_75964_3852" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32"
-                height="32">
-                <rect width="32" height="32" fill="#D9D9D9" />
-              </mask>
-              <g mask="url(#mask0_75964_3852)">
-                <path
-                  d="M14.666 17.3327H6.66602V14.666H14.666V6.66602H17.3327V14.666H25.3327V17.3327H17.3327V25.3327H14.666V17.3327Z"
-                  fill="white" />
-              </g>
-            </svg>
-          </button>
+        </div>
+
+        <div class="content">
+          <div class="row">
+            <div class="row-title">
+              <h2>To do</h2>
+              <img id="addToDo" src="./assets/img/board_plus_button.png" />
+            </div>
+            <div id="rowToDo"></div>
+          </div>
+
+          <div class="row">
+            <div class="row-title">
+              <h2>In progress</h2>
+              <img id="addProgress" src="./assets/img/board_plus_button.png" />
+            </div>
+            <div id="rowProgress"></div>
+          </div>
+
+          <div class="row">
+            <div class="row-title">
+              <h2>Await feedback</h2>
+              <img id="addFeedback" src="./assets/img/board_plus_button.png" />
+            </div>
+            <div id="rowFeedback"></div>
+          </div>
+
+          <div class="row">
+            <div class="row-title">
+              <h2>Done</h2>
+            </div>
+            <div id="rowDone"></div>
+          </div>
         </div>
       </div>
-
-      <div class="content">
-        <div class="row">
-          <div class="row-title">
-            <h2>To do</h2>
-            <img id="addToDo" src="./assets/img/board_plus_button.png" />
-          </div>
-          <div id="rowToDo"></div>
-        </div>
-
-        <div class="row">
-          <div class="row-title">
-            <h2>In progress</h2>
-            <img id="addProgress" src="./assets/img/board_plus_button.png" />
-          </div>
-          <div id="rowProgress"></div>
-        </div>
-
-        <div class="row">
-          <div class="row-title">
-            <h2>Await feedback</h2>
-            <img id="addFeedback" src="./assets/img/board_plus_button.png" />
-          </div>
-          <div id="rowFeedback"></div>
-        </div>
-
-        <div>
-          <h2>Done</h2>
-          <div id="rowDone"></div>
-        </div>
-      </div>
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>
