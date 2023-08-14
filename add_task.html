@@ -1,18 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
     <script src="js/script.js"></script>
     <script src="js/add_task.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="stylesheet" href="styles/task.css" />
+  </head>
 
-<body onload="initTemplates()">
-    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
-    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
-</body>
-
+  <body onload="initTemplates()">
+    <div
+      id="desktop-template"
+      include-templates="assets/templates/desktop_template.html"
+    ></div>
+    <main>
+      <form>
+        <h1>Add task</h1>
+        <label for="title-input">Title</label>
+        <div class="input">
+          <input
+            required
+            type="text"
+            placeholder="Enter a title"
+            id="title-input"
+          />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="email-input-error"></div>
+        </div>
+        <label for="description-input">Description</label>
+        <div class="input">
+          <textarea
+            required
+            placeholder="Enter a description"
+            id="description-input"
+          ></textarea>
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="email-input-error"></div>
+        </div>
+        <label for="due-date-input">Due date</label>
+        <div class="input">
+          <input
+            required
+            type="text"
+            placeholder="dd/mm/yyyy"
+            id="due-date-input"
+          />
+          <img src="./assets/img/event.png" class="input-icon"/>
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="email-input-error"></div>
+        </div>
+      </form>
+    </main>
+    <div
+      id="mobile-template"
+      include-templates="assets/templates/mobile_template.html"
+    ></div>
+  </body>
 </html>
