@@ -10,13 +10,14 @@ function loadHelloPageMobile() {
     main.parentNode.insertBefore(helloPage, main);
 
     fadeOutHelloPage(helloPage);
+    showGreeting("greetingMobile");
   }
 }
 
 function generateHelloPageHTML() {
   return `
     <div id="helloPageMobile" class="">
-    <span>Good morning,</span>
+    <span id="greetingMobile"></span>
     <h1 class="blue-text">Sofia Müller</h1>
     </div>
     `;
@@ -34,4 +35,28 @@ function fadeOutHelloPage(helloPage) {
 
 function changeIcon(Id, url) {
   document.getElementById(Id).src = `./assets/img/${url}`;
+}
+
+// Greeting of the User
+
+function getHour() {
+  let day = new Date();
+  return day.getHours();
+}
+
+function showGreeting(ID) {
+  let hour = getHour();
+  let greeting = document.getElementById(ID);
+
+  if (hour >= 4 && hour < 12) {
+    greeting.innerHTML = "Good morning,";
+  }
+  if (hour >= 12 && hour < 18) {
+    greeting.innerHTML = "Good afternoon,";
+  }
+  if (hour >= 18 && hour < 22) {
+    greeting.innerHTML = "Good evening,";
+  } else {
+    greeting.innerHTML = "Good night,";
+  }
 }
