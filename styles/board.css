@@ -31,8 +31,18 @@ main {
   align-items: center;
 }
 
-.board-heading button:hover {
+.board-heading button:hover,
+.board-heading-mobile button:hover {
   cursor: pointer;
+  background-color: var(--accent-color);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.board-heading button:active,
+.board-heading-mobile button:active {
+  cursor: pointer;
+  background-color: var(--primary-bg-color);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .board-heading-mobile {
@@ -56,7 +66,8 @@ input {
   outline: none;
   font-size: unset;
   font-family: unset;
-  min-width: 0;
+  min-width: 50%;
+  flex: 1;
 }
 
 .input {
@@ -72,6 +83,10 @@ input {
   margin-bottom: 1.5em;
 }
 
+.input:focus-within {
+  border: 1px solid var(--accent-color);
+}
+
 .board-heading input::placeholder {
   font-size: 1.25rem;
   color: #d1d1d1;
@@ -81,9 +96,25 @@ input {
   gap: 1em;
 }
 
-img.input-icon {
+.input-icon:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
   width: 32px;
-  object-fit: cover;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.input-icon path {
+  fill: var(--secondary-bg-color);
+}
+
+.input-icon:active path {
+  fill: var(--accent-color);
+  background-color: white;
+}
+
+.input-icon:active {
+  background-color: white;
 }
 
 .add-task-mobile {
@@ -106,11 +137,6 @@ img.input-icon {
   margin: 0;
 }
 
-.content img {
-  width: 24px;
-  object-fit: contain;
-}
-
 .columns {
   width: 100%;
   margin-bottom: 1.625rem;
@@ -122,6 +148,20 @@ img.input-icon {
   align-items: flex-start;
   margin-bottom: 1em;
   gap: 0.5em;
+}
+
+.col-title svg:hover {
+  cursor: pointer;
+}
+
+.col-title svg:hover path,
+.col-title svg:hover rect {
+  stroke: var(--accent-color);
+}
+
+.col-title svg:active path,
+.col-title svg:active rect {
+  stroke: var(--primary-bg-color);
 }
 
 .placeholder {
@@ -205,7 +245,6 @@ img.input-icon {
     justify-content: center;
     align-items: center;
     border-radius: 0.625rem;
-    border: 1px solid #2a3647;
   }
 
   .heading-desktop-rightSide button::before {
@@ -283,14 +322,8 @@ img.input-icon {
 @media (min-width: 1080px) {
   .heading-desktop-rightSide button {
     width: 10.25rem;
-    height: 3rem;
-    display: flex;
     padding: 0.5em 0.5em 0.5em 1em;
-    justify-content: center;
-    align-items: center;
     gap: 0.5em;
-    border-radius: 0.625rem;
-    border: 1px solid #2a3647;
   }
 
   .heading-desktop-rightSide button::before {
