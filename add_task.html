@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
-    <script src="js/script.js"></script>
-    <script src="js/add_task.js"></script>
+    <script defer src="js/script.js"></script>
+    <script defer src="js/add_task.js"></script>
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/login.css" />
     <link rel="stylesheet" href="styles/task.css" />
@@ -135,16 +135,40 @@
           <div class="error-message" id="due-date-input-error"></div>
         </div>
         <label for="category-input">Category</label>
-        <select
-          class="input"
-          required
-          id="category-date-input"
-        >
-          <option value="Category 1">Category 1</option>
+        <select class="input" required id="category-input">
+          <option value="">Select task category</option>
           <option value="Category 2">Category 2</option>
         </select>
         <div class="error-container">
           <div class="error-message" id="category-input-error"></div>
+        </div>
+        <label for="subtasks-input">Subtasks</label>
+        <div id="subtasks-container" class="input">
+          <input
+            required
+            type="text"
+            placeholder="Add new subtask"
+            id="subtasks-input"
+          />
+          <img
+            src="./assets/img/subtask-plus.png"
+            class="input-icon"
+            id="add-subtask"
+          />
+          <img
+            src="./assets/img/subtask-cancel.png"
+            class="input-icon d-none"
+            id="cancel-subtask"
+          />
+          <img src="./assets/img/subtask-separator.png" class="d-none" />
+          <img
+            src="./assets/img/subtask-save.png"
+            class="input-icon d-none"
+            id="save-subtask"
+          />
+        </div>
+        <div class="error-container">
+          <div class="error-message" id="due-date-input-error"></div>
         </div>
         <div class="create-btn-container">
           <button class="btn btn-primary btn-create-task" type="submit">
