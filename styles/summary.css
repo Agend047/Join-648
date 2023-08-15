@@ -232,6 +232,16 @@
   transform: scale(1.03);
 }
 
+.card-container a:active {
+  color: var(--secondary-bg-color) !important;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-container a:active .number {
+  color: #000000 !important;
+}
+
 @media (min-width: 820px) {
   .summary-main {
     align-items: flex-start;
