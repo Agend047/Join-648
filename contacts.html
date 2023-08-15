@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./styles/login.css" />
 </head>
 
-<body onload="initTemplates()">
+<body onload="initTemplates(), showContacts()">
     <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
     <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
 
@@ -24,7 +24,7 @@
                 <img src="assets/img/contacts_newContact_icon.png" alt="+">
             </button>
             <article id="contacts_list" class="d-flex flex-direction-col align-items-center">
-                <figure class="letter_div">A</figure>
+                <!-- <figure class="letter_div">A</figure>
                 <figure class="seperate_div"></figure>
                 <span class="Contact_div d-flex align-items-center" onclick="openContact(0)">
                     <div class="Initiald_svg_div">
@@ -37,7 +37,7 @@
                         <p>Anton Mayer</p>
                         <p class="Mail_text">anton@gmail.com</p>
                     </div>
-                </span>
+                </span> -->
             </article>
         </main>
 
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </span>
-                <span>
+                <span class="Contacts_stage_data">
                     <p>Contact Information</p>
                     <h5>E-Mail</h5>
                     <p class="Mail_text">wolf@gmail.com</p>
@@ -78,12 +78,23 @@
     </div>
 
     <div id="shader_div">
+
     </div>
 
-
     <!-- Give it a nice position and the sider/header! then: Javascript! -->
-    <div id="edit_and_addContact_div" class="d-flex flex-direction-col align-items-center">
-        <form id="login-form" action="./summary.html" class="form login-form">
+    <div id="addContact_div" class="Contact_proccess_div d-flex  align-items-center">
+        <button class="Close_btn" onclick="closeContactProcess('addContact_div')">
+            <img src="assets/img/cancel_icon_black.png" alt="X">
+        </button>
+        <figure id="addC_sider">
+            <img src="assets/img/join_logo_white.png" alt="">
+            <span class="Contacts_change_text">
+                <h1>Add Contact</h1>
+                <p>Tasks are better with a team!</p>
+            </span>
+            <div class="Underscore_blue"></div>
+        </figure>
+        <form action="./summary.html" class="form">
             <div class="input">
                 <input required type="text" placeholder="Name" id="name-input" />
                 <img src="./assets/img/contacts_AddName_icon.png" class="input-icon" alt="" />
@@ -97,8 +108,14 @@
                     onkeypress="return isNumberKey(event)" />
                 <img src="./assets/img/contacts_AddPhone_icon.png" class="input-icon" alt="" />
             </div>
-            <div class="error-container">
-                <div class="error-message" id="email-input-error"></div>
+            <div class="form_btn_div d-flex align-items-center">
+                <button class="btn btn-secondary Cancel_btn" onclick="cancleAddContact('addContact_div')">Cancel
+                    <img src=" assets/img/cancel_icon_black.png" alt="">
+                </button>
+                <button id="contacts_form_submit_btn" class="btn btn-primary align-items-center d-flex"
+                    type="submit">Create contact
+                    <img src="assets/img/check.png" alt="">
+                </button>
             </div>
         </form>
     </div>

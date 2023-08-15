@@ -126,6 +126,9 @@ function getHelp() {
     window.location.href = "/help.html";
 }
 
+/**
+ * After Opening the Help or Privacy Sides, this function leads back to the last visited place.
+ */
 function backToOrigin() {
     let originSideFromLocalStorage = localStorage.getItem('originSide');
 
@@ -137,18 +140,31 @@ function backToOrigin() {
     }
 }
 
+/**
+ * Saves variables in Backend
+ * @param {string} key - Name of the variable
+ * @param {any} value - value of the variable
+ * @returns 
+ */
 async function setItemInBackend(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
     return fetch('https://remote-storage.developerakademie.org/', { method: 'POST', body: JSON.stringify(payload) })
         .then(res => res.json());
 }
 
+/**
+ * Gets back variables from backend.
+ * @param {string} key - name of the variable, that was saved in backend.
+ * @returns 
+ */
 async function getItemInBackend(key) {
     const url = `https://remote-storage.developerakademie.org/?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(res => res.json());
 }
 
-function showNotification(elementId, targetHref) {   
+
+
+function showNotification(elementId, targetHref) {
     document.documentElement.style.setProperty('--notification-top-target', '80vh');
     document.getElementById(elementId).classList.add('triggered');
     setTimeout(() => {
