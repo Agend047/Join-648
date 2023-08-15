@@ -10,7 +10,9 @@ let STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
  * Inits getting the Templates
  */
 function initTemplates() {
+    console.log('Alles ')
     getTemplates()
+    console.log('Klar!')
 }
 
 /**

@@ -39,11 +39,11 @@ let ballColorCollection = ['#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8'
 /**
  * 
  */
-function showContacts() {
+async function showContacts() {
     let list = document.getElementById('contacts_list');
     list.innerHTML = '';
     let assignedLetter = '';
-    // getItemInBackend('contactList')
+    // await getItemInBackend('contactList');
     for (i in contactList) {
         let contact = contactList[i];
         if (assignedLetter != contact.startingLetter) {
@@ -67,14 +67,12 @@ function showContacts() {
                 </div>
             </span>
         `
-
-
     }
 }
 
-// <figure class="letter_div">A</figure>
-// <figure class="seperate_div"></figure>
-
+/**
+ * Opens Div to add new Contact
+ */
 function startAddContact() {
     let shader = document.getElementById('shader_div');
     shader.style.display = 'flex';
@@ -82,19 +80,62 @@ function startAddContact() {
     workDiv.style.display = 'flex';
 }
 
+/**
+ * Shows the choosen Contact at the side of the screen (Mobile: New Screen)
+ * @param {Number} i - Index in the contactList - JSON-Array
+ */
 function openContact(i) {
-    alert('Soon')
+    let contact = contactList[i]
+    let stage = document.getElementById('contacts_stage')
+    stage.innerHTML = '';
+    stage.innerHTML += /*html*/`
+        <span class="Stage_head d-flex align-items-center">
+            <div id="initial_ball_big" style="background-color: ${contact.color}" class="d-flex">${contact.initials}</div>
+            <div id="stage_head_right">
+                <p id="contact_name">${contact.name}</p>
+                <div class=" d-flex align-items-center">
+                    <a href="#" onclick="editContact(${i})" id="edit_contact_btn" class="Contact_stage_btn">
+                        <img src="assets/img/contacts_editContact_icon.png" alt="">
+                                Edit
+                    </a>
+                     <a href="#" onclick="deleteContact(${i})" id="delete_contact_btn" class="Contact_stage_btn">
+                        <img src="assets/img/contacts_deleteContacts_icon.png" alt="">
+                                Delete
+                    </a>
+                </div>
+            </div>
+        </span>
+        <span class="Contacts_stage_data">
+            <p>Contact Information</p>
+            <h5>E-Mail</h5>
+            <p class="Mail_text">${contact.e_mail}</p>
+            <h5>Phone</h5>
+            <p>${contact.phone}</p>
+        </span>
+    `
 }
 
-function editContact() {
-    alert('Edit')
+/**
+ * Opens window to edit a contact
+ * @param {Number} i - Index in contactList-JSON Array 
+ */
+function editContact(i) {
+    let contact = contactList[i]
+
+}
+/**
+ * Deletes choosen Contact
+ * @param {Number} i - Index in contactList-JSON Array 
+ */
+function deleteContact(i) {
+    let contact = contactList[i]
+
 }
 
-function deleteContact() {
-    alert('Delete!')
-}
-
-
+/**
+ * Just closes divs, but doesnt delete Data
+ * @param {String} wichDiv - ID of the div, that has to be closed.
+ */
 function closeContactProcess(wichDiv) {
     let shader = document.getElementById('shader_div');
     shader.style.display = 'none';
@@ -102,6 +143,10 @@ function closeContactProcess(wichDiv) {
     workDiv.style.display = 'none';
 }
 
+/**
+ * Deletes input and then calls a function to close the open windows.
+ * @param {String} wichDiv -  ID of the div, that has to be closed.
+ */
 function cancleAddContact(wichDiv) {
     let nameInput = document.getElementById('name-input');
     let emailInput = document.getElementById('email-input');
@@ -114,9 +159,58 @@ function cancleAddContact(wichDiv) {
     closeContactProcess(wichDiv)
 }
 
+
+/**
+ * Creates new contact for contactList
+ */
+function createContact() {
+
+    let newContact = {
+        startingLetter: getStartingLetter(document.getElementById('name-input').value),
+        name: document.getElementById('name-input').value,
+        e_mail: document.getElementById('email-input').value,
+        phone: document.getElementById('phone-input').value,
+        initials: getInitials(),
+        color: getColor(),
+    }
+    contactList.push(newContact)
+    saveContacts()
+}
+
+/**
+ * Gets first letter of a string for Initials and startingletter
+ * @param {String} toGet - The string, from wich we need the first letter
+ * @returns first letter of a word in Uppercase
+ */
+function getStartingLetter(toGet) {
+    let nameArray = toGet.split('');
+    return nameArray[0].toUpperCase();
+}
+
+/**
+ * @returns Initials of the name in the input field
+ */
+function getInitials() {
+    let name = document.getElementById('name-input');
+    let nameArray = name.value.split(' ');
+    return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
+}
+
+/**
+ * Picks a random color for the new contact
+ */
+function getColor() {
+    let random = Math.floor(Math.random() * 15);
+    return ballColorCollection[random]
+}
+
+/**
+ * Saves contactList in backup
+ */
 function saveContacts() {
-    sortContacts()
-    setItemInBackend('contactList', contactList)
+    sortContacts();
+    setItemInBackend('contactList', contactList);
+    //STORAGE
 }
 
 /**
@@ -129,9 +223,7 @@ function sortContacts() {
 
         return a < b ? -1 : a > b ? 1 : 0;
     });
-
 }
-
 
 /**
  * Checks, if the Phone NUmber is an actual number, or wont allow it as part of the Phone Number.

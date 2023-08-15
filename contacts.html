@@ -50,7 +50,7 @@
             </span>
 
             <article id="contacts_stage">
-                <span class="Stage_head d-flex align-items-center">
+                <!-- <span class="Stage_head d-flex align-items-center">
                     <div id="initial_ball_big" class="d-flex">AM</div>
                     <div id="stage_head_right">
                         <p id="contact_name">Anton Mayer</p>
@@ -69,11 +69,11 @@
                 <span class="Contacts_stage_data">
                     <p>Contact Information</p>
                     <h5>E-Mail</h5>
-                    <p class="Mail_text">wolf@gmail.com</p>
+                    <p id="contact_mail" class="Mail_text">wolf@gmail.com</p>
                     <h5>Phone</h5>
-                    <p>+4922222222</p>
+                    <p id="contact_phone">+4922222222</p>
                 </span>
-            </article>
+            </article> -->
         </section>
     </div>
 
@@ -94,9 +94,9 @@
             </span>
             <div class="Underscore_blue"></div>
         </figure>
-        <form action="./summary.html" class="form">
+        <form action="#" onsubmit="createContact()" class="form">
             <div class="input">
-                <input required type="text" placeholder="Name" id="name-input" />
+                <input required type="text" placeholder="Firstname Surname" id="name-input" pattern="^\S+\s\S+$" />
                 <img src="./assets/img/contacts_AddName_icon.png" class="input-icon" alt="" />
             </div>
             <div class="input">
