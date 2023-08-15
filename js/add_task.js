@@ -14,4 +14,4 @@ function toggleSubtaskIcons() {
     }
 }
 
-window.onload = initSubtaskInput;
+// window.onload = initSubtaskInput;
