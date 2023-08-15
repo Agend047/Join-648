@@ -171,9 +171,10 @@ a {
   background-color: var(--secondary-bg-color);
 }
 
-.btn-primary:disabled, .btn-primary:disabled:hover {
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
   background-color: var(--decent-color);
-  color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.6);
   box-shadow: none;
   cursor: auto;
 }

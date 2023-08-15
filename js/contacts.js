@@ -1,41 +1,43 @@
-let contactList = [
-    {
-        startingLetter: 'A',
-        name: 'Anja Schulz',
-        e_mail: 'schulz@hotmail.com',
-        phone: 9102423513,
-        initials: 'AS',
-        color: '#FF7A00',
-    },
-    {
-        startingLetter: 'A',
-        name: 'Anton Mayer',
-        e_mail: 'anton@gmail.com',
-        phone: 491233521,
-        initials: 'AM',
-        color: '#6E52FF',
-    },
-    {
-        startingLetter: 'B',
-        name: 'Benjamin Schulz',
-        e_mail: 'bschulz@hotmail.com',
-        phone: 0o742334542,
-        initials: 'BS',
-        color: '#00BEE8',
-    },
-    {
-        startingLetter: 'Z',
-        name: 'Zendaya Sowas',
-        e_mail: 'sowas@gmx.de',
-        phone: 49876543,
-        initials: 'ZS',
-        color: '#FF7A00',
-    },
-]
+let contactList;
+// = [
+//     {
+//         startingLetter: 'A',
+//         name: 'Anja Schulz',
+//         e_mail: 'schulz@hotmail.com',
+//         phone: 9102423513,
+//         initials: 'AS',
+//         color: '#FF7A00',
+//     },
+//     {
+//         startingLetter: 'A',
+//         name: 'Anton Mayer',
+//         e_mail: 'anton@gmail.com',
+//         phone: 491233521,
+//         initials: 'AM',
+//         color: '#6E52FF',
+//     },
+//     {
+//         startingLetter: 'B',
+//         name: 'Benjamin Schulz',
+//         e_mail: 'bschulz@hotmail.com',
+//         phone: 0o742334542,
+//         initials: 'BS',
+//         color: '#00BEE8',
+//     },
+//     {
+//         startingLetter: 'Z',
+//         name: 'Zendaya Sowas',
+//         e_mail: 'sowas@gmx.de',
+//         phone: 49876543,
+//         initials: 'ZS',
+//         color: '#FF7A00',
+//     },
+// ]
 
 let ballColorCollection = ['#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B',]
 // If no Color: #D1D1D1
 
+let responseFromBackend;
 /**
  * 
  */
@@ -43,7 +45,8 @@ async function showContacts() {
     let list = document.getElementById('contacts_list');
     list.innerHTML = '';
     let assignedLetter = '';
-    // await getItemInBackend('contactList');
+    responseFromBackend = getItemFromBackend('contactList');
+    contactList = responseFromBackend.data.value;
     for (i in contactList) {
         let contact = contactList[i];
         if (assignedLetter != contact.startingLetter) {
@@ -210,7 +213,6 @@ function getColor() {
 function saveContacts() {
     sortContacts();
     setItemInBackend('contactList', contactList);
-    //STORAGE
 }
 
 /**
