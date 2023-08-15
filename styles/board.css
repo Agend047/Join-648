@@ -170,8 +170,8 @@ img.input-icon {
 @media (min-width: 820px) {
   main {
     margin-left: 14.75em;
-    margin-right: 4em;
-    width: calc(100% - 18.75em);
+    margin-right: 3.25em;
+    width: calc(100% - 18em);
   }
 }
 
@@ -193,6 +193,7 @@ img.input-icon {
 
   .heading-desktop-rightSide {
     display: flex;
+    justify-content: flex-end;
     gap: 2em;
   }
 
@@ -219,7 +220,8 @@ img.input-icon {
   }
 
   .input {
-    width: 19.5rem;
+    width: 50%;
+    max-width: 19.5rem;
     height: 3rem;
     padding: 0.5em 1em;
     border: 1px solid #a8a8a8;
@@ -228,6 +230,13 @@ img.input-icon {
     margin-bottom: 0;
     margin-block-start: 0;
     margin-left: 3em;
+    flex: 1;
+  }
+
+  input {
+    width: 50%;
+    max-width: 19.5rem;
+    flex: 1;
   }
 
   .content h2 {

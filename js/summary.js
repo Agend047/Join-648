@@ -37,7 +37,7 @@ function changeIcon(Id, url) {
   document.getElementById(Id).src = `./assets/img/${url}`;
 }
 
-// Greeting of the User
+// Greeting the User
 
 function getHour() {
   let day = new Date();
