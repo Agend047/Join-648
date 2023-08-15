@@ -11,17 +11,7 @@
     <link rel="stylesheet" href="./styles/board.css" />
   </head>
 
-  <body
-    onload="initTemplates(), 
-    noTasksPlaceholder('colToDoDesktop', 'To do'), 
-    noTasksPlaceholder('colProgressDesktop', 'in Progress'), 
-    noTasksPlaceholder('colFeedbackDesktop', 'awaiting feedback'), 
-    noTasksPlaceholder('colDoneDesktop', 'done'),
-    noTasksPlaceholder('colToDoMobile', 'To do'), 
-    noTasksPlaceholder('colProgressMobile', 'in Progress'), 
-    noTasksPlaceholder('colFeedbackMobile', 'awaiting feedback'), 
-    noTasksPlaceholder('colDoneMobile', 'done')"
-  >
+  <body onload="initTemplates()">
     <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
@@ -149,7 +139,9 @@
                 />
               </svg>
             </div>
-            <div class="margin-bottom" id="colToDoMobile"></div>
+            <div class="margin-bottom" id="toDoMobile">
+              <div class="placeholder">No tasks To do</div>
+            </div>
 
             <div class="col-title">
               <h2>In progress</h2>
@@ -185,7 +177,9 @@
                 />
               </svg>
             </div>
-            <div class="margin-bottom" id="colProgressMobile"></div>
+            <div class="margin-bottom" id="progressMobile">
+              <div class="placeholder">No tasks In progress</div>
+            </div>
 
             <div class="col-title">
               <h2>Await feedback</h2>
@@ -221,19 +215,31 @@
                 />
               </svg>
             </div>
-            <div class="margin-bottom" id="colFeedbackMobile"></div>
+            <div class="margin-bottom" id="feedbackMobile">
+              <div class="placeholder">No tasks Await feedback</div>
+            </div>
 
             <div class="col-title">
               <h2>Done</h2>
             </div>
-            <div id="colDoneMobile"></div>
+            <div id="doneMobile">
+              <div class="placeholder">No tasks Done</div>
+            </div>
           </div>
 
           <div class="columns">
-            <div id="colToDoDesktop"></div>
-            <div id="colProgressDesktop"></div>
-            <div id="colFeedbackDesktop"></div>
-            <div id="colDoneDesktop"></div>
+            <div id="toDoDesktop">
+              <div class="placeholder">No tasks To do</div>
+            </div>
+            <div id="progressDesktop">
+              <div class="placeholder">No tasks In progress</div>
+            </div>
+            <div id="feedbackDesktop">
+              <div class="placeholder">No tasks Await feedback</div>
+            </div>
+            <div id="doneDesktop">
+              <div class="placeholder">No tasks Done</div>
+            </div>
           </div>
         </div>
       </div>

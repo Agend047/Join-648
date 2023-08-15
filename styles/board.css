@@ -184,10 +184,10 @@ input {
   margin-bottom: 1.62em;
 }
 
-#colToDoDesktop,
-#colProgressDesktop,
-#colFeedbackDesktop,
-#colDoneDesktop {
+#toDoDesktop,
+#progressDesktop,
+#feedbackDesktop,
+#doneDesktop {
   display: none;
 }
 
@@ -303,18 +303,18 @@ input {
     gap: 1.62em;
   }
 
-  #colToDoDesktop,
-  #colProgressDesktop,
-  #colFeedbackDesktop,
-  #colDoneDesktop {
+  #toDoDesktop,
+  #progressDesktop,
+  #feedbackDesktop,
+  #doneDesktop {
     display: block;
     width: 25%;
   }
 
-  #colToDoMobile,
-  #colProgressMobile,
-  #colFeedbackMobile,
-  #colDoneMobile {
+  #toDoMobile,
+  #progressMobile,
+  #feedbackMobile,
+  #doneMobile {
     display: none;
   }
 }
