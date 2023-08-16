@@ -7,6 +7,17 @@ let currentPage = 'summary.html';
 const STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
+let contactList;
+// = [
+//     {
+//         startingLetter: 'A',
+//         name: 'Anja Schulz',
+//         e_mail: 'schulz@hotmail.com',
+//         phone: 9102423513,
+//         initials: 'AS',
+//         color: '#FF7A00',
+//     },
+// ]
 
 /**
  * Inits getting the Templates
@@ -20,8 +31,7 @@ function initTemplates() {
  * @returns  form of actual Screen.
  */
 function getScreenType() {
-    let htmlDocument = document.getElementsByTagName('html');
-    let docWidth = htmlDocument[0].offsetWidth;
+    let docWidth = window.innerWidth;
     if (docWidth < 820) {
         screenType = 'mobile';
     } else if (docWidth > 820) {

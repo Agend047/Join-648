@@ -34,7 +34,7 @@
 
 .letter_div {
     width: 90%;
-    padding: 10px 36px 0px 16px;
+    padding: 10px 36px 0px 32px;
 }
 
 .seperate_div {
@@ -46,7 +46,7 @@
 
 .Contact_div {
     width: 100%;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px 8px 32px;
     border-radius: 10px;
 }
 
