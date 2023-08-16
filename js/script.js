@@ -1,7 +1,8 @@
 let docWidth;
 let screenType;
 let loaded;
-let initials = 'SM';
+let responseFromBackend;
+let userInitials = 'SM';
 let currentPage = 'summary.html';
 const STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
@@ -69,7 +70,7 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
         element.innerHTML = 'Page not found';
     }
     unloadTemplate(toUnloadID)
-    showInitialsHeader(initials)
+    showInitialsHeader(userInitials)
     markCorrectMenuPoint()
 }
 
@@ -85,12 +86,12 @@ function unloadTemplate(toUnloadID) {
 /**
  * Initials of current User are going to be written into the Header Circle.
  * If there are no, then its a "G" for "Guest User".
- * @param {string} initials - Initials of current User.
+ * @param {string} userInitials - Initials of current User.
  * 
  */
-function showInitialsHeader(initials) {
+function showInitialsHeader(userInitials) {
     let svgText = document.getElementById('svg_text');
-    if (initials) { svgText.textContent = initials; } else { svgText.textContent = 'G'; }
+    if (userInitials) { svgText.textContent = userInitials; } else { svgText.textContent = 'G'; }
 }
 
 /**  
@@ -161,11 +162,10 @@ async function setItemInBackend(key, value) {
  */
 async function getItemFromBackend(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    let response = await fetch(url);
-    let responseAsJson = await response.json();
-    return responseAsJson;
+    let response = await fetch(url).then(res => res.json());
+    let result = response.data.value;
+    return JSON.parse(result);
 }
-
 
 
 function showNotification(elementId, targetHref) {

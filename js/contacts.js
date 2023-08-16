@@ -37,7 +37,6 @@ let contactList;
 let ballColorCollection = ['#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B',]
 // If no Color: #D1D1D1
 
-let responseFromBackend;
 /**
  * 
  */
@@ -45,8 +44,7 @@ async function showContacts() {
     let list = document.getElementById('contacts_list');
     list.innerHTML = '';
     let assignedLetter = '';
-    responseFromBackend = getItemFromBackend('contactList');
-    contactList = responseFromBackend.data.value;
+    contactList = await getItemFromBackend('contactList');
     for (i in contactList) {
         let contact = contactList[i];
         if (assignedLetter != contact.startingLetter) {
@@ -178,6 +176,7 @@ function createContact() {
     }
     contactList.push(newContact)
     saveContacts()
+    cancleAddContact('addContact_div')
 }
 
 /**
@@ -208,11 +207,12 @@ function getColor() {
 }
 
 /**
- * Saves contactList in backup
+ * Sotzs, saves and shows contactList. Gets called after change in contactsList
  */
-function saveContacts() {
+async function saveContacts() {
     sortContacts();
-    setItemInBackend('contactList', contactList);
+    await setItemInBackend('contactList', contactList);
+    showContacts()
 }
 
 /**
