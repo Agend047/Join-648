@@ -23,6 +23,8 @@ function validateSignUpForm(e) {
     if (!formIsValid) {
         e.preventDefault();
         form.classList.toggle('is-validated');
+    } else {
+        showSignUpNotification('notification', 'notification-ref');
     }
 }
 
