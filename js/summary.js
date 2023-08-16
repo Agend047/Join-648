@@ -1,7 +1,5 @@
 function loadHelloPageMobile() {
-  let htmlDocument = document.getElementsByTagName("html");
-  docWidth = htmlDocument[0].offsetWidth;
-  if (docWidth < 820) {
+  if ((screenType = "mobile")) {
     let helloPage = document.createElement("div");
     helloPage.innerHTML = generateHelloPageHTML();
 
@@ -26,7 +24,7 @@ function generateHelloPageHTML() {
 function fadeOutHelloPage(helloPage) {
   setTimeout(function () {
     helloPage.classList.add("fadeOut");
-  }, 1500);
+  }, 1100);
 
   helloPage.addEventListener("transitionend", function () {
     helloPage.style.display = "none";
