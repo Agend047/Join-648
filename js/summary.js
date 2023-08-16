@@ -56,7 +56,8 @@ function showGreeting(ID) {
   }
   if (hour >= 18 && hour < 22) {
     greeting.innerHTML = "Good evening,";
-  } else {
+  }
+  if (hour >= 22 && hour < 4) {
     greeting.innerHTML = "Good night,";
   }
 }
