@@ -34,7 +34,7 @@ function getScreenType() {
     let docWidth = window.innerWidth;
     if (docWidth < 820) {
         screenType = 'mobile';
-    } else if (docWidth > 820) {
+    } else if (docWidth >= 820) {
         screenType = 'desktop';
     }
     return screenType;

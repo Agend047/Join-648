@@ -35,7 +35,8 @@ form {
 }
 
 select {
-  margin-inline-end: 1em;
+  width: 100%;
+  cursor: pointer;
 }
 
 .input {
@@ -104,6 +105,50 @@ textarea {
   height: 4em;
   resize: none;
   overflow: auto;
+}
+
+.subtasks-list {
+  padding-inline-start: 0.5em;
+}
+
+.subtask {
+ display: flex;
+ align-items: center;
+ padding: 0.5em;
+}
+
+.subtask + .subtask {
+  margin-block-start: 0.5em;
+}
+
+.subtask input {
+  background-color: transparent;
+  flex: 1;
+}
+
+.subtask-edit {
+  background-color: white;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.bullet-icon {
+  margin-inline-end: 0.5em;
+}
+
+.subtask-edit .bullet-icon {
+  display: none;
+}
+
+.subtask-edit .subtask-read-icons {
+  display: none;
+}
+
+li:not(.subtask-edit) .subtask-edit-icons {
+  display: none;
+}
+
+.subtask-icons {
+  margin-inline-start: auto;
 }
 
 form .btn-create-task {
