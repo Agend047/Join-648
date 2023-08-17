@@ -119,6 +119,12 @@ function markCorrectMenuPoint() {
     }
 }
 
+function headerMenu() {
+    let menu = document.getElementById('header_menu_id')
+    menu.classList.toggle('d-none');
+    menu.classList.toggle('d-flex');
+}
+
 /**  
  * Returns name of actual page, for marking the right Spot on header/footer in "markCorrectMenuPoint()"
  */
@@ -132,11 +138,39 @@ function getDocumentName() {
 /**
  * Saves current Page in local Storage, so its possible to return later.
  */
-function getHelp() {
+function saveDocName() {
     let originSide = getDocumentName();
     localStorage.setItem('originSide', JSON.stringify(originSide));
+}
+
+/**
+ * Saves current page and leads to help-side.
+ */
+function getHelp() {
+    saveDocName()
     window.location.href = "/help.html";
 }
+
+/**
+ * Saves current page and leads to legal notes.
+ */
+function toLegal() {
+    saveDocName()
+    window.location.href = "/legal_notes.html";
+}
+
+/**
+ * Saves current page and leads to privacy police.
+ */
+function toPrivacy() {
+    saveDocName()
+    window.location.href = "/privacy_policy.html";
+}
+
+function logOut() {
+    window.location.href = "/login.html";
+}
+
 
 /**
  * After Opening the Help or Privacy Sides, this function leads back to the last visited place.

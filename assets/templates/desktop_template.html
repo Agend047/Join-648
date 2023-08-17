@@ -4,11 +4,16 @@
 
         <img id="header_help_icon_d" src="/assets/img/header_help_icon.png" alt="?" onclick="getHelp()">
 
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <svg id="header_svg" width="56" height="56" viewBox="0 0 56 56" fill="none" onclick="headerMenu()">
             <circle cx="28" cy="28" r="26.5" stroke="#2A3647" stroke-width="3" />
             <text id="svg_text" x="48%" y="55%" text-anchor="middle" fill="blue" alignment-baseline=" middle">
         </svg>
     </div>
+    <span id="header_menu_id" class="Header_menu d-none flex-direction-col">
+        <a class="MenuButton" href="#" onclick="toLegal()">Legal Notice</a>
+        <a class="MenuButton" href="#" onclick="toPrivacy()">Privacy Policy</a>
+        <a class="MenuButton" href="#" onclick="logOut()">Log out</a>
+    </span>
 </header>
 
 <aside id="desktop_sider" class="d-flex flex-direction-col">
