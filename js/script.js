@@ -119,10 +119,24 @@ function markCorrectMenuPoint() {
     }
 }
 
+/**
+ * Brings in Menu for header
+ */
 function headerMenu() {
     let menu = document.getElementById('header_menu_id')
-    menu.classList.toggle('d-none');
-    menu.classList.toggle('d-flex');
+    let styleRight = menu.style.right;
+    (styleRight == '3vw') ? (menu.style.right = '-15vw') : (menu.style.right = '3vw')
+    hideArrow()
+}
+
+/**If theres an Arrow, it get hidden with a little delay */
+function hideArrow() {
+    setTimeout(() => {
+        try {
+            let arrow = document.querySelector('.Back_Arrow');
+            arrow.classList.toggle('d-none');
+        } catch { }
+    }, 200)
 }
 
 /**  

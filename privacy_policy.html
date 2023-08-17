@@ -5,9 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="js/script.js"></script>
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+
+<body onload="initTemplates()">
+    <div id="desktop-template" include-templates="assets/templates/desktop_template.html"></div>
+    <div id="mobile-template" include-templates="assets/templates/mobile_template.html"></div>
+    <main class="Help_Container">
+        <img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="backToOrigin()">
+        <h1>Privacy Policy</h1>
+
 
 </body>
 

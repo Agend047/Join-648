@@ -312,18 +312,21 @@ a {
   margin-bottom: 14px;
 }
 
-.Header_menu {
+#header_menu_id {
   position: absolute;
+  /* display: none; */
   top: 100px;
-  right: 3vw;
+  right: -15vw;
   width: 150px;
   height: auto;
   background-color: #2a3647;
   color: #cdcdcd;
   border-radius: 15px 0px 15px 15px;
+  transition: 500ms;
+  z-index: 50;
 }
 
-.Header_menu a {
+#header_menu_id a {
   margin: 8px;
 }
 
