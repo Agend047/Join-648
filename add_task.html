@@ -135,10 +135,12 @@
           <div class="error-message" id="due-date-input-error"></div>
         </div>
         <label for="category-input">Category</label>
-        <select class="input" required id="category-input">
+        <div class="input">
+        <select required id="category-input">
           <option value="">Select task category</option>
           <option value="Category 2">Category 2</option>
         </select>
+      </div>
         <div class="error-container">
           <div class="error-message" id="category-input-error"></div>
         </div>
@@ -152,18 +154,18 @@
           />
           <img
             src="./assets/img/subtask-plus.png"
-            class="input-icon"
+            class="input-icon cursor-pointer"
             id="add-subtask"
           />
           <img
             src="./assets/img/subtask-cancel.png"
-            class="input-icon d-none"
+            class="input-icon d-none cursor-pointer"
             id="cancel-subtask"
           />
           <img src="./assets/img/subtask-separator.png" class="d-none" />
           <img
             src="./assets/img/subtask-save.png"
-            class="input-icon d-none"
+            class="input-icon d-none cursor-pointer"
             id="save-subtask"
           />
         </div>

@@ -35,7 +35,8 @@ form {
 }
 
 select {
-  margin-inline-end: 1em;
+  width: 100%;
+  cursor: pointer;
 }
 
 .input {
