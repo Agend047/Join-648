@@ -1,7 +1,7 @@
 /*Contact List */
 
 .Main_container {
-    margin: 96px 40px 16px 232px;
+    margin: 96px 3vw 16px 232px;
     padding: 16px;
     max-width: 500px;
     min-width: 300px;
@@ -52,8 +52,12 @@
 
 .Contact_div:hover {
     cursor: pointer;
-    color: white;
-    background-color: #2A3647;
+    background-color: lightgrey;
+}
+
+.Contact_div_choosen {
+    color: white !important;
+    background-color: #2A3647 !important;
 }
 
 .Initiald_svg_div {
@@ -226,6 +230,8 @@
     z-index: 10;
     background-color: white;
     display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -242,6 +248,30 @@
 .Close_btn:hover img {
     content: url('/assets/img/cancel_icon_blue.png');
 }
+
+#delete_question {
+    position: fixed;
+    display: none;
+    top: 30vh;
+    left: 40vw;
+    width: 30vw;
+    height: 20vh;
+    background-color: white;
+    border-color: #2A3647;
+    z-index: 90;
+    align-items: center;
+    justify-content: center;
+}
+
+#show_deleting_name {
+    color: #29ABE2;
+}
+
+.delete_btn_div {
+    display: flex;
+    justify-content: space-around;
+}
+
 
 .Contact_proccess_div {
     z-index: 11;

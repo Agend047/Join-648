@@ -19,7 +19,7 @@ async function showContacts() {
             assignedLetter = contact.startingLetter;
         }
         list.innerHTML += /*html*/`
-            <span class="Contact_div d-flex align-items-center" onclick="openContact(${i})">
+            <span id="contact_div${i}"class="Contact_div d-flex align-items-center" onclick="openContact(${i})">
                 <div class="Initiald_svg_div">
                     <svg width="50" height="50" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="21" cy="21" r="20" fill="${contact.color}" stroke="white" stroke-width="2" />
@@ -35,12 +35,24 @@ async function showContacts() {
     }
 }
 
+
+/**sets shader */
+function activateShader() {
+    let shader = document.getElementById('shader_div');
+    shader.style.display = 'flex';
+}
+
+/**disables shader */
+function deactivateShader() {
+    let shader = document.getElementById('shader_div');
+    shader.style.display = 'none';
+}
+
 /**
  * Opens Div to add new Contact
  */
 function startAddContact() {
-    let shader = document.getElementById('shader_div');
-    shader.style.display = 'flex';
+    activateShader()
     let workDiv = document.getElementById('addContact_div');
     workDiv.style.display = 'flex';
 }
@@ -50,6 +62,7 @@ function startAddContact() {
  * @param {Number} i - Index in the contactList - JSON-Array
  */
 function openContact(i) {
+    markContact(i)
     let contact = contactList[i]
     let stage = document.getElementById('contacts_stage')
     stage.innerHTML = '';
@@ -63,7 +76,7 @@ function openContact(i) {
                         <img src="assets/img/contacts_editContact_icon.png" alt="">
                                 Edit
                     </a>
-                     <a href="#" onclick="deleteContact(${i})" id="delete_contact_btn" class="Contact_stage_btn">
+                     <a href="#" onclick="startDeleteProcess(${i})" id="delete_contact_btn" class="Contact_stage_btn">
                         <img src="assets/img/contacts_deleteContacts_icon.png" alt="">
                                 Delete
                     </a>
@@ -80,30 +93,75 @@ function openContact(i) {
     `
 }
 
+/**Unmarks former marked contact, and marks the contact that was choosen. */
+function markContact(i) {
+    try {
+        let formerChoosen = document.querySelector('.Contact_div_choosen')
+        formerChoosen.classList.remove('Contact_div_choosen')
+    }
+    catch { }
+    let choosen = document.getElementById('contact_div' + i)
+    choosen.classList.add('Contact_div_choosen');
+}
+
 /**
  * Opens window to edit a contact
  * @param {Number} i - Index in contactList-JSON Array 
  */
 function editContact(i) {
     let contact = contactList[i]
-
 }
+
+/**Showing an alert over a shader, before final deleting. */
+function startDeleteProcess(i) {
+    activateShader()
+    showConfirmAlert(i)
+}
+
+/**Fills the delete-confirm-alert with information and functions. */
+function showConfirmAlert(i) {
+    let deleteAlert = document.getElementById('delete_question')
+
+    deleteAlert.innerHTML = /*html*/`
+        <div class="align-items-center">
+            <p>Do you really want to delete <j id="show_deleting_name"></j>?</p>
+            <div id="" class="delete_btn_div">
+                <button class="btn btn-secondary" onclick="closeContactProcess('delete_question')">Cancel</button>
+                <button id='deleteBtn' onclick="deleteContact(${i}), closeContactProcess('delete_question')" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    `
+    deleteAlert.style.display = 'block';
+}
+
 /**
  * Deletes choosen Contact
  * @param {Number} i - Index in contactList-JSON Array 
  */
 function deleteContact(i) {
-    let contact = contactList[i]
-
+    contactList.splice(i, 1)
+    deactivateShader()
+    saveContacts()
+    cleanupMess()
 }
+
+/** After deleting a contact, unused html text gets removed. */
+function cleanupMess() {
+    let deleteAlert = document.getElementById('delete_question');
+    deleteAlert.innerHTML = '';
+    deleteAlert.style.display = 'none';
+
+    let stage = document.getElementById('contacts_stage');
+    stage.innerHTML = '';
+}
+
 
 /**
  * Just closes divs, but doesnt delete Data
  * @param {String} wichDiv - ID of the div, that has to be closed.
  */
 function closeContactProcess(wichDiv) {
-    let shader = document.getElementById('shader_div');
-    shader.style.display = 'none';
+    deactivateShader()
     let workDiv = document.getElementById(wichDiv);
     workDiv.style.display = 'none';
 }
@@ -123,7 +181,6 @@ function cancleAddContact(wichDiv) {
 
     closeContactProcess(wichDiv)
 }
-
 
 /**
  * Creates new contact for contactList
