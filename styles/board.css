@@ -213,16 +213,6 @@ input {
     margin-right: 3.25em;
     width: calc(100% - 18em);
   }
-
-  .background {
-    margin-left: 23vw;
-  }
-}
-
-@media (min-width: 900px) {
-  .background {
-    margin-left: 8em;
-  }
 }
 
 @media (min-width: 950px) {
@@ -493,18 +483,19 @@ input {
 
 .largeCard {
   display: flex;
-  width: 32.8125rem;
-  max-height: 95vh;
-  font-size: 1.25rem;
-  padding: 3rem 2.5rem;
+  width: 90vw;
+  height: calc(100vh - 170px);
+  font-size: 1rem;
+  padding: 2rem 1.5rem;
+  gap: 1em;
   flex-direction: column;
-  gap: 1.5rem;
   border-radius: 1.875rem;
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
   overflow-x: auto;
   overflow-y: scroll;
   scrollbar-width: none;
+  word-wrap: break-word;
 }
 
 .large-card-header {
@@ -513,8 +504,12 @@ input {
   align-items: center;
 }
 
+#categoryLabel.category-label {
+  font-size: 1rem;
+}
+
 h1#title {
-  font-size: 3.8125rem;
+  font-size: 2.6rem;
 }
 
 .largeCard h1,
@@ -627,4 +622,37 @@ img.user-icon {
   font-size: 1rem;
   font-weight: 400;
   gap: 1em;
+}
+
+@media (min-width: 600px) {
+  #categoryLabel.category-label {
+    font-size: 1.4375rem;
+  }
+
+  h1#title {
+    font-size: 3.8125rem;
+  }
+
+  .largeCard {
+    width: 32.8125rem;
+    font-size: 1.25rem;
+    padding: 3rem 2.5rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 820px) {
+  .largeCard {
+    height: 91vh;
+  }
+
+  .background {
+    margin-left: 23vw;
+  }
+}
+
+@media (min-width: 900px) {
+  .background {
+    margin-left: 8em;
+  }
 }
