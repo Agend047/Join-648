@@ -213,6 +213,16 @@ input {
     margin-right: 3.25em;
     width: calc(100% - 18em);
   }
+
+  .background {
+    margin-left: 23vw;
+  }
+}
+
+@media (min-width: 900px) {
+  .background {
+    margin-left: 8em;
+  }
 }
 
 @media (min-width: 950px) {
@@ -358,6 +368,7 @@ input {
 .cardSmall h1,
 .cardSmall p {
   margin: 0;
+  font-size: 1rem !important;
 }
 
 .category {
@@ -389,7 +400,7 @@ input {
   margin-bottom: 0.5em;
 }
 
-#description {
+.cardSmall #description {
   color: #a8a8a8;
   font-size: 1rem;
   font-weight: 400;
@@ -483,16 +494,137 @@ input {
 .largeCard {
   display: flex;
   width: 32.8125rem;
+  max-height: 95vh;
+  font-size: 1.25rem;
   padding: 3rem 2.5rem;
   flex-direction: column;
   gap: 1.5rem;
   border-radius: 1.875rem;
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  overflow-x: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .large-card-header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+h1#title {
+  font-size: 3.8125rem;
+}
+
+.largeCard h1,
+.largeCard p {
+  margin: 0;
+}
+
+.btn-close-card {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+}
+
+.btn-close-card:hover {
+  background-color: #eeeeee;
+  border-radius: 50%;
+}
+
+.largeCard table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding-top: 1.5rem;
+}
+
+.col-width {
+  width: 6em;
+}
+
+.large-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5em;
+}
+
+.btn-seperator {
+  height: 1.5rem;
+  width: 1.3px;
+  background-color: #d1d1d1;
+}
+
+.prio-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.62em;
+}
+
+.btn {
+  display: flex;
+  font-weight: 400;
+  gap: 0.4rem;
+  padding: 0;
+}
+
+.btn span {
+  font-size: 1rem;
+}
+
+.btn span.delete-icon {
+  background: url(/assets/img/contacts_deleteContacts_icon.png) no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.btn span.edit-icon {
+  background: url(/assets/img/contacts_editContact_icon.png) no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.btn:hover span {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.btn:hover span.delete-icon {
+  background: url(/assets/img/contacts_deleteContacts-active_icon.png) no-repeat;
+}
+
+.btn:hover span.edit-icon {
+  background: url(/assets/img/contacts_editContacts-active_icon.png) no-repeat;
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5em;
+}
+
+.assigned-user {
+  display: flex;
+  align-items: center;
+  padding: 0.44em 1em 0.44em 1em;
+  gap: 1em;
+}
+
+img.user-icon {
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.subtask {
+  display: flex;
+  align-items: center;
+  padding: 0.44em 1em 0.44em 1em;
+  font-size: 1rem;
+  font-weight: 400;
+  gap: 1em;
 }
