@@ -151,6 +151,25 @@ textarea {
   overflow: auto;
 }
 
+.assigned-to-options {
+  max-height: 4em;
+  overflow: auto;
+}
+
+.assign-to-li {
+  display: flex;
+  align-items: center;
+}
+
+.assign-to-li-name {
+  flex: 1;
+  margin-inline-start: 1em;
+}
+
+.search-active {
+  cursor: unset;
+}
+
 .subtasks-list {
   padding-inline-start: 0.5em;
 }
@@ -159,6 +178,10 @@ textarea {
   display: flex;
   align-items: center;
   padding: 0.5em;
+}
+
+.input input {
+  cursor: inherit;
 }
 
 .subtask + .subtask {

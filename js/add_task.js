@@ -26,10 +26,33 @@ function initSelectInputs() {
                 initCategorySelectItems(list);
                 break;
             case 'assigned-to-options':
+                element.addEventListener('click', activateSearchInput);
                 initAssignedToSelectItems(list);
                 break;
         }
     }
+}
+
+function activateSearchInput() {
+    const input = formControl.querySelector('input');
+    const inputContainer = formControl.querySelector('.input');
+    input.readOnly = false;
+    input.value = '';
+    input.focus();
+    inputContainer.removeEventListener('click', toggleDropdown);
+    inputContainer.removeEventListener('click', activateSearchInput);
+    inputContainer.classList.add('search-active');
+    backdrop.addEventListener('click', deactivateSearchInput);
+}
+
+function deactivateSearchInput() {
+    const input = formControl.querySelector('input');
+    const inputContainer = formControl.querySelector('.input');
+    input.readOnly = true;
+    input.value = "Select contacts to assign";
+    inputContainer.addEventListener('click', toggleDropdown);
+    inputContainer.addEventListener('click', activateSearchInput);
+    inputContainer.classList.remove('search-active');
 }
 
 function initCategorySelectItems(list) {
@@ -161,4 +184,8 @@ function updateSubtask(index) {
     subtaskListEl.classList.remove('subtask-edit');
     subtasks[index] = subtask;
     subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
+}
+
+function toggleContactSelection() {
+
 }
