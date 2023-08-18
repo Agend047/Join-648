@@ -12,6 +12,7 @@
   </head>
 
   <body onload="initTemplates(), initAddTaskPage()">
+    <div id="backdrop" class="backdrop d-none"></div>
     <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
@@ -149,7 +150,6 @@
         </div>
         <div class="form-control">
           <label for="category-input">Category</label>
-          <div id="category-backdrop" class="category-backdrop d-none"></div>
           <div id="category-input-container" class="input select-input">
             <input
               readonly

@@ -1,5 +1,5 @@
 const subtaskEl = document.getElementById('subtasks-container');
-const backdrop = document.getElementById('category-backdrop');
+const backdrop = document.getElementById('backdrop');
 let formControl;
 let subtasks = [];
 function initAddTaskPage() {
@@ -29,26 +29,6 @@ function selectCategory(e) {
     input.value = e.target.textContent;
     collapseDropdown();
 }
-
-// function toggleDropdown() {
-//     const dropdownImg = document.getElementById('dropdown-arrow');
-//     const list = document.getElementById('category-options');
-//     const backdrop = document.getElementById('category-backdrop');
-//     const input = document.getElementById('category-input-container');
-//     if (list.classList.contains('d-none')) {
-//         dropdownImg.src = './assets/img/arrow_dropdown_up.png';
-//         backdrop.addEventListener('click', toggleDropdown);
-//         input.style.zIndex = 2;
-//         list.style.zIndex = 1;
-//     } else {
-//         dropdownImg.src = './assets/img/arrow_dropdown_down.png';
-//         backdrop.removeEventListener('click', toggleDropdown);
-//         input.style.zIndex = 0;
-//         list.style.zIndex = 0;
-//     }
-//     list.classList.toggle('d-none');
-//     backdrop.classList.toggle('d-none');
-// }
 
 function toggleDropdown(ev) {
     formControl = ev.currentTarget.parentElement;
@@ -162,5 +142,3 @@ function updateSubtask(index) {
     subtasks[index] = subtask;
     subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
 }
-
-// window.onload = initSubtaskInput;

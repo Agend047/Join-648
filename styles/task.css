@@ -54,7 +54,7 @@ label, .label {
   cursor: pointer;
 }
 
-.category-backdrop {
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;
