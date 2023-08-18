@@ -185,9 +185,10 @@ function cancleAddContact(wichDiv) {
 /**
  * Creates new contact for contactList
  */
-function createContact() {
+async function createContact() {
 
     let newContact = {
+        id: await getID(),
         startingLetter: getStartingLetter(document.getElementById('name-input').value),
         name: document.getElementById('name-input').value,
         e_mail: document.getElementById('email-input').value,
@@ -198,6 +199,15 @@ function createContact() {
     contactList.push(newContact)
     saveContacts()
     cancleAddContact('addContact_div')
+}
+
+
+/**Counts ID's in backend, and returns one for the new contact. */
+async function getID() {
+    let id = await getItemFromBackend('contactIDcounter');
+    let newID = Number(id) + 1;
+    await setItemInBackend('contactIDcounter', newID);
+    return newID;
 }
 
 /**
