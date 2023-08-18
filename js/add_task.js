@@ -52,8 +52,8 @@ function selectCategory(e) {
 
 function toggleDropdown(ev) {
     formControl = ev.currentTarget.parentElement;
-    const list = formControl.querySelector('ul');
-    if (list.classList.contains('d-none')) {
+    const listContainer = formControl.querySelector('.select-options-container');
+    if (listContainer.classList.contains('d-none')) {
         expandDropdown();
     } else {
         collapseDropdown();
@@ -63,24 +63,24 @@ function toggleDropdown(ev) {
 function expandDropdown() {
     const inputContainer = formControl.querySelector('.input');
     const dropdownImg = inputContainer.querySelector('img');
-    const list = formControl.querySelector('ul');
+    const listContainer = formControl.querySelector('.select-options-container');
     dropdownImg.src = './assets/img/arrow_dropdown_up.png';
     backdrop.addEventListener('click', collapseDropdown);
     inputContainer.style.zIndex = 3;
-    list.style.zIndex = 2;
-    list.classList.toggle('d-none');
+    listContainer.style.zIndex = 2;
+    listContainer.classList.toggle('d-none');
     backdrop.classList.toggle('d-none');
 }
 
 function collapseDropdown() {
     const inputContainer = formControl.querySelector('.input');
     const dropdownImg = inputContainer.querySelector('img');
-    const list = formControl.querySelector('ul');
+    const listContainer = formControl.querySelector('.select-options-container');
     dropdownImg.src = './assets/img/arrow_dropdown_down.png';
     backdrop.removeEventListener('click', collapseDropdown);
     inputContainer.style.zIndex = 0;
-    list.style.zIndex = 0;
-    list.classList.toggle('d-none');
+    listContainer.style.zIndex = 0;
+    listContainer.classList.toggle('d-none');
     backdrop.classList.toggle('d-none');
 }
 
