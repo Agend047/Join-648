@@ -43,23 +43,19 @@ function renderSubtasks() {
     subtasksList.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        subtasksList.innerHTML += renderSubtaskHtml(subtask, i);
+        subtasksList.innerHTML += renderNewListItemHtml(subtask, i);
     }
 }
 
-function renderSubtaskHtml(subtask, index) {
-    return /*html*/`<li class="subtask">
-    <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" readonly value="${subtask}"/>
-    <div class="subtask-read-icons subtask-icons"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
-      src="./assets/img/subtask-separator.png"
-    /><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/></div>
-    <div class="subtask-edit-icons subtask-icons"><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/><img
-      src="./assets/img/subtask-separator.png"
-    /><img src="./assets/img/subtask-save.png" class="input-icon cursor-pointer" onclick="updateSubtask(${index})"/></div>
-  </li>`
+function renderNewListItemHtml(subtask, index) {
+    let html;
+    html = '<li class="subtask">';
+    html += renderListItemHtml(subtask, index);
+    html += '</li>';
+    return html;
 }
 
-function renderUpdatedSubtaskHtml(subtask, index) {
+function renderListItemHtml(subtask, index) {
     return /*html*/`
     <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" readonly value="${subtask}"/>
     <div class="subtask-read-icons subtask-icons"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
@@ -88,7 +84,7 @@ function updateSubtask(index) {
     const subtask = subtaskListEl.querySelector('input').value;
     subtaskListEl.classList.remove('subtask-edit');
     subtasks[index] = subtask;
-    subtaskListEl.innerHTML = renderUpdatedSubtaskHtml(subtask, index);
+    subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
 }
 
 // window.onload = initSubtaskInput;
