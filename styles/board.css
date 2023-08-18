@@ -710,7 +710,7 @@ textarea#description-input {
   border: none;
   padding: 0;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 1em;
 }
 
 .radio-button.prio-urgent:has(input[type="radio"]:checked) {
@@ -741,9 +741,9 @@ textarea#description-input {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   padding: 1.125rem 0.625rem;
-  justify-content: center;
   gap: 0.5rem;
   flex: 1 0 0;
 }
@@ -755,10 +755,7 @@ textarea#description-input {
 
 .radio-button > label {
   cursor: pointer;
-  padding: 10px 18px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  /*padding: 10px 18px;*/
   margin: 0;
 }
 

@@ -168,7 +168,7 @@ function generateEditTaskHTML() {
 </div>
 
 <div>
-  <span class="label">Prio</span>
+  <span class="label">Priority</span>
   <div class="input input-radio">
     <div class="radio-button prio-urgent">
       <label for="urgent" class="label-radio-btn"
