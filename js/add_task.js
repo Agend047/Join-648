@@ -36,6 +36,7 @@ function initSelectInputs() {
 function activateSearchInput() {
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
+    document.getElementById('selected-contacts').classList.toggle('d-none');
     input.readOnly = false;
     input.value = '';
     input.focus();
@@ -48,6 +49,7 @@ function activateSearchInput() {
 function deactivateSearchInput() {
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
+    document.getElementById('selected-contacts').classList.toggle('d-none');
     input.readOnly = true;
     input.value = "Select contacts to assign";
     inputContainer.addEventListener('click', toggleDropdown);
@@ -64,7 +66,11 @@ function initCategorySelectItems(list) {
 }
 
 function initAssignedToSelectItems(list) {
-
+    const contacts = list.querySelectorAll('li');
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        contact.addEventListener('click', toggleContactSelection);
+    }
 }
 
 function selectCategory(e) {
@@ -186,6 +192,11 @@ function updateSubtask(index) {
     subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
 }
 
-function toggleContactSelection() {
-
+function toggleContactSelection(event) {
+    event.currentTarget.classList.toggle('selected');
+    if (event.currentTarget.classList.contains('selected')) {
+        event.currentTarget.querySelector('img').src = './assets/img/checkbox-checked-white.png';
+    } else {
+        event.currentTarget.querySelector('img').src = './assets/img/checkbox-unchecked.svg';
+    }
 }

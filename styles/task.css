@@ -152,18 +152,29 @@ textarea {
 }
 
 .assigned-to-options {
-  max-height: 4em;
+  max-height: 13em;
   overflow: auto;
 }
 
 .assign-to-li {
   display: flex;
   align-items: center;
+  border-radius: 0.3em;
+  padding: 0.5em;
+}
+
+.select-options .assign-to-li + .assign-to-li {
+  margin: 0;
 }
 
 .assign-to-li-name {
   flex: 1;
   margin-inline-start: 1em;
+}
+
+.selected {
+  color: white;
+  background-color: var(--secondary-bg-color);
 }
 
 .search-active {
