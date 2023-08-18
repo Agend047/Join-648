@@ -150,7 +150,7 @@
         </div>
         <div class="form-control">
           <label for="category-input">Category</label>
-          <div id="category-input-container" class="input select-input">
+          <div class="input select-input">
             <input
               readonly
               required
@@ -168,6 +168,29 @@
           <ul id="category-options" class="select-options d-none">
             <li value="technical task">Technical Task</li>
             <li value="user story">User Story</li>
+          </ul>
+        </div>
+        <div class="form-control">
+          <label for="assigned-to-input">Assigned to</label>
+          <div class="input select-input">
+            <input
+              readonly
+              required
+              id="assigned-to-input"
+              value="Select contacts to assign"
+            />
+            <img
+              id="dropdown-arrow"
+              src="./assets/img/arrow_dropdown_down.png"
+            />
+          </div>
+          <div class="error-container">
+            <div class="error-message" id="category-input-error"></div>
+          </div>
+          <ul id="assigned-to-options" class="select-options d-none">
+            <li value="niklas">Niklas</li>
+            <li value="susanne">Susanne</li>
+            <li value="jan">Jan</li>
           </ul>
         </div>
         <div class="form-control">

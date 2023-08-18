@@ -4,7 +4,7 @@ let formControl;
 let subtasks = [];
 function initAddTaskPage() {
     initSubtaskInput();
-    initCategoryInput();
+    initSelectInputs();
 }
 
 function initSubtaskInput() {
@@ -15,13 +15,33 @@ function initSubtaskInput() {
     document.getElementById('save-subtask').addEventListener('click', addSubtask);
 }
 
-function initCategoryInput() {
-    document.getElementById('category-input-container').addEventListener('click', toggleDropdown);
-    const categoryOptions = document.getElementById('category-options').querySelectorAll('li');
+function initSelectInputs() {
+    const selectElements = document.getElementsByClassName('select-input');
+    for (let i = 0; i < selectElements.length; i++) {
+        const element = selectElements[i];
+        const list = element.parentElement.querySelector('ul');
+        element.addEventListener('click', toggleDropdown);
+        switch (list.id) {
+            case 'category-options':
+                initCategorySelectItems(list);
+                break;
+            case 'assigned-to-options':
+                initAssignedToSelectItems(list);
+                break;
+        }
+    }
+}
+
+function initCategorySelectItems(list) {
+    const categoryOptions = list.querySelectorAll('li');
     for (let i = 0; i < categoryOptions.length; i++) {
         const option = categoryOptions[i];
         option.addEventListener('click', selectCategory);
     }
+}
+
+function initAssignedToSelectItems(list) {
+
 }
 
 function selectCategory(e) {
@@ -46,8 +66,8 @@ function expandDropdown() {
     const list = formControl.querySelector('ul');
     dropdownImg.src = './assets/img/arrow_dropdown_up.png';
     backdrop.addEventListener('click', collapseDropdown);
-    inputContainer.style.zIndex = 2;
-    list.style.zIndex = 1;
+    inputContainer.style.zIndex = 3;
+    list.style.zIndex = 2;
     list.classList.toggle('d-none');
     backdrop.classList.toggle('d-none');
 }
