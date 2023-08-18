@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="styles/task.css" />
   </head>
 
-  <body onload="initTemplates(), initSubtaskInput()">
+  <body onload="initTemplates(), initAddTaskPage()">
     <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
@@ -45,7 +45,7 @@
         <span class="label">Prio</span>
         <div class="input input-radio">
           <div class="radio-button prio-urgent">
-            <label for="urgent"
+            <label for="urgent" class="label-radio-btn"
               >Urgent<input
                 id="urgent"
                 type="radio"
@@ -71,7 +71,7 @@
             </label>
           </div>
           <div class="radio-button prio-medium">
-            <label for="medium"
+            <label for="medium" class="label-radio-btn"
               >Medium<input
                 id="medium"
                 type="radio"
@@ -97,7 +97,7 @@
             </label>
           </div>
           <div class="radio-button prio-low">
-            <label for="low"
+            <label for="low" class="label-radio-btn"
               >Low<input id="low" type="radio" name="prio-input" value="low" />
               <svg
                 width="21"
@@ -135,15 +135,23 @@
           <div class="error-message" id="due-date-input-error"></div>
         </div>
         <label for="category-input">Category</label>
-        <div class="input">
-          <select required id="category-input">
-            <option value="">Select task category</option>
-            <option value="Category 2">Category 2</option>
-          </select>
+        <div id="category-backdrop" class="category-backdrop d-none"></div>
+        <div id="category-input-container" class="input select-input">
+          <input
+            readonly
+            required
+            id="category-input"
+            value="Select task category"
+          />
+          <img id="dropdown-arrow" src="./assets/img/arrow_dropdown_down.png" />
         </div>
         <div class="error-container">
           <div class="error-message" id="category-input-error"></div>
         </div>
+        <ul id="category-options" class="select-options d-none">
+          <li value="technical task">Technical Task</li>
+          <li value="user story">User Story</li>
+        </ul>
         <label for="subtasks-input">Subtasks</label>
         <div id="subtasks-container" class="input">
           <input
@@ -172,8 +180,7 @@
         <div class="error-container">
           <div class="error-message" id="due-date-input-error"></div>
         </div>
-        <ul id="subtasks-list" class='subtasks-list'>
-        </ul>
+        <ul id="subtasks-list" class="subtasks-list"></ul>
         <div class="create-btn-container">
           <button class="btn btn-primary btn-create-task" type="submit">
             <span>Create Task</span

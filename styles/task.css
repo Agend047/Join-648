@@ -34,15 +34,50 @@ form {
   max-width: 440px;
 }
 
-select {
-  width: 100%;
+label, .label {
+  margin-block-start: 1.5em;
+  display: block;
+}
+
+.select-options {
+  list-style-type: none;
+  padding: 1em 0.5em 0.5em;
+  margin: 0;
+  margin-block-start: -1em;
+  background-color: white;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  position: relative;
+}
+
+.select-options li {
   cursor: pointer;
+}
+
+.category-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.select-options li + li {
+  margin-block-start: 0.5em;
 }
 
 .input {
   margin-block-start: 0.5em;
-  margin-block-end: 1.5em;
   max-width: unset;
+}
+
+.select-input, .select-input * {
+  cursor: pointer;
+}
+
+.select-input {
+  margin-block-end: 0;
+  position: relative;
 }
 
 .input-radio {
@@ -93,6 +128,7 @@ select {
   display: flex;
   align-items: center;
   gap: 4px;
+  margin: 0;
 }
 
 input[type='radio'] {

@@ -1,11 +1,51 @@
 const subtaskEl = document.getElementById('subtasks-container');
 let subtasks = [];
+function initAddTaskPage() {
+    initSubtaskInput();
+    initCategoryInput();
+}
+
 function initSubtaskInput() {
     subtaskEl.firstElementChild.addEventListener('focus', toggleSubtaskIcons);
     subtaskEl.firstElementChild.addEventListener('blur', toggleSubtaskIcons);
     document.getElementById('add-subtask').addEventListener('click', () => setFocusToElement(subtaskEl.firstElementChild));
     document.getElementById('cancel-subtask').addEventListener('click', cancelSubtask);
     document.getElementById('save-subtask').addEventListener('click', addSubtask);
+}
+
+function initCategoryInput() {
+    document.getElementById('category-input-container').addEventListener('click', toggleDropdown);
+    const categoryOptions = document.getElementById('category-options').querySelectorAll('li');
+    for (let i = 0; i < categoryOptions.length; i++) {
+        const option = categoryOptions[i];
+        option.addEventListener('click', selectCategory);
+    }
+}
+
+function selectCategory(e) {
+    const input = document.getElementById('category-input');
+    input.value = e.target.textContent;
+    toggleDropdown();
+}
+
+function toggleDropdown() {
+    const dropdownImg = document.getElementById('dropdown-arrow');
+    const list = document.getElementById('category-options');
+    const backdrop = document.getElementById('category-backdrop');
+    const input = document.getElementById('category-input-container');
+    if (list.classList.contains('d-none')) {
+        dropdownImg.src = './assets/img/arrow_dropdown_up.png';
+        backdrop.addEventListener('click', toggleDropdown);
+        input.style.zIndex = 2;
+        list.style.zIndex = 1;
+    } else {
+        dropdownImg.src = './assets/img/arrow_dropdown_down.png';
+        backdrop.removeEventListener('click', toggleDropdown);
+        input.style.zIndex = 0;
+        list.style.zIndex = 0;
+    }
+    list.classList.toggle('d-none');
+    backdrop.classList.toggle('d-none');
 }
 
 function toggleSubtaskIcons() {
