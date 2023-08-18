@@ -27,7 +27,7 @@ function initCategoryInput() {
 function selectCategory(e) {
     const input = document.getElementById('category-input');
     input.value = e.target.textContent;
-    toggleDropdown();
+    collapseDropdown();
 }
 
 // function toggleDropdown() {
