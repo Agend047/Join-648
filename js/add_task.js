@@ -28,13 +28,15 @@ function initSelectInputs() {
             case 'assigned-to-options':
                 element.addEventListener('click', activateSearchInput);
                 element.querySelector('img').addEventListener('click', toggleDropdown);
+                element.querySelector('img').addEventListener('click', activateSearchInput);
                 initAssignedToSelectItems(list);
                 break;
         }
     }
 }
 
-function activateSearchInput() {
+function activateSearchInput(e) {
+    e.stopPropagation();
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
@@ -43,11 +45,14 @@ function activateSearchInput() {
     input.focus();
     inputContainer.removeEventListener('click', toggleDropdown);
     inputContainer.removeEventListener('click', activateSearchInput);
+    inputContainer.querySelector('img').removeEventListener('click', activateSearchInput);
+    inputContainer.querySelector('img').addEventListener('click', deactivateSearchInput);
     inputContainer.classList.add('search-active');
     backdrop.addEventListener('click', deactivateSearchInput);
 }
 
-function deactivateSearchInput() {
+function deactivateSearchInput(e) {
+    e.stopPropagation();
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
@@ -55,6 +60,8 @@ function deactivateSearchInput() {
     input.value = "Select contacts to assign";
     inputContainer.addEventListener('click', toggleDropdown);
     inputContainer.addEventListener('click', activateSearchInput);
+    inputContainer.querySelector('img').addEventListener('click', activateSearchInput);
+    inputContainer.querySelector('img').removeEventListener('click', deactivateSearchInput);
     inputContainer.classList.remove('search-active');
 }
 
