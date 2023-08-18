@@ -27,6 +27,7 @@ function initSelectInputs() {
                 break;
             case 'assigned-to-options':
                 element.addEventListener('click', activateSearchInput);
+                element.querySelector('img').addEventListener('click', toggleDropdown);
                 initAssignedToSelectItems(list);
                 break;
         }
@@ -80,7 +81,11 @@ function selectCategory(e) {
 }
 
 function toggleDropdown(ev) {
-    formControl = ev.currentTarget.parentElement;
+    if (ev.currentTarget.tagName === "DIV") {
+        formControl = ev.currentTarget.parentElement;
+    } else {
+        formControl = ev.currentTarget.parentElement.parentElement;
+    }
     const listContainer = formControl.querySelector('.select-options-container');
     if (listContainer.classList.contains('d-none')) {
         expandDropdown();
