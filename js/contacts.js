@@ -124,7 +124,7 @@ function showConfirmAlert(i) {
 
     deleteAlert.innerHTML = /*html*/`
         <div class="align-items-center">
-            <p>Do you really want to delete <j id="show_deleting_name"></j>?</p>
+            <p>Do you really want to delete <br><j id="show_deleting_name">${contactList[i].name}</j>?</p>
             <div id="" class="delete_btn_div">
                 <button class="btn btn-secondary" onclick="closeContactProcess('delete_question')">Cancel</button>
                 <button id='deleteBtn' onclick="deleteContact(${i}), closeContactProcess('delete_question')" class="btn btn-primary">Confirm</button>
