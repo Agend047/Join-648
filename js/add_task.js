@@ -111,8 +111,8 @@ function expandDropdown() {
     const listContainer = formControl.querySelector('.select-options-container');
     dropdownImg.src = './assets/img/arrow_dropdown_up.png';
     backdrop.addEventListener('click', collapseDropdown);
-    inputContainer.style.zIndex = 3;
-    listContainer.style.zIndex = 2;
+    inputContainer.style.zIndex = 2;
+    listContainer.style.zIndex = 1;
     listContainer.classList.toggle('d-none');
     backdrop.classList.toggle('d-none');
 }

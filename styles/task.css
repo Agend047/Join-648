@@ -250,11 +250,11 @@ form .btn-create-task {
   background-color: var(--subtle-bg-color);
   position: sticky;
   bottom: var(--footer-height);
-  z-index: 4;
+  z-index: 3;
 }
 
 #mobile-template {
-  z-index: 4;
+  z-index: 3;
 }
 
 footer {
