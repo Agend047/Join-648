@@ -41,7 +41,7 @@
             </article>
         </main>
 
-        <section id="contacs_Display_big">
+        <section id="contacts_Display_big">
             <span class="side_header d-flex align-items-center">
                 <h1>Contacts</h1>
                 <div class="Vertical_stroke Divider"></div>
@@ -54,7 +54,7 @@
                     <div id="initial_ball_big" class="d-flex">AM</div>
                     <div id="stage_head_right">
                         <p id="contact_name">Anton Mayer</p>
-                        <div class=" d-flex align-items-center">
+                        <div id="contacts_stage_workBtn_div" class="d-flex align-items-center">
                             <a href="#" onclick="editContact()" id="edit_contact_btn" class="Contact_stage_btn">
                                 <img src="assets/img/contacts_editContact_icon.png" alt="">
                                 Edit
@@ -74,11 +74,15 @@
                     <p id="contact_phone">+4922222222</p>
                 </span>-->
             </article>
+            <button id="c_stage_mobCombi_btn" class="Primary_contacts_btn btn-primary d-flex"
+                onclick="openMobCombiMenu()">
+                <img src="assets/img/contacts_mobCombi_icon.png" alt=":">
+            </button>
         </section>
     </div>
 
-    <div id="shader_div">
-    </div>
+    <div id="BlockDiv"></div>
+    <div id="shader_div"></div>
 
     <div id="delete_question" class="align-items-center">
         <div class="align-items-center">
@@ -91,9 +95,6 @@
         </div>
     </div>
 
-
-
-    <!-- Give it a nice position and the sider/header! then: Javascript! -->
     <div id="addContact_div" class="Contact_proccess_div d-flex  align-items-center">
         <button class="Close_btn" onclick="closeContactProcess('addContact_div')">
             <img src="assets/img/cancel_icon_black.png" alt="X">

@@ -71,7 +71,7 @@ function openContact(i) {
             <div id="initial_ball_big" style="background-color: ${contact.color}" class="d-flex">${contact.initials}</div>
             <div id="stage_head_right">
                 <p id="contact_name">${contact.name}</p>
-                <div class=" d-flex align-items-center">
+                <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
                     <a href="#" onclick="editContact(${i})" id="edit_contact_btn" class="Contact_stage_btn">
                         <img src="assets/img/contacts_editContact_icon.png" alt="">
                                 Edit
@@ -91,7 +91,9 @@ function openContact(i) {
             <p>${contact.phone}</p>
         </span>
     `
-    showInMobile()
+    if (loaded == 'mobile') {
+        showInMobile(stage)
+    }
 }
 
 /**Unmarks former marked contact, and marks the contact that was choosen. */
@@ -106,10 +108,16 @@ function markContact(i) {
 }
 
 function showInMobile() {
-    if (loaded == 'mobile') {
-        let stage = document.getElementById('contacts_stage');
-        stage.style.display = 'flex';
-    }
+    let stage = document.getElementById('contacts_Display_big');
+    stage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
+    stage.style.display = 'flex';
+
+};
+
+
+function closeContactStage() {
+    let stage = document.getElementById('contacts_Display_big');
+    stage.style.display = 'none';
 }
 
 /**

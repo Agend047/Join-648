@@ -328,7 +328,8 @@ a {
 }
 
 #header_menu_id a {
-  margin: 8px;
+  padding: 8px;
+  border-radius: 14px;
 }
 
 @media (max-width: 900px) {
@@ -359,6 +360,7 @@ a {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 5;
 }
 
 #header_logo_m {
@@ -376,6 +378,7 @@ a {
   background-color: #2a3647;
   color: #cdcdcd;
   justify-content: space-around;
+  z-index: 10;
 }
 
 .Footer_link_pack {
