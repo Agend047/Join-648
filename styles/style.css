@@ -109,9 +109,8 @@
   --hover-color-checkbox: #edf2fa;
   --error-color: #ff001f;
   --error-color-subtle: #ff8190;
-  --fs-smaller: ;
-  --fs-small: 1rem;
-  --fs-normal: 1.25rem;
+  --fs-small: 0.875rem;
+  --fs-normal: 1rem;
   --fs-tall: 2.25rem;
   --fs-taller: 2.938rem;
   --notification-top-target: 0;
@@ -119,6 +118,8 @@
 
 @media (min-width: 820px) {
   :root {
+    --fs-small: 1rem;
+    --fs-normal: 1.25rem;
     --fs-taller: 3.813rem;
   }
 }
