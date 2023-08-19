@@ -267,12 +267,26 @@ form .btn-text-icon {
 }
 
 form .btn-create-task {
-  margin-inline-start: auto;
   width: unset;
   gap: 4px;
 }
 
+.btn-secondary.btn-text-icon {
+  margin-inline-start: auto;
+  font-weight: normal;
+  width: fit-content;
+  gap: 4px;
+}
+
+.btn-secondary.btn-text-icon:hover path {
+  stroke: var(--accent-color);
+  transition: ease-in-out 100ms;
+}
+
 .create-btn-container {
+  display: flex;
+  justify-content: end;
+  gap: 1em;
   padding-block: 1em;
   background-color: var(--subtle-bg-color);
   position: sticky;

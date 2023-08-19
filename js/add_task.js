@@ -5,6 +5,11 @@ let subtasks = [];
 function initAddTaskPage() {
     initSubtaskInput();
     initSelectInputs();
+    initClearBtn();
+}
+
+function initClearBtn() {
+    document.getElementById('clear-btn').addEventListener('click', () => {document.forms[0].reset()})
 }
 
 function initSubtaskInput() {
