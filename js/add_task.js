@@ -37,6 +37,7 @@ function initSelectInputs() {
 
 function activateSearchInput(e) {
     e.stopPropagation();
+    formControl = document.getElementById('assigned-to-form-control');
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
@@ -53,6 +54,7 @@ function activateSearchInput(e) {
 
 function deactivateSearchInput(e) {
     e.stopPropagation();
+    formControl = document.getElementById('assigned-to-form-control');
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
@@ -63,6 +65,7 @@ function deactivateSearchInput(e) {
     inputContainer.querySelector('img').addEventListener('click', activateSearchInput);
     inputContainer.querySelector('img').removeEventListener('click', deactivateSearchInput);
     inputContainer.classList.remove('search-active');
+    backdrop.removeEventListener('click', deactivateSearchInput);
 }
 
 function initCategorySelectItems(list) {
@@ -88,6 +91,7 @@ function selectCategory(e) {
 }
 
 function toggleDropdown(ev) {
+    ev.stopPropagation();
     if (ev.currentTarget.tagName === "DIV") {
         formControl = ev.currentTarget.parentElement;
     } else {
