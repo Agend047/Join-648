@@ -134,7 +134,7 @@ select {
   margin-top: 0.5em;
 }
 
-.is-validated .input:has(input:invalid) {
+.is-validated .input:has(input:invalid), .is-validated .input:has(textarea:invalid) {
   border: 1px solid var(--error-color);
 }
 

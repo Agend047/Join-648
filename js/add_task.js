@@ -6,10 +6,11 @@ function initAddTaskPage() {
     initSubtaskInput();
     initSelectInputs();
     initClearBtn();
+    initForm();
 }
 
 function initClearBtn() {
-    document.getElementById('clear-btn').addEventListener('click', () => {document.forms[0].reset()})
+    document.getElementById('clear-btn').addEventListener('click', () => { document.forms[0].reset() })
 }
 
 function initSubtaskInput() {
@@ -219,5 +220,75 @@ function toggleContactSelection(event) {
         event.currentTarget.querySelector('img').src = './assets/img/checkbox-checked-white.png';
     } else {
         event.currentTarget.querySelector('img').src = './assets/img/checkbox-unchecked.svg';
+    }
+}
+
+function validateAddTaskForm(e) {
+    const form = e.target;
+    let formIsValid = true;
+    let prioValidationMessage;
+    const formElements = form.querySelectorAll('input:not([type="radio"]), textarea, div.custom-validation');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        if (formElement.classList.contains('custom-validation')) {
+            switch (formElement.id) {
+                case 'assigned-to-input':
+                    validateAssignedToInput(formElement);
+                    break;
+                case 'prio-inputs':
+                    prioValidationMessage = validatePrioInput(formElement);
+                    break;
+                case 'category-input':
+                    validateCategoryInput(formElement);
+                    break;
+            }
+        } else {
+            formElement.checkValidity();
+        }
+        if (formElement.id === 'prio-inputs') {
+            if (prioValidationMessage !== '') {
+                formIsValid = false;
+            }
+            document.getElementById(`${formElement.id}-error`).textContent = prioValidationMessage;
+        } else {
+            document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+            if (!formElement.validity.valid) {
+                formIsValid = false;
+            }
+        }
+    }
+    e.preventDefault();
+    if (!formIsValid) {
+        form.classList.toggle('is-validated');
+    } else {
+        alert('Task created!');
+    }
+}
+
+function validateCategoryInput(formElement) {
+    if (formElement.value === 'Select task category') {
+        formElement.setCustomValidity("This field is required.");
+    } else {
+        formElement.setCustomValidity("");
+    }
+}
+
+function validatePrioInput(formElement) {
+    const inputs = formElement.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        if (input.checked) {
+            return '';
+        }
+    }
+    return 'This field is required.';
+}
+
+function validateAssignedToInput(formElement) {
+    const assignedToCount = document.getElementById('selected-contacts').children.length;
+    if (assignedToCount > 0) {
+        formElement.setCustomValidity('');
+    } else {
+        formElement.setCustomValidity('Assign this task to at least one contact.');
     }
 }

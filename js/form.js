@@ -12,6 +12,9 @@ function initForm() {
         case 'resetpassword-form':
             validationFunction = validateResetPasswordForm;
             break;
+        case 'addtask-form':
+            validationFunction = validateAddTaskForm;
+            break;
         default:
             validationFunction = validateStandardForm;
             break;
@@ -39,7 +42,7 @@ function validateStandardForm(e) {
     }
     e.preventDefault();
     if (!formIsValid) {
-        form.classList.toggle('is-validated');
+        form.classList.add('is-validated');
     } else { showNotification('notification', form.action); }
 }
 
