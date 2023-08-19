@@ -125,7 +125,7 @@ function markCorrectMenuPoint() {
 function headerMenu() {
     let menu = document.getElementById('header_menu_id')
     let styleRight = menu.style.right;
-    (styleRight == '3vw') ? (menu.style.right = '-15vw') : (menu.style.right = '3vw')
+    (styleRight == '3vw') ? (menu.style.right = '-200px') : (menu.style.right = '3vw')
     hideArrow()
 }
 
