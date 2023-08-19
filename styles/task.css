@@ -14,6 +14,7 @@
 
 main {
   margin-block: var(--header-height);
+  margin-inline-start: var(--nav-width);
   display: unset;
   padding-inline: 2rem;
 }
@@ -25,6 +26,12 @@ h1 {
   background-color: var(--subtle-bg-color);
   padding-block-start: 1em;
   margin: 0;
+  z-index: 3;
+}
+
+.vertical-separator {
+  width: 1px;
+  background-color: #d1d1d1;
 }
 
 form {
@@ -32,6 +39,21 @@ form {
   margin-inline: auto;
   width: unset;
   max-width: 440px;
+}
+
+@media (min-width: 1200px) {
+  form {
+    max-width: max-content;
+  }
+  
+  .form-controls-all {
+    display: flex;
+    gap: 3em;
+  }
+  
+  .vertical-separator {
+    display: block;
+  }
 }
 
 label,
@@ -96,22 +118,22 @@ label,
   gap: 8px;
 }
 
-.radio-button.prio-urgent:has(input[type="radio"]:checked) {
+.radio-button.prio-urgent:has(input[type='radio']:checked) {
   background-color: #ff3d00;
   color: white;
 }
 
-.radio-button.prio-medium:has(input[type="radio"]:checked) {
+.radio-button.prio-medium:has(input[type='radio']:checked) {
   background-color: #ffa800;
   color: white;
 }
 
-.radio-button.prio-low:has(input[type="radio"]:checked) {
+.radio-button.prio-low:has(input[type='radio']:checked) {
   background-color: #7ae229;
   color: white;
 }
 
-.radio-button:has(input[type="radio"]:checked) path {
+.radio-button:has(input[type='radio']:checked) path {
   fill: white;
 }
 
@@ -139,7 +161,7 @@ label,
   margin: 0;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   appearance: none;
   margin: 0;
 }
