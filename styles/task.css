@@ -43,16 +43,21 @@ form {
 
 @media (min-width: 1200px) {
   form {
-    max-width: max-content;
+    max-width: unset;
   }
   
   .form-controls-all {
     display: flex;
+    justify-content: center;
     gap: 3em;
   }
   
   .vertical-separator {
     display: block;
+  }
+
+  .form-control {
+    width: 30vw;
   }
 }
 
