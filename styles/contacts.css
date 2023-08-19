@@ -84,15 +84,16 @@
 
 /*Contacts display */
 
-.Contacs_Display_big {
+#contacs_Display_big {
     margin-top: 70px;
+    background-color: #F6F7F8;
 }
 
-.Contacs_Display_big h1 {
+#contacs_Display_big h1 {
     font-size: var(--fs-taller);
 }
 
-.Contacs_Display_big p {
+#contacs_Display_big p {
     font-size: var(--fs-normal);
 }
 
@@ -109,6 +110,7 @@
 
 #contacts_stage {
     overflow-y: auto;
+    flex-direction: column;
 }
 
 .Stage_head {}
@@ -200,8 +202,18 @@
             max-width: 1000vw;
         }
 
-        .Contacs_Display_big {
-            display: none;
+        #contacs_Display_big {
+            /* display: none; */
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 10vh;
+            height: 90vh;
+        }
+
+        .Contacts_stage_data {
+            margin-left: 10vw;
         }
 
         .Vertical_stroke {

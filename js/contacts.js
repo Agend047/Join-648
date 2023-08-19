@@ -91,6 +91,7 @@ function openContact(i) {
             <p>${contact.phone}</p>
         </span>
     `
+    showInMobile()
 }
 
 /**Unmarks former marked contact, and marks the contact that was choosen. */
@@ -102,6 +103,13 @@ function markContact(i) {
     catch { }
     let choosen = document.getElementById('contact_div' + i)
     choosen.classList.add('Contact_div_choosen');
+}
+
+function showInMobile() {
+    if (loaded == 'mobile') {
+        let stage = document.getElementById('contacts_stage');
+        stage.style.display = 'flex';
+    }
 }
 
 /**
