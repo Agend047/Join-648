@@ -43,12 +43,12 @@ form {
 
 @media (min-width: 1200px) {
   form {
-    max-width: unset;
+    max-width: min-content;
   }
   
   .form-controls-all {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 3em;
   }
   
