@@ -233,17 +233,17 @@ function validateAddTaskForm(e) {
         if (formElement.classList.contains('custom-validation')) {
             switch (formElement.id) {
                 case 'assigned-to-input':
+                    formElement.readOnly = false;
                     validateAssignedToInput(formElement);
                     break;
                 case 'prio-inputs':
                     prioValidationMessage = validatePrioInput(formElement);
                     break;
                 case 'category-input':
+                    formElement.readOnly = false;
                     validateCategoryInput(formElement);
                     break;
             }
-        } else {
-            formElement.checkValidity();
         }
         if (formElement.id === 'prio-inputs') {
             if (prioValidationMessage !== '') {
@@ -256,13 +256,16 @@ function validateAddTaskForm(e) {
                 formIsValid = false;
             }
         }
+        if (formElement.id === 'assigned-to-input' || formElement.id === 'category-input') {
+            formElement.readOnly = true;
+        }
     }
     e.preventDefault();
-    if (!formIsValid) {
-        form.classList.toggle('is-validated');
-    } else {
-        alert('Task created!');
-    }
+        if (!formIsValid) {
+            form.classList.add('is-validated');
+        } else {
+            alert('Task created!');
+        }
 }
 
 function validateCategoryInput(formElement) {
