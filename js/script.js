@@ -247,3 +247,7 @@ function showNotification(elementId, targetHref) {
         window.location.href = targetHref;
     }, 800);
 }
+
+function getUserByEmail(email) {
+    return userList.find((user) => user.email === email);
+}

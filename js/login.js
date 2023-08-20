@@ -8,13 +8,15 @@ function init() {
 }
 
 function validateLoginForm(e) {
+    e.preventDefault();
     const form = e.target;
     let formIsValid = true;
+    const email = document.getElementById('email-input').value;
     const formElements = form.querySelectorAll('input, textarea, select');
     for (let i = 0; i < formElements.length; i++) {
         const formElement = formElements[i];
         if (formElement.id === 'password-input') {
-            validatePassword(formElement);
+            validatePassword(formElement, email);
         }
         formElement.checkValidity();
         if (!formElement.validity.valid) {
@@ -23,7 +25,6 @@ function validateLoginForm(e) {
         document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
     }
     if (!formIsValid) {
-        e.preventDefault();
         form.classList.add('is-validated');
     }
 }

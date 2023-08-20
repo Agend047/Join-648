@@ -5,6 +5,7 @@ function init() {
 }
 
 function validateResetPasswordForm(e) {
+    e.preventDefault();
     const form = e.target;
     let formIsValid = true;
     const formElements = form.querySelectorAll('input, textarea, select');
@@ -19,7 +20,6 @@ function validateResetPasswordForm(e) {
         }
         document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
     }
-    e.preventDefault();
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else { showNotification('notification', "./login.html"); }

@@ -277,6 +277,7 @@ function getContactById(id) {
 }
 
 function validateAddTaskForm(e) {
+    e.preventDefault();
     const form = e.target;
     let formIsValid = true;
     let prioValidationMessage;
@@ -313,7 +314,6 @@ function validateAddTaskForm(e) {
             formElement.readOnly = true;
         }
     }
-    e.preventDefault();
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
