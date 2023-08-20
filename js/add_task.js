@@ -15,8 +15,14 @@ async function getContacts() {
     contactList = await getItemFromBackend('contactList');
 }
 
-function initClearBtn() {
-    document.getElementById('clear-btn').addEventListener('click', () => { document.forms[0].reset() })
+function initClearBtn(ev) {
+    document.getElementById('clear-btn').addEventListener('click', (ev) => {
+        ev.preventDefault();
+        document.forms[0].reset();
+        document.getElementById('selected-contacts').innerHTML = '';
+        document.getElementById('subtasks-list').innerHTML = '';
+        renderAssignedToContactList(contactList);
+    });
 }
 
 function initSubtaskInput() {
@@ -72,6 +78,8 @@ function deactivateSearchInput(e) {
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
     input.removeEventListener('keyup', filterAssignedToContacts);
+    input.value = '';
+    filterAssignedToContacts();
     input.readOnly = true;
     input.value = "Select contacts to assign";
     inputContainer.addEventListener('click', toggleDropdown);
@@ -360,22 +368,59 @@ function renderAssignedToContactListItemHtml(contact) {
     return html;
 }
 
+// function filterAssignedToContacts2() {
+//     const searchTerm = document.getElementById('assigned-to-input').value;
+//     if (searchTerm === '') {
+//         renderAssignedToContactList(contactList);
+//     }
+//     else {
+//         const results = contactList.filter((contact) => {
+//             const names = contact.name.toLowerCase().split(' ');
+//             for (let i = 0; i < names.length; i++) {
+//                 const name = names[i];
+//                 if (name.startsWith(searchTerm)) {
+//                     return true;
+//                 }
+//             }
+//             return false;
+//         });
+//         renderAssignedToContactList(results);
+//     }
+// }
+
 function filterAssignedToContacts() {
     const searchTerm = document.getElementById('assigned-to-input').value;
+    const assignedToList = document.getElementById('assigned-to-options');
+    const listItems = assignedToList.querySelectorAll('li');
     if (searchTerm === '') {
-        renderAssignedToContactList(contactList);
+        for (let i = 0; i < listItems.length; i++) {
+            const listItem = listItems[i];
+            listItem.style.display = 'flex';
+        }
     }
     else {
-        const results = contactList.filter((contact) => {
-            const names = contact.name.toLowerCase().split(' ');
-            for (let i = 0; i < names.length; i++) {
-                const name = names[i];
-                if (name.startsWith(searchTerm)) {
-                    return true;
-                }
+        const results = filterContactListByName(searchTerm);
+        for (let i = 0; i < listItems.length; i++) {
+            const listItem = listItems[i];
+            if (results.find((contact) => contact.id === listItem.value)) {
+                listItem.style.display = 'flex';
+            } else {
+                listItem.style.display = 'none';
             }
-            return false;
-        });
-        renderAssignedToContactList(results);
-    }
+        }
+    };
+}
+
+function filterContactListByName(nameQuery) {
+    const results = contactList.filter((contact) => {
+        const names = contact.name.toLowerCase().split(' ');
+        for (let i = 0; i < names.length; i++) {
+            const name = names[i];
+            if (name.startsWith(nameQuery)) {
+                return true;
+            }
+        }
+        return false;
+    });
+    return results;
 }
