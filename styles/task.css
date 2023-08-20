@@ -12,6 +12,10 @@
   }
 }
 
+header {
+  z-index: 3;
+}
+
 main {
   margin-block: var(--header-height);
   margin-inline-start: var(--nav-width);

@@ -2,11 +2,17 @@ const subtaskEl = document.getElementById('subtasks-container');
 const backdrop = document.getElementById('backdrop');
 let formControl;
 let subtasks = [];
-function initAddTaskPage() {
+async function initAddTaskPage() {
     initSubtaskInput();
-    initSelectInputs();
     initClearBtn();
     initForm();
+    await getContacts();
+    renderAssignedToContactList(contactList);
+    initSelectInputs();
+}
+
+async function getContacts() {
+    contactList = await getItemFromBackend('contactList');
 }
 
 function initClearBtn() {
@@ -50,6 +56,7 @@ function activateSearchInput(e) {
     input.readOnly = false;
     input.value = '';
     input.focus();
+    input.addEventListener('keyup', filterAssignedToContacts);
     inputContainer.removeEventListener('click', toggleDropdown);
     inputContainer.removeEventListener('click', activateSearchInput);
     inputContainer.querySelector('img').removeEventListener('click', activateSearchInput);
@@ -64,6 +71,7 @@ function deactivateSearchInput(e) {
     const input = formControl.querySelector('input');
     const inputContainer = formControl.querySelector('.input');
     document.getElementById('selected-contacts').classList.toggle('d-none');
+    input.removeEventListener('keyup', filterAssignedToContacts);
     input.readOnly = true;
     input.value = "Select contacts to assign";
     inputContainer.addEventListener('click', toggleDropdown);
@@ -261,11 +269,11 @@ function validateAddTaskForm(e) {
         }
     }
     e.preventDefault();
-        if (!formIsValid) {
-            form.classList.add('is-validated');
-        } else {
-            alert('Task created!');
-        }
+    if (!formIsValid) {
+        form.classList.add('is-validated');
+    } else {
+        alert('Task created!');
+    }
 }
 
 function validateCategoryInput(formElement) {
@@ -294,4 +302,61 @@ function validateAssignedToInput(formElement) {
     } else {
         formElement.setCustomValidity('Assign this task to at least one contact.');
     }
+}
+
+function renderAssignedToContactList(contacts) {
+    const list = document.getElementById('assigned-to-options');
+    let html = '';
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        html += renderAssignedToContactListItemHtml(contact);
+    }
+    list.innerHTML = html;
+}
+
+function renderAssignedToContactListItemHtml(contact) {
+    return /*html*/`<li class="assign-to-li" value="${contact.id}">
+                    <svg
+                      width="42"
+                      height="42"
+                      viewBox="0 0 42 42"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="21"
+                        cy="21"
+                        r="20"
+                        fill="#00BEE8"
+                        stroke="white"
+                        stroke-width="2"
+                      />
+                      <text
+                        x="21"
+                        y="21"
+                        alignment-baseline="central"
+                        text-anchor="middle"
+                        fill="white"
+                      >
+                      ${contact.initials}
+                      </text>
+                    </svg>
+                    <span class="assign-to-li-name">${contact.name}</span>
+                    <img src="./assets/img/checkbox-unchecked.svg" />
+                  </li>`
+}
+
+function filterAssignedToContacts() {
+    const searchTerm = document.getElementById('assigned-to-input').value;
+    if (searchTerm === '') {
+        renderAssignedToContactList(contactList);
+    }
+    else {
+        const results = contactList.filter((contact) => {
+            const lowerCaseName = contact.name.toLowerCase();
+            const result = lowerCaseName.startsWith(searchTerm);
+            return result;
+        });
+        renderAssignedToContactList(results);
+    }   
 }
