@@ -5,6 +5,15 @@ function init() {
     initForm();
     initCheckboxes();
     initBackNavigator();
+    getStoredUserData();
+}
+
+function getStoredUserData() {
+    if (loginData) {
+        document.getElementById('email-input').value = loginData.email;
+        document.getElementById('password-input').value = loginData.password;
+        document.getElementById('remember-me').click();
+    }
 }
 
 function validateLoginForm(e) {
@@ -28,16 +37,21 @@ function validateLoginForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        proceedLogin();
+        proceedLogin(user);
     }
 }
 
-function proceedLogin() {
+function proceedLogin(user) {
     if (document.getElementById('remember-me').classList.contains('checked')) {
         localStorage.setItem('loggedIn', JSON.stringify(true));
+        localStorage.setItem('loginData', JSON.stringify(user));
     } else {
         sessionStorage.setItem('loggedIn', JSON.stringify(true));
+        localStorage.setItem('loginData', '');
+        localStorage.setItem('loggedIn', 'false');
+
     }
+    sessionStorage.setItem('activeUser', JSON.stringify(user));
     window.location.href = './summary.html';
 }
 

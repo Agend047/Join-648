@@ -11,9 +11,17 @@ let contactList;
 let taskList = [];
 let userList = [];
 let loggedIn;
+let loginData;
+let activeUser;
 
 function verifyUserStatus() {
-    loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || JSON.parse(sessionStorage.getItem('loggedIn'));
+    let status = JSON.parse(localStorage.getItem('loggedIn'));
+    if (status) {
+        loginData = JSON.parse(localStorage.getItem('loginData'));
+    } else {
+        status = JSON.parse(sessionStorage.getItem('loggedIn'));
+    }
+    loggedIn = status;
     if (!window.location.href.endsWith('login.html') && !loggedIn) {
         window.location.href = './login.html';
     }
