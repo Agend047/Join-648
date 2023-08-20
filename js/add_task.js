@@ -317,7 +317,7 @@ function validateAddTaskForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        alert('Task created!');
+        showNotification('notification', './board.html');
     }
 }
 
@@ -367,26 +367,6 @@ function renderAssignedToContactListItemHtml(contact) {
         <img src="./assets/img/checkbox-unchecked.svg" /></li>`
     return html;
 }
-
-// function filterAssignedToContacts2() {
-//     const searchTerm = document.getElementById('assigned-to-input').value;
-//     if (searchTerm === '') {
-//         renderAssignedToContactList(contactList);
-//     }
-//     else {
-//         const results = contactList.filter((contact) => {
-//             const names = contact.name.toLowerCase().split(' ');
-//             for (let i = 0; i < names.length; i++) {
-//                 const name = names[i];
-//                 if (name.startsWith(searchTerm)) {
-//                     return true;
-//                 }
-//             }
-//             return false;
-//         });
-//         renderAssignedToContactList(results);
-//     }
-// }
 
 function filterAssignedToContacts() {
     const searchTerm = document.getElementById('assigned-to-input').value;
