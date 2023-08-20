@@ -353,9 +353,14 @@ function filterAssignedToContacts() {
     }
     else {
         const results = contactList.filter((contact) => {
-            const lowerCaseName = contact.name.toLowerCase();
-            const result = lowerCaseName.startsWith(searchTerm);
-            return result;
+            const names = contact.name.toLowerCase().split(' ');
+            for (let i = 0; i < names.length; i++) {
+                const name = names[i];
+                if (name.startsWith(searchTerm)) {
+                    return true;
+                }
+            }
+            return false;
         });
         renderAssignedToContactList(results);
     }   
