@@ -11,21 +11,33 @@ function validateLoginForm(e) {
     e.preventDefault();
     const form = e.target;
     let formIsValid = true;
-    const email = document.getElementById('email-input').value;
-    const formElements = form.querySelectorAll('input, textarea, select');
-    for (let i = 0; i < formElements.length; i++) {
-        const formElement = formElements[i];
-        if (formElement.id === 'password-input') {
-            validatePassword(formElement, email);
-        }
-        formElement.checkValidity();
-        if (!formElement.validity.valid) {
+    const emailInput = document.getElementById('email-input');
+    const passwordInput = document.getElementById('password-input');
+    const user = getUserByEmail(emailInput.value);
+    if (!user) {
+        passwordInput.setCustomValidity('Email and/or password are incorrect.');
+        formIsValid = false;
+    } else {
+        validatePassword(passwordInput, emailInput.value);
+        passwordInput.checkValidity();
+        if (!passwordInput.validity.valid) {
             formIsValid = false;
         }
-        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
     }
+    document.getElementById(`${passwordInput.id}-error`).textContent = passwordInput.validationMessage;
     if (!formIsValid) {
         form.classList.add('is-validated');
+    } else {
+        // proceedLogin();
+        // window.location.href = './summary.html';
+    }
+}
+
+function validateLoginEmailInput(formElement) {
+    if (getUserByEmail(formElement.value)) {
+        formElement.setCustomValidity('');
+    } else {
+        formElement.setCustomValidity('This combination of user and password does not exist.');
     }
 }
 

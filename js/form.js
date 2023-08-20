@@ -47,7 +47,7 @@ function validateStandardForm(e) {
 }
 
 function validatePassword(formElement, email) {
-    if (formElement.value === getUserByEmail(email).password) {
+    if (formElement.value !== getUserByEmail(email).password) {
         formElement.setCustomValidity('Wrong password. Ups! Try again.');
     } else {
         formElement.setCustomValidity('');
