@@ -200,7 +200,7 @@ function renderNewListItemHtml(subtask, index) {
 
 function renderListItemHtml(subtask, index) {
     return /*html*/`
-    <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" readonly value="${subtask}"/>
+    <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" class="no-validation" readonly value="${subtask}"/>
     <div class="subtask-read-icons subtask-icons"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
       src="./assets/img/subtask-separator.png"
     /><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/></div>
@@ -280,7 +280,7 @@ function validateAddTaskForm(e) {
     const form = e.target;
     let formIsValid = true;
     let prioValidationMessage;
-    const formElements = form.querySelectorAll('input:not([type="radio"]), textarea, div.custom-validation');
+    const formElements = form.querySelectorAll('input:not([type="radio"]):not(.no-validation), textarea, div.custom-validation');
     for (let i = 0; i < formElements.length; i++) {
         const formElement = formElements[i];
         if (formElement.classList.contains('custom-validation')) {
@@ -317,6 +317,7 @@ function validateAddTaskForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
+        addTask();
         showNotification('notification', './board.html');
     }
 }
@@ -403,4 +404,47 @@ function filterContactListByName(nameQuery) {
         return false;
     });
     return results;
+}
+
+function addTask() {
+    let newTask = {
+        title: document.getElementById('title-input').value,
+        description: document.getElementById('description-input').value,
+        assignedTo: getAssignedToArrayFromForm(),
+        priority: getPriorityFromForm(),
+        dueDate: document.getElementById('due-date-input').value,
+        category: document.getElementById('category-input').value,
+        subtasks: getSubtasksFromForm()
+    }
+    taskList.push(newTask);
+}
+
+function getSubtasksFromForm() {
+    let subtasksArray = [];
+    const inputs = document.getElementById('subtasks-list').querySelectorAll('input');
+    for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        subtasksArray.push(input.value);
+    }
+    return subtasksArray;
+}
+
+function getPriorityFromForm() {
+    const prioInputs = document.getElementById('prio-inputs').querySelectorAll('input');
+    for (let i = 0; i < prioInputs.length; i++) {
+        const prioInput = prioInputs[i];
+        if (prioInput.checked) {
+            return prioInput.value;
+        }
+    }
+}
+
+function getAssignedToArrayFromForm() {
+    let assignedToArray = [];
+    const selectedContactElements = document.getElementById('assigned-to-options').querySelectorAll('.selected');
+    for (let i = 0; i < selectedContactElements.length; i++) {
+        const element = selectedContactElements[i];
+        assignedToArray.push(getContactById(element.value));
+    }
+    return assignedToArray;
 }
