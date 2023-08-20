@@ -22,7 +22,7 @@ function verifyUserStatus() {
         status = JSON.parse(sessionStorage.getItem('loggedIn'));
     }
     loggedIn = status;
-    if (!window.location.href.endsWith('login.html') && !loggedIn) {
+    if (!window.location.href.endsWith('login.html') && !window.location.href.endsWith('forgotpassword.html') && !window.location.href.endsWith('resetpassword.html') && !loggedIn) {
         window.location.href = './login.html';
     }
 }
