@@ -223,12 +223,49 @@ function updateSubtask(index) {
 }
 
 function toggleContactSelection(event) {
-    event.currentTarget.classList.toggle('selected');
-    if (event.currentTarget.classList.contains('selected')) {
-        event.currentTarget.querySelector('img').src = './assets/img/checkbox-checked-white.png';
+    const listItem = event.currentTarget;
+    listItem.classList.toggle('selected');
+    const selectedContactsEl = document.getElementById('selected-contacts');
+    if (listItem.classList.contains('selected')) {
+        listItem.querySelector('img').src = './assets/img/checkbox-checked-white.png';
+        selectedContactsEl.innerHTML += renderContactBubbleHtml(getContactById(listItem.value));
     } else {
-        event.currentTarget.querySelector('img').src = './assets/img/checkbox-unchecked.svg';
+        listItem.querySelector('img').src = './assets/img/checkbox-unchecked.svg';
+        selectedContactsEl.getElementsByClassName('contact-bubble-' + listItem.value)[0].remove();
     }
+}
+
+function renderContactBubbleHtml(contact) {
+    return /*html*/`<svg
+    width="42"
+    height="42"
+    viewBox="0 0 42 42"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="contact-bubble-${contact.id}"
+  >
+    <circle
+      cx="21"
+      cy="21"
+      r="20"
+      fill="${contact.color}"
+      stroke="white"
+      stroke-width="2"
+    />
+    <text
+      x="21"
+      y="21"
+      alignment-baseline="central"
+      text-anchor="middle"
+      fill="white"
+    >
+    ${contact.initials}
+    </text>
+  </svg>`
+}
+
+function getContactById(id) {
+    return contactList.find((contact) => contact.id === id);
 }
 
 function validateAddTaskForm(e) {
@@ -315,35 +352,12 @@ function renderAssignedToContactList(contacts) {
 }
 
 function renderAssignedToContactListItemHtml(contact) {
-    return /*html*/`<li class="assign-to-li" value="${contact.id}">
-                    <svg
-                      width="42"
-                      height="42"
-                      viewBox="0 0 42 42"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        cx="21"
-                        cy="21"
-                        r="20"
-                        fill="#00BEE8"
-                        stroke="white"
-                        stroke-width="2"
-                      />
-                      <text
-                        x="21"
-                        y="21"
-                        alignment-baseline="central"
-                        text-anchor="middle"
-                        fill="white"
-                      >
-                      ${contact.initials}
-                      </text>
-                    </svg>
-                    <span class="assign-to-li-name">${contact.name}</span>
-                    <img src="./assets/img/checkbox-unchecked.svg" />
-                  </li>`
+    let html = '';
+    html = /*html*/`<li class="assign-to-li" value="${contact.id}">`;
+    html += renderContactBubbleHtml(contact);
+    html += /*html*/`<span class="assign-to-li-name">${contact.name}</span>
+        <img src="./assets/img/checkbox-unchecked.svg" /></li>`
+    return html;
 }
 
 function filterAssignedToContacts() {
@@ -363,5 +377,5 @@ function filterAssignedToContacts() {
             return false;
         });
         renderAssignedToContactList(results);
-    }   
+    }
 }
