@@ -22,7 +22,7 @@ function validateSignUpForm(e) {
     }
     e.preventDefault();
     if (!formIsValid) {
-        form.classList.toggle('is-validated');
+        form.classList.add('is-validated');
     } else {
         showSignUpNotification('notification', 'notification-ref');
     }

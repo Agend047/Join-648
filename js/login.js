@@ -24,7 +24,7 @@ function validateLoginForm(e) {
     }
     if (!formIsValid) {
         e.preventDefault();
-        form.classList.toggle('is-validated');
+        form.classList.add('is-validated');
     }
 }
 

@@ -21,7 +21,7 @@ function validateResetPasswordForm(e) {
     }
     e.preventDefault();
     if (!formIsValid) {
-        form.classList.toggle('is-validated');
+        form.classList.add('is-validated');
     } else { showNotification('notification', "./login.html"); }
 }
 
