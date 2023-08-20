@@ -406,7 +406,7 @@ function filterContactListByName(nameQuery) {
     return results;
 }
 
-function addTask() {
+async function addTask() {
     let newTask = {
         title: document.getElementById('title-input').value,
         description: document.getElementById('description-input').value,
@@ -417,6 +417,7 @@ function addTask() {
         subtasks: getSubtasksFromForm()
     }
     taskList.push(newTask);
+    await setItemInBackend('taskList', JSON.stringify(taskList));
 }
 
 function getSubtasksFromForm() {

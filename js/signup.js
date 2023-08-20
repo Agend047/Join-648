@@ -5,7 +5,7 @@ function init() {
     initPolicyCheckbox(); //MUST be excecuted after initCheckboxes!
 }
 
-function validateSignUpForm(e) {
+async function validateSignUpForm(e) {
     const form = e.target;
     let formIsValid = true;
     const formElements = form.querySelectorAll('input, textarea, select');
@@ -24,8 +24,19 @@ function validateSignUpForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
+        await addUser();
         showSignUpNotification('notification', 'notification-ref');
     }
+}
+
+async function addUser() {
+    let newUser = {
+        name: document.getElementById('name-input').value,
+        email: document.getElementById('email-input').value,
+        password: document.getElementById('password-input').value //ja, wir wissen, dass man das in der Praxis nicht so macht =)
+    }
+    userList.push(newUser);
+    await setItemInBackend('userList', JSON.stringify(userList));
 }
 
 function showSignUpNotification(elementId, refElementId) {

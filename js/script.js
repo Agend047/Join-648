@@ -9,7 +9,19 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 let contactList;
 let taskList = [];
-let userList;
+let userList = [];
+
+async function getDataFromBackend() {
+    taskList = await getItemFromBackend('taskList');
+    userList =  await getItemFromBackend('userList');
+    contactList = await getItemFromBackend('contactList');
+}
+
+async function initForAllPages() {
+    await getDataFromBackend();
+}
+
+initForAllPages();
 // = [
 //     {
 //         startingLetter: 'A',
