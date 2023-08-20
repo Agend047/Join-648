@@ -10,6 +10,15 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 let contactList;
 let taskList = [];
 let userList = [];
+let loggedIn;
+
+function verifyUserStatus() {
+    loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || JSON.parse(sessionStorage.getItem('loggedIn'));
+    if (!window.location.href.endsWith('login.html') && !loggedIn) {
+        window.location.href = './login.html';
+    }
+}
+
 
 async function getDataFromBackend() {
     taskList = await getItemFromBackend('taskList');
@@ -18,6 +27,7 @@ async function getDataFromBackend() {
 }
 
 async function initForAllPages() {
+    verifyUserStatus();
     await getDataFromBackend();
 }
 

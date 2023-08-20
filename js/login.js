@@ -28,9 +28,17 @@ function validateLoginForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        // proceedLogin();
-        // window.location.href = './summary.html';
+        proceedLogin();
     }
+}
+
+function proceedLogin() {
+    if (document.getElementById('remember-me').classList.contains('checked')) {
+        localStorage.setItem('loggedIn', JSON.stringify(true));
+    } else {
+        sessionStorage.setItem('loggedIn', JSON.stringify(true));
+    }
+    window.location.href = './summary.html';
 }
 
 function validateLoginEmailInput(formElement) {
