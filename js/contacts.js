@@ -68,7 +68,7 @@ function openContact(i) {
     stage.innerHTML = '';
     stage.innerHTML += /*html*/`
         <span class="Stage_head d-flex align-items-center">
-            <div id="initial_ball_big" style="background-color: ${contact.color}" class="d-flex">${contact.initials}</div>
+            <div id="initial_ball_big" class="big_ball" style="background-color: ${contact.color}" class="d-flex">${contact.initials}</div>
             <div id="stage_head_right">
                 <p id="contact_name">${contact.name}</p>
                 <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
@@ -284,4 +284,8 @@ function isNumberKey(evt) {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; }
 
     return true;
+}
+
+function openMobCombiMenu() {
+
 }

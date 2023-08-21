@@ -31,7 +31,6 @@
     cursor: pointer;
 }
 
-
 .letter_div {
     width: 90%;
     padding: 10px 36px 0px 32px;
@@ -132,9 +131,10 @@
     background-color: #29ABE2;
 }
 
-#initial_ball_big {
-    min-width: 100px;
-    min-height: 100px;
+.big_ball {
+    display: flex;
+    min-width: 80px;
+    min-height: 80px;
     border-radius: 70px;
     justify-content: center;
     align-items: center;
@@ -247,16 +247,14 @@
         top: 40px;
     }
 
-    #initial_ball_big {
+    .big_ball {
         margin-top: 55px;
     }
 
     #c_stage_mobCombi_btn {
         display: block;
     }
-
 }
-
 
 
 /*Add & edit Contacts */
@@ -321,6 +319,8 @@
 }
 
 
+/* Add/edit Contacts */
+
 .Contact_proccess_div {
     z-index: 11;
     display: none;
@@ -336,6 +336,7 @@
 .Underscore_blue {
     height: 2px;
     width: 90px;
+    margin-top: 10px;
     background-color: #29ABE2;
 }
 
@@ -349,12 +350,13 @@
 #addC_sider {
     background-color: #2A3647;
     color: white;
+    text-align: left;
     width: 40vw;
     height: 100%;
     margin: 0;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
-    padding: 40px 10px 10px 10px;
+    padding: 100px 10px 10px 24px;
 }
 
 #addC_sider img {
@@ -362,7 +364,9 @@
     height: 55px;
 }
 
-#addC_sider h1 {
+#addC_sider h1,
+#addC_sider p {
+    text-align: left;
     margin: 0;
 }
 

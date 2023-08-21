@@ -19,7 +19,7 @@
 
     <div class="d-flex">
         <main class="Main_container d-flex flex-direction-col">
-            <button class="Primary_contacts_btn btn-primary d-flex" onclick="startAddContact()">
+            <button class="Primary_contacts_btn btn btn-primary d-flex" onclick="startAddContact()">
                 <t>Add new contact</t>
                 <img src="assets/img/contacts_newContact_icon.png" alt="+">
             </button>
@@ -74,7 +74,7 @@
                     <p id="contact_phone">+4922222222</p>
                 </span>-->
             </article>
-            <button id="c_stage_mobCombi_btn" class="Primary_contacts_btn btn-primary d-flex"
+            <button id="c_stage_mobCombi_btn" class="Primary_contacts_btn btn-primary btn d-flex"
                 onclick="openMobCombiMenu()">
                 <img src="assets/img/contacts_mobCombi_icon.png" alt=":">
             </button>
@@ -95,18 +95,17 @@
         </div>
     </div>
 
-    <div id="addContact_div" class="Contact_proccess_div d-flex  align-items-center">
+    <div id="addContact_div" class="Contact_proccess_div d-flex align-items-center">
         <button class="Close_btn" onclick="closeContactProcess('addContact_div')">
             <img src="assets/img/cancel_icon_black.png" alt="X">
         </button>
         <figure id="addC_sider">
             <img src="assets/img/join_logo_white.png" alt="">
-            <span class="Contacts_change_text">
-                <h1>Add Contact</h1>
-                <p>Tasks are better with a team!</p>
-            </span>
+            <h1>Add Contact</h1>
+            <p>Tasks are better with a team!</p>
             <div class="Underscore_blue"></div>
         </figure>
+        <div id="addit_svg" class="big_ball" style="background-color:#D1D1D1" class="d-flex"></div>
         <form action="#" onsubmit="createContact()" class="form">
             <div class="input">
                 <input required type="text" placeholder="Firstname Surname" id="name-input" pattern="^\S+\s\S+$" />
