@@ -22,7 +22,12 @@ function verifyUserStatus() {
         status = JSON.parse(sessionStorage.getItem('loggedIn'));
     }
     loggedIn = status;
-    if (!window.location.href.endsWith('login.html') && !window.location.href.endsWith('forgotpassword.html') && !window.location.href.endsWith('resetpassword.html') && !window.location.href.endsWith('signup.html') && !loggedIn) {
+    if (
+        !window.location.href.endsWith('login.html') &&
+        !window.location.href.endsWith('forgotpassword.html') &&
+        !window.location.href.endsWith('resetpassword.html') &&
+        !window.location.href.endsWith('signup.html') &&
+        !loggedIn) {
         window.location.href = './login.html';
     }
 }
@@ -30,7 +35,7 @@ function verifyUserStatus() {
 
 async function getDataFromBackend() {
     taskList = await getItemFromBackend('taskList');
-    userList =  await getItemFromBackend('userList');
+    userList = await getItemFromBackend('userList');
     contactList = await getItemFromBackend('contactList');
 }
 
