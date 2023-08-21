@@ -5,7 +5,8 @@ let subtasks = [];
 async function initAddTaskPage() {
     initSubtaskInput();
     initClearBtn();
-    initForm();
+    // initForm();
+    document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
     await getContacts();
     renderAssignedToContactList(contactList);
     initSelectInputs();

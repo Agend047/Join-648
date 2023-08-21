@@ -13,6 +13,17 @@
   </head>
 
   <body onload="initTemplates(), initAddTaskPage()">
+    <dialog id="add-contact-overlay">
+      <form method="dialog">
+        <button type="submit">
+          <img
+            class="close-icn"
+            src="./assets/img/close-white.png"
+            alt="close dialog"
+          />
+        </button>
+      </form>
+    </dialog>
     <div id="backdrop" class="backdrop d-none"></div>
     <div
       id="desktop-template"
@@ -76,7 +87,10 @@
                   id="assigned-to-options"
                   class="select-options assigned-to-options"
                 ></ul>
-                <button class="btn btn-primary btn-text-icon">
+                <button
+                  id="add-contact-btn"
+                  class="btn btn-primary btn-text-icon"
+                >
                   <span>Add new contact</span
                   ><img src="./assets/img/contacts_newContact_icon.png" />
                 </button>
