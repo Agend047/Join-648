@@ -5,7 +5,12 @@ function init() {
     initForm();
     initCheckboxes();
     initBackNavigator();
+    initGuestLoginBtn();
     getStoredUserData();
+}
+
+function initGuestLoginBtn() {
+    document.getElementById('guest-login-btn').addEventListener('click', () => sessionStorage.setItem('loggedIn', 'true'));
 }
 
 function getStoredUserData() {
