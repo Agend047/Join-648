@@ -107,18 +107,23 @@ window.onresize = function () {
  * @param {string} toUnloadID - The ID of that html-template, that has to be unloaded.
  */
 async function getMatchingTemplate(toLoadID, toUnloadID) {
-    let includeElement = document.getElementById(toLoadID);
-    const element = includeElement;
-    file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
-    let resp = await fetch(file);
-    if (resp.ok) {
-        element.innerHTML = await resp.text();
-    } else {
-        element.innerHTML = 'Page not found';
+    try {
+        let includeElement = document.getElementById(toLoadID);
+
+        const element = includeElement;
+        file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = 'Page not found';
+        }
+        unloadTemplate(toUnloadID)
+        showInitialsHeader(userInitials)
+        markCorrectMenuPoint()
+    } catch {
+        return
     }
-    unloadTemplate(toUnloadID)
-    showInitialsHeader(userInitials)
-    markCorrectMenuPoint()
 }
 
 /**
