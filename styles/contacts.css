@@ -349,7 +349,7 @@
     max-width: 422px;
 }
 
-#addC_sider {
+#cProcess_sider {
     background-color: #2A3647;
     color: white;
     text-align: left;
@@ -361,13 +361,13 @@
     padding: 100px 10px 10px 24px;
 }
 
-#addC_sider img {
+#cProcess_sider img {
     width: 45px;
     height: 55px;
 }
 
-#addC_sider h1,
-#addC_sider p {
+#cProcess_sider h1,
+#cProcess_sider p {
     text-align: left;
     margin: 0;
 }
@@ -401,7 +401,7 @@
         border-radius: 40px;
     }
 
-    #addC_sider {
+    #cProcess_sider {
         display: flex;
         width: 100vw;
         height: 100%;
@@ -413,7 +413,7 @@
 
     }
 
-    #addC_logo {
+    #cProcess_logo {
         display: none;
     }
 

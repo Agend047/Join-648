@@ -35,7 +35,6 @@ async function showContacts() {
     }
 }
 
-
 /**sets shader */
 function activateShader() {
     let shader = document.getElementById('shader_div');
@@ -53,7 +52,12 @@ function deactivateShader() {
  */
 function startAddContact() {
     activateShader()
-    let workDiv = document.getElementById('addContact_div');
+    showWorkDiv()
+}
+
+/**Opening the process div, to edit or add a contact */
+function showWorkDiv() {
+    let workDiv = document.getElementById('contactProcess_div');
     workDiv.style.display = 'flex';
 }
 
@@ -92,7 +96,7 @@ function openContact(i) {
         </span>
     `
     if (loaded == 'mobile') {
-        showInMobile(stage)
+        showInMobile()
     }
 }
 
@@ -107,18 +111,19 @@ function markContact(i) {
     choosen.classList.add('Contact_div_choosen');
 }
 
+/**Opening a contact in Stage as overlay.*/
 function showInMobile() {
     let stage = document.getElementById('contacts_Display_big');
     stage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
     stage.style.display = 'flex';
-
 };
 
-
+/**Closes ostage Overlay */
 function closeContactStage() {
     let stage = document.getElementById('contacts_Display_big');
     stage.style.display = 'none';
 }
+
 
 /**
  * Opens window to edit a contact
@@ -126,6 +131,24 @@ function closeContactStage() {
  */
 function editContact(i) {
     let contact = contactList[i]
+    prepareContactProcessDiv(contact)
+    showWorkDiv()
+}
+
+/**Writing Contact Data into fields, getting ready to edit the contact. */
+function prepareContactProcessDiv(contact) {
+    let processH1 = document.getElementById('cProcess_h1');
+    processH1.innerHTML = /*html*/`Edit contact`;
+
+    let processP = document.getElementById('cProcess_p');
+    processP.style.display = 'none';
+
+    let nameField = document.getElementById('name-input');
+    let emailField = document.getElementById('email-input');
+    let phoneField = document.getElementById('phone-input');
+    nameField.value = contact.name;
+    emailField.value = contact.e_mail;
+    phoneField.value = contact.phone;
 }
 
 /**Showing an alert over a shader, before final deleting. */
@@ -202,7 +225,6 @@ function cancleAddContact(wichDiv) {
  * Creates new contact for contactList
  */
 async function createContact() {
-
     let newContact = {
         id: await getID(),
         startingLetter: getStartingLetter(document.getElementById('name-input').value),
@@ -214,7 +236,7 @@ async function createContact() {
     }
     contactList.push(newContact)
     saveContacts()
-    cancleAddContact('addContact_div')
+    cancleAddContact('contactProcess_div')
 }
 
 
