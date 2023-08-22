@@ -51,6 +51,7 @@ function deactivateShader() {
  * Opens Div to add new Contact
  */
 function startAddContact() {
+    clearInputFields()
     activateShader()
     showWorkDiv()
 }
@@ -72,7 +73,7 @@ function openContact(i) {
     stage.innerHTML = '';
     stage.innerHTML += /*html*/`
         <span class="Stage_head d-flex align-items-center">
-            <div id="initial_ball_big" class="big_ball" style="background-color: ${contact.color}" class="d-flex">${contact.initials}</div>
+            <div id="initial_ball_big" class="big_ball d-flex" style="background-color: ${contact.color}">${contact.initials}</div>
             <div id="stage_head_right">
                 <p id="contact_name">${contact.name}</p>
                 <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
@@ -131,12 +132,13 @@ function closeContactStage() {
  */
 function editContact(i) {
     let contact = contactList[i]
-    prepareContactProcessDiv(contact)
+    prepareContactProcessDiv(contact, i)
+    activateShader()
     showWorkDiv()
 }
 
 /**Writing Contact Data into fields, getting ready to edit the contact. */
-function prepareContactProcessDiv(contact) {
+function prepareContactProcessDiv(contact, i) {
     let processH1 = document.getElementById('cProcess_h1');
     processH1.innerHTML = /*html*/`Edit contact`;
 
@@ -146,10 +148,35 @@ function prepareContactProcessDiv(contact) {
     let nameField = document.getElementById('name-input');
     let emailField = document.getElementById('email-input');
     let phoneField = document.getElementById('phone-input');
+
     nameField.value = contact.name;
     emailField.value = contact.e_mail;
     phoneField.value = contact.phone;
+
+    let placeholdIMG = document.getElementById('cProcess_img');
+    placeholdIMG.style.display = 'none';
+
+    let contactBal = document.getElementById('cProcess_ball');
+    contactBal.style.backgroundColor = contact.color;
+    contactBal.innerHTML = contact.initials;
+
+    let form = document.getElementById('mainForm');
+    form.onsubmit = function () {
+        finalEdit(i);
+    };
 }
+
+/**Here the old contact gets overwritten */
+function finalEdit(i) { //EDIT ALL THOSE FUNCTION NAMES! ITS CONFUSING! AND TEST THIS
+    let contact = contactList[i]
+
+    contact.startingLetter = getStartingLetter(document.getElementById('name-input').value);
+    contact.name = document.getElementById('name-input').value;
+    contact.e_mail = document.getElementById('email-input').value;
+    contact.phone = document.getElementById('phone-input').value;
+    contact.initials = getInitials();
+}
+
 
 /**Showing an alert over a shader, before final deleting. */
 function startDeleteProcess(i) {
@@ -209,7 +236,7 @@ function closeContactProcess(wichDiv) {
  * Deletes input and then calls a function to close the open windows.
  * @param {String} wichDiv -  ID of the div, that has to be closed.
  */
-function cancleAddContact(wichDiv) {
+function clearInputFields() {
     let nameInput = document.getElementById('name-input');
     let emailInput = document.getElementById('email-input');
     let phoneInput = document.getElementById('phone-input');
@@ -217,8 +244,6 @@ function cancleAddContact(wichDiv) {
     nameInput.value = '';
     emailInput.value = '';
     phoneInput.value = '';
-
-    closeContactProcess(wichDiv)
 }
 
 /**
@@ -236,7 +261,8 @@ async function createContact() {
     }
     contactList.push(newContact)
     saveContacts()
-    cancleAddContact('contactProcess_div')
+    clearInputFields()
+    closeContactProcess('contactProcess_div')
 }
 
 

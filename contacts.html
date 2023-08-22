@@ -105,10 +105,10 @@
             <p id="cProcess_p">Tasks are better with a team!</p>
             <div class="Underscore_blue"></div>
         </figure>
-        <div id="addit_svg" class="big_ball" style="background-color:#D1D1D1" class="d-flex">
-            <img src="assets/img/contacts_emptyC_icon.png" alt="">
+        <div id="cProcess_ball" class="big_ball d-flex" style="background-color:#D1D1D1" class="d-flex">
+            <img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">
         </div>
-        <form action="#" onsubmit="createContact()" class="form">
+        <form id="mainForm" action="#" onsubmit="createContact()" class="form">
             <div class="input">
                 <input required type="text" placeholder="Firstname Surname" id="name-input" pattern="^\S+\s\S+$" />
                 <img src="./assets/img/contacts_AddName_icon.png" class="input-icon" alt="" />
@@ -123,7 +123,7 @@
                 <img src="./assets/img/contacts_AddPhone_icon.png" class="input-icon" alt="" />
             </div>
             <div class="form_btn_div d-flex align-items-center">
-                <button class="btn btn-secondary Cancel_btn" onclick="cancleAddContact('contactProcess_div')">Cancel
+                <button class="btn btn-secondary Cancel_btn" onclick="closeContactProcess('contactProcess_div')">Cancel
                     <img src=" assets/img/cancel_icon_black.png" alt="">
                 </button>
                 <button id="contacts_form_submit_btn" class="btn btn-primary align-items-center d-flex"

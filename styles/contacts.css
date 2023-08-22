@@ -372,7 +372,7 @@
     margin: 0;
 }
 
-#addit_svg {
+#cProcess_ball {
     width: 100px;
     height: 100px;
     margin: 8px;
@@ -417,7 +417,7 @@
         display: none;
     }
 
-    #addit_svg {
+    #cProcess_ball {
         margin: 0;
         margin-top: -40px;
         width: 80px;
