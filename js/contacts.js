@@ -51,6 +51,7 @@ function deactivateShader() {
  * Opens Div to add new Contact
  */
 function startAddContact() {
+    prepareContactProcessDiv(false, false)
     clearInputFields()
     activateShader()
     showWorkDiv()
@@ -77,7 +78,7 @@ function openContact(i) {
             <div id="stage_head_right">
                 <p id="contact_name">${contact.name}</p>
                 <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
-                    <a href="#" onclick="editContact(${i})" id="edit_contact_btn" class="Contact_stage_btn">
+                    <a href="#" onclick="startEditProcess(${i})" id="edit_contact_btn" class="Contact_stage_btn">
                         <img src="assets/img/contacts_editContact_icon.png" alt="">
                                 Edit
                     </a>
@@ -130,44 +131,72 @@ function closeContactStage() {
  * Opens window to edit a contact
  * @param {Number} i - Index in contactList-JSON Array 
  */
-function editContact(i) {
+function startEditProcess(i) {
     let contact = contactList[i]
     prepareContactProcessDiv(contact, i)
     activateShader()
     showWorkDiv()
+    openContact(i)
 }
 
-/**Writing Contact Data into fields, getting ready to edit the contact. */
+/**
+ * Writing Contact Data into fields, getting ready to edit the contact, 
+ * or deleting them, preparing for adding a new contact
+
+ * @param {object} contact - an Element out of contactList. If a new contact has to be added, it will be false.
+ * @param {Number} i - Index of contact within contactList. If a new contact has to be added, it will be false.
+ */
 function prepareContactProcessDiv(contact, i) {
     let processH1 = document.getElementById('cProcess_h1');
-    processH1.innerHTML = /*html*/`Edit contact`;
-
     let processP = document.getElementById('cProcess_p');
-    processP.style.display = 'none';
-
     let nameField = document.getElementById('name-input');
     let emailField = document.getElementById('email-input');
     let phoneField = document.getElementById('phone-input');
-
-    nameField.value = contact.name;
-    emailField.value = contact.e_mail;
-    phoneField.value = contact.phone;
-
-    let placeholdIMG = document.getElementById('cProcess_img');
-    placeholdIMG.style.display = 'none';
-
     let contactBal = document.getElementById('cProcess_ball');
-    contactBal.style.backgroundColor = contact.color;
-    contactBal.innerHTML = contact.initials;
-
+    let submitBtn = document.getElementById('contacts_form_submit_btn');
     let form = document.getElementById('mainForm');
-    form.onsubmit = function () {
-        finalEdit(i);
-    };
+
+    if (contact) {
+        processH1.innerHTML = `Edit contact`;
+        processP.style.display = 'none';
+        nameField.value = contact.name;
+        emailField.value = contact.e_mail;
+        phoneField.value = contact.phone;
+        contactBal.style.backgroundColor = contact.color;
+        contactBal.innerHTML = contact.initials;
+        submitBtn.innerHTML = /*html*/`Edit Contact
+         <img src="assets/img/check.png" alt="">`
+        form.onsubmit = function () {
+            editContactProcess(i);
+        };
+    }
+    else {
+        processH1.innerHTML = `Add Contact`
+        processP.style.display = 'block';
+        nameField.value = '';
+        emailField.value = '';
+        phoneField.value = '';
+        contactBal.style.backgroundColor = '#D1D1D1';
+        contactBal.innerHTML = /*html*/`<img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">`;
+        submitBtn.innerHTML = /*html*/`Add Contact
+         <img src="assets/img/check.png" alt="">`
+        form.onsubmit = function () {
+            createContact();
+        };
+    }
+}
+
+
+/**Editing the contact, saving the list, cle */
+function editContactProcess(i) {
+    editContact(i)
+    saveContacts()
+    clearInputFields()
+    closeContactProcess('contactProcess_div')
 }
 
 /**Here the old contact gets overwritten */
-function finalEdit(i) { //EDIT ALL THOSE FUNCTION NAMES! ITS CONFUSING! AND TEST THIS
+function editContact(i) {
     let contact = contactList[i]
 
     contact.startingLetter = getStartingLetter(document.getElementById('name-input').value);
