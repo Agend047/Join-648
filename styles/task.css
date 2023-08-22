@@ -27,7 +27,7 @@ main {
   padding-inline: 2rem;
 }
 
-h1 {
+.main-header {
   text-align: start;
   position: sticky;
   top: var(--header-height);
@@ -53,13 +53,13 @@ form {
   form {
     max-width: min-content;
   }
-  
+
   .form-controls-all {
     display: flex;
     justify-content: space-between;
     gap: 3em;
   }
-  
+
   .vertical-separator {
     display: block;
   }
@@ -308,4 +308,104 @@ form .btn-create-task {
 
 footer {
   padding: unset;
+}
+
+dialog {
+  border: none;
+  padding: 0;
+  border-radius: 1em;
+}
+
+dialog h1,
+dialog p {
+  text-align: unset;
+}
+
+dialog h1 {
+  margin-block-start: 2em;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+dialog button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+dialog .user-icn {
+  display: block;
+  margin-block-start: -10%;
+  margin-inline: auto;
+  transform: translate(0, 50%);
+}
+
+dialog form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5em;
+  margin: 0;
+}
+
+dialog form .close-icn {
+  position: absolute;
+  top: 1em;
+  right: 0.5em;
+}
+
+dialog form .btn-text-icon {
+  width: fit-content;
+  margin-block: 1em 2em;
+  margin-inline: auto;
+}
+
+.form-header {
+  padding-inline: 1rem;
+  background-color: var(--primary-bg-color);
+  color: white;
+  width: 100%;
+}
+
+.form-main {
+  margin-block-start: calc(60px + 1em);
+  padding-inline: 1rem;
+}
+
+dialog form h1 {
+  background-color: inherit;
+}
+
+.desktop {
+  display: none;
+}
+
+@media (min-width: 820px) {
+  dialog {
+    max-width: unset;
+  }
+
+  dialog form {
+    flex-direction: row;
+    max-width: unset;
+  }
+
+  dialog .form-header {
+    min-height: 500px;
+    padding-inline: 2em;
+  }
+
+  dialog .form-main {
+    margin: 0;
+  }
+
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
 }
