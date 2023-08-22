@@ -13,17 +13,68 @@
   </head>
 
   <body onload="initTemplates(), initAddTaskPage()">
-    <!-- <dialog id="add-contact-overlay">
+    <dialog id="add-contact-overlay">
       <form method="dialog">
-        <button type="submit">
-          <img
-            class="close-icn"
-            src="./assets/img/close-white.png"
-            alt="close dialog"
-          />
+        <button type="button" class="close-icn mobile">
+          <img src="./assets/img/close-white.png" alt="close dialog" />
         </button>
+        <button type="button" class="close-icn desktop">
+          <img src="./assets/img/close-btn.svg" alt="close dialog" />
+        </button>
+        <div class="form-header">
+          <h1>Add contact</h1>
+          <p>Tasks are better with a team!</p>
+          <div class="horizontal-separator"></div>
+        </div>
+        <img src="./assets/img/add-contact-icn.png" class="user-icn" />
+        <div class="form-main">
+          <div class="form-control">
+            <div class="input">
+              <input required type="text" placeholder="Name" id="name-input" />
+              <img src="./assets/img/contacts_AddName_icon.png" />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="name-input-error"></div>
+            </div>
+          </div>
+          <div class="form-control">
+            <div class="input">
+              <input
+                required
+                type="email"
+                placeholder="Email"
+                id="email-input"
+              />
+              <img src="./assets/img/contacts_AddMail_icon.png" />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="email-input-error"></div>
+            </div>
+          </div>
+          <div class="form-control">
+            <div class="input">
+              <input
+                required
+                type="number"
+                placeholder="Phone"
+                id="phone-input"
+              />
+              <img src="./assets/img/contacts_AddPhone_icon.png" />
+            </div>
+            <div class="error-container">
+              <div class="error-message" id="phone-input-error"></div>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary btn-create-task btn-text-icon"
+            type="submit"
+          >
+            <span>Create contact</span
+            ><img src="./assets/img/check.png" alt="create contact" />
+          </button>
+        </div>
       </form>
-    </dialog> -->
+    </dialog>
     <div id="backdrop" class="backdrop d-none"></div>
     <div
       id="desktop-template"
@@ -31,7 +82,7 @@
     ></div>
     <main>
       <form id="addtask-form">
-        <h1>Add task</h1>
+        <h1 class="main-header">Add task</h1>
         <div class="form-controls-all">
           <div class="form-controls-section">
             <div class="form-control">
@@ -90,6 +141,7 @@
                 <button
                   id="add-contact-btn"
                   class="btn btn-primary btn-text-icon"
+                  type="button"
                 >
                   <span>Add new contact</span
                   ><img src="./assets/img/contacts_newContact_icon.png" />
