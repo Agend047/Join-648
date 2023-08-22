@@ -4,6 +4,54 @@ function openCard() {
   largeCard.innerHTML = generateLargeCardHTML();
 }
 
+function initBoardPage() {
+  showSmallCards("toDoDesktop");
+  showSmallCards("toDoMobile");
+}
+
+async function showSmallCards(ID) {
+  let toDoCards = document.getElementById(ID);
+  toDoCards.innerHTML = "";
+  taskList = await getItemFromBackend("taskList");
+  for (let i = 0; i < taskList.length; i++) {
+    const task = taskList[i];
+    toDoCards.innerHTML += generateSmallCardHTML(task);
+  }
+}
+
+function generateSmallCardHTML(task) {
+  return /*html*/ `
+              <div class="cardSmall" onclick="openCard()">
+                <div class="category">
+                  <div id="categoryLabel">${task.category}</div>
+                </div>
+                <div>
+                  <h1 id="title">${task.title}</h1>
+                  <p id="description">${task.description}</p>
+                </div>
+                <div class="progress-section">
+                  <div id="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="75"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                  <div>0/2 Subtasks</div>
+                </div>
+                <div class="card-footer">
+                  <div class="profileBadges" id="profileBadges">
+                  </div>
+                  <div class="prioIcon">
+                    <img id="prioIcon" src="./assets/img/prio-medium.svg" />
+                  </div>
+                </div>
+              </div>
+            `;
+}
+
 function generateLargeCardHTML() {
   return /*html*/ `
     <div id="popUp" class="popUp">
@@ -20,7 +68,7 @@ function generateLargeCardHTML() {
           </div>
 
           <div>
-            <h1 id="title">Kochwelt Page & Recipe Recommender</h1>
+            <h1 id="title">${taskList.title}</h1>
             <p id="description">
               Build start page with recipe recommendation.
             </p>
@@ -67,13 +115,13 @@ function generateLargeCardHTML() {
                   <div class="subsection">
                     <div class="subtask">
                       <img
-                        class="icon-checkbox"
+                        class="icon-checkbox checkbox"
                         src="./assets/img/checkbox-checked.svg"
                       /><span>Implement Recipe Recommendation</span>
                     </div>
                     <div class="subtask">
                       <img
-                        class="icon-checkbox"
+                        class="icon-checkbox checkbox"
                         src="./assets/img/checkbox-unchecked.svg"
                       /><span>Start Page Layout</span>
                     </div>
