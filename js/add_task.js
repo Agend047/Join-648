@@ -6,10 +6,23 @@ async function initAddTaskPage() {
     initSubtaskInput();
     initClearBtn();
     initForm();
+    initAddContactOverlayForm();
+    document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
     document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
     await getContacts();
     renderAssignedToContactList(contactList);
     initSelectInputs();
+}
+
+function initAddContactOverlayForm() {
+    const dialogEl = document.getElementById('add-contact-overlay');
+    const closeBtns = dialogEl.querySelectorAll('.close-icn');
+    for (let i = 0; i < closeBtns.length; i++) {
+        const closeBtn = closeBtns[i];
+        closeBtn.addEventListener('click', () => {
+            dialogEl.close();
+        })
+    }
 }
 
 async function getContacts() {
