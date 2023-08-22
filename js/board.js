@@ -4,22 +4,27 @@ function openCard() {
   largeCard.innerHTML = generateLargeCardHTML();
 }
 
-function initBoardPage() {
-  showSmallCards("toDoDesktop");
-  showSmallCards("toDoMobile");
+async function initBoardPage() {
+  await getTasks();
+  renderSmallCards("toDoDesktop");
+  renderSmallCards("toDoMobile");
+  renderAssignedBadges();
 }
 
-async function showSmallCards(ID) {
+async function getTasks() {
+  taskList = await getItemFromBackend("taskList");
+}
+
+function renderSmallCards(ID) {
   let toDoCards = document.getElementById(ID);
   toDoCards.innerHTML = "";
-  taskList = await getItemFromBackend("taskList");
   for (let i = 0; i < taskList.length; i++) {
     const task = taskList[i];
-    toDoCards.innerHTML += generateSmallCardHTML(task);
+    toDoCards.innerHTML += generateSmallCardHTML(task, i);
   }
 }
 
-function generateSmallCardHTML(task) {
+function generateSmallCardHTML(task, i) {
   return /*html*/ `
               <div class="cardSmall" onclick="openCard()">
                 <div class="category">
@@ -42,7 +47,7 @@ function generateSmallCardHTML(task) {
                   <div>0/2 Subtasks</div>
                 </div>
                 <div class="card-footer">
-                  <div class="profileBadges" id="profileBadges">
+                  <div class="profileBadges" id="profileBadges-${i}">
                   </div>
                   <div class="prioIcon">
                     <img id="prioIcon" src="./assets/img/prio-medium.svg" />
@@ -50,6 +55,51 @@ function generateSmallCardHTML(task) {
                 </div>
               </div>
             `;
+}
+
+function renderAssignedBadges() {
+  for (let i = 0; i < taskList.length; i++) {
+    const badge = document.getElementById(`profileBadges-${i}`);
+    const assignedContacts = taskList[i]["assignedTo"];
+
+    badge.innerHTML = "";
+
+    for (let j = 0; j < assignedContacts.length; j++) {
+      const assignedContact = assignedContacts[j];
+      badge.innerHTML += generateBadgeHTML(assignedContact);
+    }
+  }
+}
+
+function generateBadgeHTML(contact) {
+  return /*html*/ `
+  <svg
+    width="42"
+    height="42"
+    viewBox="0 0 42 42"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="contact-bubble-${contact.id}"
+  >
+    <circle
+      cx="21"
+      cy="21"
+      r="20"
+      fill="${contact.color}"
+      stroke="white"
+      stroke-width="2"
+    />
+    <text
+      x="21"
+      y="21"
+      alignment-baseline="central"
+      text-anchor="middle"
+      fill="white"
+    >
+    ${contact.initials}
+    </text>
+  </svg>
+  `;
 }
 
 function generateLargeCardHTML() {
@@ -68,7 +118,7 @@ function generateLargeCardHTML() {
           </div>
 
           <div>
-            <h1 id="title">${taskList.title}</h1>
+            <h1 id="title">${task.title}</h1>
             <p id="description">
               Build start page with recipe recommendation.
             </p>
