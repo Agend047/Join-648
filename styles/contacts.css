@@ -285,10 +285,11 @@
 .Close_btn {
     position: absolute;
     top: 16px;
-    right: 16px;
+    right: 24px;
     border-style: none;
     background-color: white;
     cursor: pointer;
+    padding: 0;
 }
 
 .Close_btn:hover img {
@@ -330,7 +331,8 @@
     position: fixed;
     top: 10vh;
     border-radius: 40px;
-    height: 60%;
+    width: 100vw;
+    height: 80%;
 }
 
 .Underscore_blue {
@@ -351,7 +353,7 @@
     background-color: #2A3647;
     color: white;
     text-align: left;
-    width: 40vw;
+    width: clamp(450px, 35vw 500px);
     height: 100%;
     margin: 0;
     border-top-left-radius: 40px;
@@ -368,6 +370,13 @@
 #addC_sider p {
     text-align: left;
     margin: 0;
+}
+
+#addit_svg {
+    width: 100px;
+    height: 100px;
+    margin: 8px;
+    margin-right: -72px;
 }
 
 #contacts_form_submit_btn {}
@@ -389,11 +398,38 @@
         left: 0;
         right: 0;
         bottom: 0;
+        border-radius: 40px;
     }
 
     #addC_sider {
-        top: 0;
-        left: 0;
-        right: 0;
+        display: flex;
+        width: 100vw;
+        height: 100%;
+        padding: 30px;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 40px;
+
+    }
+
+    #addC_logo {
+        display: none;
+    }
+
+    #addit_svg {
+        margin: 0;
+        margin-top: -40px;
+        width: 80px;
+    }
+
+    .Close_btn img {
+        content: url('/assets/img/close-white.png');
+        background-color: var(--secondary-bg-color);
+        margin-bottom: -10px;
+    }
+
+    .Close_btn:hover img {
+        content: url('/assets/img/close-white.png')
     }
 }
