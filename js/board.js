@@ -14,18 +14,34 @@ function renderSmallCards(ID) {
   for (let i = 0; i < taskList.length; i++) {
     const task = taskList[i];
     let totalSubtasks = getSubtasksCount(i);
-    toDoCards.innerHTML += generateSmallCardHTML(totalSubtasks, task, i);
+    const labelColor = assignLabelColor(task.category);
+    toDoCards.innerHTML += generateSmallCardHTML(
+      totalSubtasks,
+      task,
+      i,
+      labelColor
+    );
   }
   renderSubtasks();
   renderAssignedBadges();
   renderPrio();
 }
 
-function generateSmallCardHTML(totalSubtasks, task, i) {
+function assignLabelColor(category) {
+  if (category === "User Story") {
+    return "#0038ff"; // Blue color
+  } else if (category === "Technical Task") {
+    return "#1FD7C1"; // Turquoise color
+  }
+  // Default color Orange, if category doesn't match
+  return "#FF7A00";
+}
+
+function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
               <div class="cardSmall" onclick="openCard(${i})">
                 <div class="category">
-                  <div class="categoryLabel" id="categoryLabel">${task.category}</div>
+                  <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>
                 <div>
                   <h1 class="title" id="title-${i}">${task.title}</h1>
@@ -130,37 +146,26 @@ function generateLargeCardPrioHTML(task) {
   `;
 }
 
-function renderAssignedUserList() {
+function renderAssignedUserList(task) {
   const list = document.getElementById("assignedSection");
-  list.innerHTML = "";
+  let html = "";
 
-  for (let i = 0; i < taskList.length; i++) {
-    const users = taskList[i]["assignedTo"];
+  const users = task["assignedTo"];
 
-    for (let j = 0; j < users.length; j++) {
-      const assignedUser = users[j];
-      list.innerHTML += generateAssignedUserListItemHTML(assignedUser);
-    }
+  for (let i = 0; i < users.length; i++) {
+    const assignedUser = users[i];
+    html += generateAssignedUserListItemHTML(assignedUser);
   }
+  list.innerHTML = html;
 }
 
 function generateAssignedUserListItemHTML(contact) {
   let html = "";
-  html = `<div class="assigned-user"></div>`;
+  html = `<div class="assigned-user">`;
   html += generateBadgeHTML(contact);
-  html += `<span>${contact.name}<span>`;
+  html += `<span>${contact.name}<span></div>`;
   return html;
 }
-
-/*
-
-<div class="assigned-user">
-                      <img
-                        class="user-icon"
-                        src="./assets/img/profile-badge-am.png"
-                      /><span>Anton Mayer</span>
-                    </div>
-*/
 
 function renderSubtasks() {
   for (let i = 0; i < taskList.length; i++) {
@@ -203,7 +208,7 @@ function openCard(i) {
   document.body.style.overflow = "hidden";
   largeCard.innerHTML = generateLargeCardHTML(task, i);
   renderPrioLargeCard(task);
-  renderAssignedUserList();
+  renderAssignedUserList(task);
 }
 
 function generateLargeCardHTML(task, i) {

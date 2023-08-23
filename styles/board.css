@@ -228,7 +228,7 @@ input {
   }
 }
 
-@media (min-width: 950px) {
+@media (min-width: 1180px) {
   .board-heading {
     flex-direction: unset;
     justify-content: space-between;
@@ -353,7 +353,7 @@ input {
   display: flex;
   flex: 0 0 auto;
   width: 15.75rem; /* mobile */
-  /*width: 100%;   desktop */
+  min-width: 149px;
   height: auto;
   padding: 1rem;
   flex-direction: column;
@@ -392,7 +392,6 @@ input {
   align-items: flex-start;
   gap: 0.625rem;
   border-radius: 0.5rem;
-  background: #0038ff;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -486,7 +485,7 @@ input {
   height: 0.39581rem;
 }
 
-@media (min-width: 950px) {
+@media (min-width: 1180px) {
   .cardSmall {
     width: 100%;
     margin-right: 0;
@@ -644,7 +643,7 @@ td {
   gap: 1em;
 }
 
-img.user-icon {
+.assigned-user svg {
   width: 2.625rem;
   height: 2.625rem;
 }
