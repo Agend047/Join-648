@@ -315,16 +315,12 @@ a {
 }
 
 #header_menu_id {
-  position: absolute;
-  /* display: none; */
   top: 100px;
-  right: -200px;
   width: 150px;
   height: auto;
   background-color: #2a3647;
   color: #cdcdcd;
   border-radius: 15px 0px 15px 15px;
-  transition: 500ms;
   z-index: 50;
 }
 
@@ -332,6 +328,13 @@ a {
   padding: 8px;
   border-radius: 14px;
 }
+
+.float_in_menu {
+  position: absolute;
+  right: -200px;
+  transition: 500ms;
+}
+
 
 @media (max-width: 900px) {
   #desktop_sider {

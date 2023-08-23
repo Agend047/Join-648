@@ -79,9 +79,12 @@
                 <img src="assets/img/contacts_mobCombi_icon.png" alt=":">
             </button>
         </section>
+        <div id="mobile_contacts_menu" class="d-flex flex-direction-col float_in_menu">
+            <a href="#" class="mcm_pint" onclick="editContact()">Edit Contact</a>
+            <a href="#" class="mcm_pint" onclick="deleteContact()">Delete Contact</a>
+        </div>
+        <div id="BlockDiv" onclick="closeContactProcess('mobile_contacts_menu', 'shader_div')"></div>
     </div>
-
-    <div id="BlockDiv"></div>
     <div id="shader_div"></div>
 
     <div id="delete_question" class="align-items-center">

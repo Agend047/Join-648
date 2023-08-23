@@ -86,6 +86,8 @@
 #contacts_Display_big {
     margin-top: 70px;
     background-color: #F6F7F8;
+    display: block;
+    flex-direction: column;
 }
 
 #contacts_Display_big h1 {
@@ -319,7 +321,6 @@
     justify-content: space-around;
 }
 
-
 /* Add/edit Contacts */
 
 .Contact_proccess_div {
@@ -390,6 +391,10 @@
     content: url('/assets/img/cancel_icon_blue.png');
 }
 
+#mobile_contacts_menu {
+    display: none;
+}
+
 @media (max-width: 920px) {
 
     .Contact_proccess_div {
@@ -431,5 +436,10 @@
 
     .Close_btn:hover img {
         content: url('/assets/img/close-white.png')
+    }
+
+    #mobile_contacts_menu {
+        bottom: 120px;
+        height: 120px;
     }
 }

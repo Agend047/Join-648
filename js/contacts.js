@@ -42,9 +42,14 @@ function activateShader() {
 }
 
 /**disables shader */
-function deactivateShader() {
-    let shader = document.getElementById('shader_div');
-    shader.style.display = 'none';
+function deactivateShader(wichShader) {
+    if (wichShader) {
+        let shader = document.getElementById(wichShader)
+        shader.style.display = 'none';
+    } else {
+        let shader = document.getElementById('shader_div');
+        shader.style.display = 'none';
+    }
 }
 
 /**
@@ -97,9 +102,11 @@ function openContact(i) {
             <p>${contact.phone}</p>
         </span>
     `
+    let bigStage = document.getElementById('contacts_Display_big');
     if (loaded == 'mobile') {
-        showInMobile()
+        showArrow(bigStage)
     }
+    bigStage.style.display = 'flex';
 }
 
 /**Unmarks former marked contact, and marks the contact that was choosen. */
@@ -114,18 +121,20 @@ function markContact(i) {
 }
 
 /**Opening a contact in Stage as overlay.*/
-function showInMobile() {
-    let stage = document.getElementById('contacts_Display_big');
-    stage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
-    stage.style.display = 'flex';
+function showArrow(bigStage) {
+    bigStage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
 };
 
-/**Closes ostage Overlay */
+/**Closes ostage Overlay and removes back-Arrow Element to avoid infinite stacking */
 function closeContactStage() {
     let stage = document.getElementById('contacts_Display_big');
     stage.style.display = 'none';
-}
 
+    if (loaded == 'mobile') {
+        var arrow = document.querySelector('.Back_Arrow');
+        arrow.parentNode.removeChild(arrow);
+    }
+}
 
 /**
  * Opens window to edit a contact
@@ -255,8 +264,8 @@ function cleanupMess() {
  * Just closes divs, but doesnt delete Data
  * @param {String} wichDiv - ID of the div, that has to be closed.
  */
-function closeContactProcess(wichDiv) {
-    deactivateShader()
+function closeContactProcess(wichDiv, wichshader) {
+    deactivateShader(wichshader)
     let workDiv = document.getElementById(wichDiv);
     workDiv.style.display = 'none';
 }
@@ -359,10 +368,11 @@ function sortContacts() {
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; }
-
     return true;
 }
 
 function openMobCombiMenu() {
+    let menu = document.getElementById('mobile_contacts_menu');
+    menu.style.display = 'flex';
 
 }
