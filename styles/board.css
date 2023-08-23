@@ -448,7 +448,7 @@ input {
 }
 
 .progress-bar {
-  width: 50%; /*adjust with JS later according to progress*/
+  /* width: 50%; adjust with JS later according to progress*/
   height: 0.5rem;
   align-self: stretch;
   border-radius: 1rem;

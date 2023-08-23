@@ -14,7 +14,7 @@ let contact = {
   id: 1,
 };
 
-let task = {
+let taskList = {
   title: "title",
   description: "längerer Text",
   dueDate: "dd/mm/yyyy",
@@ -30,7 +30,12 @@ let task = {
       color: "#FF7A00",
     },
   ],
-  subtasks: ["subtask1", "subtask2"],
+  subtasks: [
+    {
+      text: "subtask1",
+      status: "done" / "todo",
+    },
+  ],
 };
 
 let task2 = {

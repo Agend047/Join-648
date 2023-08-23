@@ -22,11 +22,12 @@ function renderSmallCards(ID) {
   toDoCards.innerHTML = "";
   for (let i = 0; i < taskList.length; i++) {
     const task = taskList[i];
-    toDoCards.innerHTML += generateSmallCardHTML(task, i);
+    let totalSubtasks = getSubtasksCount(i);
+    toDoCards.innerHTML += generateSmallCardHTML(totalSubtasks, task, i);
   }
 }
 
-function generateSmallCardHTML(task, i) {
+function generateSmallCardHTML(totalSubtasks, task, i) {
   return /*html*/ `
               <div class="cardSmall" onclick="openCard()">
                 <div class="category">
@@ -46,7 +47,7 @@ function generateSmallCardHTML(task, i) {
                       aria-valuemax="100"
                     ></div>
                   </div>
-                  <div>0/2 Subtasks</div>
+                  <div>0/${totalSubtasks} Subtasks</div>
                 </div>
                 <div class="card-footer">
                   <div class="w-100 d-flex justify-content-space-btw align-items-center">
@@ -121,11 +122,35 @@ function renderSubtasks() {
   for (let i = 0; i < taskList.length; i++) {
     const subtask = document.getElementById(`progress-section-${i}`);
     const assignedSubtasks = taskList[i]["subtasks"];
-
-    if (assignedSubtasks.length === 0) {
-      subtask.style.display = "none";
-    }
+    hideSubtaskIfUnassigned(subtask, assignedSubtasks);
   }
+}
+
+function hideSubtaskIfUnassigned(subtask, assignedSubtasks) {
+  if (assignedSubtasks.length === 0) {
+    subtask.style.display = "none";
+  }
+}
+
+function getSubtasksCount(i) {
+  let totalSubtasks = taskList[i]["subtasks"].length;
+  return totalSubtasks;
+}
+
+function getSubtasksDone() {
+  const elementToCount = "done";
+  let subtasks = taskList[i]["subtasks"];
+  let subtasksDone = subtasks[i]["status"];
+  subtasksDone.filter((x) => x == elementToCount).length;
+  return subtasksDone;
+}
+
+function updateProgressBar(subtasksDone, totalSubtasks) {
+  getSubtasksDone();
+  let percent = subtasksDone / totalSubtasks;
+  percent = Math.round(percent * 100);
+
+  document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
 function generateLargeCardHTML() {
