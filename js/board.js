@@ -130,25 +130,37 @@ function generateLargeCardPrioHTML(task) {
   `;
 }
 
-/*
-function renderAssignedToContactList(contacts) {
-  const list = document.getElementById("assigned-to-options");
-  let html = "";
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
-    html += renderAssignedToContactListItemHtml(contact);
+function renderAssignedUserList() {
+  const list = document.getElementById("assignedSection");
+  list.innerHTML = "";
+
+  for (let i = 0; i < taskList.length; i++) {
+    const users = taskList[i]["assignedTo"];
+
+    for (let j = 0; j < users.length; j++) {
+      const assignedUser = users[j];
+      list.innerHTML += generateAssignedUserListItemHTML(assignedUser);
+    }
   }
-  list.innerHTML = html;
 }
 
-function renderAssignedToContactListItemHtml(contact) {
+function generateAssignedUserListItemHTML(contact) {
   let html = "";
-  html =  `<li class="assign-to-li" value="${contact.id}">`;
-  html += renderContactBubbleHtml(contact);
-  html +=  `<span class="assign-to-li-name">${contact.name}</span>
-        <img src="./assets/img/checkbox-unchecked.svg" /></li>`;
+  html = `<div class="assigned-user"></div>`;
+  html += generateBadgeHTML(contact);
+  html += `<span>${contact.name}<span>`;
   return html;
-}*/
+}
+
+/*
+
+<div class="assigned-user">
+                      <img
+                        class="user-icon"
+                        src="./assets/img/profile-badge-am.png"
+                      /><span>Anton Mayer</span>
+                    </div>
+*/
 
 function renderSubtasks() {
   for (let i = 0; i < taskList.length; i++) {
@@ -191,6 +203,7 @@ function openCard(i) {
   document.body.style.overflow = "hidden";
   largeCard.innerHTML = generateLargeCardHTML(task, i);
   renderPrioLargeCard(task);
+  renderAssignedUserList();
 }
 
 function generateLargeCardHTML(task, i) {
@@ -224,25 +237,7 @@ function generateLargeCardHTML(task, i) {
               <tr>
                 <td colspan="2">
                   <span>Assigned To:</span>
-                  <div class="subsection">
-                    <div class="assigned-user">
-                      <img
-                        class="user-icon"
-                        src="./assets/img/profile-badge-em.png"
-                      /><span>Emmanuel Mauer</span>
-                    </div>
-                    <div class="assigned-user">
-                      <img
-                        class="user-icon"
-                        src="./assets/img/profile-badge-mb.png"
-                      /><span>Marcel Bauer</span>
-                    </div>
-                    <div class="assigned-user">
-                      <img
-                        class="user-icon"
-                        src="./assets/img/profile-badge-am.png"
-                      /><span>Anton Mayer</span>
-                    </div>
+                  <div class="subsection" id="assignedSection">
                   </div>
                 </td>
               </tr>
