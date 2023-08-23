@@ -44,8 +44,8 @@
         <section id="contacts_Display_big">
             <span class="side_header d-flex align-items-center">
                 <h1>Contacts</h1>
-                <div class="Vertical_stroke Divider"></div>
-                <p>Better with a team</p>
+                <div class="Vertical_stroke Divider Hide_at_980"></div>
+                <p class="Hide_at_980">Better with a team</p>
                 <div class="Horizontal_stroke Divider"></div>
             </span>
 
@@ -98,43 +98,45 @@
         </div>
     </div>
 
-    <div id="contactProcess_div" class="Contact_proccess_div d-flex align-items-center">
-        <button class="Close_btn" onclick="closeContactProcess('contactProcess_div')">
-            <img src="assets/img/cancel_icon_black.png" alt="X">
-        </button>
-        <figure id="cProcess_sider">
-            <img id="cProcess_logo" src="assets/img/join_logo_white.png" alt="">
-            <h1 id="cProcess_h1"></h1>
-            <p id="cProcess_p">Tasks are better with a team!</p>
-            <div class="Underscore_blue"></div>
-        </figure>
-        <div id="cProcess_ball" class="big_ball d-flex" style="background-color:#D1D1D1" class="d-flex">
-            <img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">
+    <div id="overProcess_div">
+        <div id="contactProcess_div" class="Contact_proccess_div p-relative d-flex align-items-center">
+            <button class="Close_btn" onclick="closeContactProcess('overProcess_div')">
+                <img src="assets/img/cancel_icon_black.png" alt="X">
+            </button>
+            <figure id="cProcess_sider">
+                <img id="cProcess_logo" src="assets/img/join_logo_white.png" alt="">
+                <h1 id="cProcess_h1"></h1>
+                <p id="cProcess_p">Tasks are better with a team!</p>
+                <div class="Underscore_blue"></div>
+            </figure>
+            <div id="cProcess_ball" class="big_ball d-flex" style="background-color:#D1D1D1" class="d-flex">
+                <img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">
+            </div>
+            <form id="mainForm" action="#" onsubmit="createContact()" class="form">
+                <div class="input">
+                    <input required type="text" placeholder="Firstname Surname" id="name-input" pattern="^\S+\s\S+$" />
+                    <img src="./assets/img/contacts_AddName_icon.png" class="input-icon" alt="" />
+                </div>
+                <div class="input">
+                    <input required type="email" placeholder="Email" id="email-input" />
+                    <img src="./assets/img/contacts_AddMail_icon.png" class="input-icon" alt="" />
+                </div>
+                <div class="input">
+                    <input required type="text" placeholder="Phone Number" id="phone-input"
+                        onkeypress="return isNumberKey(event)" />
+                    <img src="./assets/img/contacts_AddPhone_icon.png" class="input-icon" alt="" />
+                </div>
+                <div class="form_btn_div d-flex align-items-center">
+                    <button id="contacts_form_cancel_btn" class="btn btn-secondary Cancel_btn" type="reset">Cancel
+                        <img src=" assets/img/cancel_icon_black.png" alt="">
+                    </button>
+                    <button id="contacts_form_submit_btn" class="btn btn-primary align-items-center d-flex"
+                        type="submit">Create contact
+                        <img src="assets/img/check.png" alt="">
+                    </button>
+                </div>
+            </form>
         </div>
-        <form id="mainForm" action="#" onsubmit="createContact()" class="form">
-            <div class="input">
-                <input required type="text" placeholder="Firstname Surname" id="name-input" pattern="^\S+\s\S+$" />
-                <img src="./assets/img/contacts_AddName_icon.png" class="input-icon" alt="" />
-            </div>
-            <div class="input">
-                <input required type="email" placeholder="Email" id="email-input" />
-                <img src="./assets/img/contacts_AddMail_icon.png" class="input-icon" alt="" />
-            </div>
-            <div class="input">
-                <input required type="text" placeholder="Phone Number" id="phone-input"
-                    onkeypress="return isNumberKey(event)" />
-                <img src="./assets/img/contacts_AddPhone_icon.png" class="input-icon" alt="" />
-            </div>
-            <div class="form_btn_div d-flex align-items-center">
-                <button id="contacts_form_cancel_btn" class="btn btn-secondary Cancel_btn" type="reset">Cancel
-                    <img src=" assets/img/cancel_icon_black.png" alt="">
-                </button>
-                <button id="contacts_form_submit_btn" class="btn btn-primary align-items-center d-flex"
-                    type="submit">Create contact
-                    <img src="assets/img/check.png" alt="">
-                </button>
-            </div>
-        </form>
     </div>
 </body>
 

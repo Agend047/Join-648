@@ -13,6 +13,7 @@ let userList = [];
 let loggedIn;
 let loginData;
 let activeUser;
+let hideSiderMenu;
 
 function verifyUserStatus() {
     let status = JSON.parse(localStorage.getItem('loggedIn'));
@@ -57,9 +58,11 @@ initForAllPages();
 // ]
 
 /**
- * Inits getting the Templates
+ *  Inits getting the Templates
+ * @param {boolean} bool - is only true, when Menu Links shall not be loaded into Sider.
  */
-function initTemplates() {
+function initTemplates(bool) {
+    (bool) ? hideSiderMenu = true : hideSiderMenu = false;
     getTemplates()
 }
 
@@ -121,6 +124,10 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
         unloadTemplate(toUnloadID)
         showInitialsHeader(userInitials)
         markCorrectMenuPoint()
+        if (hideSiderMenu) {
+            let hideSiderMenu = document.getElementById('sider_menu_points');
+            hideSiderMenu.style.display = 'none';
+        }
     } catch {
         return
     }
@@ -212,7 +219,8 @@ function getHelp() {
  */
 function toLegal() {
     saveDocName()
-    window.location.href = "/legal_notes.html";
+    window.open(
+        "/legal_notes.html", "_blank");
 }
 
 /**

@@ -64,7 +64,7 @@ function startAddContact() {
 
 /**Opening the process div, to edit or add a contact */
 function showWorkDiv() {
-    let workDiv = document.getElementById('contactProcess_div');
+    let workDiv = document.getElementById('overProcess_div');
     workDiv.style.display = 'flex';
 }
 
@@ -81,7 +81,7 @@ function openContact(i) {
         <span class="Stage_head d-flex align-items-center">
             <div id="initial_ball_big" class="big_ball d-flex" style="background-color: ${contact.color}">${contact.initials}</div>
             <div id="stage_head_right">
-                <p id="contact_name">${contact.name}</p>
+                <t id="contact_name">${contact.name}</t>
                 <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
                     <a href="#" onclick="startEditProcess(${i})" id="edit_contact_btn" class="Contact_stage_btn">
                         <img src="assets/img/contacts_editContact_icon.png" alt="">
@@ -201,7 +201,7 @@ function prepareContactProcessDiv(contact, i) {
         phoneField.value = '';
         contactBal.style.backgroundColor = '#D1D1D1';
         contactBal.innerHTML = /*html*/`<img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">`;
-        cancelBtn.onclick = function () { closeContactProcess('contactProcess_div') }
+        cancelBtn.onclick = function () { closeContactProcess('overProcess_div') }
         cancelBtn.innerHTML = /*html*/`Cancel  <img src=" assets/img/cancel_icon_black.png" alt="">`;
         submitBtn.innerHTML = /*html*/`Add Contact
          <img src="assets/img/check.png" alt="">`
@@ -216,7 +216,7 @@ function editContactProcess(i) {
     editContact(i)
     saveContacts()
     clearInputFields()
-    closeContactProcess('contactProcess_div')
+    closeContactProcess('overProcess_div')
 }
 
 /**Here the old contact gets overwritten */
@@ -314,7 +314,7 @@ async function createContact() {
     contactList.push(newContact)
     saveContacts()
     clearInputFields()
-    closeContactProcess('contactProcess_div')
+    closeContactProcess('overProcess_div')
 }
 
 
