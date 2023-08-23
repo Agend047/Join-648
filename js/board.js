@@ -2,9 +2,6 @@ async function initBoardPage() {
   await getTasks();
   renderSmallCards("toDoDesktop");
   renderSmallCards("toDoMobile");
-  renderAssignedBadges();
-  renderPrio();
-  renderSubtasks();
 }
 
 async function getTasks() {
@@ -19,6 +16,9 @@ function renderSmallCards(ID) {
     let totalSubtasks = getSubtasksCount(i);
     toDoCards.innerHTML += generateSmallCardHTML(totalSubtasks, task, i);
   }
+  renderSubtasks();
+  renderAssignedBadges();
+  renderPrio();
 }
 
 function generateSmallCardHTML(totalSubtasks, task, i) {
