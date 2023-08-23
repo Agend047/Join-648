@@ -9,6 +9,8 @@ async function initBoardPage() {
   renderSmallCards("toDoDesktop");
   renderSmallCards("toDoMobile");
   renderAssignedBadges();
+  renderPrio();
+  renderSubtasks();
 }
 
 async function getTasks() {
@@ -28,13 +30,13 @@ function generateSmallCardHTML(task, i) {
   return /*html*/ `
               <div class="cardSmall" onclick="openCard()">
                 <div class="category">
-                  <div id="categoryLabel">${task.category}</div>
+                  <div class="categoryLabel" id="categoryLabel">${task.category}</div>
                 </div>
                 <div>
-                  <h1 id="title">${task.title}</h1>
-                  <p id="description">${task.description}</p>
+                  <h1 class="title" id="title">${task.title}</h1>
+                  <p class="description" id="description">${task.description}</p>
                 </div>
-                <div class="progress-section">
+                <div class="progress-section" id="progress-section-${i}">
                   <div id="progress">
                     <div
                       class="progress-bar"
@@ -47,10 +49,11 @@ function generateSmallCardHTML(task, i) {
                   <div>0/2 Subtasks</div>
                 </div>
                 <div class="card-footer">
-                  <div class="profileBadges" id="profileBadges-${i}">
-                  </div>
-                  <div class="prioIcon">
-                    <img id="prioIcon" src="./assets/img/prio-medium.svg" />
+                  <div class="w-100 d-flex justify-content-space-btw align-items-center">
+                    <div class="profileBadges" id="profileBadges-${i}">
+                    </div>
+                    <div class="prioIcon" id="prioIcon-${i}">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -74,12 +77,9 @@ function renderAssignedBadges() {
 function generateBadgeHTML(contact) {
   return /*html*/ `
   <svg
-    width="42"
-    height="42"
     viewBox="0 0 42 42"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="contact-bubble-${contact.id}"
   >
     <circle
       cx="21"
@@ -100,6 +100,32 @@ function generateBadgeHTML(contact) {
     </text>
   </svg>
   `;
+}
+
+function renderPrio() {
+  for (let i = 0; i < taskList.length; i++) {
+    const prio = document.getElementById(`prioIcon-${i}`);
+    const assignedPrio = taskList[i]["priority"];
+    prio.innerHTML = "";
+    prio.innerHTML += generatePrioHTML(assignedPrio);
+  }
+}
+
+function generatePrioHTML(prio) {
+  return /*html*/ `
+  <img src="./assets/img/prio-${prio}.svg">
+`;
+}
+
+function renderSubtasks() {
+  for (let i = 0; i < taskList.length; i++) {
+    const subtask = document.getElementById(`progress-section-${i}`);
+    const assignedSubtasks = taskList[i]["subtasks"];
+
+    if (assignedSubtasks.length === 0) {
+      subtask.style.display = "none";
+    }
+  }
 }
 
 function generateLargeCardHTML() {
@@ -224,7 +250,7 @@ function generateEditTaskHTML() {
       </div>
     <div>
       <label for="title-input">Title</label>
-        <div class="input">
+        <div class="input-edit-task">
         <input
           required
           type="text"

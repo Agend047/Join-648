@@ -335,7 +335,6 @@ a {
   transition: 500ms;
 }
 
-
 @media (max-width: 900px) {
   #desktop_sider {
     width: 23vw;
@@ -468,6 +467,10 @@ a {
 
 .justify-content-start {
   justify-content: start;
+}
+
+.justify-content-space-btw {
+  justify-content: space-between;
 }
 
 .flex-direction-col {

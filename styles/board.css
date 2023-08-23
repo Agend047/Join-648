@@ -68,6 +68,7 @@ input {
   font-family: unset;
   min-width: 50%;
   flex: 1;
+  margin-top: 3px;
 }
 
 .input {
@@ -75,6 +76,7 @@ input {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: auto;
   padding: 0.5em 1em;
   border: 1px solid #a8a8a8;
   border-radius: 0.625rem;
@@ -166,6 +168,17 @@ input {
 
 .margin-bottom {
   margin-bottom: 1.62em;
+}
+
+#toDoMobile,
+#progressMobile,
+#feedbackMobile,
+#doneMobile {
+  display: flex;
+  flex-direction: unset;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
 }
 
 #toDoDesktop,
@@ -338,17 +351,23 @@ input {
 
 .cardSmall {
   display: flex;
-  width: 100%;
+  flex: 0 0 auto;
+  width: 15.75rem; /* mobile */
+  /*width: 100%;   desktop */
   height: auto;
   padding: 1rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 1.5em;
   border-radius: 1.5em;
   background: white;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   margin-bottom: 1em;
+  margin-right: 1em;
+  margin-top: 10px; /* room for box-shadow, so its not cut off */
+  margin-left: 10px; /* room for box-shadow, so its not cut off */
+  flex-shrink: 0;
 }
 
 .cardSmall:hover {
@@ -367,7 +386,7 @@ input {
   justify-content: flex-start;
 }
 
-#categoryLabel {
+.categoryLabel {
   display: flex;
   padding: 0.25rem 1rem;
   align-items: flex-start;
@@ -381,24 +400,23 @@ input {
   color: white;
 }
 
-#title {
+.cardSmall .title {
   color: var(--secondary-bg-color);
-  align-self: stretch;
   font-size: 1rem;
   font-weight: 700;
-  line-height: 120%;
+  line-height: 1.2em;
   margin-bottom: 0.5em;
 }
 
-.cardSmall #description {
+.cardSmall .description {
   color: #a8a8a8;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 120%;
+  line-height: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -441,17 +459,19 @@ input {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  flex-grow: 1;
 }
 
 .profileBadges {
   display: flex;
-  width: 2rem;
-  object-fit: contain;
 }
 
-.profileBadges img {
-  margin-right: -0.3em;
+.profileBadges svg {
+  margin-right: -0.5em;
+  object-fit: contain;
+  width: 2rem;
+  height: 2rem;
 }
 
 .prioIcon {
@@ -464,6 +484,14 @@ input {
 
 #prioIcon {
   height: 0.39581rem;
+}
+
+@media (min-width: 950px) {
+  .cardSmall {
+    width: 100%;
+    margin-right: 0;
+    flex-shrink: 1;
+  }
 }
 
 /* CSS LARGE CARD */
@@ -671,7 +699,7 @@ label {
   line-height: 120%;
 }
 
-.input {
+.input-edit-task {
   margin-block-start: 0.5em;
   max-width: unset;
   width: auto;
