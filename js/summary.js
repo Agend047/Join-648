@@ -6,9 +6,8 @@ function loadHelloPageMobile() {
     // Insert the helloPage before the mobileTemplate
     let main = document.querySelector("main");
     main.parentNode.insertBefore(helloPage, main);
-
-    fadeOutHelloPage(helloPage);
     showGreeting("greetingMobile");
+    fadeOutHelloPage(helloPage);
   }
 }
 
