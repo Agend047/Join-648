@@ -164,11 +164,11 @@ function markCorrectMenuPoint() {
 /**
  * Brings in Menu for header
  */
-function headerMenu() {
-    let menu = document.getElementById('header_menu_id')
+function flyInMenu(wichMenu) {
+    let menu = document.getElementById(wichMenu)
     let styleRight = menu.style.right;
     (styleRight == '3vw') ? (menu.style.right = '-200px') : (menu.style.right = '3vw')
-    hideArrow()
+    if (wichMenu == 'header_menu_id') { hideArrow() }
 }
 
 /**If theres an Arrow, it get hidden with a little delay */

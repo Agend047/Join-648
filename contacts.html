@@ -80,10 +80,10 @@
             </button>
         </section>
         <div id="mobile_contacts_menu" class="d-flex flex-direction-col float_in_menu">
-            <a href="#" class="mcm_pint" onclick="editContact()">Edit Contact</a>
-            <a href="#" class="mcm_pint" onclick="deleteContact()">Delete Contact</a>
+            <a id="mob_cont_menu_Edit" href="#" class="mcm_pint">Edit Contact</a>
+            <a id="mob_cont_menu_Delete" href="#" class="mcm_pint">Delete Contact</a>
         </div>
-        <div id="BlockDiv" onclick="closeContactProcess('mobile_contacts_menu', 'shader_div')"></div>
+        <div id="BlockDiv" onclick="closeMobCombMenu()"></div>
     </div>
     <div id="shader_div"></div>
 
@@ -126,7 +126,7 @@
                 <img src="./assets/img/contacts_AddPhone_icon.png" class="input-icon" alt="" />
             </div>
             <div class="form_btn_div d-flex align-items-center">
-                <button class="btn btn-secondary Cancel_btn" onclick="closeContactProcess('contactProcess_div')">Cancel
+                <button id="contacts_form_cancel_btn" class="btn btn-secondary Cancel_btn" type="reset">Cancel
                     <img src=" assets/img/cancel_icon_black.png" alt="">
                 </button>
                 <button id="contacts_form_submit_btn" class="btn btn-primary align-items-center d-flex"

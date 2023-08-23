@@ -80,7 +80,6 @@
     }
 }
 
-
 /*Contacts display */
 
 #contacts_Display_big {
@@ -258,7 +257,6 @@
     }
 }
 
-
 /*Add & edit Contacts */
 
 #shader_div {
@@ -304,12 +302,14 @@
     top: 30vh;
     left: 40vw;
     width: 30vw;
-    height: 20vh;
+    height: 152px;
+    width: clamp(250px, 30vw, 350px);
     background-color: white;
     border-color: #2A3647;
     z-index: 90;
     align-items: center;
     justify-content: center;
+    border-radius: 24px;
 }
 
 #show_deleting_name {
@@ -321,8 +321,6 @@
     justify-content: space-around;
 }
 
-/* Add/edit Contacts */
-
 .Contact_proccess_div {
     z-index: 11;
     display: none;
@@ -333,7 +331,7 @@
     top: 10vh;
     border-radius: 40px;
     width: 100vw;
-    height: 80%;
+    height: 88%;
 }
 
 .Underscore_blue {
@@ -391,10 +389,6 @@
     content: url('/assets/img/cancel_icon_blue.png');
 }
 
-#mobile_contacts_menu {
-    display: none;
-}
-
 @media (max-width: 920px) {
 
     .Contact_proccess_div {
@@ -415,7 +409,6 @@
         flex-direction: column;
         border-bottom-left-radius: 0;
         border-top-right-radius: 40px;
-
     }
 
     #cProcess_logo {
@@ -440,6 +433,8 @@
 
     #mobile_contacts_menu {
         bottom: 120px;
-        height: 120px;
+        height: 80px;
+        background-color: white;
+        z-index: 50;
     }
 }

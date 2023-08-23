@@ -320,11 +320,17 @@ a {
   height: auto;
   background-color: #2a3647;
   color: #cdcdcd;
-  border-radius: 15px 0px 15px 15px;
   z-index: 50;
 }
 
-#header_menu_id a {
+.float_in_menu {
+  position: fixed;
+  right: -200px;
+  transition: 500ms;
+  border-radius: 15px 0px 15px 15px;
+}
+
+.float_in_menu a {
   padding: 8px;
   border-radius: 14px;
 }

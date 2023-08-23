@@ -73,7 +73,7 @@ function showWorkDiv() {
  * @param {Number} i - Index in the contactList - JSON-Array
  */
 function openContact(i) {
-    markContact(i)
+    if (loaded == 'desktop') { markContact(i) };
     let contact = contactList[i]
     let stage = document.getElementById('contacts_stage')
     stage.innerHTML = '';
@@ -107,6 +107,7 @@ function openContact(i) {
         showArrow(bigStage)
     }
     bigStage.style.display = 'flex';
+    menuFunctions(i)
 }
 
 /**Unmarks former marked contact, and marks the contact that was choosen. */
@@ -124,6 +125,15 @@ function markContact(i) {
 function showArrow(bigStage) {
     bigStage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
 };
+
+/**Adds the correct variable for the functions in the small Edit/Delete Menu */
+function menuFunctions(i) {
+    let editButton = document.getElementById('mob_cont_menu_Edit');
+    editButton.onclick = function () { startEditProcess(i), closeMobCombMenu() }
+
+    let deleteButton = document.getElementById('mob_cont_menu_Delete');
+    deleteButton.onclick = function () { startDeleteProcess(i), closeMobCombMenu() }
+}
 
 /**Closes ostage Overlay and removes back-Arrow Element to avoid infinite stacking */
 function closeContactStage() {
@@ -162,6 +172,7 @@ function prepareContactProcessDiv(contact, i) {
     let emailField = document.getElementById('email-input');
     let phoneField = document.getElementById('phone-input');
     let contactBal = document.getElementById('cProcess_ball');
+    let cancelBtn = document.getElementById('contacts_form_cancel_btn');
     let submitBtn = document.getElementById('contacts_form_submit_btn');
     let form = document.getElementById('mainForm');
 
@@ -173,8 +184,11 @@ function prepareContactProcessDiv(contact, i) {
         phoneField.value = contact.phone;
         contactBal.style.backgroundColor = contact.color;
         contactBal.innerHTML = contact.initials;
-        submitBtn.innerHTML = /*html*/`Edit Contact
+        cancelBtn.onclick = function (event) { event.preventDefault(), startDeleteProcess(i) }
+        cancelBtn.innerHTML = `Delete`;
+        submitBtn.innerHTML = /*html*/`Save changes
          <img src="assets/img/check.png" alt="">`
+
         form.onsubmit = function () {
             editContactProcess(i);
         };
@@ -187,6 +201,8 @@ function prepareContactProcessDiv(contact, i) {
         phoneField.value = '';
         contactBal.style.backgroundColor = '#D1D1D1';
         contactBal.innerHTML = /*html*/`<img id="cProcess_img" src="assets/img/contacts_emptyC_icon.png" alt="">`;
+        cancelBtn.onclick = function () { closeContactProcess('contactProcess_div') }
+        cancelBtn.innerHTML = /*html*/`Cancel  <img src=" assets/img/cancel_icon_black.png" alt="">`;
         submitBtn.innerHTML = /*html*/`Add Contact
          <img src="assets/img/check.png" alt="">`
         form.onsubmit = function () {
@@ -194,7 +210,6 @@ function prepareContactProcessDiv(contact, i) {
         };
     }
 }
-
 
 /**Editing the contact, saving the list, cle */
 function editContactProcess(i) {
@@ -214,7 +229,6 @@ function editContact(i) {
     contact.phone = document.getElementById('phone-input').value;
     contact.initials = getInitials();
 }
-
 
 /**Showing an alert over a shader, before final deleting. */
 function startDeleteProcess(i) {
@@ -370,9 +384,15 @@ function isNumberKey(evt) {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; }
     return true;
 }
-
+/**In addition to flying in the small menu, also creates a div arround the mobile window to colose the menu. */
 function openMobCombiMenu() {
-    let menu = document.getElementById('mobile_contacts_menu');
-    menu.style.display = 'flex';
+    flyInMenu('mobile_contacts_menu');
+    let blockDiv = document.getElementById('BlockDiv');
+    blockDiv.style.display = 'block';
+}
 
+/**Closing menu and deactivating a shader behind it. */
+function closeMobCombMenu() {
+    flyInMenu('mobile_contacts_menu')
+    deactivateShader('BlockDiv');
 }
