@@ -32,7 +32,7 @@ async function getContacts() {
 function initClearBtn(ev) {
     document.getElementById('clear-btn').addEventListener('click', (ev) => {
         ev.preventDefault();
-        document.forms[0].reset();
+        document.getElementById('addtask-form').reset();
         document.getElementById('selected-contacts').innerHTML = '';
         document.getElementById('subtasks-list').innerHTML = '';
         renderAssignedToContactList(contactList);
