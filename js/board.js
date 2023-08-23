@@ -1,9 +1,3 @@
-function openCard() {
-  let largeCard = document.getElementById("popUpContainer");
-  document.body.style.overflow = "hidden";
-  largeCard.innerHTML = generateLargeCardHTML();
-}
-
 async function initBoardPage() {
   await getTasks();
   renderSmallCards("toDoDesktop");
@@ -29,13 +23,13 @@ function renderSmallCards(ID) {
 
 function generateSmallCardHTML(totalSubtasks, task, i) {
   return /*html*/ `
-              <div class="cardSmall" onclick="openCard()">
+              <div class="cardSmall" onclick="openCard(${i})">
                 <div class="category">
                   <div class="categoryLabel" id="categoryLabel">${task.category}</div>
                 </div>
                 <div>
-                  <h1 class="title" id="title">${task.title}</h1>
-                  <p class="description" id="description">${task.description}</p>
+                  <h1 class="title" id="title-${i}">${task.title}</h1>
+                  <p class="description" id="description-${i}">${task.description}</p>
                 </div>
                 <div class="progress-section" id="progress-section-${i}">
                   <div id="progress">
@@ -118,6 +112,44 @@ function generatePrioHTML(prio) {
 `;
 }
 
+function renderPrioLargeCard(task) {
+  for (let i = 0; i < taskList.length; i++) {
+    const prioLargeCard = document.getElementById("largeCardPrio");
+    const assignedPrio = taskList[i]["priority"];
+    prioLargeCard.innerHTML = "";
+    prioLargeCard.innerHTML += generateLargeCardPrioHTML(task, assignedPrio);
+  }
+}
+
+function generateLargeCardPrioHTML(task) {
+  return /*html*/ `
+  <div class="prio-btn">
+    <span>${task.priority}</span>
+    <img src="./assets/img/prio-${task.priority}.svg">
+  </div>
+  `;
+}
+
+/*
+function renderAssignedToContactList(contacts) {
+  const list = document.getElementById("assigned-to-options");
+  let html = "";
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    html += renderAssignedToContactListItemHtml(contact);
+  }
+  list.innerHTML = html;
+}
+
+function renderAssignedToContactListItemHtml(contact) {
+  let html = "";
+  html =  `<li class="assign-to-li" value="${contact.id}">`;
+  html += renderContactBubbleHtml(contact);
+  html +=  `<span class="assign-to-li-name">${contact.name}</span>
+        <img src="./assets/img/checkbox-unchecked.svg" /></li>`;
+  return html;
+}*/
+
 function renderSubtasks() {
   for (let i = 0; i < taskList.length; i++) {
     const subtask = document.getElementById(`progress-section-${i}`);
@@ -153,13 +185,21 @@ function updateProgressBar(subtasksDone, totalSubtasks) {
   document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
-function generateLargeCardHTML() {
+function openCard(i) {
+  let task = taskList[i];
+  let largeCard = document.getElementById("popUpContainer");
+  document.body.style.overflow = "hidden";
+  largeCard.innerHTML = generateLargeCardHTML(task, i);
+  renderPrioLargeCard(task);
+}
+
+function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
       <div class="background" onclick="closeCard()">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
-            <div id="categoryLabel" class="category-label">User Story</div>
+            <div id="categoryLabel" class="categoryLabel">${task.category}</div>
             <img
               onclick="closeCard()"
               id="btnCloseCard"
@@ -168,22 +208,18 @@ function generateLargeCardHTML() {
             />
           </div>
 
-          <div>
-            <h1 id="title">${task.title}</h1>
-            <p id="description">
-              Build start page with recipe recommendation.
+          <div class="large-card-content">
+            <h1 class="title-large-card" id="title-${i}">${task.title}</h1>
+            <p class="description" id="description-${i}">${task.description}
             </p>
             <table>
               <tr>
                 <td class="col-width">Due date:</td>
-                <td>10/05/2023</td>
+                <td id="dueDate">${task.dueDate}</td>
               </tr>
               <tr>
                 <td class="col-width">Priority:</td>
-                <td class="prio-btn">
-                  <span>Medium</span>
-                  <img id="prioIcon" src="./assets/img/prio-medium.svg" />
-                </td>
+                <td class="prio-btn" id="largeCardPrio"></td>
               </tr>
               <tr>
                 <td colspan="2">

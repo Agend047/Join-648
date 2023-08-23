@@ -512,7 +512,8 @@ input {
 .largeCard {
   display: flex;
   width: 90vw;
-  height: calc(100vh - 170px);
+  height: calc(100vh - 200px);
+  max-height: 860px;
   font-size: 1rem;
   padding: 2rem 1.5rem;
   gap: 1em;
@@ -526,17 +527,23 @@ input {
   word-wrap: break-word;
 }
 
+.large-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 .large-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#categoryLabel.category-label {
+.categoryLabel {
   font-size: 1rem;
 }
 
-h1#title {
+.title-large-card {
   font-size: 2.6rem;
 }
 
@@ -563,7 +570,7 @@ h1#title {
 }
 
 td {
-  padding-top: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .col-width {
@@ -574,7 +581,6 @@ td {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 1.5em;
 }
 
 .btn-seperator {
@@ -652,12 +658,14 @@ img.user-icon {
   gap: 1em;
 }
 
-@media (min-width: 600px) {
-  #categoryLabel.category-label {
+@media (min-width: 330px) {
+  .categoryLabel {
     font-size: 1.4375rem;
   }
+}
 
-  h1#title {
+@media (min-width: 600px) {
+  .title-large-card {
     font-size: 3.8125rem;
   }
 
@@ -666,6 +674,14 @@ img.user-icon {
     font-size: 1.25rem;
     padding: 3rem 2.5rem;
     gap: 1.5rem;
+  }
+
+  .large-card-content {
+    gap: 1.5em;
+  }
+
+  td {
+    padding-bottom: 1.5rem;
   }
 }
 
