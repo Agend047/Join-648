@@ -384,7 +384,7 @@ function renderAssignedToContactListItemHtml(contact) {
 }
 
 function filterAssignedToContacts() {
-    const searchTerm = document.getElementById('assigned-to-input').value;
+    const searchTerm = document.getElementById('assigned-to-input').value.toLowerCase();
     const assignedToList = document.getElementById('assigned-to-options');
     const listItems = assignedToList.querySelectorAll('li');
     if (searchTerm === '') {
