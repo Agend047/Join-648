@@ -15,6 +15,7 @@ let contact = {
 };
 
 let taskList = {
+  id: 1,
   title: "title",
   description: "längerer Text",
   dueDate: "dd/mm/yyyy",
@@ -33,10 +34,20 @@ let taskList = {
   subtasks: [
     {
       text: "subtask1",
-      status: "done" / "todo",
+      status: [
+        "todo",
+        "inprogress",
+        "feedback",
+        "done",
+      ] /* nur eine Zuweisung */,
     },
   ],
 };
+
+let todo = [1, 5, 6];
+let inprogress = [3, 4];
+let feedback = [7];
+let done = [8, 9];
 
 let task2 = {
   title: "title",

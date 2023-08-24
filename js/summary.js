@@ -1,10 +1,10 @@
 function initSummary() {
   loadHelloPageMobile();
   showGreeting("greetingDesktop");
-  countTasksInBoard();
 }
 
 /** Counting all task (.smallCards) in board and displaying the count in a variable on the Summary Page*/
+/*
 function countTasksInBoard() {
   const columns = [
     "toDoDesktop",
@@ -22,7 +22,7 @@ function countTasksInBoard() {
   });
 
   return totalTasks;
-}
+}*/
 
 function loadHelloPageMobile() {
   if ((screenType = "mobile")) {
