@@ -2,7 +2,23 @@ async function initSummary() {
   await getDataFromBackend();
   loadHelloPageMobile();
   showGreeting("greetingDesktop");
+  greetGuestUser();
   showNumberOfTotalTasks();
+}
+
+function greetGuestUser() {
+  if (location.search.includes("guestuser=true")) {
+    modifyGreetingForGuestUser("greetingDesktop");
+    modifyGreetingForGuestUser("greetingMobile");
+
+    document.getElementById("userNameDesktop").style.display = "none";
+    document.getElementById("userNameMobile").style.display = "none";
+  }
+}
+
+function modifyGreetingForGuestUser(ID) {
+  let greeting = document.getElementById(ID);
+  greeting.innerHTML = greeting.innerHTML.replace(/,/g, "!");
 }
 
 function showNumberOfTotalTasks() {
@@ -25,27 +41,6 @@ function countTasksInArray(ID, status) {
   count.innerHTML = tasksAmount;
 }
 
-/** Counting all task (.smallCards) in board and displaying the count in a variable on the Summary Page*/
-/*
-function countTasksInBoard() {
-  const columns = [
-    "toDoDesktop",
-    "progressDesktop",
-    "feedbackDesktop",
-    "doneDesktop",
-  ];
-
-  let totalTasks = 0;
-
-  columns.forEach((columnId) => {
-    const column = document.getElementById(columnId);
-    const cardsInColumn = column.querySelectorAll(".cardSmall");
-    totalTasks += cardsInColumn.length;
-  });
-
-  return totalTasks;
-}*/
-
 function loadHelloPageMobile() {
   if ((screenType = "mobile")) {
     let helloPage = document.createElement("div");
@@ -63,7 +58,7 @@ function generateHelloPageHTML() {
   return `
     <div id="helloPageMobile" class="">
     <span id="greetingMobile"></span>
-    <h1 class="blue-text">Sofia Müller</h1>
+    <h1 class="blue-text" id="userNameMobile">Sofia Müller</h1>
     </div>
     `;
 }
