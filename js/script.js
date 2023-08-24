@@ -14,6 +14,9 @@ let loggedIn;
 let loginData;
 let activeUser;
 let hideSiderMenu;
+let maxUserId;
+let maxTaskId;
+let maxContactId;
 
 /**
  * Checks localstorage if the user is logged in.
