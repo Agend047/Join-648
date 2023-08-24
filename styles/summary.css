@@ -98,6 +98,7 @@
 .card-container {
   display: flex;
   width: clamp(calc(320px - 40px), 80vw, 396px);
+  padding: 5px; /* Padding so the hover effect isnt cut off*/
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
