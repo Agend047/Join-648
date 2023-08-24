@@ -15,13 +15,13 @@ function renderAllContainersHtml() {
 }
 
 function updateHTML(ID, status) {
-  let todo = taskList.filter(t => t["status"] == status);
+  let filteredTasks = taskList.filter(t => t["status"] == status);
   const todoContainer = document.getElementById(ID);
   todoContainer.innerHTML = "";
 
-  for (let i = 0; i < todo.length; i++) {
+  for (let i = 0; i < filteredTasks.length; i++) {
     // array später durch 'todo' ersetzen, wenn Status im Array angelegt & gespeichert
-    const task = taskList[i];
+    const task = filteredTasks[i];
     let totalSubtasks = getSubtasksCount(i);
     const labelColor = assignLabelColor(task.category);
     todoContainer.innerHTML += generateSmallCardHTML(
@@ -48,13 +48,13 @@ function updateHTML(ID, status) {
     );
   }
   */
-  renderSmallCard(status);
+  renderSmallCard(filteredTasks);
 }
 
-function renderSmallCard(status) {
-  renderSubtasks(status);
-  renderAssignedBadges();
-  renderPrio();
+function renderSmallCard(filteredTasks) {
+  renderSubtasks(filteredTasks);
+  renderAssignedBadges(filteredTasks);
+  renderPrio(filteredTasks);
 }
 
 function assignLabelColor(category) {
@@ -67,8 +67,8 @@ function assignLabelColor(category) {
   return "#FF7A00";
 }
 
-function startDragging(index) {
-  currentDraggedElement = index;
+function startDragging(id) {
+  currentDraggedElement = id;
 }
 
 function allowDrop(event) {
@@ -76,7 +76,8 @@ function allowDrop(event) {
 }
 
 function moveTo(status) {
-  taskList[currentDraggedElement]['status'] = status;
+  const taskIndex = taskList.findIndex((task) => task.id === currentDraggedElement);
+  taskList[taskIndex]['status'] = status;
   renderAllContainersHtml()
   // updateHTML('todoDesktop');
   // updateHTML('progressDesktop');
@@ -86,7 +87,7 @@ function moveTo(status) {
 
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
-              <div id="${i}" draggable="true" ondragstart="startDragging(${i})" class="cardSmall" onclick="openCard(${i})">
+              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${i})">
                 <div class="category">
                   <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>
@@ -94,7 +95,7 @@ function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
                   <h1 class="title" id="title-${i}">${task.title}</h1>
                   <p class="description" id="description-${i}">${task.description}</p>
                 </div>
-                <div class="progress-section" id="progress-section-${i}">
+                <div class="progress-section" id="progress-section-${task.id}">
                   <div id="progress">
                     <div
                       class="progress-bar"
@@ -108,9 +109,9 @@ function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
                 </div>
                 <div class="card-footer">
                   <div class="w-100 d-flex justify-content-space-btw align-items-center">
-                    <div class="profileBadges" id="profileBadges-${i}">
+                    <div class="profileBadges" id="profileBadges-${task.id}">
                     </div>
-                    <div class="prioIcon" id="prioIcon-${i}">
+                    <div class="prioIcon" id="prioIcon-${task.id}">
                     </div>
                   </div>
                 </div>
@@ -118,10 +119,11 @@ function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
             `;
 }
 
-function renderAssignedBadges() {
-  for (let i = 0; i < taskList.length; i++) {
-    const badge = document.getElementById(`profileBadges-${i}`);
-    const assignedContacts = taskList[i]["assignedTo"];
+function renderAssignedBadges(filteredTasks) {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const badge = document.getElementById(`profileBadges-${filteredTask.id}`);
+    const assignedContacts = filteredTask["assignedTo"];
 
     badge.innerHTML = "";
 
@@ -160,10 +162,11 @@ function generateBadgeHTML(contact) {
   `;
 }
 
-function renderPrio() {
-  for (let i = 0; i < taskList.length; i++) {
-    const prio = document.getElementById(`prioIcon-${i}`);
-    const assignedPrio = taskList[i]["priority"];
+function renderPrio(filteredTasks) {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const prio = document.getElementById(`prioIcon-${filteredTask.id}`);
+    const assignedPrio = filteredTask["priority"];
     prio.innerHTML = "";
     prio.innerHTML += generatePrioHTML(assignedPrio);
   }
@@ -214,10 +217,11 @@ function generateAssignedUserListItemHTML(contact) {
   return html;
 }
 
-function renderSubtasks() {
-  for (let i = 0; i < taskList.length; i++) {
-    const subtask = document.getElementById(`progress-section-${i}`);
-    const assignedSubtasks = taskList[i]["subtasks"];
+function renderSubtasks(filteredTasks) {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const subtask = document.getElementById(`progress-section-${filteredTask.id}`);
+    const assignedSubtasks = filteredTask["subtasks"];
     hideSubtaskIfUnassigned(subtask, assignedSubtasks);
   }
 }

@@ -180,7 +180,7 @@ input {
 }
 
 #todoMobile,
-#progressMobile,
+#inprogressMobile,
 #feedbackMobile,
 #doneMobile {
   display: flex;
@@ -191,7 +191,7 @@ input {
 }
 
 #todoDesktop,
-#progressDesktop,
+#inprogressDesktop,
 #feedbackDesktop,
 #doneDesktop {
   display: none;
@@ -329,7 +329,7 @@ input {
   }
 
   #todoDesktop,
-  #progressDesktop,
+  #inprogressDesktop,
   #feedbackDesktop,
   #doneDesktop {
     display: block;
@@ -337,7 +337,7 @@ input {
   }
 
   #todoMobile,
-  #progressMobile,
+  #inprogressMobile,
   #feedbackMobile,
   #doneMobile {
     display: none;
