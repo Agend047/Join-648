@@ -7,13 +7,27 @@ async function initSummary() {
 }
 
 function greetGuestUser() {
-  if (location.search.includes("guestuser=true")) {
+  const isGuestUser = location.search.includes("guestuser=true");
+
+  if (isGuestUser) {
+    localStorage.setItem("isGuestUser", "true");
     modifyGreetingForGuestUser("greetingDesktop");
     modifyGreetingForGuestUser("greetingMobile");
+    hideUserName();
+  } else {
+    const storedIsGuestUser = localStorage.getItem("isGuestUser");
 
-    document.getElementById("userNameDesktop").style.display = "none";
-    document.getElementById("userNameMobile").style.display = "none";
+    if (storedIsGuestUser === "true") {
+      modifyGreetingForGuestUser("greetingDesktop");
+      modifyGreetingForGuestUser("greetingMobile");
+      hideUserName();
+    }
   }
+}
+
+function hideUserName() {
+  document.getElementById("userNameDesktop").style.display = "none";
+  document.getElementById("userNameMobile").style.display = "none";
 }
 
 function modifyGreetingForGuestUser(ID) {
