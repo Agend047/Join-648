@@ -82,9 +82,10 @@ async function moveTo(status) {
   renderAllContainersHtml();
 }
 
+// i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
-              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${i})">
+              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id})">
                 <div class="category">
                   <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>
@@ -251,7 +252,7 @@ function updateProgressBar(subtasksDone, totalSubtasks) {
 }
 
 function openCard(i) {
-  let task = taskList[i];
+  let task = findTaskInList(i);
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   largeCard.innerHTML = generateLargeCardHTML(task, i);
@@ -316,7 +317,7 @@ function generateLargeCardHTML(task, i) {
             </table>
 
             <div class="large-card-footer">
-              <div class="btn">
+              <div class="btn" onclick="deleteTask(${task.id})">
                 <span class="delete-icon"></span>
                 <span>Delete</span>
               </div>
@@ -331,6 +332,38 @@ function generateLargeCardHTML(task, i) {
       </div>
     </div>
   `;
+}
+
+
+/**
+ * Deleting a task out of TaskList
+ * @param {Number} taskID - ID ot the to delete Task
+ */
+// async function deleteTask(taskID) {
+//   taskList.splice(taskID, 1)
+//   await setItemInBackend('taskList', JSON.stringify(taskList))
+//   closeCard()
+//   renderAllContainersHtml()
+// }
+
+/**
+ * Searches for the task within the taskList, by a specific id.
+ * @param {Number} findID - The Id, we are looking for
+ * @returns - the task (Object) we wanted.
+ */
+function findTaskInList(findID) {
+  let foundTask = taskList.find(t => t.id === findID);
+  return foundTask
+}
+
+function getIndexInList(term) {
+  let index = -1;
+  taskList.find(function (item, i) {
+    if (item.name === term) {
+      index = i;
+      return i;
+    }
+  });
 }
 
 function closeCard() {
