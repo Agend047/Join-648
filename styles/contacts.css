@@ -71,7 +71,6 @@
 
 .Mail_text {
     color: #007CEE;
-
 }
 
 @media (max-width: 800px) {
@@ -83,7 +82,7 @@
 /*Contacts display */
 
 #contacts_Display_big {
-    margin-top: 70px;
+    margin-top: clamp(130px, 19vh, 300px);
     background-color: #F6F7F8;
     display: block;
     flex-direction: column;
@@ -112,7 +111,13 @@
     flex-direction: column;
 }
 
-.Stage_head {}
+.Stage_head {
+    margin-top: 8px;
+}
+
+#contacts_stage_workBtn_div {
+    margin-top: 8px;
+}
 
 #stage_head_right {
     margin-left: 2vw;
@@ -147,7 +152,7 @@
 
 #contact_name {
     font-size: var(--fs-tall);
-    margin: 16px;
+    margin: 0px 16px 32px 16px;
 }
 
 #delete_contact_btn {
@@ -227,12 +232,17 @@
         right: 0;
         bottom: 10vh;
         height: 90vh;
-        padding-left: 50px;
+        padding-left: 10px;
         z-index: 1;
+        margin-top: 80px;
     }
 
     #contacts_stage_workBtn_div {
         display: none;
+    }
+
+    #contact_name {
+        margin-left: 0px;
     }
 
     .Contacts_stage_data {
@@ -251,6 +261,7 @@
 
     .Back_Arrow {
         top: 40px;
+        right: 32px;
     }
 
     .big_ball {
