@@ -170,7 +170,7 @@ input {
   margin-bottom: 1.62em;
 }
 
-#toDoMobile,
+#todoMobile,
 #progressMobile,
 #feedbackMobile,
 #doneMobile {
@@ -181,7 +181,7 @@ input {
   flex-wrap: nowrap;
 }
 
-#toDoDesktop,
+#todoDesktop,
 #progressDesktop,
 #feedbackDesktop,
 #doneDesktop {
@@ -192,6 +192,7 @@ input {
   display: flex;
   width: 100%;
   padding: 0.53em;
+  margin-top: 8px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -316,7 +317,7 @@ input {
     gap: 1.62em;
   }
 
-  #toDoDesktop,
+  #todoDesktop,
   #progressDesktop,
   #feedbackDesktop,
   #doneDesktop {
@@ -324,7 +325,7 @@ input {
     width: 25%;
   }
 
-  #toDoMobile,
+  #todoMobile,
   #progressMobile,
   #feedbackMobile,
   #doneMobile {

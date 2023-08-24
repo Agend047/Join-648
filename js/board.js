@@ -1,23 +1,47 @@
 async function initBoardPage() {
   await getDataFromBackend();
-  renderSmallCards("toDoDesktop");
-  renderSmallCards("toDoMobile");
+  updateHTML("Desktop");
+  updateHTML("Mobile");
 }
 
-function renderSmallCards(ID) {
-  let toDoCards = document.getElementById(ID);
-  toDoCards.innerHTML = "";
+function updateHTML(ID) {
+  /*let todo = taskList.filter(t => t["status"] == 'todo');*/
+  const todoContainer = document.getElementById(`todo${ID}`);
+  todoContainer.innerHTML = "";
+
   for (let i = 0; i < taskList.length; i++) {
+    // array später durch 'todo' ersetzen, wenn Status im Array angelegt & gespeichert
     const task = taskList[i];
     let totalSubtasks = getSubtasksCount(i);
     const labelColor = assignLabelColor(task.category);
-    toDoCards.innerHTML += generateSmallCardHTML(
+    todoContainer.innerHTML += generateSmallCardHTML(
       totalSubtasks,
       task,
       i,
       labelColor
     );
   }
+
+  let progress = taskList.filter((t) => t["status"] == "inprogress");
+  const progressContainer = document.getElementById(`progress${ID}`);
+  progressContainer.innerHTML = "";
+
+  for (let i = 0; i < progress.length; i++) {
+    const task = progress[i];
+    let totalSubtasks = getSubtasksCount(i);
+    const labelColor = assignLabelColor(task.category);
+    todoContainer.innerHTML += generateSmallCardHTML(
+      totalSubtasks,
+      task,
+      i,
+      labelColor
+    );
+  }
+
+  renderSmallCard();
+}
+
+function renderSmallCard() {
   renderSubtasks();
   renderAssignedBadges();
   renderPrio();
