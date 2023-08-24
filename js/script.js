@@ -2,10 +2,10 @@ let docWidth;
 let screenType;
 let loaded;
 let responseFromBackend;
-let userInitials = 'SM';
-let currentPage = 'summary.html';
-const STORAGE_TOKEN = 'G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+let userInitials = "SM";
+let currentPage = "summary.html";
+const STORAGE_TOKEN = "G1OERBUF0NPIB8DLZPT41ZZ5I569IQR3G99JW22P";
+const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
 
 let contactList;
 let taskList = [];
@@ -16,33 +16,33 @@ let activeUser;
 let hideSiderMenu;
 
 function verifyUserStatus() {
-    let status = JSON.parse(localStorage.getItem('loggedIn'));
-    if (status) {
-        loginData = JSON.parse(localStorage.getItem('loginData'));
-    } else {
-        status = JSON.parse(sessionStorage.getItem('loggedIn'));
-    }
-    loggedIn = status;
-    if (
-        !window.location.href.endsWith('login.html') &&
-        !window.location.href.endsWith('forgotpassword.html') &&
-        !window.location.href.endsWith('resetpassword.html') &&
-        !window.location.href.endsWith('signup.html') &&
-        !loggedIn) {
-        window.location.href = './login.html';
-    }
+  let status = JSON.parse(localStorage.getItem("loggedIn"));
+  if (status) {
+    loginData = JSON.parse(localStorage.getItem("loginData"));
+  } else {
+    status = JSON.parse(sessionStorage.getItem("loggedIn"));
+  }
+  loggedIn = status;
+  if (
+    !window.location.href.endsWith("login.html") &&
+    !window.location.href.endsWith("forgotpassword.html") &&
+    !window.location.href.endsWith("resetpassword.html") &&
+    !window.location.href.endsWith("signup.html") &&
+    !loggedIn
+  ) {
+    window.location.href = "./login.html";
+  }
 }
 
-
 async function getDataFromBackend() {
-    taskList = await getItemFromBackend('taskList');
-    userList = await getItemFromBackend('userList');
-    contactList = await getItemFromBackend('contactList');
+  taskList = await getItemFromBackend("taskList");
+  userList = await getItemFromBackend("userList");
+  contactList = await getItemFromBackend("contactList");
 }
 
 async function initForAllPages() {
-    verifyUserStatus();
-    await getDataFromBackend();
+  verifyUserStatus();
+  await getDataFromBackend();
 }
 
 initForAllPages();
@@ -62,8 +62,8 @@ initForAllPages();
  * @param {boolean} bool - is only true, when Menu Links shall not be loaded into Sider.
  */
 function initTemplates(bool) {
-    (bool) ? hideSiderMenu = true : hideSiderMenu = false;
-    getTemplates()
+  bool ? (hideSiderMenu = true) : (hideSiderMenu = false);
+  getTemplates();
 }
 
 /**
@@ -71,37 +71,37 @@ function initTemplates(bool) {
  * @returns  form of actual Screen.
  */
 function getScreenType() {
-    let docWidth = window.innerWidth;
-    if (docWidth < 820) {
-        screenType = 'mobile';
-    } else if (docWidth >= 820) {
-        screenType = 'desktop';
-    }
-    return screenType;
+  let docWidth = window.innerWidth;
+  if (docWidth < 820) {
+    screenType = "mobile";
+  } else if (docWidth >= 820) {
+    screenType = "desktop";
+  }
+  return screenType;
 }
 
 /**
  * Loads in the needed Templates for Desktop or Mobile Version
  */
 async function getTemplates() {
-    getScreenType()
-    if (screenType == 'mobile') {
-        await getMatchingTemplate('mobile-template', 'desktop-template')
-        loaded = 'mobile';
-    } else if (screenType == 'desktop') {
-        await getMatchingTemplate('desktop-template', 'mobile-template')
-        loaded = 'desktop';
-    }
+  getScreenType();
+  if (screenType == "mobile") {
+    await getMatchingTemplate("mobile-template", "desktop-template");
+    loaded = "mobile";
+  } else if (screenType == "desktop") {
+    await getMatchingTemplate("desktop-template", "mobile-template");
+    loaded = "desktop";
+  }
 }
 
 /**
  * Checks, if Screentyoe still matches the actual loaded Template Versions.
  */
 window.onresize = function () {
-    if (getScreenType() != loaded) {
-        getTemplates()
-    }
-}
+  if (getScreenType() != loaded) {
+    getTemplates();
+  }
+};
 
 /**
  * Loads in templates for needed Version, (Mobile or Desktop) unloads the other templates, if needed.
@@ -110,27 +110,27 @@ window.onresize = function () {
  * @param {string} toUnloadID - The ID of that html-template, that has to be unloaded.
  */
 async function getMatchingTemplate(toLoadID, toUnloadID) {
-    try {
-        let includeElement = document.getElementById(toLoadID);
+  try {
+    let includeElement = document.getElementById(toLoadID);
 
-        const element = includeElement;
-        file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
-        let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
-        unloadTemplate(toUnloadID)
-        showInitialsHeader(userInitials)
-        markCorrectMenuPoint()
-        if (hideSiderMenu) {
-            let hideSiderMenu = document.getElementById('sider_menu_points');
-            hideSiderMenu.style.display = 'none';
-        }
-    } catch {
-        return
+    const element = includeElement;
+    file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = "Page not found";
     }
+    unloadTemplate(toUnloadID);
+    showInitialsHeader(userInitials);
+    markCorrectMenuPoint();
+    if (hideSiderMenu) {
+      let hideSiderMenu = document.getElementById("sider_menu_points");
+      hideSiderMenu.style.display = "none";
+    }
+  } catch {
+    return;
+  }
 }
 
 /**
@@ -138,152 +138,161 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
  * @param {*} toUnloadID ID of to unload Template
  */
 function unloadTemplate(toUnloadID) {
-    let toUnload = document.getElementById(toUnloadID);
-    toUnload.innerHTML = '';
+  let toUnload = document.getElementById(toUnloadID);
+  toUnload.innerHTML = "";
 }
 
 /**
  * Initials of current User are going to be written into the Header Circle.
  * If there are no, then its a "G" for "Guest User".
  * @param {string} userInitials - Initials of current User.
- * 
+ *
  */
 function showInitialsHeader(userInitials) {
-    let svgText = document.getElementById('svg_text');
-    if (userInitials) { svgText.textContent = userInitials; } else { svgText.textContent = 'G'; }
+  let svgText = document.getElementById("svg_text");
+  if (userInitials) {
+    svgText.textContent = userInitials;
+  } else {
+    svgText.textContent = "G";
+  }
 }
 
-/**  
+/**
  * Marks Point on the Sider/Footer that is currently open.
  */
 function markCorrectMenuPoint() {
-    let activeSide = getDocumentName()
+  let activeSide = getDocumentName();
 
-    let toChoose = document.getElementById(activeSide + "ID");
-    if (toChoose) {
-        toChoose.classList.add('Choosen_field');
-    } else {
-        let helpIcon = document.getElementById('header_help_icon_d');
-        helpIcon.classList.add('d-none');
-    }
+  let toChoose = document.getElementById(activeSide + "ID");
+  if (toChoose) {
+    toChoose.classList.add("Choosen_field");
+  } else {
+    let helpIcon = document.getElementById("header_help_icon_d");
+    helpIcon.classList.add("d-none");
+  }
 }
 
 /**
  * Brings in Menu for header
  */
 function flyInMenu(wichMenu) {
-    let menu = document.getElementById(wichMenu)
-    let styleRight = menu.style.right;
-    (styleRight == '3vw') ? (menu.style.right = '-200px') : (menu.style.right = '3vw')
-    if (wichMenu == 'header_menu_id') { hideArrow() }
+  let menu = document.getElementById(wichMenu);
+  let styleRight = menu.style.right;
+  styleRight == "3vw"
+    ? (menu.style.right = "-200px")
+    : (menu.style.right = "3vw");
+  if (wichMenu == "header_menu_id") {
+    hideArrow();
+  }
 }
 
 /**If theres an Arrow, it get hidden with a little delay */
 function hideArrow() {
-    setTimeout(() => {
-        try {
-            let arrow = document.querySelector('.Back_Arrow');
-            arrow.classList.toggle('d-none');
-        } catch { }
-    }, 200)
+  setTimeout(() => {
+    try {
+      let arrow = document.querySelector(".Back_Arrow");
+      arrow.classList.toggle("d-none");
+    } catch {}
+  }, 200);
 }
 
-/**  
+/**
  * Returns name of actual page, for marking the right Spot on header/footer in "markCorrectMenuPoint()"
  */
 function getDocumentName() {
-    var path = window.location.pathname;
-    var path = path.split("/").pop();
-    let page = path.split(".html");
-    return page[0];
+  var path = window.location.pathname;
+  var path = path.split("/").pop();
+  let page = path.split(".html");
+  return page[0];
 }
 
 /**
  * Saves current Page in local Storage, so its possible to return later.
  */
 function saveDocName() {
-    let originSide = getDocumentName();
-    localStorage.setItem('originSide', JSON.stringify(originSide));
+  let originSide = getDocumentName();
+  localStorage.setItem("originSide", JSON.stringify(originSide));
 }
 
 /**
  * Saves current page and leads to help-side.
  */
 function getHelp() {
-    saveDocName()
-    window.location.href = "/help.html";
+  saveDocName();
+  window.location.href = "/help.html";
 }
 
 /**
  * Saves current page and leads to legal notes.
  */
 function toLegal() {
-    saveDocName()
-    window.open(
-        "/legal_notes.html", "_blank");
+  saveDocName();
+  window.open("/legal_notes.html", "_blank");
 }
 
 /**
  * Saves current page and leads to privacy police.
  */
 function toPrivacy() {
-    saveDocName()
-    window.location.href = "/privacy_policy.html";
+  saveDocName();
+  window.location.href = "/privacy_policy.html";
 }
 
 function logOut() {
-    window.location.href = "/login.html";
+  window.location.href = "/login.html";
 }
-
 
 /**
  * After Opening the Help or Privacy Sides, this function leads back to the last visited place.
  */
 function backToOrigin() {
-    let originSideFromLocalStorage = localStorage.getItem('originSide');
+  let originSideFromLocalStorage = localStorage.getItem("originSide");
 
-    if (originSideFromLocalStorage) {
-        let test = JSON.parse(originSideFromLocalStorage);
-        originSide = test;
-        localStorage.removeItem(originSide);
-        window.location.href = "/" + originSide + ".html";
-    }
+  if (originSideFromLocalStorage) {
+    let test = JSON.parse(originSideFromLocalStorage);
+    originSide = test;
+    localStorage.removeItem(originSide);
+    window.location.href = "/" + originSide + ".html";
+  }
 }
 
 /**
  * Saves variables in Backend
  * @param {string} key - Name of the variable
  * @param {any} value - value of the variable
- * @returns 
+ * @returns
  */
 async function setItemInBackend(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
-        .then(res => res.json());
+  const payload = { key, value, token: STORAGE_TOKEN };
+  return fetch(STORAGE_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  }).then((res) => res.json());
 }
-
 
 /**
  * Gets back variables from backend.
  * @param {string} key - name of the variable, that was saved in backend.
- * @returns 
+ * @returns
  */
 async function getItemFromBackend(key) {
-    const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    let response = await fetch(url).then(res => res.json());
-    let result = response.data.value;
-    return JSON.parse(result);
+  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+  let response = await fetch(url).then((res) => res.json());
+  let result = response.data.value;
+  return JSON.parse(result);
 }
 
-
 function showNotification(elementId, targetHref) {
-    document.documentElement.style.setProperty('--notification-top-target', '80vh');
-    document.getElementById(elementId).classList.add('triggered');
-    setTimeout(() => {
-        window.location.href = targetHref;
-    }, 800);
+  document.documentElement.style.setProperty(
+    "--notification-top-target",
+    "80vh"
+  );
+  document.getElementById(elementId).classList.add("triggered");
+  setTimeout(() => {
+    window.location.href = targetHref;
+  }, 800);
 }
 
 function getUserByEmail(email) {
-    return userList.find((user) => user.email === email);
+  return userList.find((user) => user.email === email);
 }

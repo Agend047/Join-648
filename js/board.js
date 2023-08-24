@@ -1,11 +1,7 @@
 async function initBoardPage() {
-  await getTasks();
+  await getDataFromBackend();
   renderSmallCards("toDoDesktop");
   renderSmallCards("toDoMobile");
-}
-
-async function getTasks() {
-  taskList = await getItemFromBackend("taskList");
 }
 
 function renderSmallCards(ID) {

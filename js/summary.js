@@ -1,6 +1,28 @@
-function initSummary() {
+async function initSummary() {
+  await getDataFromBackend();
   loadHelloPageMobile();
   showGreeting("greetingDesktop");
+  showNumberOfTotalTasks();
+}
+
+function showNumberOfTotalTasks() {
+  let tasksCount = document.getElementById("tasksCount");
+  tasksCount.innerHTML = "";
+  let totalTasks = taskList.length;
+  tasksCount.innerHTML = totalTasks;
+}
+
+function showNumberOfTasks() {
+  countTasksInArray("progressCount", "inprogress");
+  countTasksInArray("feedbackCount", "feedback");
+  countTasksInArray("doneCount", "done");
+}
+
+function countTasksInArray(ID, status) {
+  let count = document.getElementById(ID);
+  count.innerHTML = "";
+  let tasksAmount = taskList[i]["status"].filter((x) => x === status).length;
+  count.innerHTML = tasksAmount;
 }
 
 /** Counting all task (.smallCards) in board and displaying the count in a variable on the Summary Page*/
