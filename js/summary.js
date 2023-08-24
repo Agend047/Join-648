@@ -1,9 +1,9 @@
 async function initSummary() {
-  await getDataFromBackend();
   loadHelloPageMobile();
   showGreeting("greetingDesktop");
   greetGuestUser();
   showNumberOfTotalTasks();
+  await getDataFromBackend();
 }
 
 function greetGuestUser() {
