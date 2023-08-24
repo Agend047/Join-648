@@ -303,7 +303,7 @@ function clearInputFields() {
  */
 async function createContact() {
     let newContact = {
-        id: await getID(),
+        id: await getContactID(),
         startingLetter: getStartingLetter(document.getElementById('name-input').value),
         name: document.getElementById('name-input').value,
         e_mail: document.getElementById('email-input').value,
@@ -319,7 +319,7 @@ async function createContact() {
 
 
 /**Counts ID's in backend, and returns one for the new contact. */
-async function getID() {
+async function getContactID() {
     let id = await getItemFromBackend('contactIDcounter');
     let newID = Number(id) + 1;
     await setItemInBackend('contactIDcounter', newID);

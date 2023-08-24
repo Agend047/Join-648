@@ -465,4 +465,8 @@
         background-color: white;
         z-index: 50;
     }
+
+    #delete_question {
+        left: 14vw;
+    }
 }
