@@ -1,15 +1,25 @@
+let currentDraggedElement;
+
 async function initBoardPage() {
   await getDataFromBackend();
-  updateHTML("Desktop");
-  updateHTML("Mobile");
+  renderAllContainersHtml();
 }
 
-function updateHTML(ID) {
-  /*let todo = taskList.filter(t => t["status"] == 'todo');*/
-  const todoContainer = document.getElementById(`todo${ID}`);
+function renderAllContainersHtml() {
+  const statusArr = ['todo', 'inprogress', 'feedback', 'done'];
+  for (let i = 0; i < statusArr.length; i++) {
+    const status = statusArr[i];
+    updateHTML(status + 'Desktop', status);
+    updateHTML(status + 'Mobile', status);
+  }
+}
+
+function updateHTML(ID, status) {
+  let todo = taskList.filter(t => t["status"] == status);
+  const todoContainer = document.getElementById(ID);
   todoContainer.innerHTML = "";
 
-  for (let i = 0; i < taskList.length; i++) {
+  for (let i = 0; i < todo.length; i++) {
     // array später durch 'todo' ersetzen, wenn Status im Array angelegt & gespeichert
     const task = taskList[i];
     let totalSubtasks = getSubtasksCount(i);
@@ -38,11 +48,11 @@ function updateHTML(ID) {
     );
   }
   */
-  renderSmallCard();
+  renderSmallCard(status);
 }
 
-function renderSmallCard() {
-  renderSubtasks();
+function renderSmallCard(status) {
+  renderSubtasks(status);
   renderAssignedBadges();
   renderPrio();
 }
@@ -57,9 +67,25 @@ function assignLabelColor(category) {
   return "#FF7A00";
 }
 
+function startDragging(index) {
+  currentDraggedElement = index;
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function moveTo(status) {
+  taskList[currentDraggedElement]['status'] = status;
+  updateHTML('todoDesktop');
+  updateHTML('progressDesktop');
+  updateHTML('feedbackDesktop');
+  updateHTML('doneDesktop');
+}
+
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
-              <div id="cardSmall-${i}" draggable="true" class="cardSmall" onclick="openCard(${i})">
+              <div id="${i}" draggable="true" ondragstart="startDragging(${i})" class="cardSmall" onclick="openCard(${i})">
                 <div class="category">
                   <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>

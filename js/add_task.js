@@ -429,7 +429,8 @@ async function addTask() {
         dueDate: document.getElementById('due-date-input').value,
         category: document.getElementById('category-input').value,
         subtasks: getSubtasksFromForm(),
-        status: "todo"
+        status: "todo",
+        id: await getID()
     }
     taskList.push(newTask);
     await setItemInBackend('taskList', JSON.stringify(taskList));
@@ -464,3 +465,11 @@ function getAssignedToArrayFromForm() {
     }
     return assignedToArray;
 }
+
+
+async function getTaskID() {
+    let id = await getItemFromBackend('TaskID');
+    let newID = Number(id) + 1;
+    await setItemInBackend('TaskId', newID);
+    return newID;
+} 

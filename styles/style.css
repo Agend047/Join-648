@@ -124,10 +124,6 @@
   }
 }
 
-img {
-  pointer-events: none;
-}
-
 *,
 ::before,
 ::after {
@@ -151,6 +147,13 @@ body {
 main {
   flex: 1;
 }
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  }
 
 a {
   text-decoration: none;
