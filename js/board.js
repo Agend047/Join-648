@@ -252,7 +252,7 @@ function updateProgressBar(subtasksDone, totalSubtasks) {
 }
 
 function openCard(id, i) {
-  let task = findTaskInList(id);
+  let task = getTaskByID(id);
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   largeCard.innerHTML = generateLargeCardHTML(task, i);
@@ -323,7 +323,7 @@ function generateLargeCardHTML(task, i) {
               <div class="btn-seperator"></div>
               <div class="btn">
                 <span class="edit-icon"></span>
-                <span onclick="editTask()">Edit</span>
+                <span onclick="editTask(${task.id})">Edit</span>
               </div>
             </div>
           </div>
@@ -339,7 +339,7 @@ function generateLargeCardHTML(task, i) {
  * @param {Number} taskID - ID ot the to delete Task
  */
 async function deleteTask(taskID) {
-  let taskIndex = getTaskByID(taskID)
+  let taskIndex = getTaskIndexByID(taskID)
 
   taskList.splice(taskIndex, 1)
 
@@ -353,8 +353,8 @@ async function deleteTask(taskID) {
  * @param {Number} taskID - ID of searched Task
  * @returns - Indexof searched Task inside of taskList
  */
-function getTaskByID(taskID) {
-  let task = findTaskInList(taskID);
+function getTaskIndexByID(taskID) {
+  let task = getTaskByID(taskID);
   let taskIndex = taskList.indexOf(task)
   return taskIndex;
 }
@@ -364,9 +364,9 @@ function getTaskByID(taskID) {
  * @param {Number} findID - The Id, we are looking for
  * @returns - the task (Object) we wanted.
  */
-function findTaskInList(findID) {
-  let foundTask = taskList.find(t => t.id === findID);
-  return foundTask
+function getTaskByID(findID) {
+  let task = taskList.find(t => t.id === findID);
+  return task
 }
 
 function closeCard() {
@@ -374,14 +374,15 @@ function closeCard() {
   document.body.style.overflow = "scroll";
 }
 
-function editTask() {
+function editTask(taskID) {
   document.getElementById(`popUp`).classList.add("d-none");
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
-  largeCard.innerHTML = generateEditTaskHTML();
+  largeCard.innerHTML = generateEditTaskHTML(taskID);
 }
 
-function generateEditTaskHTML() {
+function generateEditTaskHTML(taskID) {
+  let task = getTaskByID(taskID);
   return /*html*/ `
   <div class="background">
     <div class="editCard">
@@ -473,6 +474,7 @@ function generateEditTaskHTML() {
                   type="text"
                   placeholder="Enter a title"
                   id="title-input"
+                  value="${task.title}"
                 />
               </div>
               <div class="error-container">
@@ -486,6 +488,7 @@ function generateEditTaskHTML() {
                   required
                   placeholder="Enter a description"
                   id="description-input"
+                  value="${task.description}"
                 ></textarea>
               </div>
               <div class="error-container">
@@ -629,6 +632,7 @@ function generateEditTaskHTML() {
                   type="text"
                   placeholder="dd/mm/yyyy"
                   id="due-date-input"
+                  value="${task.dueDate}"
                 />
                 <img src="./assets/img/event.png" class="input-icon" />
               </div>
