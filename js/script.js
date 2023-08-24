@@ -337,3 +337,5 @@ function logOut() {
     window.sessionStorage.setItem('loggedIn', 'false')
     window.location.href = "/login.html";
 }
+
+

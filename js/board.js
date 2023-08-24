@@ -77,10 +77,11 @@ function allowDrop(event) {
 
 function moveTo(status) {
   taskList[currentDraggedElement]['status'] = status;
-  updateHTML('todoDesktop');
-  updateHTML('progressDesktop');
-  updateHTML('feedbackDesktop');
-  updateHTML('doneDesktop');
+  renderAllContainersHtml()
+  // updateHTML('todoDesktop');
+  // updateHTML('progressDesktop');
+  // updateHTML('feedbackDesktop');
+  // updateHTML('doneDesktop');
 }
 
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {

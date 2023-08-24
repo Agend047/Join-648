@@ -290,7 +290,7 @@ function getContactById(id) {
     return contactList.find((contact) => contact.id === id);
 }
 
-function validateAddTaskForm(e) {
+async function validateAddTaskForm(e) {
     e.preventDefault();
     const form = e.target;
     let formIsValid = true;
@@ -331,7 +331,7 @@ function validateAddTaskForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        addTask();
+        await addTask();
         showNotification('notification', './board.html');
     }
 }
@@ -430,7 +430,7 @@ async function addTask() {
         category: document.getElementById('category-input').value,
         subtasks: getSubtasksFromForm(),
         status: "todo",
-        id: await getID()
+        id: await getTaskID()
     }
     taskList.push(newTask);
     await setItemInBackend('taskList', JSON.stringify(taskList));
@@ -468,7 +468,7 @@ function getAssignedToArrayFromForm() {
 
 
 async function getTaskID() {
-    let id = await getItemFromBackend('TaskID');
+    let id = await getItemFromBackend('TaskId');
     let newID = Number(id) + 1;
     await setItemInBackend('TaskId', newID);
     return newID;
