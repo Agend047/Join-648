@@ -124,6 +124,10 @@
   }
 }
 
+img {
+  pointer-events: none;
+}
+
 *,
 ::before,
 ::after {
