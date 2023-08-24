@@ -39,7 +39,7 @@ function assignLabelColor(category) {
 
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
-              <div class="cardSmall" onclick="openCard(${i})">
+              <div id="cardSmall-${i}" class="cardSmall" onclick="openCard(${i})">
                 <div class="category">
                   <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>

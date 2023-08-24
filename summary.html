@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
     <link rel="icon" href="./assets/img/join_logo_black.png" />
+    <link href="./board.html" rel="import" />
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/board.js"></script>
     <script defer src="./js/summary.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/summary.css" />
   </head>
 
-  <body
-    onload="loadHelloPageMobile(), initTemplates(), showGreeting('greetingDesktop')"
-  >
+  <body onload="initTemplates(), initSummary()">
     <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
@@ -36,15 +36,15 @@
           <div class="card-container">
             <div class="top-row">
               <a href="/board.html" class="tasks-board flex-direction-col">
-                <div class="number">5</div>
+                <div class="number" id="tasksCount">0</div>
                 <span>Tasks in<br />Board</span>
               </a>
               <a href="/board.html" class="tasks-progress flex-direction-col">
-                <div class="number">2</div>
+                <div class="number" id="progressCount">0</div>
                 <span>Tasks In<br />Progress</span>
               </a>
               <a href="/board.html" class="tasks-feedback flex-direction-col">
-                <div class="number">2</div>
+                <div class="number" id="feedbackCount">0</div>
                 <span>Awaiting<br />feedback</span>
               </a>
             </div>
@@ -53,13 +53,13 @@
               <div class="d-flex gap-medium align-items-center">
                 <img src="./assets/img/sum_urgent_icon.png" />
                 <div class="d-flex flex-direction-col">
-                  <div class="number">1</div>
+                  <div class="number" id="urgentCount">0</div>
                   <span>Urgent</span>
                 </div>
               </div>
               <div class="seperator-grey"></div>
               <div class="text-align-left">
-                <div id="deadline">August 07, 2023</div>
+                <div id="deadline"></div>
                 <span>Upcoming Deadline</span>
               </div>
             </a>

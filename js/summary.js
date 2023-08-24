@@ -1,3 +1,29 @@
+function initSummary() {
+  loadHelloPageMobile();
+  showGreeting("greetingDesktop");
+  countTasksInBoard();
+}
+
+/** Counting all task (.smallCards) in board and displaying the count in a variable on the Summary Page*/
+function countTasksInBoard() {
+  const columns = [
+    "toDoDesktop",
+    "progressDesktop",
+    "feedbackDesktop",
+    "doneDesktop",
+  ];
+
+  let totalTasks = 0;
+
+  columns.forEach((columnId) => {
+    const column = document.getElementById(columnId);
+    const cardsInColumn = column.querySelectorAll(".cardSmall");
+    totalTasks += cardsInColumn.length;
+  });
+
+  return totalTasks;
+}
+
 function loadHelloPageMobile() {
   if ((screenType = "mobile")) {
     let helloPage = document.createElement("div");
