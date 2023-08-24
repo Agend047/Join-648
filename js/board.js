@@ -10,7 +10,7 @@ function renderAllContainersHtml() {
   for (let i = 0; i < statusArr.length; i++) {
     const status = statusArr[i];
     updateHTML(status + 'Desktop', status);
-    updateHTML(status + 'Mobile', status);
+    // updateHTML(status + 'Mobile', status);
   }
 }
 
@@ -75,14 +75,11 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   const taskIndex = taskList.findIndex((task) => task.id === currentDraggedElement);
   taskList[taskIndex]['status'] = status;
-  renderAllContainersHtml()
-  // updateHTML('todoDesktop');
-  // updateHTML('progressDesktop');
-  // updateHTML('feedbackDesktop');
-  // updateHTML('doneDesktop');
+  await setItemInBackend('taskList', JSON.stringify(taskList));
+  renderAllContainersHtml();
 }
 
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
