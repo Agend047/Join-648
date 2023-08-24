@@ -390,7 +390,15 @@ function generateEditTaskHTML() {
     ></div>
     <main>
       <form id="addtask-form">
-        <h1 class="main-header">Add task</h1>
+        <div class="large-card-header">
+            
+          <img
+              onclick="closeCard()"
+              id="btnCloseCard"
+              class="btn-close-card"
+              src="./assets/img/close-btn.svg"
+          />
+        </div>
         <div class="form-controls-all">
           <div class="form-controls-section">
             <div class="form-control">
@@ -625,29 +633,12 @@ function generateEditTaskHTML() {
           </div>
         </div>
         <div class="create-btn-container">
-          <button id="clear-btn" class="btn btn-secondary btn-text-icon">
-            <span>Clear</span
-            ><svg
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.0692 12.0001L17.3122 17.2431M6.82617 17.2431L12.0692 12.0001L6.82617 17.2431ZM17.3122 6.75708L12.0682 12.0001L17.3122 6.75708ZM12.0682 12.0001L6.82617 6.75708L12.0682 12.0001Z"
-                stroke="#2A3647"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+          
           <button
             class="btn btn-primary btn-create-task btn-text-icon"
             type="submit"
           >
-            <span>Create Task</span
+            <span>Ok</span
             ><img src="./assets/img/check.png" alt="create task" />
           </button>
         </div>
