@@ -320,7 +320,7 @@ function editTask() {
 function generateEditTaskHTML() {
   return /*html*/ `
   <div class="background">
-    <div class="largeCard">
+    <div class="editCard">
     <dialog id="add-contact-overlay">
       <form method="dialog">
         <button type="button" class="close-icn mobile">
@@ -337,7 +337,7 @@ function generateEditTaskHTML() {
         <img src="./assets/img/add-contact-icn.png" class="user-icn" />
         <div class="form-main">
           <div class="form-control">
-            <div class="input">
+            <div class="input-edit-task">
               <input required type="text" placeholder="Name" id="name-input" />
               <img src="./assets/img/contacts_AddName_icon.png" />
             </div>
@@ -346,7 +346,7 @@ function generateEditTaskHTML() {
             </div>
           </div>
           <div class="form-control">
-            <div class="input">
+            <div class="input-edit-task">
               <input
                 required
                 type="email"
@@ -360,7 +360,7 @@ function generateEditTaskHTML() {
             </div>
           </div>
           <div class="form-control">
-            <div class="input">
+            <div class="input-edit-task">
               <input
                 required
                 type="number"
@@ -388,7 +388,7 @@ function generateEditTaskHTML() {
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
     ></div>
-    <main>
+    <div>
       <form id="addtask-form">
         <div class="large-card-header">
             
@@ -403,7 +403,7 @@ function generateEditTaskHTML() {
           <div class="form-controls-section">
             <div class="form-control">
               <label for="title-input">Title</label>
-              <div class="input">
+              <div class="input-edit-task">
                 <input
                   required
                   type="text"
@@ -417,7 +417,7 @@ function generateEditTaskHTML() {
             </div>
             <div class="form-control">
               <label for="description-input">Description</label>
-              <div class="input">
+              <div class="input-edit-task">
                 <textarea
                   required
                   placeholder="Enter a description"
@@ -430,7 +430,7 @@ function generateEditTaskHTML() {
             </div>
             <div id="assigned-to-form-control" class="form-control">
               <label for="assigned-to-input">Assigned to</label>
-              <div class="input select-input">
+              <div class="input-edit-task select-input">
                 <input
                   readonly
                   required
@@ -472,7 +472,7 @@ function generateEditTaskHTML() {
               <span class="label">Prio</span>
               <div
                 id="prio-inputs"
-                class="input input-radio custom-validation custom-element"
+                class="input-prio-btn input-radio custom-validation custom-element"
               >
                 <div class="radio-button prio-urgent">
                   <label for="urgent" class="label-radio-btn"
@@ -559,7 +559,7 @@ function generateEditTaskHTML() {
             </div>
             <div class="form-control">
               <label for="due-date-input">Due date</label>
-              <div class="input">
+              <div class="input-edit-task">
                 <input
                   required
                   type="text"
@@ -574,7 +574,7 @@ function generateEditTaskHTML() {
             </div>
             <div id="category-form-control" class="form-control">
               <label for="category-input">Category</label>
-              <div class="input select-input">
+              <div class="input-edit-task select-input">
                 <input
                   readonly
                   required
@@ -602,7 +602,7 @@ function generateEditTaskHTML() {
             </div>
             <div class="form-control">
               <label for="subtasks-input">Subtasks</label>
-              <div id="subtasks-container" class="input">
+              <div id="subtasks-container" class="input-edit-task">
                 <input
                   type="text"
                   placeholder="Add new subtask"
@@ -643,7 +643,7 @@ function generateEditTaskHTML() {
           </button>
         </div>
       </form>
-    </main>
+</div>
     <div id="notification" class="notification">
       <span>Task added to board</span>
       <img src="./assets/img/board-icn-small.png" />
