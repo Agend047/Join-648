@@ -380,8 +380,13 @@ a {
   height: 80px;
   background-color: #2a3647;
   color: #cdcdcd;
-  justify-content: space-around;
   z-index: 10;
+}
+
+#mobile_footer_links {
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
 }
 
 .Footer_link_pack {
