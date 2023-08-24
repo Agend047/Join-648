@@ -12,6 +12,7 @@
     <script defer src="./js/generalelements.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/board.css" />
+    <link rel="stylesheet" href="./styles/task.css" />
   </head>
 
   <body onload="initTemplates(), initBoardPage()">
@@ -24,13 +25,13 @@
       include-templates="assets/templates/mobile_template.html"
     ></div>
 
-    <main>
+    <main class="board-main">
       <div id="popUpContainer"></div>
 
       <div class="board-heading-desktop">
         <div class="board-heading">
           <div class="board-heading-mobile">
-            <h1>Board</h1>
+            <h1 class="board-heading-h1">Board</h1>
             <a href="/add_task.html">
               <button>
                 <img
