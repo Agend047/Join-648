@@ -85,7 +85,7 @@ async function moveTo(status) {
 // i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
   return /*html*/ `
-              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id})">
+              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
                 <div class="category">
                   <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                 </div>
@@ -251,8 +251,8 @@ function updateProgressBar(subtasksDone, totalSubtasks) {
   document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
-function openCard(i) {
-  let task = findTaskInList(i);
+function openCard(id, i) {
+  let task = findTaskInList(id);
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   largeCard.innerHTML = generateLargeCardHTML(task, i);
@@ -277,8 +277,7 @@ function generateLargeCardHTML(task, i) {
 
           <div class="large-card-content">
             <h1 class="title-large-card" id="title-${i}">${task.title}</h1>
-            <p class="description" id="description-${i}">${task.description}
-            </p>
+            <p class="description" id="description-${i}">${task.description}</p>
             <table>
               <tr>
                 <td class="col-width">Due date:</td>
@@ -339,12 +338,26 @@ function generateLargeCardHTML(task, i) {
  * Deleting a task out of TaskList
  * @param {Number} taskID - ID ot the to delete Task
  */
-// async function deleteTask(taskID) {
-//   taskList.splice(taskID, 1)
-//   await setItemInBackend('taskList', JSON.stringify(taskList))
-//   closeCard()
-//   renderAllContainersHtml()
-// }
+async function deleteTask(taskID) {
+  let taskIndex = getTaskByID(taskID)
+
+  taskList.splice(taskIndex, 1)
+
+  await setItemInBackend('taskList', JSON.stringify(taskList))
+  closeCard()
+  renderAllContainersHtml()
+}
+
+/**
+ * Gets task throught other function, then gets Index
+ * @param {Number} taskID - ID of searched Task
+ * @returns - Indexof searched Task inside of taskList
+ */
+function getTaskByID(taskID) {
+  let task = findTaskInList(taskID);
+  let taskIndex = taskList.indexOf(task)
+  return taskIndex;
+}
 
 /**
  * Searches for the task within the taskList, by a specific id.
@@ -354,16 +367,6 @@ function generateLargeCardHTML(task, i) {
 function findTaskInList(findID) {
   let foundTask = taskList.find(t => t.id === findID);
   return foundTask
-}
-
-function getIndexInList(term) {
-  let index = -1;
-  taskList.find(function (item, i) {
-    if (item.name === term) {
-      index = i;
-      return i;
-    }
-  });
 }
 
 function closeCard() {
