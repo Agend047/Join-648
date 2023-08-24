@@ -334,6 +334,7 @@ function getUserByEmail(email) {
 /**Setting the  loggedIn variable to false and saving in localstorage and sessionstorage.*/
 function logOut() {
     localStorage.setItem('loggedIn', 'false');
+    sessionStorage.setItem('loggedIn', 'false')
     window.sessionStorage.setItem('loggedIn', 'false')
     window.location.href = "/login.html";
 }
