@@ -790,4 +790,15 @@ input[type="radio"] {
 
 .input-prio-btn {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.radio-button {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+label input {
+  min-width: unset;
 }
