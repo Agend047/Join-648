@@ -428,7 +428,8 @@ async function addTask() {
         priority: getPriorityFromForm(),
         dueDate: document.getElementById('due-date-input').value,
         category: document.getElementById('category-input').value,
-        subtasks: getSubtasksFromForm()
+        subtasks: getSubtasksFromForm(),
+        status: "todo"
     }
     taskList.push(newTask);
     await setItemInBackend('taskList', JSON.stringify(taskList));
