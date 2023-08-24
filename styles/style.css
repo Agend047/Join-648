@@ -335,12 +335,6 @@ a {
   border-radius: 14px;
 }
 
-.float_in_menu {
-  position: absolute;
-  right: -200px;
-  transition: 500ms;
-}
-
 @media (max-width: 900px) {
   #desktop_sider {
     width: 23vw;
