@@ -138,6 +138,7 @@ input {
   width: 100%;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .content h2 {
@@ -151,6 +152,11 @@ input {
 .columns {
   width: 100%;
   margin-bottom: 1.625rem;
+  flex:1;
+}
+
+.status-column {
+  min-height: 30em;
 }
 
 .col-title {
