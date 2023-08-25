@@ -382,7 +382,41 @@ function editTask(taskID) {
   let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
+  markPrioForEdit(taskID);
 }
+
+/**
+ * Generates Contact-Initial Balls as SVG Elements
+ * @param {Number} taskID -ID of used Task
+ * @returns SVG Elements for Edit-Task Side
+ */
+function showAssignedContacts(taskID) {
+  let task = getTaskByID(taskID)
+  let result = '';
+  for (contact of task.assignedTo) {
+    console.log(task.assignedTo);
+    result += renderContactBubbleHtml(contact);
+  }
+  return result;
+}
+
+/**
+ * Checks priority field in Edit-Task
+ * @param {Number} taskID -ID of used Task
+ */
+function markPrioForEdit(taskID) {
+  let task = getTaskByID(taskID)
+  let div = document.getElementById('prio-inputs');
+  let prioFields = div.querySelectorAll('input');
+  for (i in prioFields) {
+    if (prioFields[i].value == task.priority) {
+      prioFields[i].checked = true;
+      break
+    }
+  }
+}
+
+
 
 function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
@@ -492,8 +526,7 @@ function generateEditTaskHTML(taskID) {
                   required
                   placeholder="Enter a description"
                   id="description-input"
-                  value="${task.description}"
-                ></textarea>
+                  >${task.description}</textarea>
               </div>
               <div class="error-container">
                 <div class="error-message" id="description-input-error"></div>
@@ -534,7 +567,9 @@ function generateEditTaskHTML(taskID) {
                   ><img src="./assets/img/contacts_newContact_icon.png" />
                 </button>
               </div>
-              <div id="selected-contacts" class="selected-contacts"></div>
+              <div id="selected-contacts" class="selected-contacts">
+                ${showAssignedContacts(taskID)}
+              </div>
             </div>
           </div>
           <div class="vertical-separator d-none"></div>
@@ -578,6 +613,7 @@ function generateEditTaskHTML(taskID) {
                       type="radio"
                       name="prio-input"
                       value="medium"
+                      checked
                     />
                     <svg
                       width="21"
@@ -604,6 +640,7 @@ function generateEditTaskHTML(taskID) {
                       type="radio"
                       name="prio-input"
                       value="low"
+                      
                     />
                     <svg
                       width="21"

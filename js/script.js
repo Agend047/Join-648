@@ -340,3 +340,31 @@ function logOut() {
 }
 
 
+function renderContactBubbleHtml(contact) {
+    return /*html*/`<svg
+    width="42"
+    height="42"
+    viewBox="0 0 42 42"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="contact-bubble-${contact.id}"
+  >
+    <circle
+      cx="21"
+      cy="21"
+      r="20"
+      fill="${contact.color}"
+      stroke="white"
+      stroke-width="2"
+    />
+    <text
+      x="21"
+      y="21"
+      alignment-baseline="central"
+      text-anchor="middle"
+      fill="white"
+    >
+    ${contact.initials}
+    </text>
+  </svg>`
+}
