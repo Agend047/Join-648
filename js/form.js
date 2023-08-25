@@ -17,6 +17,9 @@ function initForm() {
             case 'addtask-form':
                 validationFunction = validateAddTaskForm;
                 break;
+            case 'overlay-add-contact-form':
+                validationFunction = validateOverlayAddcontactForm;
+                break;
             default:
                 validationFunction = validateStandardForm;
                 break;
