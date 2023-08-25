@@ -2,6 +2,7 @@ let user = {
   name: "Vorname Nachname",
   email: "email@email.de",
   password: "test123",
+  initials: "VN",
 };
 
 let contact = {

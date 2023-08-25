@@ -33,14 +33,15 @@ async function addUser() {
     let newUser = {
         name: document.getElementById('name-input').value,
         email: document.getElementById('email-input').value,
-        password: document.getElementById('password-input').value //ja, wir wissen, dass man das in der Praxis nicht so macht =)
+        password: document.getElementById('password-input').value, //ja, wir wissen, dass man das in der Praxis nicht so macht =)
+        initials: getInitials(),
     }
     userList.push(newUser);
     await setItemInBackend('userList', JSON.stringify(userList));
 }
 
 function showSignUpNotification(elementId, refElementId) {
-    let top = document.getElementById(refElementId).getBoundingClientRect().top + 'px';    
+    let top = document.getElementById(refElementId).getBoundingClientRect().top + 'px';
     document.documentElement.style.setProperty('--notification-top-target', top);
     document.getElementById(elementId).classList.add('triggered');
     setTimeout(() => {

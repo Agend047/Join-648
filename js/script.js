@@ -27,6 +27,7 @@ function verifyUserStatus() {
     let status = JSON.parse(localStorage.getItem("loggedIn"));
     if (status) {
         loginData = JSON.parse(localStorage.getItem("loginData"));
+        activeUser = JSON.parse(sessionStorage.getItem('activeUser'));
     } else {
         status = JSON.parse(sessionStorage.getItem("loggedIn"));
     }
@@ -165,7 +166,7 @@ function unloadTemplate(toUnloadID) {
 function showInitialsHeader(userInitials) {
     let svgText = document.getElementById("svg_text");
     if (userInitials) {
-        svgText.textContent = userInitials;
+        svgText.textContent = activeUser.initials;
     } else {
         svgText.textContent = "G";
     }
@@ -245,6 +246,25 @@ function getDocumentName() {
     var path = path.split("/").pop();
     let page = path.split(".html");
     return page[0];
+}
+
+/**
+ * @returns Initials of the name in the input field, used for Contacts and new Users
+ */
+function getInitials() {
+    let name = document.getElementById('name-input');
+    let nameArray = name.value.split(' ');
+    return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
+}
+
+/**
+ * Gets first letter of a string for Initials and startingletter of contacts, as well as for User initials
+ * @param {String} toGet - The string, from wich we need the first letter
+ * @returns first letter of a word in Uppercase
+ */
+function getStartingLetter(toGet) {
+    let nameArray = toGet.split('');
+    return nameArray[0].toUpperCase();
 }
 
 /**
