@@ -118,6 +118,7 @@
 
 #contacts_stage_workBtn_div {
     margin-top: 8px;
+    align-items: center;
 }
 
 #stage_head_right {
@@ -182,6 +183,11 @@
 }
 
 @media (max-width: 980px) {
+
+    .side_header {
+        margin-left: 0;
+    }
+
     .Hide_at_980 {
         display: none;
     }
@@ -189,6 +195,18 @@
     .Main_container {
         margin-left: 24vw;
     }
+
+    #contacts_stage_workBtn_div {
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    #delete_contact_btn {
+        padding-left: 0;
+        padding-top: 10px;
+    }
+
+
 }
 
 @media (max-width: 900px) {}

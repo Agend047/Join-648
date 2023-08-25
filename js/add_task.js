@@ -44,6 +44,7 @@ function initClearBtn(ev) {
         document.getElementById('selected-contacts').innerHTML = '';
         document.getElementById('subtasks-list').innerHTML = '';
         renderAssignedToContactList(contactList);
+        selectedContactIds = [];
     });
 }
 
@@ -265,7 +266,6 @@ function toggleContactSelection(event) {
         selectedContactsEl.getElementsByClassName('contact-bubble-' + listItem.value)[0].remove();
         selectedContactIds.splice(selectedContactIds.indexOf(listItem.value), 1);
     }
-    console.log(selectedContactIds);
 }
 
 
@@ -348,8 +348,7 @@ async function validateAddTaskForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        await addTask();
-        showNotification('notification', './board.html');
+        await saveTask();
     }
 }
 
@@ -443,8 +442,17 @@ function filterContactListByName(nameQuery) {
     return results;
 }
 
-async function addTask() {
+async function saveTask() {
     let taskList = await getItemFromBackend('taskList');
+    let status;
+    let id;
+    if (selectedTask !== null) {
+        id = selectedTask.id;
+        status = selectedTask.status;
+    } else {
+        id = await getTaskID();
+        status = "todo";
+    }
     let newTask = {
         title: document.getElementById('title-input').value,
         description: document.getElementById('description-input').value,
@@ -453,11 +461,19 @@ async function addTask() {
         dueDate: document.getElementById('due-date-input').value,
         category: document.getElementById('category-input').value,
         subtasks: getSubtasksFromForm(),
-        status: "todo",
-        id: await getTaskID()
+        status: status,
+        id: id
     }
-    taskList.push(newTask);
-    await setItemInBackend('taskList', JSON.stringify(taskList));
+    if (selectedTask === null) {
+        taskList.push(newTask);
+        await setItemInBackend('taskList', JSON.stringify(taskList));
+        showNotification('notification', './board.html');
+    } else {
+        taskList[getTaskIndexByID(selectedTask.id)] = newTask;
+        await setItemInBackend('taskList', JSON.stringify(taskList));
+        closeCard('editPopUp');
+        initBoardPage()
+    }
 }
 
 function getSubtasksFromForm() {

@@ -1,4 +1,5 @@
 let currentDraggedElement;
+let selectedTask = null;
 
 async function initBoardPage() {
   await getDataFromBackend();
@@ -324,9 +325,9 @@ function generateLargeCardHTML(task, i) {
                 <span>Delete</span>
               </div>
               <div class="btn-seperator"></div>
-              <div class="footer-btn">
+              <div onclick="editTask(${task.id}); initAddTaskPage()" class="footer-btn">
                 <span class="edit-icon"></span>
-                <span onclick="editTask(${task.id}); initAddTaskPage()">Edit</span>
+                <span>Edit</span>
               </div>
             </div>
           </div>
@@ -346,7 +347,7 @@ async function deleteTask(taskID) {
   taskList.splice(taskIndex, 1);
 
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard();
+  closeCard('popUp');
   renderAllContainersHtml();
 }
 
@@ -377,11 +378,21 @@ function closeCard(ID) {
 }
 
 function editTask(taskID) {
+  selectedTask = getTaskByID(taskID);
   document.getElementById("popUp").style.display = "none";
   let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
   markPrioForEdit(taskID);
+  setSelectedContactIdsArray(selectedTask['assignedTo']);
+}
+
+function setSelectedContactIdsArray(selectedContacts) {
+  selectedContactIds = [];
+  for (let i = 0; i < selectedContacts.length; i++) {
+    const contact = selectedContacts[i];
+    selectedContactIds.push(contact.id);
+  }
 }
 
 /**
@@ -684,7 +695,7 @@ function generateEditTaskHTML(taskID) {
                   readonly
                   required
                   id="category-input"
-                  value="Select task category"
+                  value="${task.category}"
                   class="custom-validation"
                 />
                 <img
