@@ -165,7 +165,7 @@ function unloadTemplate(toUnloadID) {
  */
 function showInitialsHeader(userInitials) {
     let svgText = document.getElementById("svg_text");
-    if (userInitials) {
+    if (activeUser) {
         svgText.textContent = activeUser.initials;
     } else {
         svgText.textContent = "G";
