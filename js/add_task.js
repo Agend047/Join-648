@@ -471,6 +471,8 @@ async function saveTask() {
     } else {
         taskList[getTaskIndexByID(selectedTask.id)] = newTask;
         await setItemInBackend('taskList', JSON.stringify(taskList));
+        closeCard('editPopUp');
+        initBoardPage()
     }
 }
 

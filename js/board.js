@@ -695,7 +695,7 @@ function generateEditTaskHTML(taskID) {
                   readonly
                   required
                   id="category-input"
-                  value="Select task category"
+                  value="${task.category}"
                   class="custom-validation"
                 />
                 <img
