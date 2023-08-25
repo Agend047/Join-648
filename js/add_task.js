@@ -316,19 +316,7 @@ async function validateOverlayAddcontactForm(e) {
 }
 
 async function addContactWithinTaskForm() {
-    let name = document.getElementById('name-input').value;
-    let email = document.getElementById('email-input').value;
-    let phone = document.getElementById('phone-input').value;
-    let newContact = {
-        startingLetter: name.substring(0, 1),
-        name: name,
-        e_mail: email,
-        phone: phone,
-        initials: name.split(' ').map((el) => el.substring(0, 1)).join(''),
-        color: getColor(),
-        id: await getContactID()
-    }
-    contactList.push(newContact);
+    const newContact = await createContact();
     sortContacts();
     await setItemInBackend('contactList', JSON.stringify(contactList));
     const assignedtoContactList = document.getElementById('assigned-to-options');
