@@ -31,7 +31,8 @@ async function showContacts() {
                     <p class="Mail_text">${contact.e_mail}</p>
                 </div>
             </span>
-        `    }
+        `
+    }
 }
 
 /**sets shader */
@@ -81,7 +82,7 @@ function openContact(i) {
             <div id="initial_ball_big" class="big_ball d-flex" style="background-color: ${contact.color}">${contact.initials}</div>
             <div id="stage_head_right">
                 <t id="contact_name">${contact.name}</t>
-                <div id="contacts_stage_workBtn_div"  class=" d-flex align-items-center">
+                <div id="contacts_stage_workBtn_div"  class=" d-flex">
                     <a href="#" onclick="startEditProcess(${i})" id="edit_contact_btn" class="Contact_stage_btn">
                         <img src="assets/img/contacts_editContact_icon.png" alt="">
                                 Edit

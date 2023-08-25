@@ -325,9 +325,9 @@ function generateLargeCardHTML(task, i) {
                 <span>Delete</span>
               </div>
               <div class="btn-seperator"></div>
-              <div class="footer-btn">
+              <div onclick="editTask(${task.id}); initAddTaskPage()" class="footer-btn">
                 <span class="edit-icon"></span>
-                <span onclick="editTask(${task.id}); initAddTaskPage()">Edit</span>
+                <span>Edit</span>
               </div>
             </div>
           </div>
@@ -347,7 +347,7 @@ async function deleteTask(taskID) {
   taskList.splice(taskIndex, 1);
 
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard();
+  closeCard('popUp');
   renderAllContainersHtml();
 }
 
