@@ -1,4 +1,5 @@
 let currentDraggedElement;
+let selectedTask = null;
 
 async function initBoardPage() {
   await getDataFromBackend();
@@ -377,11 +378,21 @@ function closeCard(ID) {
 }
 
 function editTask(taskID) {
+  selectedTask = getTaskByID(taskID);
   document.getElementById("popUp").style.display = "none";
   let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
   markPrioForEdit(taskID);
+  setSelectedContactIdsArray(selectedTask['assignedTo']);
+}
+
+function setSelectedContactIdsArray(selectedContacts) {
+  selectedContactIds = [];
+  for (let i = 0; i < selectedContacts.length; i++) {
+    const contact = selectedContacts[i];
+    selectedContactIds.push(contact.id);
+  }
 }
 
 /**
