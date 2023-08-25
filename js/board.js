@@ -461,7 +461,7 @@ function generateEditTaskHTML(taskID) {
         <div class="edit-card-header">
             
           <img
-              onclick="closeCard(${i})"
+              onclick="closeCard()"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
