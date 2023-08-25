@@ -267,12 +267,12 @@ function openCard(id, i) {
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
-      <div class="background" onclick="closeCard()">
+      <div class="background" onclick="closeCard(${i})">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
             <div id="categoryLabel" class="categoryLabel">${task.category}</div>
             <img
-              onclick="closeCard()"
+              onclick="closeCard(${i})"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -461,7 +461,7 @@ function generateEditTaskHTML(taskID) {
         <div class="edit-card-header">
             
           <img
-              onclick="closeCard()"
+              onclick="closeCard(${i})"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
