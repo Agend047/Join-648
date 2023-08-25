@@ -329,6 +329,7 @@ async function addContactWithinTaskForm() {
         id: await getContactID()
     }
     contactList.push(newContact);
+    sortContacts();
     await setItemInBackend('contactList', JSON.stringify(contactList));
     const assignedtoContactList = document.getElementById('assigned-to-options');
     selectedContactIds.push(newContact.id);
