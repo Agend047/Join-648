@@ -6,16 +6,16 @@ async function initBoardPage() {
 }
 
 function renderAllContainersHtml() {
-  const statusArr = ['todo', 'inprogress', 'feedback', 'done'];
+  const statusArr = ["todo", "inprogress", "feedback", "done"];
   for (let i = 0; i < statusArr.length; i++) {
     const status = statusArr[i];
-    updateHTML(status + 'Desktop', status);
+    updateHTML(status + "Desktop", status);
     // updateHTML(status + 'Mobile', status);
   }
 }
 
 function updateHTML(ID, status) {
-  let filteredTasks = taskList.filter(t => t["status"] == status);
+  let filteredTasks = taskList.filter((t) => t["status"] == status);
   const todoContainer = document.getElementById(ID);
   todoContainer.innerHTML = "";
 
@@ -76,9 +76,11 @@ function allowDrop(event) {
 }
 
 async function moveTo(status) {
-  const taskIndex = taskList.findIndex((task) => task.id === currentDraggedElement);
-  taskList[taskIndex]['status'] = status;
-  await setItemInBackend('taskList', JSON.stringify(taskList));
+  const taskIndex = taskList.findIndex(
+    (task) => task.id === currentDraggedElement
+  );
+  taskList[taskIndex]["status"] = status;
+  await setItemInBackend("taskList", JSON.stringify(taskList));
   renderAllContainersHtml();
 }
 
@@ -218,7 +220,9 @@ function generateAssignedUserListItemHTML(contact) {
 function renderSubtasks(filteredTasks) {
   for (let i = 0; i < filteredTasks.length; i++) {
     const filteredTask = filteredTasks[i];
-    const subtask = document.getElementById(`progress-section-${filteredTask.id}`);
+    const subtask = document.getElementById(
+      `progress-section-${filteredTask.id}`
+    );
     const assignedSubtasks = filteredTask["subtasks"];
     hideSubtaskIfUnassigned(subtask, assignedSubtasks);
   }
@@ -316,12 +320,12 @@ function generateLargeCardHTML(task, i) {
             </table>
 
             <div class="large-card-footer">
-              <div class="btn" onclick="deleteTask(${task.id})">
+              <div class="footer-btn" onclick="deleteTask(${task.id})">
                 <span class="delete-icon"></span>
                 <span>Delete</span>
               </div>
               <div class="btn-seperator"></div>
-              <div class="btn">
+              <div class="footer-btn">
                 <span class="edit-icon"></span>
                 <span onclick="editTask(${task.id})">Edit</span>
               </div>
@@ -333,19 +337,18 @@ function generateLargeCardHTML(task, i) {
   `;
 }
 
-
 /**
  * Deleting a task out of TaskList
  * @param {Number} taskID - ID ot the to delete Task
  */
 async function deleteTask(taskID) {
-  let taskIndex = getTaskIndexByID(taskID)
+  let taskIndex = getTaskIndexByID(taskID);
 
-  taskList.splice(taskIndex, 1)
+  taskList.splice(taskIndex, 1);
 
-  await setItemInBackend('taskList', JSON.stringify(taskList))
-  closeCard()
-  renderAllContainersHtml()
+  await setItemInBackend("taskList", JSON.stringify(taskList));
+  closeCard();
+  renderAllContainersHtml();
 }
 
 /**
@@ -355,7 +358,7 @@ async function deleteTask(taskID) {
  */
 function getTaskIndexByID(taskID) {
   let task = getTaskByID(taskID);
-  let taskIndex = taskList.indexOf(task)
+  let taskIndex = taskList.indexOf(task);
   return taskIndex;
 }
 
@@ -365,8 +368,8 @@ function getTaskIndexByID(taskID) {
  * @returns - the task (Object) we wanted.
  */
 function getTaskByID(findID) {
-  let task = taskList.find(t => t.id === findID);
-  return task
+  let task = taskList.find((t) => t.id === findID);
+  return task;
 }
 
 function closeCard() {
@@ -455,7 +458,7 @@ function generateEditTaskHTML(taskID) {
     ></div>
     <div>
       <form id="addtask-form">
-        <div class="large-card-header">
+        <div class="edit-card-header">
             
           <img
               onclick="closeCard()"
@@ -467,7 +470,7 @@ function generateEditTaskHTML(taskID) {
         <div class="form-controls-all">
           <div class="form-controls-section">
             <div class="form-control">
-              <label for="title-input">Title</label>
+              <label class="edit-title" for="title-input">Title</label>
               <div class="input-edit-task">
                 <input
                   required
@@ -539,7 +542,7 @@ function generateEditTaskHTML(taskID) {
               <span class="label">Prio</span>
               <div
                 id="prio-inputs"
-                class="input-prio-btn input-radio custom-validation custom-element"
+                class="input-prio-container input-radio custom-validation custom-element"
               >
                 <div class="radio-button prio-urgent">
                   <label for="urgent" class="label-radio-btn"
@@ -634,7 +637,7 @@ function generateEditTaskHTML(taskID) {
                   id="due-date-input"
                   value="${task.dueDate}"
                 />
-                <img src="./assets/img/event.png" class="input-icon" />
+                <img src="./assets/img/event.png" class="edit-input-icon" />
               </div>
               <div class="error-container">
                 <div class="error-message" id="due-date-input-error"></div>
@@ -678,18 +681,18 @@ function generateEditTaskHTML(taskID) {
                 />
                 <img
                   src="./assets/img/subtask-plus.png"
-                  class="input-icon cursor-pointer"
+                  class="edit-input-icon cursor-pointer"
                   id="add-subtask"
                 />
                 <img
                   src="./assets/img/subtask-cancel.png"
-                  class="input-icon d-none cursor-pointer"
+                  class="edit-input-icon d-none cursor-pointer"
                   id="cancel-subtask"
                 />
                 <img src="./assets/img/subtask-separator.png" class="d-none" />
                 <img
                   src="./assets/img/subtask-save.png"
-                  class="input-icon d-none cursor-pointer"
+                  class="edit-input-icon d-none cursor-pointer"
                   id="save-subtask"
                 />
               </div>

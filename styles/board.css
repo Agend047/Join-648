@@ -2,8 +2,8 @@ header {
   z-index: 0 !important;
 }
 
-#desktop_sider {
-  z-index: 0 !important;
+#mobile-template {
+  z-index: 0;
 }
 
 .board-main {
@@ -523,7 +523,7 @@ input {
 .largeCard {
   display: flex;
   width: 90vw;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 50px);
   max-height: 860px;
   font-size: 1rem;
   padding: 2rem 1.5rem;
@@ -533,9 +533,14 @@ input {
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
   overflow-x: auto;
-  overflow-y: scroll;
-  scrollbar-width: none;
   word-wrap: break-word;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.largeCard::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
 }
 
 .large-card-content {
@@ -613,32 +618,44 @@ td {
   padding: 0;
 }
 
+.footer-btn span {
+  font-size: 1rem;
+}
+
+.footer-btn {
+  display: flex;
+  font-weight: 400;
+  gap: 0.4rem;
+  padding: 0;
+  cursor: pointer;
+}
+
 .btn span {
   font-size: 1rem;
 }
 
-.btn span.delete-icon {
+.footer-btn span.delete-icon {
   background: url(/assets/img/contacts_deleteContacts_icon.png) no-repeat;
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.btn span.edit-icon {
+.footer-btn span.edit-icon {
   background: url(/assets/img/contacts_editContact_icon.png) no-repeat;
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.btn:hover span {
+.footer-btn:hover span {
   color: var(--accent-color);
   font-weight: 700;
 }
 
-.btn:hover span.delete-icon {
+.footer-btn:hover span.delete-icon {
   background: url(/assets/img/contacts_deleteContacts-active_icon.png) no-repeat;
 }
 
-.btn:hover span.edit-icon {
+.footer-btn:hover span.edit-icon {
   background: url(/assets/img/contacts_editContacts-active_icon.png) no-repeat;
 }
 
@@ -761,17 +778,37 @@ input[type="radio"] {
 .editCard {
   display: flex;
   width: 90vw;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 50px);
   max-height: 860px;
   font-size: 1rem;
+  padding: 0rem 1.5rem 0 1.5rem;
   flex-direction: column;
   border-radius: 1.875rem;
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
   overflow-x: auto;
-  overflow-y: scroll;
-  scrollbar-width: none;
   word-wrap: break-word;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.editCard::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
+
+.edit-card-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding-block-start: 1.5em;
+  padding-block-end: 0.5em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-title {
+  margin-block-start: 0.2em;
 }
 
 .input-edit-task {
@@ -788,17 +825,76 @@ input[type="radio"] {
   margin-block-start: 0.5em;
 }
 
-.input-prio-btn {
+.input-prio-container {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   background-color: white;
+  margin-top: 0.5em;
 }
 
 .radio-button {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  margin: 2px;
 }
 
 label input {
   min-width: unset;
+}
+
+.edit-input-icon:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 425px) {
+  .radio-button {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (min-width: 450px) {
+  .input-prio-container {
+    justify-content: space-between;
+  }
+
+  .radio-button {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+@media (min-width: 600px) {
+  .editCard {
+    width: 32.8125rem;
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 820px) {
+  .editCard {
+    height: auto;
+    max-height: 91vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  form {
+    max-width: 440px;
+  }
+
+  .form-controls-all {
+    display: unset;
+  }
+
+  .vertical-separator {
+    display: none;
+  }
+
+  .form-control {
+    width: unset;
+  }
 }

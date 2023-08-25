@@ -9,6 +9,7 @@
     <script defer src="./js/script.js"></script>
     <script defer src="./js/board.js"></script>
     <script defer src="./js/summary.js"></script>
+    <script defer src="./js/add_task.js"></script>
     <script defer src="./js/generalelements.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/task.css" />
@@ -239,16 +240,32 @@
           </div>
 
           <div class="columns">
-            <div id="todoDesktop" ondragover='allowDrop(event)' ondrop='moveTo("todo")'>
+            <div
+              id="todoDesktop"
+              ondragover="allowDrop(event)"
+              ondrop='moveTo("todo")'
+            >
               <div class="placeholder">No tasks To do</div>
             </div>
-            <div id="inprogressDesktop" ondragover='allowDrop(event)' ondrop='moveTo("inprogress")'>
+            <div
+              id="inprogressDesktop"
+              ondragover="allowDrop(event)"
+              ondrop='moveTo("inprogress")'
+            >
               <div class="placeholder">No tasks In progress</div>
             </div>
-            <div id="feedbackDesktop" ondragover='allowDrop(event)' ondrop='moveTo("feedback")'>
+            <div
+              id="feedbackDesktop"
+              ondragover="allowDrop(event)"
+              ondrop='moveTo("feedback")'
+            >
               <div class="placeholder">No tasks Await feedback</div>
             </div>
-            <div id="doneDesktop" ondragover='allowDrop(event)'ondrop='moveTo("done")'>
+            <div
+              id="doneDesktop"
+              ondragover="allowDrop(event)"
+              ondrop='moveTo("done")'
+            >
               <div class="placeholder">No tasks Done</div>
             </div>
           </div>

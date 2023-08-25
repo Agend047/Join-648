@@ -144,6 +144,11 @@ body {
   flex-direction: column;
 }
 
+/* scrollable without scrollbar */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 main {
   flex: 1;
 }
@@ -153,7 +158,7 @@ img {
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  }
+}
 
 a {
   text-decoration: none;
