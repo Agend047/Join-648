@@ -267,7 +267,6 @@ function openCard(id, i) {
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
-      <div class="background" onclick="closeCard('popUp')">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
             <div id="categoryLabel" class="categoryLabel">${task.category}</div>
@@ -332,7 +331,7 @@ function generateLargeCardHTML(task, i) {
             </div>
           </div>
         </div>
-      </div>
+        <div class="background" onclick="closeCard('popUp')"></div>
     </div>
   `;
 }
@@ -373,12 +372,12 @@ function getTaskByID(findID) {
 }
 
 function closeCard(ID) {
-  document.getElementById(ID).classList.add("d-none");
+  document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
 }
 
 function editTask(taskID) {
-  document.getElementById(`popUp`).classList.add("d-none");
+  document.getElementById("popUp").style.display = "none";
   let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
@@ -388,7 +387,6 @@ function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
   return /*html*/ `
   <div id="editPopUp" class="popUp">
-  <div class="background" onclick="closeCard('editPopUp')">
     <div class="editCard">
     <!-- <dialog id="add-contact-overlay">
       <form method="dialog">
@@ -721,7 +719,7 @@ function generateEditTaskHTML(taskID) {
       <img src="./assets/img/board-icn-small.png" />
     </div>
     </div>
-    </div>
+    <div class="background" onclick="closeCard('editPopUp')"></div>
   </div>
   `;
 }
