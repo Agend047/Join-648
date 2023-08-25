@@ -267,12 +267,12 @@ function openCard(id, i) {
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
-      <div class="background" onclick="closeCard(${i})">
+      <div class="background" onclick="closeCard('popUp')">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
             <div id="categoryLabel" class="categoryLabel">${task.category}</div>
             <img
-              onclick="closeCard(${i})"
+              onclick="closeCard('popUp')"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -372,8 +372,8 @@ function getTaskByID(findID) {
   return task;
 }
 
-function closeCard() {
-  document.getElementById(`popUp`).classList.add("d-none");
+function closeCard(ID) {
+  document.getElementById(ID).classList.add("d-none");
   document.body.style.overflow = "scroll";
 }
 
@@ -387,7 +387,8 @@ function editTask(taskID) {
 function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
   return /*html*/ `
-  <div class="background">
+  <div id="editPopUp" class="popUp">
+  <div class="background" onclick="closeCard('editPopUp')">
     <div class="editCard">
     <dialog id="add-contact-overlay">
       <form method="dialog">
@@ -461,7 +462,7 @@ function generateEditTaskHTML(taskID) {
         <div class="edit-card-header">
             
           <img
-              onclick="closeCard(${i})"
+              onclick="closeCard('editPopUp')"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -714,12 +715,12 @@ function generateEditTaskHTML(taskID) {
           </button>
         </div>
       </form>
-</div>
+  
     <div id="notification" class="notification">
       <span>Task added to board</span>
       <img src="./assets/img/board-icn-small.png" />
     </div>
-      
+    </div>
     </div>
   </div>
   `;
