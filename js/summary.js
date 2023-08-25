@@ -1,22 +1,10 @@
-function initSummary() {
-  //getLoggedInUser();
-  updateHTML();
-}
-
-async function updateHTML() {
+async function initSummary() {
   greetUser();
   await getDataFromBackend();
   showTotalTasks();
   showTasks();
   showUpcomingDeadline();
 }
-
-/*
-function getLoggedInUser() {
-  let loggedInUser = localStorage.getItem("activeUser");
-  let username = loggedInUser[0];
-  document.getElementById("userNameDesktop").innerHTML = username;
-}*/
 
 function greetUser() {
   const isGuestUser = location.search.includes("guestuser=true");
@@ -25,16 +13,16 @@ function greetUser() {
     loadHelloPageMobile();
     greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");
   }
-  //if (screenType === "mobile" && isLoggedInUser) {
-  //  loadHelloPageMobile();
-  //}
-  else if (screenType === "desktop" && isGuestUser) {
+  if (screenType === "mobile" && activeUser) {
+    loadHelloPageMobile();
+    document.getElementById("userNameMobile").innerHTML = getUserName();
+  } else if (screenType === "desktop" && isGuestUser) {
     showGreeting("greetingDesktop");
     greetGuestUser(isGuestUser, "greetingDesktop", "userNameDesktop");
+  } else if (screenType === "desktop" && activeUser) {
+    showGreeting("greetingDesktop");
+    document.getElementById("userNameDesktop").innerHTML = getUserName();
   }
-  // else if (screenType === "desktop" && isLoggedInUser) {
-  //  showGreeting("greetingDesktop");
-  //}
 }
 
 function greetGuestUser(isGuestUser, greetingID, nameID) {

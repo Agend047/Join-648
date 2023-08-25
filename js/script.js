@@ -24,37 +24,44 @@ let maxContactId;
  * If not logged in, acess to former sites will be denied.
  */
 function verifyUserStatus() {
-    let status = JSON.parse(localStorage.getItem("loggedIn"));
-    if (status) {
-        loginData = JSON.parse(localStorage.getItem("loginData"));
-        activeUser = JSON.parse(sessionStorage.getItem('activeUser'));
-    } else {
-        status = JSON.parse(sessionStorage.getItem("loggedIn"));
-    }
-    loggedIn = status;
-    if (
-        !window.location.href.endsWith("login.html") &&
-        !window.location.href.endsWith("forgotpassword.html") &&
-        !window.location.href.endsWith("resetpassword.html") &&
-        !window.location.href.endsWith("signup.html") &&
-        !window.location.href.endsWith("privacy_policy.html") &&
-        !window.location.href.endsWith("legal_notes.html") &&
-        !loggedIn
-    ) {
-        window.location.href = "./login.html";
-    }
+  let status = JSON.parse(localStorage.getItem("loggedIn"));
+  if (status) {
+    loginData = JSON.parse(localStorage.getItem("loginData"));
+    activeUser = JSON.parse(sessionStorage.getItem("activeUser"));
+  } else {
+    status = JSON.parse(sessionStorage.getItem("loggedIn"));
+  }
+  loggedIn = status;
+  if (
+    !window.location.href.endsWith("login.html") &&
+    !window.location.href.endsWith("forgotpassword.html") &&
+    !window.location.href.endsWith("resetpassword.html") &&
+    !window.location.href.endsWith("signup.html") &&
+    !window.location.href.endsWith("privacy_policy.html") &&
+    !window.location.href.endsWith("legal_notes.html") &&
+    !loggedIn
+  ) {
+    window.location.href = "./login.html";
+  }
+}
 
+function getUserName() {
+  if (loginData) {
+    return loginData.name;
+  } else {
+    return "Guest User";
+  }
 }
 
 async function getDataFromBackend() {
-    taskList = await getItemFromBackend("taskList");
-    userList = await getItemFromBackend("userList");
-    contactList = await getItemFromBackend("contactList");
+  taskList = await getItemFromBackend("taskList");
+  userList = await getItemFromBackend("userList");
+  contactList = await getItemFromBackend("contactList");
 }
 
 async function initForAllPages() {
-    verifyUserStatus();
-    await getDataFromBackend();
+  verifyUserStatus();
+  await getDataFromBackend();
 }
 
 initForAllPages();
@@ -74,8 +81,8 @@ initForAllPages();
  * @param {boolean} bool - is only true, when Menu Links shall not be loaded into Sider.
  */
 function initTemplates(bool) {
-    bool ? (hideSiderMenu = true) : (hideSiderMenu = false);
-    getTemplates();
+  bool ? (hideSiderMenu = true) : (hideSiderMenu = false);
+  getTemplates();
 }
 
 /**
@@ -83,36 +90,36 @@ function initTemplates(bool) {
  * @returns  form of actual Screen.
  */
 function getScreenType() {
-    let docWidth = window.innerWidth;
-    if (docWidth < 820) {
-        screenType = "mobile";
-    } else if (docWidth >= 820) {
-        screenType = "desktop";
-    }
-    return screenType;
+  let docWidth = window.innerWidth;
+  if (docWidth < 820) {
+    screenType = "mobile";
+  } else if (docWidth >= 820) {
+    screenType = "desktop";
+  }
+  return screenType;
 }
 
 /**
  * Loads in the needed Templates for Desktop or Mobile Version
  */
 async function getTemplates() {
-    getScreenType();
-    if (screenType == "mobile") {
-        await getMatchingTemplate("mobile-template", "desktop-template");
-        loaded = "mobile";
-    } else if (screenType == "desktop") {
-        await getMatchingTemplate("desktop-template", "mobile-template");
-        loaded = "desktop";
-    }
+  getScreenType();
+  if (screenType == "mobile") {
+    await getMatchingTemplate("mobile-template", "desktop-template");
+    loaded = "mobile";
+  } else if (screenType == "desktop") {
+    await getMatchingTemplate("desktop-template", "mobile-template");
+    loaded = "desktop";
+  }
 }
 
 /**
  * Checks, if Screentyoe still matches the actual loaded Template Versions.
  */
 window.onresize = function () {
-    if (getScreenType() != loaded) {
-        getTemplates();
-    }
+  if (getScreenType() != loaded) {
+    getTemplates();
+  }
 };
 
 /**
@@ -122,30 +129,29 @@ window.onresize = function () {
  * @param {string} toUnloadID - The ID of that html-template, that has to be unloaded.
  */
 async function getMatchingTemplate(toLoadID, toUnloadID) {
-    try {
-        let includeElement = document.getElementById(toLoadID);
-        const element = includeElement;
-        file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
-        let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
-        unloadTemplate(toUnloadID)
-        showInitialsHeader(userInitials)
-        markCorrectMenuPoint()
-        if (hideSiderMenu) {
-            if (screenType == 'mobile') {
-                hideMenusMobile()
-            } else {
-                hideMenusDesktop()
-            }
-        }
-    } catch {
-        return
-
+  try {
+    let includeElement = document.getElementById(toLoadID);
+    const element = includeElement;
+    file = element.getAttribute("include-templates"); // "assets/templates/desktop_template.html" or mobile_template.html
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = "Page not found";
     }
+    unloadTemplate(toUnloadID);
+    showInitialsHeader(userInitials);
+    markCorrectMenuPoint();
+    if (hideSiderMenu) {
+      if (screenType == "mobile") {
+        hideMenusMobile();
+      } else {
+        hideMenusDesktop();
+      }
+    }
+  } catch {
+    return;
+  }
 }
 
 /**
@@ -153,8 +159,8 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
  * @param {*} toUnloadID ID of to unload Template
  */
 function unloadTemplate(toUnloadID) {
-    let toUnload = document.getElementById(toUnloadID);
-    toUnload.innerHTML = "";
+  let toUnload = document.getElementById(toUnloadID);
+  toUnload.innerHTML = "";
 }
 
 /**
@@ -164,97 +170,99 @@ function unloadTemplate(toUnloadID) {
  *
  */
 function showInitialsHeader(userInitials) {
-    let svgText = document.getElementById("svg_text");
-    if (activeUser) {
-        svgText.textContent = activeUser.initials;
-    } else {
-        svgText.textContent = "G";
-    }
+  let svgText = document.getElementById("svg_text");
+  if (activeUser) {
+    svgText.textContent = activeUser.initials;
+  } else {
+    svgText.textContent = "G";
+  }
 }
 
 /**
  * Marks Point on the Sider/Footer that is currently open.
  */
 function markCorrectMenuPoint() {
-    let activeSide = getDocumentName()
-    try {
-        let toChoose = document.getElementById(activeSide + "ID");
-        if (toChoose) {
-            toChoose.classList.add('Choosen_field');
-        } else {
-            let helpIcon = document.getElementById('header_help_icon_d');
-            helpIcon.classList.add('d-none');
-        }
-    } catch { return }
+  let activeSide = getDocumentName();
+  try {
+    let toChoose = document.getElementById(activeSide + "ID");
+    if (toChoose) {
+      toChoose.classList.add("Choosen_field");
+    } else {
+      let helpIcon = document.getElementById("header_help_icon_d");
+      helpIcon.classList.add("d-none");
+    }
+  } catch {
+    return;
+  }
 }
 
 /**On some pages, the menu Points shall not be visible. Desktop parts get invisible here */
 function hideMenusDesktop() {
-    let siderMenu = document.getElementById('sider_menu_points');
-    siderMenu.style.display = 'none';
-    let siderBlocker = document.getElementById('sider_blocker');
-    siderBlocker.classList.remove('d-none');
+  let siderMenu = document.getElementById("sider_menu_points");
+  siderMenu.style.display = "none";
+  let siderBlocker = document.getElementById("sider_blocker");
+  siderBlocker.classList.remove("d-none");
 
-    if (loggedIn != true) {
-        let initialSVG = document.getElementById('header_svg');
-        initialSVG.style.display = 'none';
-    }
+  if (loggedIn != true) {
+    let initialSVG = document.getElementById("header_svg");
+    initialSVG.style.display = "none";
+  }
 }
 
 /**On some pages, the menu Points shall not be visible. Mobile parts get invisible here */
 function hideMenusMobile() {
-    let mobFooterLinks = document.getElementById('mobile_footer_links');
-    mobFooterLinks.style.display = 'none';
+  let mobFooterLinks = document.getElementById("mobile_footer_links");
+  mobFooterLinks.style.display = "none";
 
-    if (loggedIn != true) {
-        let initialSVG = document.getElementById('header_svg');
-        initialSVG.style.display = 'none';
-        let mobileFooter = document.getElementById('mobile_footer_links');
-        mobileFooter.style.display = 'none';
-    }
+  if (loggedIn != true) {
+    let initialSVG = document.getElementById("header_svg");
+    initialSVG.style.display = "none";
+    let mobileFooter = document.getElementById("mobile_footer_links");
+    mobileFooter.style.display = "none";
+  }
 }
 
 /**
  * Brings in Menu for header
  */
 function flyInMenu(wichMenu) {
-    let menu = document.getElementById(wichMenu);
-    let styleRight = menu.style.right;
-    styleRight == "3vw"
-        ? (menu.style.right = "-200px")
-        : (menu.style.right = "3vw");
-    if (wichMenu == "header_menu_id") {
-        hideArrow();
-    }
+  let menu = document.getElementById(wichMenu);
+  let styleRight = menu.style.right;
+  styleRight == "3vw"
+    ? (menu.style.right = "-200px")
+    : (menu.style.right = "3vw");
+  if (wichMenu == "header_menu_id") {
+    hideArrow();
+  }
 }
 
 /**If theres an Arrow, it get hidden with a little delay */
 function hideArrow() {
-    setTimeout(() => {
-        try {
-            let arrow = document.querySelector(".Back_Arrow");
-            arrow.classList.toggle("d-none");
-        } catch { }
-    }, 200);
+  setTimeout(() => {
+    try {
+      let arrow = document.querySelector(".Back_Arrow");
+      arrow.classList.toggle("d-none");
+    } catch {}
+  }, 200);
 }
 
 /**
  * Returns name of actual page, for marking the right Spot on header/footer in "markCorrectMenuPoint()"
  */
 function getDocumentName() {
-    var path = window.location.pathname;
-    var path = path.split("/").pop();
-    let page = path.split(".html");
-    return page[0];
+  var path = window.location.pathname;
+  var path = path.split("/").pop();
+  let page = path.split(".html");
+  return page[0];
 }
 
 /**
  * @returns Initials of the name in the input field, used for Contacts and new Users
  */
 function getInitials() {
-    let name = document.getElementById('name-input');
-    let nameArray = name.value.split(' ');
-    return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
+  let name = document.getElementById("name-input");
+  let nameArray = name.value.split(" ");
+  return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
 }
 
 /**
@@ -263,51 +271,50 @@ function getInitials() {
  * @returns first letter of a word in Uppercase
  */
 function getStartingLetter(toGet) {
-    let nameArray = toGet.split('');
-    return nameArray[0].toUpperCase();
+  let nameArray = toGet.split("");
+  return nameArray[0].toUpperCase();
 }
 
 /**
  * Saves current Page in local Storage, so its possible to return later.
  */
 function saveDocName() {
-    let originSide = getDocumentName();
-    localStorage.setItem("originSide", JSON.stringify(originSide));
+  let originSide = getDocumentName();
+  localStorage.setItem("originSide", JSON.stringify(originSide));
 }
 
 /**
  * Saves current page and leads to help-side.
  */
 function getHelp() {
-    saveDocName();
-    window.location.href = "/help.html";
+  saveDocName();
+  window.location.href = "/help.html";
 }
 
 /** Saves current page and leads to legal notes. */
 function toLegal() {
-    saveDocName();
-    window.open("/legal_notes.html", "_blank");
+  saveDocName();
+  window.open("/legal_notes.html", "_blank");
 }
 
 /** Saves current page and leads to privacy police.*/
 function toPrivacy() {
-    saveDocName()
-    window.open(
-        "/privacy_policy.html", "_blank")
+  saveDocName();
+  window.open("/privacy_policy.html", "_blank");
 }
 
 /**
  * After Opening the Help or Privacy Sides, this function leads back to the last visited place.
  */
 function backToOrigin() {
-    let originSideFromLocalStorage = localStorage.getItem("originSide");
+  let originSideFromLocalStorage = localStorage.getItem("originSide");
 
-    if (originSideFromLocalStorage) {
-        let test = JSON.parse(originSideFromLocalStorage);
-        originSide = test;
-        localStorage.removeItem(originSide);
-        window.location.href = "/" + originSide + ".html";
-    }
+  if (originSideFromLocalStorage) {
+    let test = JSON.parse(originSideFromLocalStorage);
+    originSide = test;
+    localStorage.removeItem(originSide);
+    window.location.href = "/" + originSide + ".html";
+  }
 }
 
 /**
@@ -317,11 +324,11 @@ function backToOrigin() {
  * @returns
  */
 async function setItemInBackend(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, {
-        method: "POST",
-        body: JSON.stringify(payload),
-    }).then((res) => res.json());
+  const payload = { key, value, token: STORAGE_TOKEN };
+  return fetch(STORAGE_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  }).then((res) => res.json());
 }
 
 /**
@@ -330,38 +337,37 @@ async function setItemInBackend(key, value) {
  * @returns
  */
 async function getItemFromBackend(key) {
-    const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    let response = await fetch(url).then((res) => res.json());
-    let result = response.data.value;
-    return JSON.parse(result);
+  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+  let response = await fetch(url).then((res) => res.json());
+  let result = response.data.value;
+  return JSON.parse(result);
 }
 
 function showNotification(elementId, targetHref) {
-    document.documentElement.style.setProperty(
-        "--notification-top-target",
-        "80vh"
-    );
-    document.getElementById(elementId).classList.add("triggered");
-    setTimeout(() => {
-        window.location.href = targetHref;
-    }, 800);
+  document.documentElement.style.setProperty(
+    "--notification-top-target",
+    "80vh"
+  );
+  document.getElementById(elementId).classList.add("triggered");
+  setTimeout(() => {
+    window.location.href = targetHref;
+  }, 800);
 }
 
 function getUserByEmail(email) {
-    return userList.find((user) => user.email === email);
+  return userList.find((user) => user.email === email);
 }
 
 /**Setting the  loggedIn variable to false and saving in localstorage and sessionstorage.*/
 function logOut() {
-    localStorage.setItem('loggedIn', 'false');
-    sessionStorage.setItem('loggedIn', 'false')
-    window.sessionStorage.setItem('loggedIn', 'false')
-    window.location.href = "/login.html";
+  localStorage.setItem("loggedIn", "false");
+  sessionStorage.setItem("loggedIn", "false");
+  window.sessionStorage.setItem("loggedIn", "false");
+  window.location.href = "/login.html";
 }
 
-
 function renderContactBubbleHtml(contact) {
-    return /*html*/`<svg
+  return /*html*/ `<svg
     width="42"
     height="42"
     viewBox="0 0 42 42"
@@ -386,5 +392,5 @@ function renderContactBubbleHtml(contact) {
     >
     ${contact.initials}
     </text>
-  </svg>`
+  </svg>`;
 }
