@@ -123,7 +123,7 @@ function markContact(i) {
 
 /**Opening a contact in Stage as overlay.*/
 function showArrow(bigStage) {
-    bigStage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()"></img>`
+    bigStage.innerHTML += /*html*/`<img src="assets/img/arrow_left.png" alt="Back" class="Back_Arrow" onclick="closeContactStage()">`
 };
 
 /**Adds the correct variable for the functions in the small Edit/Delete Menu */
@@ -206,7 +206,7 @@ function prepareContactProcessDiv(contact, i) {
         submitBtn.innerHTML = /*html*/`Add Contact
          <img src="assets/img/check.png" alt="">`
         form.onsubmit = function () {
-            createContact();
+            startContactCreation();
         };
     }
 }
@@ -245,7 +245,7 @@ function showConfirmAlert(i) {
             <p>Do you really want to delete <br><j id="show_deleting_name">${contactList[i].name}</j>?</p>
             <div id="" class="delete_btn_div">
                 <button class="btn btn-secondary" onclick="closeContactProcess('delete_question')">Cancel</button>
-                <button id='deleteBtn' onclick="deleteContact(${i}), closeContactProcess('delete_question')" class="btn btn-primary">Confirm</button>
+                <button id='deleteBtn' onclick="deleteContact(${i}), closeContactProcess('delete_question'), closeContactStage()" class="btn btn-primary">Confirm</button>
             </div>
         </div>
     `
@@ -298,8 +298,17 @@ function clearInputFields() {
     phoneInput.value = '';
 }
 
+/**Organizing Contact creation on contacts Side */
+async function startContactCreation() {
+    await createContact()
+    saveContacts()
+    clearInputFields()
+    closeContactProcess('overProcess_div')
+}
+
 /**
  * Creates new contact for contactList
+ * @returns the new Contact for further work.
  */
 async function createContact() {
     let newContact = {
@@ -312,11 +321,8 @@ async function createContact() {
         color: getColor(),
     }
     contactList.push(newContact)
-    saveContacts()
-    clearInputFields()
-    closeContactProcess('overProcess_div')
+    return newContact;
 }
-
 
 /**Counts ID's in backend, and returns one for the new contact. */
 async function getContactID() {

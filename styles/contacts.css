@@ -100,6 +100,7 @@
     justify-content: space-between;
     margin-bottom: -40px;
     margin-right: 12px;
+    margin-left: 5vw;
 }
 
 
@@ -112,7 +113,7 @@
 }
 
 .Stage_head {
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 #contacts_stage_workBtn_div {
@@ -237,6 +238,10 @@
         margin-top: 80px;
     }
 
+    #contacts_stage {
+        margin-left: 4vw;
+    }
+
     #contacts_stage_workBtn_div {
         display: none;
     }
@@ -266,6 +271,7 @@
 
     .big_ball {
         margin-top: 55px;
+        margin-left: 0;
     }
 
     #c_stage_mobCombi_btn {
