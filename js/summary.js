@@ -2,8 +2,9 @@ async function initSummary() {
   loadHelloPageMobile();
   showGreeting("greetingDesktop");
   greetGuestUser();
-  showNumberOfTotalTasks();
   await getDataFromBackend();
+  showTotalTasks();
+  showTasks();
 }
 
 function greetGuestUser() {
@@ -35,24 +36,29 @@ function modifyGreetingForGuestUser(ID) {
   greeting.innerHTML = greeting.innerHTML.replace(/,/g, "!");
 }
 
-function showNumberOfTotalTasks() {
+function showTotalTasks() {
   let tasksCount = document.getElementById("tasksCount");
   tasksCount.innerHTML = "";
   let totalTasks = taskList.length;
   tasksCount.innerHTML = totalTasks;
 }
 
-function showNumberOfTasks() {
-  countTasksInArray("progressCount", "inprogress");
-  countTasksInArray("feedbackCount", "feedback");
-  countTasksInArray("doneCount", "done");
+function showTasks() {
+  showTaskAmount("progressCount", "status", "inprogress");
+  showTaskAmount("feedbackCount", "status", "feedback");
+  showTaskAmount("todoCount", "status", "todo");
+  showTaskAmount("doneCount", "status", "done");
+  showTaskAmount("urgentCount", "priority", "urgent");
 }
 
-function countTasksInArray(ID, status) {
-  let count = document.getElementById(ID);
-  count.innerHTML = "";
-  let tasksAmount = taskList[i]["status"].filter((x) => x === status).length;
-  count.innerHTML = tasksAmount;
+function showTaskAmount(ID, property, propertyValue) {
+  let task = document.getElementById(ID);
+  task.innerHTML = filterTasksByProperty(property, propertyValue).length;
+}
+
+function filterTasksByProperty(property, propertyValue) {
+  let filteredProperty = taskList.filter((x) => x[property] === propertyValue);
+  return filteredProperty;
 }
 
 function loadHelloPageMobile() {

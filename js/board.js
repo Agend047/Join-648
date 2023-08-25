@@ -267,7 +267,6 @@ function openCard(id, i) {
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
-      <div class="background" onclick="closeCard('popUp')">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
             <div id="categoryLabel" class="categoryLabel">${task.category}</div>
@@ -332,7 +331,7 @@ function generateLargeCardHTML(task, i) {
             </div>
           </div>
         </div>
-      </div>
+        <div class="background" onclick="closeCard('popUp')"></div>
     </div>
   `;
 }
@@ -373,24 +372,57 @@ function getTaskByID(findID) {
 }
 
 function closeCard(ID) {
-  document.getElementById(ID).classList.add("d-none");
+  document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
 }
 
 function editTask(taskID) {
-  document.getElementById(`popUp`).classList.add("d-none");
+  document.getElementById("popUp").style.display = "none";
   let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
+  markPrioForEdit(taskID);
 }
+
+/**
+ * Generates Contact-Initial Balls as SVG Elements
+ * @param {Number} taskID -ID of used Task
+ * @returns SVG Elements for Edit-Task Side
+ */
+function showAssignedContacts(taskID) {
+  let task = getTaskByID(taskID)
+  let result = '';
+  for (contact of task.assignedTo) {
+    console.log(task.assignedTo);
+    result += renderContactBubbleHtml(contact);
+  }
+  return result;
+}
+
+/**
+ * Checks priority field in Edit-Task
+ * @param {Number} taskID -ID of used Task
+ */
+function markPrioForEdit(taskID) {
+  let task = getTaskByID(taskID)
+  let div = document.getElementById('prio-inputs');
+  let prioFields = div.querySelectorAll('input');
+  for (i in prioFields) {
+    if (prioFields[i].value == task.priority) {
+      prioFields[i].checked = true;
+      break
+    }
+  }
+}
+
+
 
 function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
   return /*html*/ `
   <div id="editPopUp" class="popUp">
-  <div class="background" onclick="closeCard('editPopUp')">
     <div class="editCard">
-    <dialog id="add-contact-overlay">
+    <!-- <dialog id="add-contact-overlay">
       <form method="dialog">
         <button type="button" class="close-icn mobile">
           <img src="./assets/img/close-white.png" alt="close dialog" />
@@ -451,18 +483,18 @@ function generateEditTaskHTML(taskID) {
           </button>
         </div>
       </form>
-    </dialog>
+    </dialog> -->
     <div id="backdrop" class="backdrop d-none"></div>
-    <div
+    <!-- <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
-    ></div>
+    ></div> -->
     <div>
       <form id="addtask-form">
         <div class="edit-card-header">
             
           <img
-              onclick="closeCard(${i})"
+              onclick="closeCard('editPopUp')"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -492,8 +524,7 @@ function generateEditTaskHTML(taskID) {
                   required
                   placeholder="Enter a description"
                   id="description-input"
-                  value="${task.description}"
-                ></textarea>
+                  >${task.description}</textarea>
               </div>
               <div class="error-container">
                 <div class="error-message" id="description-input-error"></div>
@@ -534,7 +565,9 @@ function generateEditTaskHTML(taskID) {
                   ><img src="./assets/img/contacts_newContact_icon.png" />
                 </button>
               </div>
-              <div id="selected-contacts" class="selected-contacts"></div>
+              <div id="selected-contacts" class="selected-contacts">
+                ${showAssignedContacts(taskID)}
+              </div>
             </div>
           </div>
           <div class="vertical-separator d-none"></div>
@@ -578,6 +611,7 @@ function generateEditTaskHTML(taskID) {
                       type="radio"
                       name="prio-input"
                       value="medium"
+                      checked
                     />
                     <svg
                       width="21"
@@ -604,6 +638,7 @@ function generateEditTaskHTML(taskID) {
                       type="radio"
                       name="prio-input"
                       value="low"
+                      
                     />
                     <svg
                       width="21"
@@ -721,7 +756,7 @@ function generateEditTaskHTML(taskID) {
       <img src="./assets/img/board-icn-small.png" />
     </div>
     </div>
-    </div>
+    <div class="background" onclick="closeCard('editPopUp')"></div>
   </div>
   `;
 }
