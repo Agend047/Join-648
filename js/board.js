@@ -346,7 +346,7 @@ async function deleteTask(taskID) {
   taskList.splice(taskIndex, 1);
 
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard();
+  closeCard('popUp');
   renderAllContainersHtml();
 }
 

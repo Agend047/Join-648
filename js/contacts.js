@@ -31,7 +31,8 @@ async function showContacts() {
                     <p class="Mail_text">${contact.e_mail}</p>
                 </div>
             </span>
-        `    }
+        `
+    }
 }
 
 /**sets shader */
