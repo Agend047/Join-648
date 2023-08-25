@@ -320,10 +320,8 @@ async function createContact() {
         color: getColor(),
     }
     contactList.push(newContact)
+    return newContact;
 }
-
-
-
 
 /**Counts ID's in backend, and returns one for the new contact. */
 async function getContactID() {
