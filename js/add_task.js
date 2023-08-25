@@ -476,6 +476,7 @@ function filterContactListByName(nameQuery) {
 }
 
 async function addTask() {
+    let taskList = await getItemFromBackend('taskList');
     let newTask = {
         title: document.getElementById('title-input').value,
         description: document.getElementById('description-input').value,
