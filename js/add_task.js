@@ -2,12 +2,12 @@ const subtaskEl = document.getElementById('subtasks-container');
 const backdrop = document.getElementById('backdrop');
 let formControl;
 let subtasks = [];
+let selectedContactIds = [];
 async function initAddTaskPage() {
     initSubtaskInput();
     initClearBtn();
     initForm();
     initAddContactOverlayForm();
-    document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
     document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
     await getContacts();
     renderAssignedToContactList(contactList);
@@ -23,7 +23,6 @@ function initAddContactOverlayForm() {
             dialogEl.close();
         })
     }
-    document.getElementById('create-contact-btn'.addEventListener('click'))
 }
 
 async function getContacts() {
@@ -250,12 +249,15 @@ function toggleContactSelection(event) {
     listItem.classList.toggle('selected');
     const selectedContactsEl = document.getElementById('selected-contacts');
     if (listItem.classList.contains('selected')) {
+        selectedContactIds.push(listItem.value)
         listItem.querySelector('img').src = './assets/img/checkbox-checked-white.png';
         selectedContactsEl.innerHTML += renderContactBubbleHtml(getContactById(listItem.value));
     } else {
         listItem.querySelector('img').src = './assets/img/checkbox-unchecked.svg';
         selectedContactsEl.getElementsByClassName('contact-bubble-' + listItem.value)[0].remove();
+        selectedContactIds.splice(selectedContactIds.indexOf(listItem.value), 1);
     }
+    console.log(selectedContactIds);
 }
 
 function renderContactBubbleHtml(contact) {
@@ -291,7 +293,7 @@ function getContactById(id) {
     return contactList.find((contact) => contact.id === id);
 }
 
-function validateOverlayAddcontactForm() {
+async function validateOverlayAddcontactForm(e) {
     const form = document.getElementById('overlay-add-contact-form');
     let formIsValid = true;
     const formElements = form.querySelectorAll('input, textarea, select');
@@ -307,7 +309,9 @@ function validateOverlayAddcontactForm() {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        addContactWithinTaskForm();
+        await addContactWithinTaskForm();
+        form.parentElement.close();
+        document.getElementById('dropdown-arrow').dispatchEvent(new Event('click'));
     }
 }
 
@@ -320,12 +324,19 @@ async function addContactWithinTaskForm() {
         name: name,
         e_mail: email,
         phone: phone,
-        initials: name.split(' ').map((el) => el.substring(0, 1)).join(),
+        initials: name.split(' ').map((el) => el.substring(0, 1)).join(''),
         color: getColor(),
         id: await getContactID()
     }
     contactList.push(newContact);
+    sortContacts();
     await setItemInBackend('contactList', JSON.stringify(contactList));
+    const assignedtoContactList = document.getElementById('assigned-to-options');
+    selectedContactIds.push(newContact.id);
+    renderAssignedToContactList(contactList);
+    initAssignedToSelectItems(assignedtoContactList);
+    document.getElementById('selected-contacts').innerHTML += renderContactBubbleHtml(newContact);
+    document.getElementById('overlay-add-contact-form').reset();
 }
 
 async function validateAddTaskForm(e) {
@@ -406,18 +417,24 @@ function renderAssignedToContactList(contacts) {
     const list = document.getElementById('assigned-to-options');
     let html = '';
     for (let i = 0; i < contacts.length; i++) {
+        let selectedAttrValue = '';
+        let checkboxSrc = "./assets/img/checkbox-unchecked.svg";
         const contact = contacts[i];
-        html += renderAssignedToContactListItemHtml(contact);
+        if (selectedContactIds.indexOf(contact.id) !== -1) {
+            selectedAttrValue = " selected";
+            checkboxSrc = "./assets/img/checkbox-checked-white.png";
+        }
+        html += renderAssignedToContactListItemHtml(contact, selectedAttrValue, checkboxSrc);
     }
     list.innerHTML = html;
 }
 
-function renderAssignedToContactListItemHtml(contact) {
+function renderAssignedToContactListItemHtml(contact, selectedAttrValue, checkboxSrc) {
     let html = '';
-    html = /*html*/`<li class="assign-to-li" value="${contact.id}">`;
+    html = /*html*/`<li class="assign-to-li${selectedAttrValue}" value="${contact.id}">`;
     html += renderContactBubbleHtml(contact);
     html += /*html*/`<span class="assign-to-li-name">${contact.name}</span>
-        <img src="./assets/img/checkbox-unchecked.svg" /></li>`
+        <img src=${checkboxSrc} /></li>`
     return html;
 }
 
