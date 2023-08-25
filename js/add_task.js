@@ -1,14 +1,22 @@
-const subtaskEl = document.getElementById('subtasks-container');
-const backdrop = document.getElementById('backdrop');
+let subtaskEl;
+let backdrop;
 let formControl;
 let subtasks = [];
 let selectedContactIds = [];
+
+function getAddContactElements() {
+    subtaskEl = document.getElementById('subtasks-container');
+    backdrop = document.getElementById('backdrop');
+}
 async function initAddTaskPage() {
+    getAddContactElements();
     initSubtaskInput();
-    initClearBtn();
     initForm();
-    initAddContactOverlayForm();
-    document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
+    if (location.href.endsWith('add_task.html')) {
+        initClearBtn();
+        initAddContactOverlayForm();
+        document.getElementById('add-contact-btn').addEventListener('click', () => document.getElementById('add-contact-overlay').showModal());
+    }
     await getContacts();
     renderAssignedToContactList(contactList);
     initSelectInputs();
@@ -191,11 +199,11 @@ function addSubtask() {
         input.value = '';
         input.focus();
         toggleSubtaskIcons();
-        renderSubtasks();
+        renderSubtasksInForm();
     }
 }
 
-function renderSubtasks() {
+function renderSubtasksInForm() {
     const subtasksList = document.getElementById('subtasks-list');
     subtasksList.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
@@ -225,7 +233,7 @@ function renderListItemHtml(subtask, index) {
 
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
-    renderSubtasks();
+    renderSubtasksInForm();
 }
 
 function editSubtask(index) {

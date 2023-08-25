@@ -326,7 +326,7 @@ function generateLargeCardHTML(task, i) {
               <div class="btn-seperator"></div>
               <div class="footer-btn">
                 <span class="edit-icon"></span>
-                <span onclick="editTask(${task.id})">Edit</span>
+                <span onclick="editTask(${task.id}); initAddTaskPage()">Edit</span>
               </div>
             </div>
           </div>
