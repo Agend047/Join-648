@@ -80,7 +80,7 @@ input {
   margin-top: 3px;
 }
 
-.input {
+.board-input {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,7 +94,7 @@ input {
   margin-bottom: 2.5em;
 }
 
-.input:focus-within {
+.board-input:focus-within {
   border: 1px solid var(--accent-color);
 }
 
@@ -820,7 +820,7 @@ input[type="radio"] {
   margin-block-start: 0.2em;
 }
 
-.input-edit-task {
+.input {
   display: flex;
   justify-content: space-between;
   align-items: center;

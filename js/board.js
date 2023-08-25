@@ -390,8 +390,8 @@ function editTask(taskID) {
  * @returns SVG Elements for Edit-Task Side
  */
 function showAssignedContacts(taskID) {
-  let task = getTaskByID(taskID)
-  let result = '';
+  let task = getTaskByID(taskID);
+  let result = "";
   for (contact of task.assignedTo) {
     console.log(task.assignedTo);
     result += renderContactBubbleHtml(contact);
@@ -404,18 +404,16 @@ function showAssignedContacts(taskID) {
  * @param {Number} taskID -ID of used Task
  */
 function markPrioForEdit(taskID) {
-  let task = getTaskByID(taskID)
-  let div = document.getElementById('prio-inputs');
-  let prioFields = div.querySelectorAll('input');
+  let task = getTaskByID(taskID);
+  let div = document.getElementById("prio-inputs");
+  let prioFields = div.querySelectorAll("input");
   for (i in prioFields) {
     if (prioFields[i].value == task.priority) {
       prioFields[i].checked = true;
-      break
+      break;
     }
   }
 }
-
-
 
 function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
@@ -438,7 +436,7 @@ function generateEditTaskHTML(taskID) {
         <img src="./assets/img/add-contact-icn.png" class="user-icn" />
         <div class="form-main">
           <div class="form-control">
-            <div class="input-edit-task">
+            <div class="input">
               <input required type="text" placeholder="Name" id="name-input" />
               <img src="./assets/img/contacts_AddName_icon.png" />
             </div>
@@ -447,7 +445,7 @@ function generateEditTaskHTML(taskID) {
             </div>
           </div>
           <div class="form-control">
-            <div class="input-edit-task">
+            <div class="input">
               <input
                 required
                 type="email"
@@ -461,7 +459,7 @@ function generateEditTaskHTML(taskID) {
             </div>
           </div>
           <div class="form-control">
-            <div class="input-edit-task">
+            <div class="input">
               <input
                 required
                 type="number"
@@ -504,7 +502,7 @@ function generateEditTaskHTML(taskID) {
           <div class="form-controls-section">
             <div class="form-control">
               <label class="edit-title" for="title-input">Title</label>
-              <div class="input-edit-task">
+              <div class="input">
                 <input
                   required
                   type="text"
@@ -519,7 +517,7 @@ function generateEditTaskHTML(taskID) {
             </div>
             <div class="form-control">
               <label for="description-input">Description</label>
-              <div class="input-edit-task">
+              <div class="input">
                 <textarea
                   required
                   placeholder="Enter a description"
@@ -532,7 +530,7 @@ function generateEditTaskHTML(taskID) {
             </div>
             <div id="assigned-to-form-control" class="form-control">
               <label for="assigned-to-input">Assigned to</label>
-              <div class="input-edit-task select-input">
+              <div class="input select-input">
                 <input
                   readonly
                   required
@@ -665,7 +663,7 @@ function generateEditTaskHTML(taskID) {
             </div>
             <div class="form-control">
               <label for="due-date-input">Due date</label>
-              <div class="input-edit-task">
+              <div class="input">
                 <input
                   required
                   type="text"
@@ -681,7 +679,7 @@ function generateEditTaskHTML(taskID) {
             </div>
             <div id="category-form-control" class="form-control">
               <label for="category-input">Category</label>
-              <div class="input-edit-task select-input">
+              <div class="input select-input">
                 <input
                   readonly
                   required
@@ -709,7 +707,7 @@ function generateEditTaskHTML(taskID) {
             </div>
             <div class="form-control">
               <label for="subtasks-input">Subtasks</label>
-              <div id="subtasks-container" class="input-edit-task">
+              <div id="subtasks-container" class="input">
                 <input
                   type="text"
                   placeholder="Add new subtask"
