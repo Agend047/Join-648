@@ -282,7 +282,7 @@ input {
     min-width: 32px;
   }
 
-  .input {
+  .board-input {
     width: 50%;
     max-width: 19.5rem;
     height: 3rem;
