@@ -5,6 +5,7 @@ async function initSummary() {
   await getDataFromBackend();
   showTotalTasks();
   showTasks();
+  showUpcomingDeadline();
 }
 
 function greetGuestUser() {
@@ -61,6 +62,67 @@ function filterTasksByProperty(property, propertyValue) {
   return filteredProperty;
 }
 
+function showUpcomingDeadline() {
+  let deadline = document.getElementById("deadline");
+  let deadlinesArray = filteredDeadlines();
+
+  if (deadlinesArray.length === 0) {
+    deadline.innerHTML = `<div style="font-weight: 400; margin-bottom: 10px;">Sit back & relax:</div><div>No</div>`; // If no tasks are in Board, hence no deadlines to display.
+  } else {
+    deadline.innerHTML = formatUpcomingDeadline();
+  }
+}
+
+function filteredDeadlines() {
+  let deadlines = [];
+
+  for (let x of taskList) {
+    if (x.dueDate) {
+      deadlines.push(x.dueDate);
+    }
+  }
+  return deadlines;
+}
+
+function getUpcomingDeadline() {
+  let deadlinesArray = filteredDeadlines();
+
+  let sortedDeadlines = deadlinesArray.sort((a, b) => {
+    let nearestDate = new Date(a.split("/").reverse().join("/"));
+    let distantDate = new Date(b.split("/").reverse().join("/"));
+    return distantDate - nearestDate;
+  });
+
+  let upcomingDeadline = sortedDeadlines[0];
+  return upcomingDeadline;
+}
+
+function formatUpcomingDeadline() {
+  let upcomingDeadline = getUpcomingDeadline();
+  let months = [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ];
+
+  let datePartsAsArray = upcomingDeadline.split("/");
+  let year = datePartsAsArray[2];
+  let monthIndex = parseInt(datePartsAsArray[1]) - 1;
+  let day = datePartsAsArray[0];
+
+  let formattedDeadline = `${months[monthIndex]} ${day}, ${year}`;
+  return formattedDeadline;
+}
+
 function loadHelloPageMobile() {
   if ((screenType = "mobile")) {
     let helloPage = document.createElement("div");
@@ -99,25 +161,24 @@ function changeIcon(Id, url) {
 
 // Greeting the User
 
-function getHour() {
+function currentHour() {
   let day = new Date();
   return day.getHours();
 }
 
 function showGreeting(ID) {
-  let hour = getHour();
+  let currenthour = currentHour();
   let greeting = document.getElementById(ID);
 
-  if (hour >= 4 && hour < 12) {
+  if (currenthour >= 4 && currenthour < 12) {
     greeting.innerHTML = "Good morning,";
   }
-  if (hour >= 12 && hour < 18) {
+  if (currenthour >= 12 && currenthour < 18) {
     greeting.innerHTML = "Good afternoon,";
   }
-  if (hour >= 18 && hour < 22) {
+  if (currenthour >= 18 && currenthour < 22) {
     greeting.innerHTML = "Good evening,";
-  }
-  if (hour >= 22 && hour < 4) {
+  } else {
     greeting.innerHTML = "Good night,";
   }
 }
