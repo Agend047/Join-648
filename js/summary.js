@@ -44,17 +44,21 @@ function showTotalTasks() {
 }
 
 function showTasks() {
-  countTasksInArray("progressCount", "inprogress");
-  countTasksInArray("feedbackCount", "feedback");
-  countTasksInArray("urgentCount", "urgent");
-  countTasksInArray("doneCount", "done");
+  showTaskAmount("progressCount", "status", "inprogress");
+  showTaskAmount("feedbackCount", "status", "feedback");
+  showTaskAmount("todoCount", "status", "todo");
+  showTaskAmount("doneCount", "status", "done");
+  showTaskAmount("urgentCount", "priority", "urgent");
 }
 
-function countTasksInArray(ID, status) {
-  let count = document.getElementById(ID);
-  count.innerHTML = "";
-  let statusAmount = taskList.filter((x) => x === status).length;
-  count.innerHTML = statusAmount;
+function showTaskAmount(ID, property, propertyValue) {
+  let task = document.getElementById(ID);
+  task.innerHTML = filterTasksByProperty(property, propertyValue).length;
+}
+
+function filterTasksByProperty(property, propertyValue) {
+  let filteredProperty = taskList.filter((x) => x[property] === propertyValue);
+  return filteredProperty;
 }
 
 function loadHelloPageMobile() {
