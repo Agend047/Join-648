@@ -390,7 +390,7 @@ function generateEditTaskHTML(taskID) {
   <div id="editPopUp" class="popUp">
   <div class="background" onclick="closeCard('editPopUp')">
     <div class="editCard">
-    <dialog id="add-contact-overlay">
+    <!-- <dialog id="add-contact-overlay">
       <form method="dialog">
         <button type="button" class="close-icn mobile">
           <img src="./assets/img/close-white.png" alt="close dialog" />
@@ -451,18 +451,18 @@ function generateEditTaskHTML(taskID) {
           </button>
         </div>
       </form>
-    </dialog>
+    </dialog> -->
     <div id="backdrop" class="backdrop d-none"></div>
-    <div
+    <!-- <div
       id="desktop-template"
       include-templates="assets/templates/desktop_template.html"
-    ></div>
+    ></div> -->
     <div>
       <form id="addtask-form">
         <div class="edit-card-header">
             
           <img
-              onclick="closeCard(${i})"
+              onclick="closeCard('editPopUp')"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
