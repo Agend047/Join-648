@@ -1,41 +1,100 @@
-async function initSummary() {
-  loadHelloPageMobile();
-  showGreeting("greetingDesktop");
-  greetGuestUser();
+function initSummary() {
+  //getLoggedInUser();
+  updateHTML();
+}
+
+async function updateHTML() {
+  greetUser();
   await getDataFromBackend();
   showTotalTasks();
   showTasks();
   showUpcomingDeadline();
 }
 
-function greetGuestUser() {
+/*
+function getLoggedInUser() {
+  let loggedInUser = localStorage.getItem("activeUser");
+  let username = loggedInUser[0];
+  document.getElementById("userNameDesktop").innerHTML = username;
+}*/
+
+function greetUser() {
   const isGuestUser = location.search.includes("guestuser=true");
 
+  if (screenType === "mobile" && isGuestUser) {
+    loadHelloPageMobile();
+    greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");
+  }
+  //if (screenType === "mobile" && isLoggedInUser) {
+  //  loadHelloPageMobile();
+  //}
+  else if (screenType === "desktop" && isGuestUser) {
+    showGreeting("greetingDesktop");
+    greetGuestUser(isGuestUser, "greetingDesktop", "userNameDesktop");
+  }
+  // else if (screenType === "desktop" && isLoggedInUser) {
+  //  showGreeting("greetingDesktop");
+  //}
+}
+
+function greetGuestUser(isGuestUser, greetingID, nameID) {
   if (isGuestUser) {
     localStorage.setItem("isGuestUser", "true");
-    modifyGreetingForGuestUser("greetingDesktop");
-    modifyGreetingForGuestUser("greetingMobile");
-    hideUserName();
+    modifyGreetingForGuestUser(greetingID);
+    hideUserName(nameID);
   } else {
     const storedIsGuestUser = localStorage.getItem("isGuestUser");
 
     if (storedIsGuestUser === "true") {
-      modifyGreetingForGuestUser("greetingDesktop");
-      modifyGreetingForGuestUser("greetingMobile");
-      hideUserName();
+      modifyGreetingForGuestUser(greetingID);
+      hideUserName(nameID);
     }
   }
 }
 
-function hideUserName() {
-  document.getElementById("userNameDesktop").style.display = "none";
-  document.getElementById("userNameMobile").style.display = "none";
+function hideUserName(ID) {
+  document.getElementById(ID).style.display = "none";
 }
 
 function modifyGreetingForGuestUser(ID) {
   let greeting = document.getElementById(ID);
   greeting.innerHTML = greeting.innerHTML.replace(/,/g, "!");
 }
+
+function loadHelloPageMobile() {
+  if (screenType === "mobile") {
+    let helloPage = document.createElement("div");
+    helloPage.innerHTML = generateHelloPageHTML();
+
+    // Insert the helloPage before the mobileTemplate
+    let main = document.querySelector("main");
+    main.parentNode.insertBefore(helloPage, main);
+    showGreeting("greetingMobile");
+    fadeOutHelloPage(helloPage);
+  }
+}
+
+function generateHelloPageHTML() {
+  return `
+    <div id="helloPageMobile" class="">
+    <span id="greetingMobile"></span>
+    <h1 class="blue-text" id="userNameMobile">Sofia Müller</h1>
+    </div>
+    `;
+}
+
+function fadeOutHelloPage(helloPage) {
+  setTimeout(function () {
+    helloPage.classList.add("fadeOut");
+  }, 1100);
+
+  helloPage.addEventListener("transitionend", function () {
+    helloPage.style.display = "none";
+  });
+}
+
+///////////////////////////////////////////////////////////////////////
+// Render Numbers from Board into Summary Page
 
 function showTotalTasks() {
   let tasksCount = document.getElementById("tasksCount");
@@ -62,6 +121,8 @@ function filterTasksByProperty(property, propertyValue) {
   return filteredProperty;
 }
 
+///////////////////////////////////////////////////////////////////////
+// Functions to display the formatted Upcoming Deadline on the Summary Page
 function showUpcomingDeadline() {
   let deadline = document.getElementById("deadline");
   let deadlinesArray = filteredDeadlines();
@@ -122,38 +183,8 @@ function formatUpcomingDeadline() {
   let formattedDeadline = `${months[monthIndex]} ${day}, ${year}`;
   return formattedDeadline;
 }
-
-function loadHelloPageMobile() {
-  if ((screenType = "mobile")) {
-    let helloPage = document.createElement("div");
-    helloPage.innerHTML = generateHelloPageHTML();
-
-    // Insert the helloPage before the mobileTemplate
-    let main = document.querySelector("main");
-    main.parentNode.insertBefore(helloPage, main);
-    showGreeting("greetingMobile");
-    fadeOutHelloPage(helloPage);
-  }
-}
-
-function generateHelloPageHTML() {
-  return `
-    <div id="helloPageMobile" class="">
-    <span id="greetingMobile"></span>
-    <h1 class="blue-text" id="userNameMobile">Sofia Müller</h1>
-    </div>
-    `;
-}
-
-function fadeOutHelloPage(helloPage) {
-  setTimeout(function () {
-    helloPage.classList.add("fadeOut");
-  }, 1100);
-
-  helloPage.addEventListener("transitionend", function () {
-    helloPage.style.display = "none";
-  });
-}
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 function changeIcon(Id, url) {
   document.getElementById(Id).src = `./assets/img/${url}`;
