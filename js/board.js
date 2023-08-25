@@ -379,9 +379,9 @@ function closeCard() {
 
 function editTask(taskID) {
   document.getElementById(`popUp`).classList.add("d-none");
-  let largeCard = document.getElementById("popUpContainer");
+  let editCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
-  largeCard.innerHTML = generateEditTaskHTML(taskID);
+  editCard.innerHTML = generateEditTaskHTML(taskID);
 }
 
 function generateEditTaskHTML(taskID) {
