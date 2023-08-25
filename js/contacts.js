@@ -206,7 +206,7 @@ function prepareContactProcessDiv(contact, i) {
         submitBtn.innerHTML = /*html*/`Add Contact
          <img src="assets/img/check.png" alt="">`
         form.onsubmit = function () {
-            createContact();
+            startContactCreation();
         };
     }
 }
@@ -298,6 +298,14 @@ function clearInputFields() {
     phoneInput.value = '';
 }
 
+/**Organizing Contact creation on contacts Side */
+async function startContactCreation() {
+    await createContact()
+    saveContacts()
+    clearInputFields()
+    closeContactProcess('overProcess_div')
+}
+
 /**
  * Creates new contact for contactList
  */
@@ -312,10 +320,9 @@ async function createContact() {
         color: getColor(),
     }
     contactList.push(newContact)
-    saveContacts()
-    clearInputFields()
-    closeContactProcess('overProcess_div')
 }
+
+
 
 
 /**Counts ID's in backend, and returns one for the new contact. */
