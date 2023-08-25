@@ -567,7 +567,7 @@ function generateEditTaskHTML(taskID) {
                 ></ul>
                 <button
                   id="add-contact-btn"
-                  class="btn btn-primary btn-text-icon"
+                  class="btn btn-primary btn-text-icon d-none"
                   type="button"
                 >
                   <span>Add new contact</span

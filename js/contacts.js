@@ -333,25 +333,6 @@ async function getContactID() {
 }
 
 /**
- * Gets first letter of a string for Initials and startingletter
- * @param {String} toGet - The string, from wich we need the first letter
- * @returns first letter of a word in Uppercase
- */
-function getStartingLetter(toGet) {
-    let nameArray = toGet.split('');
-    return nameArray[0].toUpperCase();
-}
-
-/**
- * @returns Initials of the name in the input field
- */
-function getInitials() {
-    let name = document.getElementById('name-input');
-    let nameArray = name.value.split(' ');
-    return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
-}
-
-/**
  * Picks a random color for the new contact
  */
 function getColor() {

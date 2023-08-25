@@ -10,10 +10,11 @@
 }
 
 #contacts_list {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     width: 100%;
     min-width: 360px;
+    height: 76vh;
 }
 
 .Primary_contacts_btn {
