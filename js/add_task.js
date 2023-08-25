@@ -23,6 +23,7 @@ function initAddContactOverlayForm() {
             dialogEl.close();
         })
     }
+    document.getElementById('create-contact-btn'.addEventListener('click'))
 }
 
 async function getContacts() {
@@ -288,6 +289,43 @@ function renderContactBubbleHtml(contact) {
 
 function getContactById(id) {
     return contactList.find((contact) => contact.id === id);
+}
+
+function validateOverlayAddcontactForm() {
+    const form = document.getElementById('overlay-add-contact-form');
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        formElement.checkValidity();
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+        }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+    }
+    e.preventDefault();
+    if (!formIsValid) {
+        form.classList.add('is-validated');
+    } else {
+        addContactWithinTaskForm();
+    }
+}
+
+async function addContactWithinTaskForm() {
+    let name = document.getElementById('name-input').value;
+    let email = document.getElementById('email-input').value;
+    let phone = document.getElementById('phone-input').value;
+    let newContact = {
+        startingLetter: name.substring(0, 1),
+        name: name,
+        e_mail: email,
+        phone: phone,
+        initials: name.split(' ').map((el) => el.substring(0, 1)).join(),
+        color: getColor(),
+        id: await getContactID()
+    }
+    contactList.push(newContact);
+    await setItemInBackend('contactList', JSON.stringify(contactList));
 }
 
 async function validateAddTaskForm(e) {
