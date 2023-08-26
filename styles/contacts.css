@@ -3,9 +3,10 @@
 .Main_container {
     margin: 96px 3vw 16px 232px;
     padding: 16px;
+    margin-bottom: 0;
+    padding-bottom: 0;
     max-width: 500px;
     min-width: 330px;
-    overflow-y: auto;
     background-color: white;
 }
 
