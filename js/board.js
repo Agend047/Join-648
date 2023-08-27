@@ -372,6 +372,22 @@ function getTaskByID(findID) {
   return task;
 }
 
+
+/**Searches through all Tasks if one may be the one, were looking for. */
+function searchTask() {
+  let term = document.getElementById('findTask').value;
+  let foundTasks = [];
+
+  for (i in taskList) {
+    let taskTitle = taskList[i].title;
+    let taskDesc = taskList[i].description;
+    if (taskTitle.includes(term) || taskDesc.includes(term)) {
+      foundTasks.push(taskList[i]);
+    }
+  }
+  console.log(foundTasks);
+}
+
 function closeCard(ID) {
   document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";

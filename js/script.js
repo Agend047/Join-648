@@ -242,7 +242,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch {}
+    } catch { }
   }, 200);
 }
 
