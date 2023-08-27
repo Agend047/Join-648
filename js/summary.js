@@ -192,12 +192,13 @@ function showGreeting(ID) {
   if (currenthour >= 4 && currenthour < 12) {
     greeting.innerHTML = "Good morning,";
   }
-  if (currenthour >= 12 && currenthour < 18) {
+  else if (currenthour >= 12 && currenthour < 18) {
     greeting.innerHTML = "Good afternoon,";
   }
-  if (currenthour >= 18 && currenthour < 22) {
+  else if (currenthour >= 18 && currenthour < 22) {
     greeting.innerHTML = "Good evening,";
   } else {
     greeting.innerHTML = "Good night,";
   }
 }
+
