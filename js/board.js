@@ -21,7 +21,6 @@ function updateHTML(ID, status) {
   todoContainer.innerHTML = "";
 
   for (let i = 0; i < filteredTasks.length; i++) {
-    // array später durch 'todo' ersetzen, wenn Status im Array angelegt & gespeichert
     const task = filteredTasks[i];
     let totalSubtasks = getSubtasksCount(i);
     const labelColor = assignLabelColor(task.category);
@@ -32,23 +31,7 @@ function updateHTML(ID, status) {
       labelColor
     );
   }
-  /*
-  let progress = taskList.filter((t) => t["status"] == "inprogress");
-  const progressContainer = document.getElementById(`progress${ID}`);
-  progressContainer.innerHTML = "";
 
-  for (let i = 0; i < progress.length; i++) {
-    const task = progress[i];
-    let totalSubtasks = getSubtasksCount(i);
-    const labelColor = assignLabelColor(task.category);
-    todoContainer.innerHTML += generateSmallCardHTML(
-      totalSubtasks,
-      task,
-      i,
-      labelColor
-    );
-  }
-  */
   renderSmallCard(filteredTasks);
 }
 
@@ -347,7 +330,7 @@ async function deleteTask(taskID) {
   taskList.splice(taskIndex, 1);
 
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard('popUp');
+  closeCard("popUp");
   renderAllContainersHtml();
 }
 
@@ -372,10 +355,9 @@ function getTaskByID(findID) {
   return task;
 }
 
-
 /**Searches through all Tasks if one may be the one, were looking for. */
 function searchTask() {
-  let term = document.getElementById('findTask').value;
+  let term = document.getElementById("findTask").value;
   let foundTasks = [];
 
   for (i in taskList) {
@@ -393,12 +375,13 @@ function searchTask() {
  * @param {Array} foundTasks collection of ID´s from those Tasks, wich involve things, the user is looking for.
  */
 function hideNotSearchedTasks(foundTasks) {
-  console.log(foundTasks)
+  console.log(foundTasks);
   for (task of taskList) {
-    if (foundTasks.indexOf(task.id) + 1) { //+1 because if the index is 0, it will be handled as 'false'!
-      document.getElementById(task.id).style.display = 'flex';
+    if (foundTasks.indexOf(task.id) + 1) {
+      //+1 because if the index is 0, it will be handled as 'false'!
+      document.getElementById(task.id).style.display = "flex";
     } else {
-      document.getElementById(task.id).style.display = 'none';
+      document.getElementById(task.id).style.display = "none";
     }
   }
 }
@@ -415,7 +398,7 @@ function editTask(taskID) {
   document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
   markPrioForEdit(taskID);
-  setSelectedContactIdsArray(selectedTask['assignedTo']);
+  setSelectedContactIdsArray(selectedTask["assignedTo"]);
 }
 
 function setSelectedContactIdsArray(selectedContacts) {
@@ -590,20 +573,20 @@ function generateEditTaskHTML(taskID) {
               </div>
               <div
                 id="contacts-list"
-                class="contacts-list-container select-options-container d-none"
+                class="contacts-list-container edit-task-selection-container select-options-container d-none"
               >
                 <ul
                   id="assigned-to-options"
                   class="select-options assigned-to-options"
                 ></ul>
-                <button
+                <!-- <button
                   id="add-contact-btn"
                   class="btn btn-primary btn-text-icon d-none"
                   type="button"
                 >
                   <span>Add new contact</span
                   ><img src="./assets/img/contacts_newContact_icon.png" />
-                </button>
+                </button> -->
               </div>
               <div id="selected-contacts" class="selected-contacts">
                 ${showAssignedContacts(taskID)}
@@ -739,7 +722,7 @@ function generateEditTaskHTML(taskID) {
               </div>
               <div
                 id="category-list-container"
-                class="category-list-container select-options-container d-none"
+                class="category-list-container edit-task-selection-container select-options-container d-none"
               >
                 <ul id="category-options" class="select-options">
                   <li value="technical task">Technical Task</li>

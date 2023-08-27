@@ -107,7 +107,7 @@ input {
   gap: 1em;
 }
 
-.input-icon:hover {
+.board-input-icon:hover {
   cursor: pointer;
   background-color: #eeeeee;
   width: 32px;
@@ -115,16 +115,16 @@ input {
   border-radius: 50%;
 }
 
-.input-icon path {
+.board-input-icon path {
   fill: var(--secondary-bg-color);
 }
 
-.input-icon:active path {
+.board-input-icon:active path {
   fill: var(--accent-color);
   background-color: white;
 }
 
-.input-icon:active {
+.board-input-icon:active {
   background-color: white;
 }
 
@@ -152,7 +152,7 @@ input {
 .columns {
   width: 100%;
   margin-bottom: 1.625rem;
-  flex:1;
+  flex: 1;
 }
 
 .status-column {
@@ -770,7 +770,6 @@ textarea#description-input {
 
 .radio-button > label {
   cursor: pointer;
-  /*padding: 10px 18px;*/
   margin: 0;
 }
 
@@ -835,8 +834,8 @@ input[type="radio"] {
   padding: 0.5em 1em;
   border: 1px solid #a8a8a8;
   border-radius: 0.625rem;
-  background: #fff;
-  margin-bottom: 1.5em;
+  background: white;
+  margin-bottom: 0.5em;
   margin-block-start: 0.5em;
 }
 
@@ -859,6 +858,21 @@ label input {
 
 .edit-input-icon:hover {
   cursor: pointer;
+}
+
+.error-container {
+  color: var(--error-color-subtle);
+  font-size: 13px;
+}
+
+.edit-task-selection-container {
+  padding: 1em 0.5em 0.5em;
+  margin: 0;
+  margin-block-start: -1em;
+  background-color: #eeeeee;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  position: relative;
 }
 
 @media (min-width: 425px) {
