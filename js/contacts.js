@@ -96,9 +96,9 @@ function openContact(i) {
         </span>
         <span class="Contacts_stage_data">
             <p>Contact Information</p>
-            <h5>E-Mail</h5>
+            <p><b>E-Mail</b></p>
             <p class="Mail_text">${contact.e_mail}</p>
-            <h5>Phone</h5>
+            <p><b>Phone</b></p>
             <p>${contact.phone}</p>
         </span>
     `
