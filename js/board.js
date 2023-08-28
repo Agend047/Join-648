@@ -4,10 +4,10 @@ let labelColor;
 
 async function initBoardPage() {
   await getDataFromBackend();
-  renderAllContainersHtml();
+  renderAllContainersHTML();
 }
 
-function renderAllContainersHtml() {
+function renderAllContainersHTML() {
   const statusArr = ["todo", "inprogress", "feedback", "done"];
   for (let i = 0; i < statusArr.length; i++) {
     const status = statusArr[i];
@@ -195,14 +195,14 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-/**  */
+/** Moves the Task into another Column by setting the new Status and saving it in the Array */
 async function moveTo(status) {
   const taskIndex = taskList.findIndex(
     (task) => task.id === currentDraggedElement
   );
   taskList[taskIndex]["status"] = status;
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  renderAllContainersHtml();
+  renderAllContainersHTML();
 }
 
 /** Highlights the droparea */
@@ -308,7 +308,7 @@ async function deleteTask(taskID) {
 
   await setItemInBackend("taskList", JSON.stringify(taskList));
   closeCard("popUp");
-  renderAllContainersHtml();
+  renderAllContainersHTML();
 }
 
 /**
@@ -374,6 +374,7 @@ function generateAssignedUserListItemHTML(contact) {
 function renderSubtasksList(task) {
   const list = document.getElementById("subtaskList");
   const subtasks = task["subtasks"]["text"];
+  let srcImg = getImgBySubtaskStatus(task);
   list.innerHTML = "";
 
   if (subtasks.length === 0) {
@@ -381,18 +382,43 @@ function renderSubtasksList(task) {
   } else {
     for (let i = 0; i < subtasks.length; i++) {
       const subtask = subtasks[i];
-      list.innerHTML += generateSubtasksListHTML(subtask);
+      list.innerHTML += generateSubtasksListHTML(srcImg, subtask);
     }
   }
 }
 
-function updateSubtasksStatus() {
-  const list = document.getElementById("subtaskList");
+function getImgBySubtaskStatus(task) {
+  let srcImg;
+  let subtaskStatus = task["subtasks"]["status"];
+  if (subtaskStatus === "todo") {
+    srcImg = "unchecked";
+  } else {
+    srcImg = "checked";
+  }
+  return srcImg;
 }
 
-function generateSubtasksListHTML(subtask) {
+// function updateSubtasksStatus(task) {
+//   const list = document.getElementById("subtaskList");
+//   const checkboxes = document.getElementsByClassName("checkbox");
+//   const subtasks = task["subtasks"];
+//   for (let i = 0; i < checkboxes.length; i++) {
+//     const checkbox = checkboxes[i];
+//     subtasks["status"][i] = subtaskStatus;
+
+//     if (checkboxes[i].classList.contains("checked")) {
+//       subtaskStatus = "done";
+//       list.src = "./assets/img/checkbox-checked.svg";
+//     } else {
+//       subtaskStatus = "todo";
+//       list.src = "./assets/img/checkbox-unchecked.svg";
+//     }
+//   }
+// }
+
+function generateSubtasksListHTML(srcImg, subtask) {
   html = `<div class="subtask">`;
-  html += `<img src="./assets/img/checkbox-unchecked.svg" class="icon-checkbox checkbox"/>`;
+  html += `<img src="./assets/img/checkbox-${srcImg}.svg" class="icon-checkbox checkbox"/>`;
   html += `<span>${subtask}<span></div>`;
   return html;
 }
