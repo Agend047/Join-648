@@ -237,7 +237,7 @@ function generateLargeCardHTML(task, i) {
           <div class="large-card-header">
             <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
             <img
-              onclick="closeCard('popUp')"
+              onclick="closeCard('popUp'), updateSubtasksStatus(${task.id})"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -399,7 +399,8 @@ function getImgBySubtaskStatus(subtask) {
   return srcImg;
 }
 
-// function updateSubtasksStatus(task) {
+//HERE
+// function updateSubtasksStatus(taskID) {
 //   const list = document.getElementById("subtaskList");
 //   const checkboxes = document.getElementsByClassName("checkbox");
 //   const subtasks = task["subtasks"];
@@ -419,7 +420,7 @@ function getImgBySubtaskStatus(subtask) {
 
 function generateSubtasksListHTML(srcImg, subtask) {
   html = `<div class="subtask">`;
-  html += `<img src="./assets/img/checkbox-${srcImg}.svg" class="icon-checkbox checkbox"/>`;
+  html += `<img src="./assets/img/checkbox-${srcImg}.svg" class="icon-checkbox checkbox ${srcImg}"/>`;
   html += `<span>${subtask}<span></div>`;
   return html;
 }
