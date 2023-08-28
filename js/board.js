@@ -372,23 +372,25 @@ function generateAssignedUserListItemHTML(contact) {
 
 function renderSubtasksList(task) {
   const list = document.getElementById("subtaskList");
-  const subtasks = task["subtasks"]["text"];
-  let srcImg = getImgBySubtaskStatus(task);
   list.innerHTML = "";
 
+  const subtasks = task["subtasks"];
   if (subtasks.length === 0) {
     list.innerHTML = `<div class="subtask">No subtasks</div>`;
   } else {
     for (let i = 0; i < subtasks.length; i++) {
       const subtask = subtasks[i];
-      list.innerHTML += generateSubtasksListHTML(srcImg, subtask);
+
+      let srcImg = getImgBySubtaskStatus(subtask);
+
+      list.innerHTML += generateSubtasksListHTML(srcImg, subtask.text);
     }
   }
 }
 
-function getImgBySubtaskStatus(task) {
+function getImgBySubtaskStatus(subtask) {
   let srcImg;
-  let subtaskStatus = task["subtasks"]["status"];
+  let subtaskStatus = subtask["status"];
   if (subtaskStatus === "todo") {
     srcImg = "unchecked";
   } else {
