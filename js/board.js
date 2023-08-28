@@ -19,7 +19,6 @@ function updateHTML(status, id) {
   let filteredTasks = taskList.filter((t) => t["status"] == status);
   const taskContainer = document.getElementById(id);
   taskContainer.innerHTML = "";
-
   if (filteredTasks.length === 0) {
     const placeholderText = renderPlaceholderText(status);
     taskContainer.innerHTML = generatePlaceholderHTML(placeholderText);
@@ -425,8 +424,7 @@ function generateSubtasksListHTML(srcImg, subtask) {
 
 function getSubtasksCount(filteredTasks, i) {
   const filteredSubTask = filteredTasks[i]["subtasks"];
-  let totalSubtasks = filteredSubTask["text"].length;
-  return totalSubtasks;
+  return filteredSubTask.length;
 }
 
 function getSubtasksDone() {

@@ -487,7 +487,7 @@ function filterContactListByName(nameQuery) {
 }
 
 async function saveTask() {
-  let taskList = await getItemFromBackend("taskList");
+  // let taskList = await getItemFromBackend("taskList");
   let status;
   let id;
   if (selectedTask !== null) {
@@ -504,10 +504,7 @@ async function saveTask() {
     priority: getPriorityFromForm(),
     dueDate: document.getElementById("due-date-input").value,
     category: document.getElementById("category-input").value,
-    subtasks: {
-      text: getSubtasksFromForm(),
-      status: "todo",
-    },
+    subtasks: getSubtasksFromForm(),
     status: status,
     id: id,
   };
@@ -530,10 +527,13 @@ function getSubtasksFromForm() {
     .querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
     const input = inputs[i];
-    subtasksArray.push(input.value);
+    subtasksArray.push({ text: input.value, status: 'todo' })
   }
   return subtasksArray;
 }
+
+
+
 
 function getPriorityFromForm() {
   const prioInputs = document
