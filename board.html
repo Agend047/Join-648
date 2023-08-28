@@ -162,9 +162,10 @@
               </a>
             </div>
             <div
-              id="todoDesktop"
-              ondragover="allowDrop(event)"
-              ondrop='moveTo("todo")'
+              id="todo"
+              ondragover="allowDrop(event); addHighlight('todo')"
+              ondrop="moveTo('todo'); removeHighlight('todo')"
+              ondragleave="removeHighlight('todo')"
               class="columns status-column"
             >
               <div class="placeholder">No tasks To do</div>
@@ -210,9 +211,10 @@
             </div>
 
             <div
-              id="inprogressDesktop"
-              ondragover="allowDrop(event)"
-              ondrop='moveTo("inprogress")'
+              id="inprogress"
+              ondragover="allowDrop(event); addHighlight('inprogress')"
+              ondrop="moveTo('inprogress'); removeHighlight('inprogress')"
+              ondragleave="removeHighlight('inprogress')"
               class="columns status-column"
             >
               <div class="placeholder">No tasks In progress</div>
@@ -257,9 +259,10 @@
               </a>
             </div>
             <div
-              id="feedbackDesktop"
-              ondragover="allowDrop(event)"
-              ondrop='moveTo("feedback")'
+              id="feedback"
+              ondragover="allowDrop(event); addHighlight('feedback')"
+              ondrop="moveTo('feedback'); removeHighlight('feedback')"
+              ondragleave="removeHighlight('feedback')"
               class="columns status-column"
             >
               <div class="placeholder">No tasks Await feedback</div>
@@ -271,9 +274,10 @@
               <h2>Done</h2>
             </div>
             <div
-              id="doneDesktop"
-              ondragover="allowDrop(event)"
-              ondrop='moveTo("done")'
+              id="done"
+              ondragover="allowDrop(event); addHighlight('done')"
+              ondrop="moveTo('done'); removeHighlight('done')"
+              ondragleave="removeHighlight('done')"
               class="columns status-column"
             >
               <div class="placeholder">No tasks Done</div>

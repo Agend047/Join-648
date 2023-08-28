@@ -11,14 +11,13 @@ function renderAllContainersHtml() {
   const statusArr = ["todo", "inprogress", "feedback", "done"];
   for (let i = 0; i < statusArr.length; i++) {
     const status = statusArr[i];
-    updateHTML(status + "Desktop", status);
-    // updateHTML(status + 'Mobile', status);
+    updateHTML(status, status);
   }
 }
 
-function updateHTML(ID, status) {
+function updateHTML(status, id) {
   let filteredTasks = taskList.filter((t) => t["status"] == status);
-  const todoContainer = document.getElementById(ID);
+  const todoContainer = document.getElementById(id);
   todoContainer.innerHTML = "";
 
   for (let i = 0; i < filteredTasks.length; i++) {
@@ -26,7 +25,12 @@ function updateHTML(ID, status) {
     let totalSubtasks = getSubtasksCount(filteredTasks, i);
     let subtasksDone = getSubtasksDone();
     labelColor = assignLabelColor(task.category);
-    todoContainer.innerHTML += generateSmallCardHTML(totalSubtasks, task, i);
+    todoContainer.innerHTML += generateSmallCardHTML(
+      totalSubtasks,
+      subtasksDone,
+      task,
+      i
+    );
   }
 
   renderSmallCard(filteredTasks);
@@ -63,14 +67,19 @@ function assignLabelColor(category) {
   return "#FF7A00";
 }
 
+//////////////////////////////////////////////////////////////////////
+// DRAG & DROP FUNCTIONS
+/** Sets the Task ID to the currently dragged Element and saves it in a variable */
 function startDragging(id) {
   currentDraggedElement = id;
 }
 
+/**  */
 function allowDrop(event) {
   event.preventDefault();
 }
 
+/**  */
 async function moveTo(status) {
   const taskIndex = taskList.findIndex(
     (task) => task.id === currentDraggedElement
@@ -80,8 +89,19 @@ async function moveTo(status) {
   renderAllContainersHtml();
 }
 
+/** Highlights the droparea */
+function addHighlight(ID) {
+  document.getElementById(ID).classList.add("drag-area-highlight");
+}
+
+/** Removes the Highlight from the droparea */
+function removeHighlight(ID) {
+  document.getElementById(ID).classList.remove("drag-area-highlight");
+}
+//////////////////////////////////////////////////////////////////////
+
 // i = i in filteredTasks! Attention!
-function generateSmallCardHTML(totalSubtasks, task, i, subtasksDone) {
+function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
   return /*html*/ `
               <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
                 <div class="category">
