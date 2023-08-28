@@ -124,159 +124,157 @@
         </div>
 
         <div class="content">
-          <div class="title-row">
+          <div class="columns-desktop">
             <div class="col-title">
               <h2>To do</h2>
-              <svg
-                class="plus-icon"
-                id="addToDo"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 8V16"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M16 12.0754L8 12.0754"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="7"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                />
-              </svg>
+              <a href="/add_task.html">
+                <svg
+                  class="plus-icon"
+                  id="addToDo"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8V16"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M16 12.0754L8 12.0754"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="7"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
             </div>
-            <div class="margin-bottom" id="todoMobile">
-              <div class="placeholder">No tasks To do</div>
-            </div>
-
-            <div class="col-title">
-              <h2>In progress</h2>
-              <svg
-                class="plus-icon"
-                id="addProgress"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 8V16"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M16 12.0754L8 12.0754"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="7"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <div class="margin-bottom" id="inprogressMobile">
-              <div class="placeholder">No tasks In progress</div>
-            </div>
-
-            <div class="col-title">
-              <h2>Await feedback</h2>
-              <svg
-                class="plus-icon"
-                id="addFeedback"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 8V16"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M16 12.0754L8 12.0754"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="7"
-                  stroke="#2A3647"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <div class="margin-bottom" id="feedbackMobile">
-              <div class="placeholder">No tasks Await feedback</div>
-            </div>
-
-            <div class="col-title">
-              <h2>Done</h2>
-            </div>
-            <div id="doneMobile">
-              <div class="placeholder">No tasks Done</div>
-            </div>
-          </div>
-
-          <div class="columns">
             <div
               id="todoDesktop"
               ondragover="allowDrop(event)"
               ondrop='moveTo("todo")'
-              class="status-column"
+              class="columns status-column"
             >
               <div class="placeholder">No tasks To do</div>
             </div>
+          </div>
+
+          <div class="columns-desktop">
+            <div class="col-title">
+              <h2>In progress</h2>
+              <a href="/add_task.html">
+                <svg
+                  class="plus-icon"
+                  id="addProgress"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8V16"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M16 12.0754L8 12.0754"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="7"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
+            </div>
+
             <div
               id="inprogressDesktop"
               ondragover="allowDrop(event)"
               ondrop='moveTo("inprogress")'
-              class="status-column"
+              class="columns status-column"
             >
               <div class="placeholder">No tasks In progress</div>
+            </div>
+          </div>
+
+          <div class="columns-desktop">
+            <div class="col-title">
+              <h2>Await feedback</h2>
+              <a href="/add_task.html">
+                <svg
+                  class="plus-icon"
+                  id="addFeedback"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8V16"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M16 12.0754L8 12.0754"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="7"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
             </div>
             <div
               id="feedbackDesktop"
               ondragover="allowDrop(event)"
               ondrop='moveTo("feedback")'
-              class="status-column"
+              class="columns status-column"
             >
               <div class="placeholder">No tasks Await feedback</div>
+            </div>
+          </div>
+
+          <div class="columns-desktop">
+            <div class="col-title">
+              <h2>Done</h2>
             </div>
             <div
               id="doneDesktop"
               ondragover="allowDrop(event)"
               ondrop='moveTo("done")'
-              class="status-column"
+              class="columns status-column"
             >
               <div class="placeholder">No tasks Done</div>
             </div>

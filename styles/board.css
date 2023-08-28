@@ -139,6 +139,7 @@ input {
   display: flex;
   flex-direction: column;
   flex: 1;
+  gap: 1.2em;
 }
 
 .content h2 {
@@ -150,21 +151,29 @@ input {
 }
 
 .columns {
-  width: 100%;
-  margin-bottom: 1.625rem;
-  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  overflow-y: hidden;
+  overflow-x: auto;
+  word-wrap: break-word;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  margin: -10px -10px; /*necessary for overflow vertical & box shadow visible*/
+  padding: 10px 10px; /*necessary for overflow vertical & box shadow visible*/
 }
 
 .status-column {
-  min-height: 30em;
+  min-height: 5em;
 }
 
 .col-title {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1em;
-  gap: 0.5em;
+  margin-bottom: 0.8em;
 }
 
 .col-title svg:hover {
@@ -183,24 +192,6 @@ input {
 
 .margin-bottom {
   margin-bottom: 1.62em;
-}
-
-#todoMobile,
-#inprogressMobile,
-#feedbackMobile,
-#doneMobile {
-  display: flex;
-  flex-direction: unset;
-  overflow-x: auto;
-  overflow-y: hidden;
-  flex-wrap: nowrap;
-}
-
-#todoDesktop,
-#inprogressDesktop,
-#feedbackDesktop,
-#doneDesktop {
-  display: none;
 }
 
 .placeholder {
@@ -241,6 +232,21 @@ input {
     margin-left: 14.75em;
     margin-right: 3.25em;
     width: calc(100% - 18em);
+  }
+}
+
+@media (min-width: 1080px) {
+  .heading-desktop-rightSide button {
+    width: 10.25rem;
+    padding: 0.5em 0.5em 0.5em 1em;
+    gap: 0.5em;
+  }
+
+  .heading-desktop-rightSide button::before {
+    content: "Add task";
+    color: white;
+    font-size: 1.3125rem;
+    font-weight: 700;
   }
 }
 
@@ -309,6 +315,11 @@ input {
     flex: 1;
   }
 
+  .content {
+    flex-direction: unset;
+    gap: 1.65em;
+  }
+
   .content h2 {
     font-size: 1.25rem;
   }
@@ -318,50 +329,29 @@ input {
     object-fit: contain;
   }
 
-  .title-row {
-    display: flex;
-    width: 100%;
-    gap: 1.62em;
+  .col-title {
+    width: auto;
+    max-width: 19rem;
+    min-height: 2.4em;
+    gap: 0.8em;
   }
 
-  .col-title {
+  .columns-desktop {
     width: 25%;
   }
 
   .columns {
-    width: 100%;
+    width: auto;
     display: flex;
-    gap: 1.62em;
-  }
-
-  #todoDesktop,
-  #inprogressDesktop,
-  #feedbackDesktop,
-  #doneDesktop {
-    display: block;
-    width: 25%;
-  }
-
-  #todoMobile,
-  #inprogressMobile,
-  #feedbackMobile,
-  #doneMobile {
-    display: none;
-  }
-}
-
-@media (min-width: 1080px) {
-  .heading-desktop-rightSide button {
-    width: 10.25rem;
-    padding: 0.5em 0.5em 0.5em 1em;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 0.5em;
+    overflow: visible;
   }
 
-  .heading-desktop-rightSide button::before {
-    content: "Add task";
-    color: white;
-    font-size: 1.3125rem;
-    font-weight: 700;
+  .status-column {
+    min-height: 30em;
   }
 }
 
@@ -370,10 +360,10 @@ input {
 .cardSmall {
   display: flex;
   flex: 0 0 auto;
-  width: 99%;
-  max-width: 15.75rem; /* mobile */
+  width: 95%;
+  max-width: 15.75rem;
   min-width: 149px;
-  height: auto;
+  height: 16.4rem;
   padding: 1rem;
   flex-direction: column;
   justify-content: flex-start;
@@ -382,7 +372,7 @@ input {
   border-radius: 1.5em;
   background: white;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-  /*margin: 10px;  /*room for box-shadow, so its not cut off */
+  margin: 10px; /*room for box-shadow, so its not cut off*/
   flex-shrink: 0;
 }
 
@@ -504,6 +494,7 @@ input {
 
 @media (min-width: 1180px) {
   .cardSmall {
+    height: auto;
     margin-right: 0;
     flex-shrink: 1;
   }
