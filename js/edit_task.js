@@ -25,7 +25,6 @@ function showAssignedContacts(taskID) {
   let task = getTaskByID(taskID);
   let result = "";
   for (contact of task.assignedTo) {
-    console.log(task.assignedTo);
     result += renderContactBubbleHtml(contact);
   }
   return result;

@@ -472,7 +472,6 @@ function searchTask() {
  * @param {Array} foundTasks collection of ID´s from those Tasks, wich involve things, the user is looking for.
  */
 function hideNotSearchedTasks(foundTasks) {
-  console.log(foundTasks);
   for (task of taskList) {
     if (foundTasks.indexOf(task.id) + 1) {
       //+1 because if the index is 0, it will be handled as 'false'!
