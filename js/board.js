@@ -1,5 +1,6 @@
 let currentDraggedElement;
 let selectedTask = null;
+let labelColor;
 
 async function initBoardPage() {
   await getDataFromBackend();
@@ -22,23 +23,34 @@ function updateHTML(ID, status) {
 
   for (let i = 0; i < filteredTasks.length; i++) {
     const task = filteredTasks[i];
-    let totalSubtasks = getSubtasksCount(i);
-    const labelColor = assignLabelColor(task.category);
-    todoContainer.innerHTML += generateSmallCardHTML(
-      totalSubtasks,
-      task,
-      i,
-      labelColor
-    );
+    let totalSubtasks = getSubtasksCount(filteredTasks, i);
+    let subtasksDone = getSubtasksDone();
+    labelColor = assignLabelColor(task.category);
+    todoContainer.innerHTML += generateSmallCardHTML(totalSubtasks, task, i);
   }
 
   renderSmallCard(filteredTasks);
 }
 
 function renderSmallCard(filteredTasks) {
-  renderSubtasks(filteredTasks);
+  renderProgressSection(filteredTasks);
   renderAssignedBadges(filteredTasks);
   renderPrio(filteredTasks);
+}
+
+function renderProgressSection(filteredTasks) {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const progress = document.getElementById(
+      `progress-section-${filteredTask.id}`
+    );
+    const assignedSubtasks = filteredTask["subtasks"];
+    if (assignedSubtasks.length === 0) {
+      progress.style.display = "none";
+    } else {
+      updateProgressBar();
+    }
+  }
 }
 
 function assignLabelColor(category) {
@@ -69,7 +81,7 @@ async function moveTo(status) {
 }
 
 // i = i in filteredTasks! Attention!
-function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
+function generateSmallCardHTML(totalSubtasks, task, i, subtasksDone) {
   return /*html*/ `
               <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
                 <div class="category">
@@ -82,6 +94,7 @@ function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
                 <div class="progress-section" id="progress-section-${task.id}">
                   <div id="progress">
                     <div
+                    id="progress-bar"
                       class="progress-bar"
                       role="progressbar"
                       aria-valuenow="75"
@@ -89,7 +102,7 @@ function generateSmallCardHTML(totalSubtasks, task, i, labelColor) {
                       aria-valuemax="100"
                     ></div>
                   </div>
-                  <div>0/${totalSubtasks} Subtasks</div>
+                  <div>${subtasksDone}/${totalSubtasks} Subtasks</div>
                 </div>
                 <div class="card-footer">
                   <div class="w-100 d-flex justify-content-space-btw align-items-center">
@@ -201,38 +214,45 @@ function generateAssignedUserListItemHTML(contact) {
   return html;
 }
 
-function renderSubtasks(filteredTasks) {
-  for (let i = 0; i < filteredTasks.length; i++) {
-    const filteredTask = filteredTasks[i];
-    const subtask = document.getElementById(
-      `progress-section-${filteredTask.id}`
-    );
-    const assignedSubtasks = filteredTask["subtasks"];
-    hideSubtaskIfUnassigned(subtask, assignedSubtasks);
+function renderSubtasksList(task) {
+  const list = document.getElementById("subtaskList");
+  const subtasks = task["subtasks"];
+  list.innerHTML = "";
+
+  if (subtasks.length === 0) {
+    list.innerHTML = `<div class="subtask">No subtasks</div>`;
+  } else {
+    for (let i = 0; i < subtasks.length; i++) {
+      const subtask = subtasks[i];
+      list.innerHTML += generateSubtasksListHTML(subtask);
+    }
   }
 }
 
-function hideSubtaskIfUnassigned(subtask, assignedSubtasks) {
-  if (assignedSubtasks.length === 0) {
-    subtask.style.display = "none";
-  }
+function generateSubtasksListHTML(subtask) {
+  html = `<div class="subtask">`;
+  html += `<img src="./assets/img/checkbox-unchecked.svg" class="icon-checkbox checkbox"/>`;
+  html += `<span>${subtask}<span></div>`;
+  return html;
 }
 
-function getSubtasksCount(i) {
-  let totalSubtasks = taskList[i]["subtasks"].length;
+function getSubtasksCount(filteredTasks, i) {
+  const filteredTask = filteredTasks[i];
+  let totalSubtasks = filteredTask["subtasks"].length;
   return totalSubtasks;
 }
 
 function getSubtasksDone() {
-  const elementToCount = "done";
-  let subtasks = taskList[i]["subtasks"];
-  let subtasksDone = subtasks[i]["status"];
-  subtasksDone.filter((x) => x == elementToCount).length;
+  const checkboxes = document.getElementsByClassName("checkbox");
+  let subtasksDone = 0;
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].classList.contains("checked")) subtasksDone++;
+  }
   return subtasksDone;
 }
 
-function updateProgressBar(subtasksDone, totalSubtasks) {
-  getSubtasksDone();
+function updateProgressBar(totalSubtasks) {
+  const subtasksDone = getSubtasksDone();
   let percent = subtasksDone / totalSubtasks;
   percent = Math.round(percent * 100);
 
@@ -243,9 +263,12 @@ function openCard(id, i) {
   let task = getTaskByID(id);
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
+  labelColor = assignLabelColor(task.category);
   largeCard.innerHTML = generateLargeCardHTML(task, i);
   renderPrioLargeCard(task);
   renderAssignedUserList(task);
+  renderSubtasksList(task);
+  initCheckboxes();
 }
 
 function generateLargeCardHTML(task, i) {
@@ -253,7 +276,7 @@ function generateLargeCardHTML(task, i) {
     <div id="popUp" class="popUp">
         <div id="largeCard" class="largeCard">
           <div class="large-card-header">
-            <div id="categoryLabel" class="categoryLabel">${task.category}</div>
+            <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
             <img
               onclick="closeCard('popUp')"
               id="btnCloseCard"
@@ -284,19 +307,8 @@ function generateLargeCardHTML(task, i) {
               <tr>
                 <td colspan="2">
                   <span>Subtasks</span>
-                  <div class="subsection">
-                    <div class="subtask">
-                      <img
-                        class="icon-checkbox checkbox"
-                        src="./assets/img/checkbox-checked.svg"
-                      /><span>Implement Recipe Recommendation</span>
-                    </div>
-                    <div class="subtask">
-                      <img
-                        class="icon-checkbox checkbox"
-                        src="./assets/img/checkbox-unchecked.svg"
-                      /><span>Start Page Layout</span>
-                    </div>
+                  <div class="subsection" id="subtaskList">
+                    <div class="subtask">No subtasks</div>
                   </div>
                 </td>
               </tr>

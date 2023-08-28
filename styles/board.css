@@ -404,7 +404,7 @@ input {
   justify-content: flex-start;
 }
 
-.categoryLabel {
+.cardSmall .categoryLabel {
   display: flex;
   padding: 0.25rem 1rem;
   align-items: flex-start;
@@ -538,10 +538,10 @@ input {
 .largeCard {
   display: flex;
   width: 90vw;
-  height: calc(100vh - 50px);
-  max-height: 860px;
+  height: calc(100vh - 60px);
+  max-height: 670px;
   font-size: 1rem;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem 0 1.5rem;
   gap: 1em;
   flex-direction: column;
   border-radius: 1.875rem;
@@ -553,6 +553,18 @@ input {
   scrollbar-width: none;
 }
 
+.largeCard .categoryLabel {
+  display: flex;
+  padding: 0.25rem 1rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  color: white;
+}
+
 .largeCard::-webkit-scrollbar {
   display: none;
   width: 0 !important;
@@ -562,12 +574,20 @@ input {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  height: auto;
+  flex: 1;
 }
 
 .large-card-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding-block-start: 2.5em;
+  padding-block-end: 0.6em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
 }
 
 .categoryLabel {
@@ -611,7 +631,13 @@ td {
 .large-card-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
   gap: 1rem;
+  position: sticky;
+  bottom: 0;
+  padding-block-start: 1.5em;
+  padding-block-end: 2em;
+  background-color: white;
 }
 
 .btn-seperator {
@@ -695,10 +721,14 @@ td {
 .subtask {
   display: flex;
   align-items: center;
-  padding: 0.44em 1em 0.44em 1em;
+  padding: 0em 1em 0em 1em;
   font-size: 1rem;
   font-weight: 400;
   gap: 1em;
+}
+
+.checkbox {
+  cursor: pointer;
 }
 
 @media (min-width: 330px) {
@@ -707,15 +737,21 @@ td {
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 440px) {
+  .largeCard {
+    height: calc(100vh - 80px);
+    max-height: 900px;
+  }
+}
+
+@media (min-width: 440px) {
   .title-large-card {
     font-size: 3.8125rem;
   }
 
   .largeCard {
-    width: 32.8125rem;
     font-size: 1.25rem;
-    padding: 3rem 2.5rem;
+    padding: 0rem 2.5rem 0rem 2.5rem;
     gap: 1.5rem;
   }
 
@@ -728,12 +764,13 @@ td {
   }
 }
 
-@media (min-width: 820px) {
+@media (min-width: 590px) {
   .largeCard {
-    height: auto;
-    max-height: 91vh;
+    width: 32.8125rem;
   }
+}
 
+@media (min-width: 820px) {
   .popUp {
     margin-left: 23vw;
   }
