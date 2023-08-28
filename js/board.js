@@ -370,11 +370,12 @@ function getTaskByID(findID) {
 /**Searches through all Tasks if one may be the one, were looking for. */
 function searchTask() {
   let term = document.getElementById("findTask").value;
+  term = term.toLowerCase();
   let foundTasks = [];
 
   for (i in taskList) {
-    let taskTitle = taskList[i].title;
-    let taskDesc = taskList[i].description;
+    let taskTitle = taskList[i].title.toLowerCase();
+    let taskDesc = taskList[i].description.toLowerCase();
     if (taskTitle.includes(term) || taskDesc.includes(term)) {
       foundTasks.push(taskList[i].id);
     }
