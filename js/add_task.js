@@ -3,6 +3,7 @@ let backdrop;
 let formControl;
 let subtasks = [];
 let selectedContactIds = [];
+let selectedTask = null;
 
 function getAddContactElements() {
   subtaskEl = document.getElementById("subtasks-container");

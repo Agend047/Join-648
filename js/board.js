@@ -17,22 +17,26 @@ function renderAllContainersHtml() {
 
 function updateHTML(status, id) {
   let filteredTasks = taskList.filter((t) => t["status"] == status);
-  const todoContainer = document.getElementById(id);
-  todoContainer.innerHTML = "";
+  const taskContainer = document.getElementById(id);
+  taskContainer.innerHTML = "";
 
-  for (let i = 0; i < filteredTasks.length; i++) {
-    const task = filteredTasks[i];
-    let totalSubtasks = getSubtasksCount(filteredTasks, i);
-    let subtasksDone = getSubtasksDone();
-    labelColor = assignLabelColor(task.category);
-    todoContainer.innerHTML += generateSmallCardHTML(
-      totalSubtasks,
-      subtasksDone,
-      task,
-      i
-    );
+  if (filteredTasks.length === 0) {
+    const placeholderText = renderPlaceholderText(status);
+    taskContainer.innerHTML = generatePlaceholderHTML(placeholderText);
+  } else {
+    for (let i = 0; i < filteredTasks.length; i++) {
+      const task = filteredTasks[i];
+      let totalSubtasks = getSubtasksCount(filteredTasks, i);
+      let subtasksDone = getSubtasksDone();
+      labelColor = assignLabelColor(task.category);
+      taskContainer.innerHTML += generateSmallCardHTML(
+        totalSubtasks,
+        subtasksDone,
+        task,
+        i
+      );
+    }
   }
-
   renderSmallCard(filteredTasks);
 }
 
@@ -66,39 +70,6 @@ function assignLabelColor(category) {
   // Default color Orange, if category doesn't match
   return "#FF7A00";
 }
-
-//////////////////////////////////////////////////////////////////////
-// DRAG & DROP FUNCTIONS
-/** Sets the Task ID to the currently dragged Element and saves it in a variable */
-function startDragging(id) {
-  currentDraggedElement = id;
-}
-
-/**  */
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-/**  */
-async function moveTo(status) {
-  const taskIndex = taskList.findIndex(
-    (task) => task.id === currentDraggedElement
-  );
-  taskList[taskIndex]["status"] = status;
-  await setItemInBackend("taskList", JSON.stringify(taskList));
-  renderAllContainersHtml();
-}
-
-/** Highlights the droparea */
-function addHighlight(ID) {
-  document.getElementById(ID).classList.add("drag-area-highlight");
-}
-
-/** Removes the Highlight from the droparea */
-function removeHighlight(ID) {
-  document.getElementById(ID).classList.remove("drag-area-highlight");
-}
-//////////////////////////////////////////////////////////////////////
 
 // i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
@@ -134,6 +105,23 @@ function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
                 </div>
               </div>
             `;
+}
+
+function generatePlaceholderHTML(status) {
+  return `<div class="placeholder">No Tasks ${status}</div>`;
+}
+
+function renderPlaceholderText(status) {
+  switch (status) {
+    case "todo":
+      return "To Do";
+    case "inprogress":
+      return "In Progress";
+    case "feedback":
+      return "Await Feedback";
+    case "done":
+      return "Done";
+  }
 }
 
 function renderAssignedBadges(filteredTasks) {
@@ -193,6 +181,155 @@ function generatePrioHTML(prio) {
   return /*html*/ `
   <img src="./assets/img/prio-${prio}.svg">
 `;
+}
+
+//////////////////////////////////////////////////////////////////////
+// DRAG & DROP FUNCTIONS
+/** Sets the Task ID to the currently dragged Element and saves it in a variable */
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+/**  */
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+/**  */
+async function moveTo(status) {
+  const taskIndex = taskList.findIndex(
+    (task) => task.id === currentDraggedElement
+  );
+  taskList[taskIndex]["status"] = status;
+  await setItemInBackend("taskList", JSON.stringify(taskList));
+  renderAllContainersHtml();
+}
+
+/** Highlights the droparea */
+function addHighlight(ID) {
+  document.getElementById(ID).classList.add("drag-area-highlight");
+}
+
+/** Removes the Highlight from the droparea */
+function removeHighlight(ID) {
+  document.getElementById(ID).classList.remove("drag-area-highlight");
+}
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// FUNCTIONS FOR LARGE CARD (OPEN POPUP)
+
+function openCard(id, i) {
+  let task = getTaskByID(id);
+  let largeCard = document.getElementById("popUpContainer");
+  document.body.style.overflow = "hidden";
+  labelColor = assignLabelColor(task.category);
+  largeCard.innerHTML = generateLargeCardHTML(task, i);
+  renderPrioLargeCard(task);
+  renderAssignedUserList(task);
+  renderSubtasksList(task);
+  initCheckboxes();
+}
+
+function generateLargeCardHTML(task, i) {
+  return /*html*/ `
+    <div id="popUp" class="popUp">
+        <div id="largeCard" class="largeCard">
+          <div class="large-card-header">
+            <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
+            <img
+              onclick="closeCard('popUp')"
+              id="btnCloseCard"
+              class="btn-close-card"
+              src="./assets/img/close-btn.svg"
+            />
+          </div>
+
+          <div class="large-card-content">
+            <h1 class="title-large-card" id="title-${i}">${task.title}</h1>
+            <p class="description" id="description-${i}">${task.description}</p>
+            <table>
+              <tr>
+                <td class="col-width">Due date:</td>
+                <td id="dueDate">${task.dueDate}</td>
+              </tr>
+              <tr>
+                <td class="col-width">Priority:</td>
+                <td class="prio-btn" id="largeCardPrio"></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <span>Assigned To:</span>
+                  <div class="subsection" id="assignedSection">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <span>Subtasks</span>
+                  <div class="subsection" id="subtaskList">
+                    <div class="subtask">No subtasks</div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <div class="large-card-footer">
+              <div class="footer-btn" onclick="deleteTask(${task.id})">
+                <span class="delete-icon"></span>
+                <span>Delete</span>
+              </div>
+              <div class="btn-seperator"></div>
+              <div onclick="editTask(${task.id}); initAddTaskPage()" class="footer-btn">
+                <span class="edit-icon"></span>
+                <span>Edit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="background" onclick="closeCard('popUp')"></div>
+    </div>
+  `;
+}
+
+function closeCard(ID) {
+  document.getElementById(ID).style.display = "none";
+  document.body.style.overflow = "scroll";
+}
+
+/**
+ * Deleting a task out of TaskList
+ * @param {Number} taskID - ID ot the to delete Task
+ */
+async function deleteTask(taskID) {
+  let taskIndex = getTaskIndexByID(taskID);
+
+  taskList.splice(taskIndex, 1);
+
+  await setItemInBackend("taskList", JSON.stringify(taskList));
+  closeCard("popUp");
+  renderAllContainersHtml();
+}
+
+/**
+ * Searches for the task within the taskList, by a specific id.
+ * @param {Number} findID - The Id, we are looking for
+ * @returns - the task (Object) we wanted.
+ */
+function getTaskByID(findID) {
+  let task = taskList.find((t) => t.id === findID);
+  return task;
+}
+
+/**
+ * Gets task through other function, then gets Index
+ * @param {Number} taskID - ID of searched Task
+ * @returns - Indexof searched Task inside of taskList
+ */
+function getTaskIndexByID(taskID) {
+  let task = getTaskByID(taskID);
+  let taskIndex = taskList.indexOf(task);
+  return taskIndex;
 }
 
 function renderPrioLargeCard(task) {
@@ -279,113 +416,10 @@ function updateProgressBar(totalSubtasks) {
   document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
-function openCard(id, i) {
-  let task = getTaskByID(id);
-  let largeCard = document.getElementById("popUpContainer");
-  document.body.style.overflow = "hidden";
-  labelColor = assignLabelColor(task.category);
-  largeCard.innerHTML = generateLargeCardHTML(task, i);
-  renderPrioLargeCard(task);
-  renderAssignedUserList(task);
-  renderSubtasksList(task);
-  initCheckboxes();
-}
+//////////////////////////////////////////////////////////////////////
 
-function generateLargeCardHTML(task, i) {
-  return /*html*/ `
-    <div id="popUp" class="popUp">
-        <div id="largeCard" class="largeCard">
-          <div class="large-card-header">
-            <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
-            <img
-              onclick="closeCard('popUp')"
-              id="btnCloseCard"
-              class="btn-close-card"
-              src="./assets/img/close-btn.svg"
-            />
-          </div>
-
-          <div class="large-card-content">
-            <h1 class="title-large-card" id="title-${i}">${task.title}</h1>
-            <p class="description" id="description-${i}">${task.description}</p>
-            <table>
-              <tr>
-                <td class="col-width">Due date:</td>
-                <td id="dueDate">${task.dueDate}</td>
-              </tr>
-              <tr>
-                <td class="col-width">Priority:</td>
-                <td class="prio-btn" id="largeCardPrio"></td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <span>Assigned To:</span>
-                  <div class="subsection" id="assignedSection">
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <span>Subtasks</span>
-                  <div class="subsection" id="subtaskList">
-                    <div class="subtask">No subtasks</div>
-                  </div>
-                </td>
-              </tr>
-            </table>
-
-            <div class="large-card-footer">
-              <div class="footer-btn" onclick="deleteTask(${task.id})">
-                <span class="delete-icon"></span>
-                <span>Delete</span>
-              </div>
-              <div class="btn-seperator"></div>
-              <div onclick="editTask(${task.id}); initAddTaskPage()" class="footer-btn">
-                <span class="edit-icon"></span>
-                <span>Edit</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="background" onclick="closeCard('popUp')"></div>
-    </div>
-  `;
-}
-
-/**
- * Deleting a task out of TaskList
- * @param {Number} taskID - ID ot the to delete Task
- */
-async function deleteTask(taskID) {
-  let taskIndex = getTaskIndexByID(taskID);
-
-  taskList.splice(taskIndex, 1);
-
-  await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard("popUp");
-  renderAllContainersHtml();
-}
-
-/**
- * Gets task throught other function, then gets Index
- * @param {Number} taskID - ID of searched Task
- * @returns - Indexof searched Task inside of taskList
- */
-function getTaskIndexByID(taskID) {
-  let task = getTaskByID(taskID);
-  let taskIndex = taskList.indexOf(task);
-  return taskIndex;
-}
-
-/**
- * Searches for the task within the taskList, by a specific id.
- * @param {Number} findID - The Id, we are looking for
- * @returns - the task (Object) we wanted.
- */
-function getTaskByID(findID) {
-  let task = taskList.find((t) => t.id === findID);
-  return task;
-}
+///////////////////////////////////////////////////////////////////
+// SEARCH FUNCIONS
 
 /**Searches through all Tasks if one may be the one, were looking for. */
 function searchTask() {
@@ -417,9 +451,4 @@ function hideNotSearchedTasks(foundTasks) {
       document.getElementById(task.id).style.display = "none";
     }
   }
-}
-
-function closeCard(ID) {
-  document.getElementById(ID).style.display = "none";
-  document.body.style.overflow = "scroll";
 }

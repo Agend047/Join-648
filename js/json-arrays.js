@@ -34,15 +34,11 @@ let taskList = {
   ],
   subtasks: [
     {
-      text: "subtask1"
+      text: "subtask1",
+      status: "done",
     },
   ],
-  status: [
-    "todo",
-    "inprogress",
-    "feedback",
-    "done",
-  ] /* nur eine Zuweisung */
+  status: ["todo", "inprogress", "feedback", "done"] /* nur eine Zuweisung */,
 };
 
 let todo = [1, 5, 6];
