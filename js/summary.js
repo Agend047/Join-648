@@ -8,20 +8,20 @@ async function initSummary() {
 
 function greetUser() {
   const isGuestUser = location.search.includes("guestuser=true");
-
+  console.log(isGuestUser);
   if (screenType === "mobile" && isGuestUser) {
     loadHelloPageMobile();
     greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");
   }
   if (screenType === "mobile" && activeUser) {
     loadHelloPageMobile();
-    document.getElementById("userNameMobile").innerHTML = getUserName();
+    document.getElementById("userNameMobile").innerHTML = activeUser.name;
   } else if (screenType === "desktop" && isGuestUser) {
     showGreeting("greetingDesktop");
     greetGuestUser(isGuestUser, "greetingDesktop", "userNameDesktop");
   } else if (screenType === "desktop" && activeUser) {
     showGreeting("greetingDesktop");
-    document.getElementById("userNameDesktop").innerHTML = getUserName();
+    document.getElementById("userNameDesktop").innerHTML = activeUser.name;
   }
 }
 

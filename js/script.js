@@ -27,10 +27,10 @@ function verifyUserStatus() {
   let status = JSON.parse(localStorage.getItem("loggedIn"));
   if (status) {
     loginData = JSON.parse(localStorage.getItem("loginData"));
-    activeUser = JSON.parse(sessionStorage.getItem("activeUser"));
   } else {
     status = JSON.parse(sessionStorage.getItem("loggedIn"));
   }
+  activeUser = JSON.parse(sessionStorage.getItem("activeUser"));
   loggedIn = status;
   if (
     !window.location.href.endsWith("login.html") &&
@@ -362,9 +362,11 @@ function getUserByEmail(email) {
 function logOut() {
   localStorage.setItem("loggedIn", "false");
   sessionStorage.setItem("loggedIn", "false");
+  sessionStorage.setItem("activeUser", "false");
   window.sessionStorage.setItem("loggedIn", "false");
   window.location.href = "/login.html";
 }
+
 
 function renderContactBubbleHtml(contact) {
   return /*html*/ `<svg
