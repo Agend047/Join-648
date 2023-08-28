@@ -1,5 +1,4 @@
 let currentDraggedElement;
-let selectedTask = null;
 let labelColor;
 
 async function initBoardPage() {
@@ -279,7 +278,7 @@ function generateLargeCardHTML(task, i) {
                 <span>Delete</span>
               </div>
               <div class="btn-seperator"></div>
-              <div onclick="editTask(${task.id}); initAddTaskPage()" class="footer-btn">
+              <div onclick="editTask(${task.id}), initAddTaskPage()" class="footer-btn">
                 <span class="edit-icon"></span>
                 <span>Edit</span>
               </div>
