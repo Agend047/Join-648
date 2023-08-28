@@ -370,7 +370,8 @@ input {
 .cardSmall {
   display: flex;
   flex: 0 0 auto;
-  width: 15.75rem; /* mobile */
+  width: 99%;
+  max-width: 15.75rem; /* mobile */
   min-width: 149px;
   height: auto;
   padding: 1rem;
@@ -381,15 +382,13 @@ input {
   border-radius: 1.5em;
   background: white;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-  margin-bottom: 1em;
-  margin-right: 1em;
-  margin-top: 10px; /* room for box-shadow, so its not cut off */
-  margin-left: 10px; /* room for box-shadow, so its not cut off */
+  /*margin: 10px;  /*room for box-shadow, so its not cut off */
   flex-shrink: 0;
 }
 
 .cardSmall:hover {
   cursor: pointer;
+  transform: rotate(5deg);
 }
 
 .cardSmall h1,
@@ -505,7 +504,6 @@ input {
 
 @media (min-width: 1180px) {
   .cardSmall {
-    width: 100%;
     margin-right: 0;
     flex-shrink: 1;
   }
