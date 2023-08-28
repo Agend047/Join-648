@@ -25,7 +25,7 @@ function updateHTML(status, id) {
     for (let i = 0; i < filteredTasks.length; i++) {
       const task = filteredTasks[i];
       let totalSubtasks = getSubtasksCount(filteredTasks, i);
-      let subtasksDone = getSubtasksDone();
+      let subtasksDone = getSubtasksDone(filteredTasks, i);
       labelColor = assignLabelColor(task.category);
       taskContainer.innerHTML += generateSmallCardHTML(
         totalSubtasks,
@@ -54,9 +54,39 @@ function renderProgressSection(filteredTasks) {
     if (assignedSubtasks.length === 0) {
       progress.style.display = "none";
     } else {
-      updateProgressBar();
+      updateProgressBar(filteredTasks, i);
     }
   }
+}
+
+function getSubtasksCount(filteredTasks, i) {
+  const filteredSubtask = filteredTasks[i]["subtasks"];
+  return filteredSubtask.length;
+}
+
+function getSubtasksDone(filteredTasks, i) {
+  const filteredSubtasks = filteredTasks[i]["subtasks"];
+  const subtasksStatus = [];
+  let subtasksDone = 0;
+  for (let i = 0; i < filteredSubtasks.length; i++) {
+    const filteredSubtask = filteredSubtasks[i];
+    subtasksStatus.push(filteredSubtask.status);
+  }
+  for (let j = 0; j < subtasksStatus.length; j++) {
+    if (subtasksStatus[j] === "done") {
+      subtasksDone++;
+    }
+  }
+  return subtasksDone;
+}
+
+function updateProgressBar(filteredTasks, i) {
+  const totalSubtasks = getSubtasksCount(filteredTasks, i);
+  const subtasksDone = getSubtasksDone(filteredTasks, i);
+  let percent = subtasksDone / totalSubtasks;
+  percent = Math.round(percent * 100);
+
+  document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
 function assignLabelColor(category) {
@@ -369,10 +399,9 @@ function generateAssignedUserListItemHTML(contact) {
   return html;
 }
 
-
 /**
- * Writes the subtask into the Big Card 
- * @param {Object} task The Task we want to show 
+ * Writes the subtask into the Big Card
+ * @param {Object} task The Task we want to show
  */
 function renderSubtasksList(task) {
   const list = document.getElementById("subtaskList");
@@ -414,10 +443,9 @@ function getImgBySubtaskStatus(subtask) {
  */
 function updateSubtasksStatus(taskID) {
   let checkboxes = document.getElementsByClassName("checkbox");
-  const task = getTaskByID(taskID)
+  const task = getTaskByID(taskID);
   const subtasks = task["subtasks"];
   for (let i = 0; i < checkboxes.length; i++) {
-
     if (checkboxes[i].classList.contains("checked")) {
       subtasks[i].status = "done";
     } else {
@@ -431,28 +459,6 @@ function generateSubtasksListHTML(srcImg, subtask) {
   html += `<img src="./assets/img/checkbox-${srcImg}.svg" class="icon-checkbox checkbox ${srcImg}"/>`;
   html += `<span>${subtask}<span></div>`;
   return html;
-}
-
-function getSubtasksCount(filteredTasks, i) {
-  const filteredSubTask = filteredTasks[i]["subtasks"];
-  return filteredSubTask.length;
-}
-
-function getSubtasksDone() {
-  const checkboxes = document.getElementsByClassName("checkbox");
-  let subtasksDone = 0;
-  for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].classList.contains("checked")) subtasksDone++;
-  }
-  return subtasksDone;
-}
-
-function updateProgressBar(totalSubtasks) {
-  const subtasksDone = getSubtasksDone();
-  let percent = subtasksDone / totalSubtasks;
-  percent = Math.round(percent * 100);
-
-  document.getElementById("progress-bar").style = `width: ${percent}%;`;
 }
 
 //////////////////////////////////////////////////////////////////////
