@@ -373,7 +373,7 @@ function generateAssignedUserListItemHTML(contact) {
 
 function renderSubtasksList(task) {
   const list = document.getElementById("subtaskList");
-  const subtasks = task["subtasks"];
+  const subtasks = task["subtasks"]["text"];
   list.innerHTML = "";
 
   if (subtasks.length === 0) {
@@ -386,6 +386,10 @@ function renderSubtasksList(task) {
   }
 }
 
+function updateSubtasksStatus() {
+  const list = document.getElementById("subtaskList");
+}
+
 function generateSubtasksListHTML(subtask) {
   html = `<div class="subtask">`;
   html += `<img src="./assets/img/checkbox-unchecked.svg" class="icon-checkbox checkbox"/>`;
@@ -394,8 +398,8 @@ function generateSubtasksListHTML(subtask) {
 }
 
 function getSubtasksCount(filteredTasks, i) {
-  const filteredTask = filteredTasks[i];
-  let totalSubtasks = filteredTask["subtasks"].length;
+  const filteredSubTask = filteredTasks[i]["subtasks"];
+  let totalSubtasks = filteredSubTask["text"].length;
   return totalSubtasks;
 }
 
