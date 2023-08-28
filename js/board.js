@@ -237,7 +237,7 @@ function generateLargeCardHTML(task, i) {
           <div class="large-card-header">
             <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
             <img
-              onclick="closeCard('popUp'), updateSubtasksStatus(${task.id})"
+              onclick="updateSubtasksStatus(${task.id}, closeCard('popUp'))"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -370,6 +370,11 @@ function generateAssignedUserListItemHTML(contact) {
   return html;
 }
 
+
+/**
+ * Writes the subtask into the Big Card 
+ * @param {Object} task The Task we want to show 
+ */
 function renderSubtasksList(task) {
   const list = document.getElementById("subtaskList");
   list.innerHTML = "";
@@ -388,6 +393,11 @@ function renderSubtasksList(task) {
   }
 }
 
+/**
+ * Checks Status of a subtask and returns the status (Checked or unchecked) for Image source
+ * @param {Object} subtask the Subtask inside of the Task we want to show
+ * @returns Status of Subtask (Checked or unchecked) for IMG
+ */
 function getImgBySubtaskStatus(subtask) {
   let srcImg;
   let subtaskStatus = subtask["status"];
@@ -399,24 +409,23 @@ function getImgBySubtaskStatus(subtask) {
   return srcImg;
 }
 
-//HERE
-// function updateSubtasksStatus(taskID) {
-//   const list = document.getElementById("subtaskList");
-//   const checkboxes = document.getElementsByClassName("checkbox");
-//   const subtasks = task["subtasks"];
-//   for (let i = 0; i < checkboxes.length; i++) {
-//     const checkbox = checkboxes[i];
-//     subtasks["status"][i] = subtaskStatus;
+/**
+ * Changes the Subtask Status depending on the Checked Boxes on the BigCard
+ * @param {Number} taskID ID Of the Task we opened
+ */
+function updateSubtasksStatus(taskID) {
+  let checkboxes = document.getElementsByClassName("checkbox");
+  const task = getTaskByID(taskID)
+  const subtasks = task["subtasks"];
+  for (let i = 0; i < checkboxes.length; i++) {
 
-//     if (checkboxes[i].classList.contains("checked")) {
-//       subtaskStatus = "done";
-//       list.src = "./assets/img/checkbox-checked.svg";
-//     } else {
-//       subtaskStatus = "todo";
-//       list.src = "./assets/img/checkbox-unchecked.svg";
-//     }
-//   }
-// }
+    if (checkboxes[i].classList.contains("checked")) {
+      subtasks[i].status = "done";
+    } else {
+      subtasks[i].status = "todo";
+    }
+  }
+}
 
 function generateSubtasksListHTML(srcImg, subtask) {
   html = `<div class="subtask">`;
