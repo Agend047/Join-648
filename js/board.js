@@ -360,27 +360,6 @@ async function deleteTask(taskID) {
 }
 
 /**
- * Searches for the task within the taskList, by a specific id.
- * @param {Number} findID - The Id, we are looking for
- * @returns - the task (Object) we wanted.
- */
-function getTaskByID(findID) {
-  let task = taskList.find((t) => t.id === findID);
-  return task;
-}
-
-/**
- * Gets task through other function, then gets Index
- * @param {Number} taskID - ID of searched Task
- * @returns - Indexof searched Task inside of taskList
- */
-function getTaskIndexByID(taskID) {
-  let task = getTaskByID(taskID);
-  let taskIndex = taskList.indexOf(task);
-  return taskIndex;
-}
-
-/**
  * Renders the priority icon on the larger card view based on the task's priority.
  * @param {object} task - The task within the taskList, retrieved by a specific id.
  */

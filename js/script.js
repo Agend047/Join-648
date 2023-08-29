@@ -18,7 +18,6 @@ let maxUserId;
 let maxTaskId;
 let maxContactId;
 
-
 initForAllPages();
 
 /**
@@ -57,6 +56,27 @@ async function getDataFromBackend() {
 async function initForAllPages() {
   verifyUserStatus();
   await getDataFromBackend();
+}
+
+/**
+ * Searches for the task within the taskList, by a specific id.
+ * @param {Number} findID - The Id, we are looking for
+ * @returns - the task (Object) we wanted.
+ */
+function getTaskByID(findID) {
+  let task = taskList.find((t) => t.id === findID);
+  return task;
+}
+
+/**
+ * Gets task through other function, then gets Index
+ * @param {Number} taskID - ID of searched Task
+ * @returns - Indexof searched Task inside of taskList
+ */
+function getTaskIndexByID(taskID) {
+  let task = getTaskByID(taskID);
+  let taskIndex = taskList.indexOf(task);
+  return taskIndex;
 }
 
 /**
@@ -351,7 +371,6 @@ async function getTaskID() {
   await setItemInBackend("TaskId", newID);
   return newID;
 }
-
 
 /**Setting the  loggedIn variable to false and saving in localstorage and sessionstorage.*/
 function logOut() {
