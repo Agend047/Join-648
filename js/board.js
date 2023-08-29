@@ -156,40 +156,6 @@ function renderAssignedBadges() {
 }
 
 /**
- * Generates the HTML badge containing the initials of the contact and a colored circle.
- * Initials and color are retrieved from the assignedTo key in the TaskList array.
- * @param {object} contact parameter containing the assigned contact from the TaskList array of the assigned Task.
- * @returns the badge svg with Initials and color
- */
-function generateBadgeHTML(contact) {
-  return /*html*/ `
-  <svg
-    viewBox="0 0 42 42"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="21"
-      cy="21"
-      r="20"
-      fill="${contact.color}"
-      stroke="white"
-      stroke-width="2"
-    />
-    <text
-      x="21"
-      y="21"
-      alignment-baseline="central"
-      text-anchor="middle"
-      fill="white"
-    >
-    ${contact.initials}
-    </text>
-  </svg>
-  `;
-}
-
-/**
  * Determines and returns the color code based on the selected category of the task.
  * values are "user story" or "technical task". If for some reason there is no category, the default color is orange.
  * @param {string} category category of the current task, retrieved from TaskList array with key "category".
@@ -216,71 +182,6 @@ function renderPrio() {
     prio.innerHTML = "";
     prio.innerHTML += generatePrioHTML(assignedPrio);
   }
-}
-
-/**
- * Generates the HTML for displaying a priority icon image based on the provided prio parameter.
- * The parameter is inserted into the img URL to exchange the correct image dynamically acording to the prio value.
- * @param {string} prio value ("low", "medium" or "urgent") of the priority belonging to the current task.
- * @returns HTML code snippet for the icon image
- */
-function generatePrioHTML(prio) {
-  return /*html*/ `
-  <img src="./assets/img/prio-${prio}.svg">
-`;
-}
-
-/**
- * Generates the HTML for rendering a small task card for the current filtered Task
- * @param {Number} totalSubtasks number of total subtasks belonging to the task
- * @param {Number} subtasksDone number of all subtasks marked as "done"/with status "done"
- * @param {Object} task current task
- * @param {Number} i index of the current filtered task
- * @returns the HTML Code for the Task
- */
-// i = i in filteredTasks! Attention!
-function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
-  return /*html*/ `
-              <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
-                <div class="category">
-                  <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
-                </div>
-                <div>
-                  <h1 class="title" id="title-${i}">${task.title}</h1>
-                  <p class="description" id="description-${i}">${task.description}</p>
-                </div>
-                <div class="progress-section" id="progress-section-${task.id}">
-                  <div id="progress">
-                    <div
-                    id="progress-bar-${task.id}"
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="75"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <div>${subtasksDone}/${totalSubtasks} Subtasks</div>
-                </div>
-                <div class="card-footer">
-                  <div class="w-100 d-flex justify-content-space-btw align-items-center">
-                    <div class="profileBadges" id="profileBadges-${task.id}">
-                    </div>
-                    <div class="prioIcon" id="prioIcon-${task.id}">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
-}
-
-/**
- * Generates HTML code for a placeholder message when there are no tasks of a specific status.
- * @param {string} status - The status for which there are no tasks (e.g., "todo", "inprogress", "feedback", "done").
- * @returns {string} The generated HTML code for the placeholder message.
- */
-function generatePlaceholderHTML(status) {
-  return `<div class="placeholder">No Tasks ${status}</div>`;
 }
 
 /**
@@ -345,15 +246,16 @@ function removeHighlight(ID) {
   document.getElementById(ID).classList.remove("drag-area-highlight");
 }
 
+/* End of Drag & Drop functions
+////////////////////////////////////////////////////////////////////////////////
+
 /**
  * Deleting a task out of TaskList
  * @param {Number} taskID - ID ot the to delete Task
  */
 async function deleteTask(taskID) {
   let taskIndex = getTaskIndexByID(taskID);
-
   taskList.splice(taskIndex, 1);
-
   await setItemInBackend("taskList", JSON.stringify(taskList));
   closeCard("popUp");
   renderAllContainersHTML();
@@ -370,20 +272,6 @@ function renderPrioLargeCard(task) {
     prioLargeCard.innerHTML = "";
     prioLargeCard.innerHTML += generateLargeCardPrioHTML(task, assignedPrio);
   }
-}
-
-/**
- * Generates HTML code to display the priority icon and label on the larger card view.
- * @param {object} task - The current task within the taskList by ID.
- * @returns {string} The generated HTML code for the priority section of the larger card.
- */
-function generateLargeCardPrioHTML(task) {
-  return /*html*/ `
-  <div class="prio-btn">
-    <span>${task.priority}</span>
-    <img src="./assets/img/prio-${task.priority}.svg">
-  </div>
-  `;
 }
 
 /**
@@ -404,19 +292,6 @@ function renderAssignedUserList(task) {
 }
 
 /**
- * Generates HTML code for Item of the assigned user for the Assigned User list on the larger card.
- * @param {object} contact - The contact information within the taskList array of the current task and user.
- * @returns {string} The generated HTML code for the assigned user item.
- */
-function generateAssignedUserListItemHTML(contact) {
-  let html = "";
-  html = `<div class="assigned-user">`;
-  html += generateBadgeHTML(contact);
-  html += `<span>${contact.name}<span></div>`;
-  return html;
-}
-
-/**
  * Writes the subtask into the open PopUp Card
  * @param {Object} task The Task we want to show
  */
@@ -430,9 +305,7 @@ function renderSubtasksList(task) {
   } else {
     for (let i = 0; i < subtasks.length; i++) {
       const subtask = subtasks[i];
-
       let srcImg = getImgBySubtaskStatus(subtask);
-
       list.innerHTML += generateSubtasksListHTML(srcImg, subtask.text);
     }
   }
@@ -485,12 +358,6 @@ function generateSubtasksListHTML(srcImg, subtask) {
   html += `<span>${subtask}<span></div>`;
   return html;
 }
-
-// /**
-//  * Sets the global 'subtasks' Variable to the Value of the subtasks from the Task, we want to edit.
-//  * @param {Number} taskID ID of Task
-//  */
-//////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 // SEARCH FUNCIONS
