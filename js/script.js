@@ -341,6 +341,18 @@ function getUserByEmail(email) {
   return userList.find((user) => user.email === email);
 }
 
+/**
+ * When new Task gets created, we get an ID from Backend, to never have the same ID twice!
+ * @returns New ID for a new Task
+ */
+async function getTaskID() {
+  let id = await getItemFromBackend("TaskId");
+  let newID = Number(id) + 1;
+  await setItemInBackend("TaskId", newID);
+  return newID;
+}
+
+
 /**Setting the  loggedIn variable to false and saving in localstorage and sessionstorage.*/
 function logOut() {
   localStorage.setItem("loggedIn", "false");
