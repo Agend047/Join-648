@@ -8,7 +8,6 @@ async function initSummary() {
 
 function greetUser() {
   const isGuestUser = location.search.includes("guestuser=true");
-  console.log(isGuestUser);
   if (screenType === "mobile" && isGuestUser) {
     loadHelloPageMobile();
     greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");
