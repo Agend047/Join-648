@@ -417,6 +417,20 @@ a {
   }
 }
 
+/* Date Input */
+input[type="date"]{
+  font-size: var(--fs-normal);
+}
+
+::-webkit-calendar-picker-indicator { 
+  content: url("/assets/img/event.png");
+  object-fit: contain;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+
 /* Utility classes */
 
 .d-none {
