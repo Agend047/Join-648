@@ -270,7 +270,6 @@ async function validateAddTaskForm(e) {
       switch (formElement.id) {
         case "assigned-to-input":
           formElement.readOnly = false;
-          validateAssignedToInput(formElement);
           break;
         case "prio-inputs":
           prioValidationMessage = validatePrioInput(formElement);
@@ -325,16 +324,6 @@ function validatePrioInput(formElement) {
     }
   }
   return "This field is required.";
-}
-
-function validateAssignedToInput(formElement) {
-  const assignedToCount =
-    document.getElementById("selected-contacts").children.length;
-  if (assignedToCount > 0) {
-    formElement.setCustomValidity("");
-  } else {
-    formElement.setCustomValidity("Assign this task to at least one contact.");
-  }
 }
 
 function renderAssignedToContactList(contacts) {
