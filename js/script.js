@@ -45,14 +45,6 @@ function verifyUserStatus() {
   }
 }
 
-function getUserName() {
-  if (loginData) {
-    return loginData.name;
-  } else {
-    return "Guest User";
-  }
-}
-
 async function getDataFromBackend() {
   taskList = await getItemFromBackend("taskList");
   userList = await getItemFromBackend("userList");
@@ -242,7 +234,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch { }
+    } catch {}
   }, 200);
 }
 
@@ -366,7 +358,6 @@ function logOut() {
   window.sessionStorage.setItem("loggedIn", "false");
   window.location.href = "/login.html";
 }
-
 
 function renderContactBubbleHtml(contact) {
   return /*html*/ `<svg

@@ -441,7 +441,7 @@ function getImgBySubtaskStatus(subtask) {
  * Changes the Subtask Status depending on the Checked Boxes on the BigCard
  * @param {Number} taskID ID Of the Task we opened
  */
-function updateSubtasksStatus(taskID) {
+async function updateSubtasksStatus(taskID) {
   let checkboxes = document.getElementsByClassName("checkbox");
   const task = getTaskByID(taskID);
   const subtasks = task["subtasks"];
@@ -452,6 +452,7 @@ function updateSubtasksStatus(taskID) {
       subtasks[i].status = "todo";
     }
   }
+  await setItemInBackend("taskList", JSON.stringify(taskList));
 }
 
 function generateSubtasksListHTML(srcImg, subtask) {
