@@ -81,12 +81,15 @@ function getSubtasksDone(filteredTasks, i) {
 }
 
 function updateProgressBar(filteredTasks, i) {
+  const task = filteredTasks[i];
   const totalSubtasks = getSubtasksCount(filteredTasks, i);
   const subtasksDone = getSubtasksDone(filteredTasks, i);
   let percent = subtasksDone / totalSubtasks;
   percent = Math.round(percent * 100);
 
-  document.getElementById("progress-bar").style = `width: ${percent}%;`;
+  document.getElementById(
+    `progress-bar-${task.id}`
+  ).style = `width: ${percent}%;`;
 }
 
 function assignLabelColor(category) {
@@ -113,7 +116,7 @@ function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
                 <div class="progress-section" id="progress-section-${task.id}">
                   <div id="progress">
                     <div
-                    id="progress-bar"
+                    id="progress-bar-${task.id}"
                       class="progress-bar"
                       role="progressbar"
                       aria-valuenow="75"
@@ -266,7 +269,7 @@ function generateLargeCardHTML(task, i) {
           <div class="large-card-header">
             <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
             <img
-              onclick="updateSubtasksStatus(${task.id}, closeCard('popUp'))"
+              onclick="updateSubtasksStatus(${task.id}); closeCard('popUp');"
               id="btnCloseCard"
               class="btn-close-card"
               src="./assets/img/close-btn.svg"
@@ -315,7 +318,7 @@ function generateLargeCardHTML(task, i) {
             </div>
           </div>
         </div>
-        <div class="background" onclick="closeCard('popUp')"></div>
+        <div class="background" onclick="updateSubtasksStatus(${task.id}); closeCard('popUp');"></div>
     </div>
   `;
 }
@@ -323,6 +326,7 @@ function generateLargeCardHTML(task, i) {
 function closeCard(ID) {
   document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
+  renderAllContainersHTML();
 }
 
 /**
@@ -400,7 +404,7 @@ function generateAssignedUserListItemHTML(contact) {
 }
 
 /**
- * Writes the subtask into the Big Card
+ * Writes the subtask into the open PopUp Card
  * @param {Object} task The Task we want to show
  */
 function renderSubtasksList(task) {
@@ -441,7 +445,7 @@ function getImgBySubtaskStatus(subtask) {
  * Changes the Subtask Status depending on the Checked Boxes on the BigCard
  * @param {Number} taskID ID Of the Task we opened
  */
-async function updateSubtasksStatus(taskID) {
+async function updateSubtasksStatus(taskID, status, id) {
   let checkboxes = document.getElementsByClassName("checkbox");
   const task = getTaskByID(taskID);
   const subtasks = task["subtasks"];
