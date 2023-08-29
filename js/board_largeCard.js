@@ -137,7 +137,7 @@ async function saveTask() {
     priority: getPriorityFromForm(),
     dueDate: document.getElementById("due-date-input").value,
     category: document.getElementById("category-input").value,
-    subtasks: subtasks, //getSubtasksFromForm(),
+    subtasks: subtasks,
     status: status,
     id: id,
   };

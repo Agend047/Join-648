@@ -210,6 +210,10 @@
         padding-top: 10px;
     }
 
+    .big_ball {
+        margin: 0;
+    }
+
 
 }
 
@@ -354,6 +358,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 24px;
+    border-style: solid;
+    border-width: 1px;
 }
 
 #show_deleting_name {
