@@ -6,6 +6,7 @@ function editTask(taskID) {
   editCard.innerHTML = generateEditTaskHTML(taskID);
   markPrioForEdit(taskID);
   setSelectedContactIdsArray(selectedTask["assignedTo"]);
+  renderSubtasksList(selectedTask);
 }
 
 function setSelectedContactIdsArray(selectedContacts) {
@@ -364,7 +365,7 @@ function generateEditTaskHTML(taskID) {
                 <div class="error-container">
                   <div class="error-message" id="subtasks-input-error"></div>
                 </div>
-                <ul id="subtasks-list" class="subtasks-list"></ul>
+                <ul id="subtaskList" class="subtasks-list"></ul>
               </div>
             </div>
           </div>
