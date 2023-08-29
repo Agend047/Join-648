@@ -1,5 +1,6 @@
 let currentDraggedElement;
 let labelColor;
+let filteredTasks;
 
 async function initBoardPage() {
   await getDataFromBackend();
@@ -15,7 +16,7 @@ function renderAllContainersHTML() {
 }
 
 function updateHTML(status, id) {
-  let filteredTasks = taskList.filter((t) => t["status"] == status);
+  filteredTasks = taskList.filter((t) => t["status"] == status);
   const taskContainer = document.getElementById(id);
   taskContainer.innerHTML = "";
   if (filteredTasks.length === 0) {
@@ -24,8 +25,8 @@ function updateHTML(status, id) {
   } else {
     for (let i = 0; i < filteredTasks.length; i++) {
       const task = filteredTasks[i];
-      let totalSubtasks = getSubtasksCount(filteredTasks, i);
-      let subtasksDone = getSubtasksDone(filteredTasks, i);
+      let totalSubtasks = getSubtasksCount(i);
+      let subtasksDone = getSubtasksDone(i);
       labelColor = assignLabelColor(task.category);
       taskContainer.innerHTML += generateSmallCardHTML(
         totalSubtasks,
@@ -35,16 +36,16 @@ function updateHTML(status, id) {
       );
     }
   }
-  renderSmallCard(filteredTasks);
+  renderSmallCard();
 }
 
-function renderSmallCard(filteredTasks) {
-  renderProgressSection(filteredTasks);
-  renderAssignedBadges(filteredTasks);
-  renderPrio(filteredTasks);
+function renderSmallCard() {
+  renderProgressSection();
+  renderAssignedBadges();
+  renderPrio();
 }
 
-function renderProgressSection(filteredTasks) {
+function renderProgressSection() {
   for (let i = 0; i < filteredTasks.length; i++) {
     const filteredTask = filteredTasks[i];
     const progress = document.getElementById(
@@ -54,17 +55,17 @@ function renderProgressSection(filteredTasks) {
     if (assignedSubtasks.length === 0) {
       progress.style.display = "none";
     } else {
-      updateProgressBar(filteredTasks, i);
+      updateProgressBar(i);
     }
   }
 }
 
-function getSubtasksCount(filteredTasks, i) {
+function getSubtasksCount(i) {
   const filteredSubtask = filteredTasks[i]["subtasks"];
   return filteredSubtask.length;
 }
 
-function getSubtasksDone(filteredTasks, i) {
+function getSubtasksDone(i) {
   const filteredSubtasks = filteredTasks[i]["subtasks"];
   const subtasksStatus = [];
   let subtasksDone = 0;
@@ -80,10 +81,10 @@ function getSubtasksDone(filteredTasks, i) {
   return subtasksDone;
 }
 
-function updateProgressBar(filteredTasks, i) {
+function updateProgressBar(i) {
   const task = filteredTasks[i];
-  const totalSubtasks = getSubtasksCount(filteredTasks, i);
-  const subtasksDone = getSubtasksDone(filteredTasks, i);
+  const totalSubtasks = getSubtasksCount(i);
+  const subtasksDone = getSubtasksDone(i);
   let percent = subtasksDone / totalSubtasks;
   percent = Math.round(percent * 100);
 
@@ -155,7 +156,7 @@ function renderPlaceholderText(status) {
   }
 }
 
-function renderAssignedBadges(filteredTasks) {
+function renderAssignedBadges() {
   for (let i = 0; i < filteredTasks.length; i++) {
     const filteredTask = filteredTasks[i];
     const badge = document.getElementById(`profileBadges-${filteredTask.id}`);
@@ -198,7 +199,7 @@ function generateBadgeHTML(contact) {
   `;
 }
 
-function renderPrio(filteredTasks) {
+function renderPrio() {
   for (let i = 0; i < filteredTasks.length; i++) {
     const filteredTask = filteredTasks[i];
     const prio = document.getElementById(`prioIcon-${filteredTask.id}`);
@@ -445,7 +446,7 @@ function getImgBySubtaskStatus(subtask) {
  * Changes the Subtask Status depending on the Checked Boxes on the BigCard
  * @param {Number} taskID ID Of the Task we opened
  */
-async function updateSubtasksStatus(taskID, status, id) {
+async function updateSubtasksStatus(taskID) {
   let checkboxes = document.getElementsByClassName("checkbox");
   const task = getTaskByID(taskID);
   const subtasks = task["subtasks"];
