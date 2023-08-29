@@ -349,6 +349,11 @@ function removeHighlight(ID) {
 //////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR LARGE CARD (OPEN POPUP)
 
+/**
+ * Opens a larger card (PopUp) view for the current task on click, displaying detailed information and controls.
+ * @param {number} id - The ID of the task for which the larger card view will be opened.
+ * @param {number} i - The index of the task within the filteredTasks array.
+ */
 function openCard(id, i) {
   let task = getTaskByID(id);
   let largeCard = document.getElementById("popUpContainer");
@@ -361,6 +366,13 @@ function openCard(id, i) {
   initCheckboxes();
 }
 
+/**
+ * Generates HTML code for large card (PopUp) view.
+ *
+ * @param {object} task - The task object containing detailed information about the task.
+ * @param {number} i - The index of the task.
+ * @returns {string} The generated HTML code for the PopUp.
+ */
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
     <div id="popUp" class="popUp">
@@ -422,6 +434,10 @@ function generateLargeCardHTML(task, i) {
   `;
 }
 
+/**
+ * Closes the PopUp (large Card view) by hiding it and restoring the scrolling behavior of the body content.
+ * @param {string} ID - The ID of the card view element to be closed.
+ */
 function closeCard(ID) {
   document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
@@ -463,6 +479,10 @@ function getTaskIndexByID(taskID) {
   return taskIndex;
 }
 
+/**
+ * Renders the priority icon on the larger card view based on the task's priority.
+ * @param {object} task - The task within the taskList, retrieved by a specific id.
+ */
 function renderPrioLargeCard(task) {
   for (let i = 0; i < taskList.length; i++) {
     const prioLargeCard = document.getElementById("largeCardPrio");
@@ -472,6 +492,11 @@ function renderPrioLargeCard(task) {
   }
 }
 
+/**
+ * Generates HTML code to display the priority icon and label on the larger card view.
+ * @param {object} task - The current task within the taskList by ID.
+ * @returns {string} The generated HTML code for the priority section of the larger card.
+ */
 function generateLargeCardPrioHTML(task) {
   return /*html*/ `
   <div class="prio-btn">
@@ -481,6 +506,10 @@ function generateLargeCardPrioHTML(task) {
   `;
 }
 
+/**
+ * Renders the list of assigned users or contacts on the larger card view.
+ * @param {object} task - The current task within the taskList by ID.
+ */
 function renderAssignedUserList(task) {
   const list = document.getElementById("assignedSection");
   let html = "";
@@ -494,6 +523,11 @@ function renderAssignedUserList(task) {
   list.innerHTML = html;
 }
 
+/**
+ * Generates HTML code for Item of the assigned user for the Assigned User list on the larger card.
+ * @param {object} contact - The contact information within the taskList array of the current task and user.
+ * @returns {string} The generated HTML code for the assigned user item.
+ */
 function generateAssignedUserListItemHTML(contact) {
   let html = "";
   html = `<div class="assigned-user">`;
@@ -558,6 +592,13 @@ async function updateSubtasksStatus(taskID) {
   await setItemInBackend("taskList", JSON.stringify(taskList));
 }
 
+/**
+ * Generates HTML code to display the subtask item within the subtasks list on the larger card.
+ * Exchanges the Img by inserting the URL snippet "unchecked" or "checked" to get the correct img belonging to the subtask status.
+ * @param {string} srcImg - contains the value "checked" or "unchecked" for the img src.
+ * @param {string} subtask - The text content of the subtask.
+ * @returns {string} The generated HTML code for the subtask item.
+ */
 function generateSubtasksListHTML(srcImg, subtask) {
   html = `<div class="subtask">`;
   html += `<img src="./assets/img/checkbox-${srcImg}.svg" class="icon-checkbox checkbox ${srcImg}"/>`;
