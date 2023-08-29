@@ -422,7 +422,7 @@ function generateLargeCardHTML(task, i) {
                 <span>Delete</span>
               </div>
               <div class="btn-seperator"></div>
-              <div onclick="editTask(${task.id}), initAddTaskPage()" class="footer-btn">
+              <div onclick="updateSubtasksStatus(${task.id}), editTask(${task.id}), initAddTaskPage()" class="footer-btn">
                 <span class="edit-icon"></span>
                 <span>Edit</span>
               </div>
@@ -581,7 +581,7 @@ function getImgBySubtaskStatus(subtask) {
 async function updateSubtasksStatus(taskID) {
   let checkboxes = document.getElementsByClassName("checkbox");
   const task = getTaskByID(taskID);
-  const subtasks = task["subtasks"];
+  subtasks = task["subtasks"];
   for (let i = 0; i < checkboxes.length; i++) {
     if (checkboxes[i].classList.contains("checked")) {
       subtasks[i].status = "done";
@@ -605,6 +605,16 @@ function generateSubtasksListHTML(srcImg, subtask) {
   html += `<span>${subtask}<span></div>`;
   return html;
 }
+
+// /**
+//  * Sets the global 'subtasks' Variable to the Value of the subtasks from the Task, we want to edit.
+//  * @param {Number} taskID ID of Task
+//  */
+// function setSubtasksForEdit(taskID) {
+
+//   let task = getTaskByID(taskID);
+//   subtasks = task.subtasks;
+// }
 
 //////////////////////////////////////////////////////////////////////
 

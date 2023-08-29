@@ -9,6 +9,7 @@ function getAddContactElements() {
   subtaskEl = document.getElementById("subtasks-container");
   backdrop = document.getElementById("backdrop");
 }
+
 async function initAddTaskPage() {
   getAddContactElements();
   initSubtaskInput();
@@ -25,6 +26,7 @@ async function initAddTaskPage() {
   await getContacts();
   renderAssignedToContactList(contactList);
   initSelectInputs();
+  renderSubtasksInForm();
 }
 
 function initAddContactOverlayForm() {
@@ -47,7 +49,7 @@ function initClearBtn(ev) {
     ev.preventDefault();
     document.getElementById("addtask-form").reset();
     document.getElementById("selected-contacts").innerHTML = "";
-    document.getElementById("subtasks-list").innerHTML = "";
+    document.getElementById("subtaskList").innerHTML = "";
     renderAssignedToContactList(contactList);
     selectedContactIds = [];
   });
@@ -217,7 +219,7 @@ function cancelSubtask() {
 function addSubtask() {
   const input = document.getElementById("subtasks-input");
   if (input.value) {
-    subtasks.push(input.value);
+    subtasks.push({text: input.value, status: 'todo'});
     input.value = "";
     input.focus();
     toggleSubtaskIcons();
@@ -226,10 +228,11 @@ function addSubtask() {
 }
 
 function renderSubtasksInForm() {
-  const subtasksList = document.getElementById("subtasks-list");
+  const subtasksList = document.getElementById("subtaskList");
   subtasksList.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
-    const subtask = subtasks[i];
+    const subtask = subtasks[i].text;
+    
     subtasksList.innerHTML += renderNewListItemHtml(subtask, i);
   }
 }
@@ -259,14 +262,14 @@ function deleteSubtask(index) {
 }
 
 function editSubtask(index) {
-  const subtasksList = document.getElementById("subtasks-list");
+  const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
   subtaskListEl.classList.add("subtask-edit");
   subtaskListEl.querySelector("input").readOnly = false;
 }
 
 function updateSubtask(index) {
-  const subtasksList = document.getElementById("subtasks-list");
+  const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
   const subtask = subtaskListEl.querySelector("input").value;
   subtaskListEl.classList.remove("subtask-edit");
@@ -504,7 +507,7 @@ async function saveTask() {
     priority: getPriorityFromForm(),
     dueDate: document.getElementById("due-date-input").value,
     category: document.getElementById("category-input").value,
-    subtasks: getSubtasksFromForm(),
+    subtasks: subtasks, //getSubtasksFromForm(),
     status: status,
     id: id,
   };
@@ -520,17 +523,18 @@ async function saveTask() {
   }
 }
 
-function getSubtasksFromForm() {
-  let subtasksArray = [];
-  const inputs = document
-    .getElementById("subtasks-list")
-    .querySelectorAll("input");
-  for (let i = 0; i < inputs.length; i++) {
-    const input = inputs[i];
-    subtasksArray.push({ text: input.value, status: 'todo' })
-  }
-  return subtasksArray;
-}
+// function getSubtasksFromForm() {
+//   console.log(subtasks);
+//   let subtasksArray = [];
+//   const inputs = document
+//     .getElementById("subtaskList")
+//     .querySelectorAll("input");
+//   for (let i = 0; i < inputs.length; i++) {
+//     const input = inputs[i];
+//     subtasksArray.push({ text: input.value, status: 'todo' })
+//   }
+//   return subtasksArray;
+// }
 
 
 
