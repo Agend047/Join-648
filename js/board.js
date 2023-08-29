@@ -610,12 +610,6 @@ function generateSubtasksListHTML(srcImg, subtask) {
 //  * Sets the global 'subtasks' Variable to the Value of the subtasks from the Task, we want to edit.
 //  * @param {Number} taskID ID of Task
 //  */
-// function setSubtasksForEdit(taskID) {
-
-//   let task = getTaskByID(taskID);
-//   subtasks = task.subtasks;
-// }
-
 //////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////

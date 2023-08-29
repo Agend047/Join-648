@@ -52,73 +52,7 @@ function generateEditTaskHTML(taskID) {
   return /*html*/ `
     <div id="editPopUp" class="popUp">
       <div class="editCard">
-      <!-- <dialog id="add-contact-overlay">
-        <form method="dialog">
-          <button type="button" class="close-icn mobile">
-            <img src="./assets/img/close-white.png" alt="close dialog" />
-          </button>
-          <button type="button" class="close-icn desktop">
-            <img src="./assets/img/close-btn.svg" alt="close dialog" />
-          </button>
-          <div class="form-header">
-            <h1>Add contact</h1>
-            <p>Tasks are better with a team!</p>
-            <div class="horizontal-separator"></div>
-          </div>
-          <img src="./assets/img/add-contact-icn.png" class="user-icn" />
-          <div class="form-main">
-            <div class="form-control">
-              <div class="input">
-                <input required type="text" placeholder="Name" id="name-input" />
-                <img src="./assets/img/contacts_AddName_icon.png" />
-              </div>
-              <div class="error-container">
-                <div class="error-message" id="name-input-error"></div>
-              </div>
-            </div>
-            <div class="form-control">
-              <div class="input">
-                <input
-                  required
-                  type="email"
-                  placeholder="Email"
-                  id="email-input"
-                />
-                <img src="./assets/img/contacts_AddMail_icon.png" />
-              </div>
-              <div class="error-container">
-                <div class="error-message" id="email-input-error"></div>
-              </div>
-            </div>
-            <div class="form-control">
-              <div class="input">
-                <input
-                  required
-                  type="number"
-                  placeholder="Phone"
-                  id="phone-input"
-                />
-                <img src="./assets/img/contacts_AddPhone_icon.png" />
-              </div>
-              <div class="error-container">
-                <div class="error-message" id="phone-input-error"></div>
-              </div>
-            </div>
-            <button
-              class="btn btn-primary btn-create-task btn-text-icon"
-              type="submit"
-            >
-              <span>Create contact</span
-              ><img src="./assets/img/check.png" alt="create contact" />
-            </button>
-          </div>
-        </form>
-      </dialog> -->
       <div id="backdrop" class="backdrop d-none"></div>
-      <!-- <div
-        id="desktop-template"
-        include-templates="assets/templates/desktop_template.html"
-      ></div> -->
       <div>
         <form id="addtask-form">
           <div class="edit-card-header">
@@ -186,15 +120,7 @@ function generateEditTaskHTML(taskID) {
                     id="assigned-to-options"
                     class="select-options assigned-to-options"
                   ></ul>
-                  <!-- <button
-                    id="add-contact-btn"
-                    class="btn btn-primary btn-text-icon d-none"
-                    type="button"
-                  >
-                    <span>Add new contact</span
-                    ><img src="./assets/img/contacts_newContact_icon.png" />
-                  </button> -->
-                </div>
+                 </div>
                 <div id="selected-contacts" class="selected-contacts">
                   ${showAssignedContacts(taskID)}
                 </div>

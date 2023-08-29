@@ -1,11 +1,11 @@
-let user = {
+let userList = {
   name: "Vorname Nachname",
   email: "email@email.de",
   password: "test123",
   initials: "VN",
 };
 
-let contact = {
+let contactList = {
   startingLetter: "A",
   name: "Anja Schulz",
   e_mail: "schulz@hotmail.com",
@@ -41,17 +41,3 @@ let taskList = {
   status: ["todo", "inprogress", "feedback", "done"] /* nur eine Zuweisung */,
 };
 
-let todo = [1, 5, 6];
-let inprogress = [3, 4];
-let feedback = [7];
-let done = [8, 9];
-
-let task2 = {
-  title: "title",
-  description: "längerer Text",
-  dueDate: "dd/mm/yyyy",
-  prio: "urgent",
-  category: "user story",
-  assignedTo: [3, 6, 10],
-  subtasks: ["subtask1", "subtask2"],
-};

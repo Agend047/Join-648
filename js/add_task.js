@@ -523,22 +523,6 @@ async function saveTask() {
   }
 }
 
-// function getSubtasksFromForm() {
-//   console.log(subtasks);
-//   let subtasksArray = [];
-//   const inputs = document
-//     .getElementById("subtaskList")
-//     .querySelectorAll("input");
-//   for (let i = 0; i < inputs.length; i++) {
-//     const input = inputs[i];
-//     subtasksArray.push({ text: input.value, status: 'todo' })
-//   }
-//   return subtasksArray;
-// }
-
-
-
-
 function getPriorityFromForm() {
   const prioInputs = document
     .getElementById("prio-inputs")

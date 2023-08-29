@@ -18,6 +18,9 @@ let maxUserId;
 let maxTaskId;
 let maxContactId;
 
+
+initForAllPages();
+
 /**
  * Checks localstorage if the user is logged in.
  * Else will check Sessionstorage, and sets loggedIn to 'true' or 'false'.
@@ -55,18 +58,6 @@ async function initForAllPages() {
   verifyUserStatus();
   await getDataFromBackend();
 }
-
-initForAllPages();
-// = [
-//     {
-//         startingLetter: 'A',
-//         name: 'Anja Schulz',
-//         e_mail: 'schulz@hotmail.com',
-//         phone: 9102423513,
-//         initials: 'AS',
-//         color: '#FF7A00',
-//     },
-// ]
 
 /**
  *  Inits getting the Templates
