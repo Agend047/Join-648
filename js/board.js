@@ -2,11 +2,20 @@ let currentDraggedElement;
 let labelColor;
 let filteredTasks;
 
+/**
+ * Initializes functions of the Board.
+ */
 async function initBoardPage() {
   await getDataFromBackend();
   renderAllContainersHTML();
 }
 
+/**
+ * Predefined Array that contains the 4 possible status values of the tasks.
+ * The function iterates through the status and retrieves the current status.
+ * Then the updateHTML function ist called with two arguments: the current status
+ * value is used both as a status filter and as an ID for the container where the updated HTML content should be placed.
+ */
 function renderAllContainersHTML() {
   const statusArr = ["todo", "inprogress", "feedback", "done"];
   for (let i = 0; i < statusArr.length; i++) {
@@ -15,6 +24,14 @@ function renderAllContainersHTML() {
   }
 }
 
+/**
+ * Updates the HTML content of the columns on the Board page based on a given status and ID.
+ * Filters the task Array based on the status of the task.
+ * If there are no Task of a certain status, the placeholder is rendered into this column.
+ * Otherwise it renders the Task HTML into the column and displayes it as a card.
+ * @param {string} status current status of the filtered Task
+ * @param {string} id id of the board column the task is rendered into (= same value as status)
+ */
 function updateHTML(status, id) {
   filteredTasks = taskList.filter((t) => t["status"] == status);
   const taskContainer = document.getElementById(id);
@@ -39,12 +56,21 @@ function updateHTML(status, id) {
   renderSmallCard();
 }
 
+/**
+ * Orchestrates the rendering of various components of the Task-Card.
+ * It calls seperate functions to update the ProgressBar, the Assigned User Badges and the Prio Icons.
+ */
 function renderSmallCard() {
   renderProgressSection();
   renderAssignedBadges();
   renderPrio();
 }
 
+/**
+ * Renders the Section that displays the progress on the Subtasks on the Small Card of a specific filtered Task.
+ * First, it checks if there are subtasks belonging to the filtered Task and hides the section, if it is empty (no subtasks).
+ * Then it calls the updateProgressBar Function.
+ */
 function renderProgressSection() {
   for (let i = 0; i < filteredTasks.length; i++) {
     const filteredTask = filteredTasks[i];
@@ -60,11 +86,22 @@ function renderProgressSection() {
   }
 }
 
+/**
+ * Counts the numer of subtasks belonging to the task in the filteredTasks Array.
+ * @param {Number} i index of the task in the filteredTasks array
+ * @returns number of total subtask of current task
+ */
 function getSubtasksCount(i) {
   const filteredSubtask = filteredTasks[i]["subtasks"];
   return filteredSubtask.length;
 }
 
+/**
+ * Counts the number of subtasks that are marked as "done" for a specific task in the filteredTasks Array.
+ * Then returns the number of done Subtasks.
+ * @param {Number} i the index of the task in the filteredTasks array for which the function counts the "done" subtasks.
+ * @returns number of done subtasks
+ */
 function getSubtasksDone(i) {
   const filteredSubtasks = filteredTasks[i]["subtasks"];
   const subtasksStatus = [];
@@ -81,6 +118,10 @@ function getSubtasksDone(i) {
   return subtasksDone;
 }
 
+/**
+ * Updates the width of the progress bar based on how many subtasks are marked as "done" for the specific task.
+ * @param {Number} i
+ */
 function updateProgressBar(i) {
   const task = filteredTasks[i];
   const totalSubtasks = getSubtasksCount(i);
@@ -93,6 +134,67 @@ function updateProgressBar(i) {
   ).style = `width: ${percent}%;`;
 }
 
+/**
+ * Renders the badge elements that indicate which contacts or users are assigned to the specific task.
+ * retrieves the list of assigned contacts for the current task from the assignedTo property.
+ * Iterates through the assignedContacts array for the current task and generates
+ * the HTML Code for each assigned contact.
+ */
+function renderAssignedBadges() {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const badge = document.getElementById(`profileBadges-${filteredTask.id}`);
+    const assignedContacts = filteredTask["assignedTo"];
+
+    badge.innerHTML = "";
+
+    for (let j = 0; j < assignedContacts.length; j++) {
+      const assignedContact = assignedContacts[j];
+      badge.innerHTML += generateBadgeHTML(assignedContact);
+    }
+  }
+}
+
+/**
+ * Generates the HTML badge containing the initials of the contact and a colored circle.
+ * Initials and color are retrieved from the assignedTo key in the TaskList array.
+ * @param {object} contact parameter containing the assigned contact from the TaskList array of the assigned Task.
+ * @returns the badge svg with Initials and color
+ */
+function generateBadgeHTML(contact) {
+  return /*html*/ `
+  <svg
+    viewBox="0 0 42 42"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="21"
+      cy="21"
+      r="20"
+      fill="${contact.color}"
+      stroke="white"
+      stroke-width="2"
+    />
+    <text
+      x="21"
+      y="21"
+      alignment-baseline="central"
+      text-anchor="middle"
+      fill="white"
+    >
+    ${contact.initials}
+    </text>
+  </svg>
+  `;
+}
+
+/**
+ * Determines and returns the color code based on the selected category of the task.
+ * values are "user story" or "technical task". If for some reason there is no category, the default color is orange.
+ * @param {string} category category of the current task, retrieved from TaskList array with key "category".
+ * @returns color
+ */
 function assignLabelColor(category) {
   if (category === "User Story") {
     return "#0038ff"; // Blue color
@@ -101,6 +203,25 @@ function assignLabelColor(category) {
   }
   // Default color Orange, if category doesn't match
   return "#FF7A00";
+}
+
+/**
+ * renders the Prio Icons on the SmallCard. Retrieving the prio data for the filtered Task from the TaskList array, key priority.
+ */
+function renderPrio() {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const prio = document.getElementById(`prioIcon-${filteredTask.id}`);
+    const assignedPrio = filteredTask["priority"];
+    prio.innerHTML = "";
+    prio.innerHTML += generatePrioHTML(assignedPrio);
+  }
+}
+
+function generatePrioHTML(prio) {
+  return /*html*/ `
+  <img src="./assets/img/prio-${prio}.svg">
+`;
 }
 
 // i = i in filteredTasks! Attention!
@@ -154,65 +275,6 @@ function renderPlaceholderText(status) {
     case "done":
       return "Done";
   }
-}
-
-function renderAssignedBadges() {
-  for (let i = 0; i < filteredTasks.length; i++) {
-    const filteredTask = filteredTasks[i];
-    const badge = document.getElementById(`profileBadges-${filteredTask.id}`);
-    const assignedContacts = filteredTask["assignedTo"];
-
-    badge.innerHTML = "";
-
-    for (let j = 0; j < assignedContacts.length; j++) {
-      const assignedContact = assignedContacts[j];
-      badge.innerHTML += generateBadgeHTML(assignedContact);
-    }
-  }
-}
-
-function generateBadgeHTML(contact) {
-  return /*html*/ `
-  <svg
-    viewBox="0 0 42 42"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="21"
-      cy="21"
-      r="20"
-      fill="${contact.color}"
-      stroke="white"
-      stroke-width="2"
-    />
-    <text
-      x="21"
-      y="21"
-      alignment-baseline="central"
-      text-anchor="middle"
-      fill="white"
-    >
-    ${contact.initials}
-    </text>
-  </svg>
-  `;
-}
-
-function renderPrio() {
-  for (let i = 0; i < filteredTasks.length; i++) {
-    const filteredTask = filteredTasks[i];
-    const prio = document.getElementById(`prioIcon-${filteredTask.id}`);
-    const assignedPrio = filteredTask["priority"];
-    prio.innerHTML = "";
-    prio.innerHTML += generatePrioHTML(assignedPrio);
-  }
-}
-
-function generatePrioHTML(prio) {
-  return /*html*/ `
-  <img src="./assets/img/prio-${prio}.svg">
-`;
 }
 
 //////////////////////////////////////////////////////////////////////
