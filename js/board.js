@@ -206,7 +206,7 @@ function assignLabelColor(category) {
 }
 
 /**
- * renders the Prio Icons on the SmallCard. Retrieving the prio data for the filtered Task from the TaskList array, key priority.
+ * Renders the Prio Icons on the SmallCard. Retrieving the prio data for the filtered Task from the TaskList array, key priority.
  */
 function renderPrio() {
   for (let i = 0; i < filteredTasks.length; i++) {
@@ -218,12 +218,26 @@ function renderPrio() {
   }
 }
 
+/**
+ * Generates the HTML for displaying a priority icon image based on the provided prio parameter.
+ * The parameter is inserted into the img URL to exchange the correct image dynamically acording to the prio value.
+ * @param {string} prio value ("low", "medium" or "urgent") of the priority belonging to the current task.
+ * @returns HTML code snippet for the icon image
+ */
 function generatePrioHTML(prio) {
   return /*html*/ `
   <img src="./assets/img/prio-${prio}.svg">
 `;
 }
 
+/**
+ * Generates the HTML for rendering a small task card for the current filtered Task
+ * @param {Number} totalSubtasks number of total subtasks belonging to the task
+ * @param {Number} subtasksDone number of all subtasks marked as "done"/with status "done"
+ * @param {Object} task current task
+ * @param {Number} i index of the current filtered task
+ * @returns the HTML Code for the Task
+ */
 // i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
   return /*html*/ `
@@ -260,10 +274,20 @@ function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
             `;
 }
 
+/**
+ * Generates HTML code for a placeholder message when there are no tasks of a specific status.
+ * @param {string} status - The status for which there are no tasks (e.g., "todo", "inprogress", "feedback", "done").
+ * @returns {string} The generated HTML code for the placeholder message.
+ */
 function generatePlaceholderHTML(status) {
   return `<div class="placeholder">No Tasks ${status}</div>`;
 }
 
+/**
+ * Generates the text for the placeholder message. Adapts the text of the given status.
+ * @param {string} status - The status for which the placeholder text is being generated (e.g., "todo", "inprogress", "feedback", "done").
+ * @returns {string} The descriptive text for the corresponding placeholder message.
+ */
 function renderPlaceholderText(status) {
   switch (status) {
     case "todo":
@@ -284,12 +308,18 @@ function startDragging(id) {
   currentDraggedElement = id;
 }
 
-/**  */
+/**
+ * Prevents the default behavior of the drag-and-drop event, allowing the element to be a drop target.
+ * @param {Event} event - The drag-and-drop event object.
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
 
-/** Moves the Task into another Column by setting the new Status and saving it in the Array */
+/**
+ * Moves the Task into another Column by setting the new Status and updates the backend data.
+ * @param {string} status - The new status to which the task will be moved (e.g., "todo", "inprogress", "feedback", "done").
+ */
 async function moveTo(status) {
   const taskIndex = taskList.findIndex(
     (task) => task.id === currentDraggedElement
@@ -299,12 +329,18 @@ async function moveTo(status) {
   renderAllContainersHTML();
 }
 
-/** Highlights the droparea */
+/**
+ * Adds a CSS class to highlight the drop area for the Drag & Drop.
+ * @param {string} ID - The ID of the column to which the highlight class will be added.
+ */
 function addHighlight(ID) {
   document.getElementById(ID).classList.add("drag-area-highlight");
 }
 
-/** Removes the Highlight from the droparea */
+/**
+ * Removes the Highlight from the droparea
+ *  @param {string} ID - The ID of the column to which the highlight class will be added.
+ */
 function removeHighlight(ID) {
   document.getElementById(ID).classList.remove("drag-area-highlight");
 }
