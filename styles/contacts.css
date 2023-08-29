@@ -87,7 +87,6 @@
     margin-top: clamp(130px, 19vh, 300px);
     background-color: #F6F7F8;
     display: block;
-    box-shadow: 1px 1px 5px #888888 inset;
     flex-direction: column;
 }
 
