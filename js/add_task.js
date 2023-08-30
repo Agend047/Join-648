@@ -4,6 +4,7 @@ let formControl;
 let subtasks = [];
 let selectedContactIds = [];
 let selectedTask = null;
+let taskDestinationStatus;
 
 function getAddContactElements() {
   subtaskEl = document.getElementById("subtasks-container");
@@ -27,6 +28,7 @@ async function initAddTaskPage() {
   renderAssignedToContactList(contactList);
   initSelectInputs();
   renderSubtasksInForm();
+  getTaskDestination()
 }
 
 function initAddContactOverlayForm() {

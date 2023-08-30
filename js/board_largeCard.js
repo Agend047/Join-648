@@ -176,12 +176,13 @@ function getDate() {
 }
 
 /**
- * Checks if a task is edited or not, and returns either Status of selected Task, or a new one
+ * Checks if a task is edited or not, and returns either Status of selected Task, or a new one.
+ * Variable 'taskDestinationStatus' is 'todo' except another destination was set from taskDestination()
  * @returns  Status of selected Task, or a new one for the new task.
  */
 function getStatus() {
   let result;
-  (selectedTask !== null) ? result = selectedTask.status : result = "todo";
+  (selectedTask !== null) ? result = selectedTask.status : result = taskDestinationStatus;
   return result
 }
 
@@ -213,4 +214,26 @@ async function orderTasks(newTask) {
     closeCard("editPopUp");
     initBoardPage();
   }
+}
+
+/**
+ * On the Board Page the Plus-Symbols can be used to add a new task directly with a specific status. (todo, feedback or progress)
+ * Here this will be setup in localStorage, and recieved by getTaskDestination()
+ * @param {String} target the name of the targeted Status (todo, feedback or progress) of the new task.
+ */
+async function taskDestination(target) {
+  taskDestinationStatus = target;
+  localStorage.setItem('taskDestination', JSON.stringify(target));
+}
+
+/**
+ * Sets a variable value. The Variale will be used to create a task, wich is supposed to have a specific status from beginning. (todo, feedback or progress)
+ * Then resets Value in local Storage with standard status (todo)
+ */
+async function getTaskDestination() {
+ let getJSON = localStorage.getItem('taskDestination')
+  if(getJSON){
+    taskDestinationStatus = JSON.parse(getJSON)
+  }
+  localStorage.setItem('taskDestination', JSON.stringify('todo'))
 }
