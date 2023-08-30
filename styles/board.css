@@ -384,6 +384,12 @@ input {
   transform: rotate(5deg);
 }
 
+@media (max-width: 820px) {
+  .cardSmall:hover {
+    transform: none;
+  }
+}
+
 .cardSmall h1,
 .cardSmall p {
   margin: 0;
