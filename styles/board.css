@@ -334,8 +334,9 @@ input {
 
   .col-title {
     width: auto;
-    max-width: 19rem;
+    max-width: 15.75rem;
     min-height: 2.4em;
+    margin-right: 10px;
     gap: 0.8em;
   }
 
@@ -347,7 +348,7 @@ input {
     width: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 0.5em;
     overflow: visible;
@@ -355,6 +356,10 @@ input {
 
   .status-column {
     min-height: 30em;
+  }
+
+  .placeholder {
+    max-width: 15.75rem;
   }
 }
 
