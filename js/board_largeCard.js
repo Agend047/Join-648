@@ -120,38 +120,38 @@ function filterContactListByName(nameQuery) {
   return results;
 }
 
+/**
+ * Saves all needed Data inside the new Task variable and then it gets saved - as new one or as edited one.
+ */
 async function saveTask() {
-  let status;
-  let id;
-  if (selectedTask !== null) {
-    id = selectedTask.id;
-    status = selectedTask.status;
-  } else {
-    id = await getTaskID();
-    status = "todo";
-  }
+
   let newTask = {
     title: document.getElementById("title-input").value,
     description: document.getElementById("description-input").value,
     assignedTo: getAssignedToArrayFromForm(),
     priority: getPriorityFromForm(),
-    dueDate: document.getElementById("due-date-input").value,
+    dueDate: getDate(),
     category: document.getElementById("category-input").value,
     subtasks: subtasks,
-    status: status,
-    id: id,
+    status: getStatus(),
+    id: await getID(),
   };
-  if (selectedTask === null) {
-    taskList.push(newTask);
-    await setItemInBackend("taskList", JSON.stringify(taskList));
-    showNotification("notification", "./board.html");
-  } else {
-    taskList[getTaskIndexByID(selectedTask.id)] = newTask;
-    await setItemInBackend("taskList", JSON.stringify(taskList));
-    closeCard("editPopUp");
-    initBoardPage();
-  }
+
+  orderTasks(newTask)
 }
+
+function getAssignedToArrayFromForm() {
+  let assignedToArray = [];
+  const selectedContactElements = document
+    .getElementById("assigned-to-options")
+    .querySelectorAll(".selected");
+  for (let i = 0; i < selectedContactElements.length; i++) {
+    const element = selectedContactElements[i];
+    assignedToArray.push(getContactById(element.value));
+  }
+  return assignedToArray;
+}
+
 
 function getPriorityFromForm() {
   const prioInputs = document
@@ -165,14 +165,52 @@ function getPriorityFromForm() {
   }
 }
 
-function getAssignedToArrayFromForm() {
-  let assignedToArray = [];
-  const selectedContactElements = document
-    .getElementById("assigned-to-options")
-    .querySelectorAll(".selected");
-  for (let i = 0; i < selectedContactElements.length; i++) {
-    const element = selectedContactElements[i];
-    assignedToArray.push(getContactById(element.value));
+/**
+ * Takes data from date-Input field and transforms it into European style. Otherwise it would have format:
+ * @returns Date in german date format (dd.mm.yyyy)
+ */
+function getDate() {
+  let date = document.getElementById("due-date-input").value;
+  date = date.split('-').reverse();
+  return date.join('.');
+}
+
+/**
+ * Checks if a task is edited or not, and returns either Status of selected Task, or a new one
+ * @returns  Status of selected Task, or a new one for the new task.
+ */
+function getStatus() {
+  let result;
+  (selectedTask !== null) ? result = selectedTask.status : result = "todo";
+  return result
+}
+
+/**
+ * Checks if a task is edited or not, and returns either ID of selected Task, or a new one
+ * @returns ID of selected Task, or a new one for the new task.
+ */
+async function getID() {
+  let result;
+  (selectedTask !== null) ? result = selectedTask.id : result = await getTaskID();
+  return result
+}
+
+/**
+ * Checks again if a task was edited or not. If its a new one, the task gets pushed, the list saved in Backend and the page leads to the Board.
+ * If a task was edited, the Old Task gets overwritten, the List saved in Backend and Edit popup get closed.
+ * @param {Object} newTask the Task wich has been edited or created.
+ */
+async function orderTasks(newTask) {
+
+  if (selectedTask === null) {
+    taskList.push(newTask);
+    await setItemInBackend("taskList", JSON.stringify(taskList));
+    showNotification("notification", "./board.html");
+
+  } else {
+    taskList[getTaskIndexByID(selectedTask.id)] = newTask;
+    await setItemInBackend("taskList", JSON.stringify(taskList));
+    closeCard("editPopUp");
+    initBoardPage();
   }
-  return assignedToArray;
 }
