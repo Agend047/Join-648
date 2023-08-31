@@ -1,3 +1,8 @@
+/**
+ * Gets selectet Task, and writes the Task, returned by generateEditTaskHTML() into a container.
+ * Afterwards a few functions to make the editing work as it should.
+ * @param {Number} taskID ID of Task, we want to edit
+ */
 function editTask(taskID) {
   selectedTask = getTaskByID(taskID);
   document.getElementById("popUp").style.display = "none";

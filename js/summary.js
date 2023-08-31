@@ -145,6 +145,11 @@ function getUpcomingDeadline() {
   return upcomingDeadline;
 }
 
+
+/**
+ * 
+ * @returns The deadline that has the shortest time to finish the work.
+ */
 function formatUpcomingDeadline() {
   let upcomingDeadline = getUpcomingDeadline();
   let months = [
@@ -162,7 +167,7 @@ function formatUpcomingDeadline() {
     "Dezember",
   ];
 
-  let datePartsAsArray = upcomingDeadline.split("/");
+  let datePartsAsArray = upcomingDeadline.split(".");
   let year = datePartsAsArray[2];
   let monthIndex = parseInt(datePartsAsArray[1]) - 1;
   let day = datePartsAsArray[0];

@@ -140,7 +140,7 @@ function cancelSubtask() {
 function addSubtask() {
   const input = document.getElementById("subtasks-input");
   if (input.value) {
-    subtasks.push({text: input.value, status: 'todo'});
+    subtasks.push({ text: input.value, status: 'todo' });
     input.value = "";
     input.focus();
     toggleSubtaskIcons();
@@ -153,7 +153,7 @@ function renderSubtasksInForm() {
   subtasksList.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
     const subtask = subtasks[i].text;
-    
+
     subtasksList.innerHTML += renderNewListItemHtml(subtask, i);
   }
 }
