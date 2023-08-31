@@ -547,6 +547,7 @@ input {
   font-size: 1rem;
   padding: 0 1.5rem 0 1.5rem;
   gap: 1em;
+  flex: 1;
   flex-direction: column;
   border-radius: 1.875rem;
   background: #fff;
@@ -575,10 +576,10 @@ input {
 }
 
 .large-card-content {
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  height: auto;
   flex: 1;
 }
 
@@ -639,6 +640,7 @@ td {
   gap: 1rem;
   position: sticky;
   bottom: 0;
+  flex: 1;
   padding-block-start: 1.5em;
   padding-block-end: 2em;
   background-color: white;
