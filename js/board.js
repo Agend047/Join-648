@@ -246,6 +246,99 @@ function removeHighlight(ID) {
   document.getElementById(ID).classList.remove("drag-area-highlight");
 }
 
+/* MOUSEMOVE MOBILE DRAG & DROP */
+function mobileDragAndDrop(task) {
+  let start = document.querySelector(`#${task.id}`);
+
+  let startx = 0;
+  let starty = 0;
+
+  let todoColumn = document.querySelector("#todo");
+  let progressColumn = document.querySelector("#inprogress");
+  let feedbackColumn = document.querySelector("#feedback");
+  let doneColumn = document.querySelector("#done");
+
+  let rectTodo = todoColumn.getBoundingClientRect();
+  let rectProgress = progressColumn.getBoundingClientRect();
+  let rectFeedback = feedbackColumn.getBoundingClientRect();
+  let rectDone = doneColumn.getBoundingClientRect();
+
+  window.onscroll = function () {
+    rectTodo = todoColumn.getBoundingClientRect();
+    rectProgress = progressColumn.getBoundingClientRect();
+    rectFeedback = feedbackColumn.getBoundingClientRect();
+    rectDone = doneColumn.getBoundingClientRect();
+  };
+
+  if (
+    start.getAttribute("draggable") &&
+    start.getAttribute("draggable") === "true"
+  ) {
+    start.addEventListener("touchstart", function (eve) {
+      let touchobj = eve.changedTouches[0]; // erster Finger des touchstart-Events
+      startx = parseInt(touchobj.clientX); // x-Koordinaten des Fingers
+      starty = parseInt(touchobj.clientY); // y-Koordinaten des Fingers
+      eve.preventDefault();
+    });
+
+    start.addEventListener("touchmove", function (eve) {
+      let touchobj = eve.changedTouches[0]; // immer noch der erste Finger
+      let distx = parseInt(touchobj.clientX) - startx;
+      let disty = parseInt(touchobj.clientY) - starty;
+      eve.preventDefault();
+    });
+  }
+
+  start.addEventListener("touchend", function (eve) {
+    let touchobj = eve.changedTouches[0];
+    if (
+      touchobj.clientX > rectTodo.left &&
+      touchobj.clientX < rectTodo.right &&
+      touchobj.clientY > rectTodo.top &&
+      touchobj.clientY < rectTodo.bottom
+    ) {
+      let clone = start.cloneNode(start);
+      todoColumn.appendChild(clone);
+      start.parentNode.removeChild(start);
+    }
+
+    if (
+      touchobj.clientX > rectProgress.left &&
+      touchobj.clientX < rectProgress.right &&
+      touchobj.clientY > rectProgress.top &&
+      touchobj.clientY < rectProgress.bottom
+    ) {
+      let clone = start.cloneNode(start);
+      progressColumn.appendChild(clone);
+      start.parentNode.removeChild(start);
+    }
+
+    if (
+      touchobj.clientX > rectFeedback.left &&
+      touchobj.clientX < rectFeedback.right &&
+      touchobj.clientY > rectFeedback.top &&
+      touchobj.clientY < rectFeedback.bottom
+    ) {
+      let clone = start.cloneNode(start);
+      feedbackColumn.appendChild(clone);
+      start.parentNode.removeChild(start);
+    }
+
+    if (
+      touchobj.clientX > rectDone.left &&
+      touchobj.clientX < rectDone.right &&
+      touchobj.clientY > rectDone.top &&
+      touchobj.clientY < rectDone.bottom
+    ) {
+      let clone = start.cloneNode(start);
+      doneColumn.appendChild(clone);
+      start.parentNode.removeChild(start);
+    }
+
+    eve.preventDefault();
+  });
+}
+
 /* End of Drag & Drop functions
 ////////////////////////////////////////////////////////////////////////////////
 
