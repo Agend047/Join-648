@@ -384,7 +384,7 @@ input {
   flex-shrink: 0;
 }
 
-.cardSmall:hover {
+.cardSmall:not(.nohover):hover {
   cursor: pointer;
   transform: rotate(5deg);
 }

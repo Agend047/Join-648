@@ -7,6 +7,8 @@ function openCard(id, i) {
   let task = getTaskByID(id);
   let largeCard = document.getElementById("popUpContainer");
   document.body.style.overflow = "hidden";
+  let smallCard = document.getElementById(task.id);
+  smallCard.classList.add("nohover");
   labelColor = assignLabelColor(task.category);
   largeCard.innerHTML = generateLargeCardHTML(task, i);
   renderPrioLargeCard(task);
@@ -124,7 +126,6 @@ function filterContactListByName(nameQuery) {
  * Saves all needed Data inside the new Task variable and then it gets saved - as new one or as edited one.
  */
 async function saveTask() {
-
   let newTask = {
     title: document.getElementById("title-input").value,
     description: document.getElementById("description-input").value,
@@ -137,7 +138,7 @@ async function saveTask() {
     id: await getID(),
   };
 
-  orderTasks(newTask)
+  orderTasks(newTask);
 }
 
 function getAssignedToArrayFromForm() {
@@ -151,7 +152,6 @@ function getAssignedToArrayFromForm() {
   }
   return assignedToArray;
 }
-
 
 function getPriorityFromForm() {
   const prioInputs = document
@@ -171,8 +171,8 @@ function getPriorityFromForm() {
  */
 function getDate() {
   let date = document.getElementById("due-date-input").value;
-  date = date.split('-').reverse();
-  return date.join('.');
+  date = date.split("-").reverse();
+  return date.join(".");
 }
 
 /**
@@ -182,8 +182,10 @@ function getDate() {
  */
 function getStatus() {
   let result;
-  (selectedTask !== null) ? result = selectedTask.status : result = taskDestinationStatus;
-  return result
+  selectedTask !== null
+    ? (result = selectedTask.status)
+    : (result = taskDestinationStatus);
+  return result;
 }
 
 /**
@@ -192,8 +194,10 @@ function getStatus() {
  */
 async function getID() {
   let result;
-  (selectedTask !== null) ? result = selectedTask.id : result = await getTaskID();
-  return result
+  selectedTask !== null
+    ? (result = selectedTask.id)
+    : (result = await getTaskID());
+  return result;
 }
 
 /**
@@ -202,12 +206,10 @@ async function getID() {
  * @param {Object} newTask the Task wich has been edited or created.
  */
 async function orderTasks(newTask) {
-
   if (selectedTask === null) {
     taskList.push(newTask);
     await setItemInBackend("taskList", JSON.stringify(taskList));
     showNotification("notification", "./board.html");
-
   } else {
     taskList[getTaskIndexByID(selectedTask.id)] = newTask;
     await setItemInBackend("taskList", JSON.stringify(taskList));
@@ -223,7 +225,7 @@ async function orderTasks(newTask) {
  */
 async function taskDestination(target) {
   taskDestinationStatus = target;
-  localStorage.setItem('taskDestination', JSON.stringify(target));
+  localStorage.setItem("taskDestination", JSON.stringify(target));
 }
 
 /**
@@ -231,9 +233,9 @@ async function taskDestination(target) {
  * Then resets Value in local Storage with standard status (todo)
  */
 async function getTaskDestination() {
- let getJSON = localStorage.getItem('taskDestination')
-  if(getJSON){
-    taskDestinationStatus = JSON.parse(getJSON)
+  let getJSON = localStorage.getItem("taskDestination");
+  if (getJSON) {
+    taskDestinationStatus = JSON.parse(getJSON);
   }
-  localStorage.setItem('taskDestination', JSON.stringify('todo'))
+  localStorage.setItem("taskDestination", JSON.stringify("todo"));
 }
