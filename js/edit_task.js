@@ -14,6 +14,10 @@ function editTask(taskID) {
   renderSubtasksList(selectedTask);
 }
 
+/**
+ * 
+ * @param {Array} selectedContacts The Contacts
+ */
 function setSelectedContactIdsArray(selectedContacts) {
   selectedContactIds = [];
   for (let i = 0; i < selectedContacts.length; i++) {
@@ -52,6 +56,11 @@ function markPrioForEdit(taskID) {
   }
 }
 
+/**
+ * gets the Task and creates all the HTML needed for the Edit-WIndow.
+ * @param {Number} taskID ID Number of Task
+ * @returns The HTML Code for the Edit-Window. Filled with Data of the Task, we want to edit.
+ */
 function generateEditTaskHTML(taskID) {
   let task = getTaskByID(taskID);
   return /*html*/ `

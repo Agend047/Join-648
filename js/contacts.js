@@ -211,7 +211,10 @@ function prepareContactProcessDiv(contact, i) {
     }
 }
 
-/**Editing the contact, saving the list, cle */
+/**
+ * Editing the contact, saving the list, clearing files and close the PopUp
+ * @param {Number} i - Index of contact within contactList.
+ */
 function editContactProcess(i) {
     editContact(i)
     saveContacts()

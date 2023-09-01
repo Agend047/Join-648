@@ -19,7 +19,11 @@ let maxTaskId;
 let maxContactId;
 
 initForAllPages();
-
+/**Starting function, to validate User and fill the most-used Variables with data. */
+async function initForAllPages() {
+  verifyUserStatus();
+  await getDataFromBackend();
+}
 /**
  * Checks localstorage if the user is logged in.
  * Else will check Sessionstorage, and sets loggedIn to 'true' or 'false'.
@@ -47,15 +51,11 @@ function verifyUserStatus() {
   }
 }
 
+/** Fills 3 important global variables with much used Data */
 async function getDataFromBackend() {
   taskList = await getItemFromBackend("taskList");
   userList = await getItemFromBackend("userList");
   contactList = await getItemFromBackend("contactList");
-}
-
-async function initForAllPages() {
-  verifyUserStatus();
-  await getDataFromBackend();
 }
 
 /**
@@ -245,7 +245,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch {}
+    } catch { }
   }, 200);
 }
 
@@ -346,6 +346,11 @@ async function getItemFromBackend(key) {
   return JSON.parse(result);
 }
 
+/**
+ * 
+ * @param {*} elementId 
+ * @param {*} targetHref 
+ */
 function showNotification(elementId, targetHref) {
   document.documentElement.style.setProperty(
     "--notification-top-target",
@@ -357,6 +362,11 @@ function showNotification(elementId, targetHref) {
   }, 800);
 }
 
+/**
+ * Searches in userList for the User after the E-Mail.
+ * @param {string} email the E-Mail wich was typed in.
+ * @returns The found user
+ */
 function getUserByEmail(email) {
   return userList.find((user) => user.email === email);
 }
@@ -381,6 +391,11 @@ function logOut() {
   window.location.href = "/login.html";
 }
 
+/**
+ * Creates the balls, in wich the contact initials are shwon.
+ * @param {Object} contact Contact out of the ContactList
+ * @returns 
+ */
 function renderContactBubbleHtml(contact) {
   return /*html*/ `<svg
     width="42"
