@@ -6,11 +6,13 @@ let selectedContactIds = [];
 let selectedTask = null;
 let taskDestinationStatus;
 
+/**Gets 2 container for further use. */
 function getAddContactElements() {
   subtaskEl = document.getElementById("subtasks-container");
   backdrop = document.getElementById("backdrop");
 }
 
+/**The order for the functions, so the Add-Task page works correct. */
 async function initAddTaskPage() {
   getAddContactElements();
   initSubtaskInput();
@@ -31,6 +33,7 @@ async function initAddTaskPage() {
   getTaskDestination()
 }
 
+
 function initAddContactOverlayForm() {
   const dialogEl = document.getElementById("add-contact-overlay");
   const closeBtns = dialogEl.querySelectorAll(".close-icn");
@@ -42,6 +45,7 @@ function initAddContactOverlayForm() {
   }
 }
 
+/**Gettinig the contactList out of backend */
 async function getContacts() {
   contactList = await getItemFromBackend("contactList");
 }
