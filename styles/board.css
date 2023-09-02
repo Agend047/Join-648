@@ -537,6 +537,20 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.1s;
+}
+
+.visually-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: -50%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: unset;
+  overflow: hidden;
 }
 
 .largeCard {

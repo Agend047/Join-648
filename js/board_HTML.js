@@ -115,12 +115,12 @@ function generatePlaceholderHTML(status) {
  */
 function generateLargeCardHTML(task, i) {
   return /*html*/ `
-          <div id="popUp" class="popUp">
+          <div id="popUp-${task.id}" class="visually-hidden">
               <div id="largeCard" class="largeCard">
                 <div class="large-card-header">
                   <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
                   <img
-                    onclick="updateSubtasksStatus(${task.id}); closeCard('popUp');"
+                    onclick="updateSubtasksStatus(${task.id}); closeCard(${task.id}, 'popUp-${task.id}');"
                     id="btnCloseCard"
                     class="btn-close-card"
                     src="./assets/img/close-btn.svg"
@@ -169,7 +169,7 @@ function generateLargeCardHTML(task, i) {
                   </div>
                 </div>
               </div>
-              <div class="background" onclick="updateSubtasksStatus(${task.id}); closeCard('popUp');"></div>
+              <div class="background" onclick="updateSubtasksStatus(${task.id}); closeCard(${task.id}, 'popUp-${task.id}');"></div>
           </div>
         `;
 }

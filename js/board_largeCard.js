@@ -12,6 +12,7 @@ function openCard(id, i) {
   let mobileTemplate = document.getElementById("mobile-template");
   mobileTemplate.style.zIndex = "0";
   renderLargeCard(largeCard, task, i);
+  flyInCard(task.id);
 }
 
 /**
@@ -33,12 +34,31 @@ function renderLargeCard(largeCard, task, i) {
  * Closes the PopUp (large Card view) by hiding it and restoring the scrolling behavior of the body content.
  * @param {string} ID - The ID of the card view element to be closed.
  */
-function closeCard(ID) {
+function closeCard(task, ID) {
+  flyInCard(task);
   document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
   let mobileTemplate = document.getElementById("mobile-template");
   mobileTemplate.style.zIndex = "3";
   renderAllContainersHTML();
+}
+
+/**
+ * Makes Slide In Animation when opening the Large Card
+ */
+function flyInCard(taskID) {
+  let card = document.getElementById(`popUp-${taskID}`);
+  if (card.classList.contains("visually-hidden")) {
+    setTimeout(function () {
+      card.classList.remove("visually-hidden");
+      card.classList.add("popUp");
+    }, 2); // Delay the animation by a small amount (adjust as needed)
+  } else {
+    setTimeout(function () {
+      card.classList.add("visually-hidden");
+      card.classList.remove("popUp");
+    }, 10); // Delay the animation by a small amount (adjust as needed)
+  }
 }
 
 function initSubtaskInput() {
