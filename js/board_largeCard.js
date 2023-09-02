@@ -1,5 +1,5 @@
 /**
- * Opens a larger card (PopUp) view for the current task on click, displaying detailed information and controls.
+ * Opens a larger card (PopUp) view for the current task on click.
  * @param {number} id - The ID of the task for which the larger card view will be opened.
  * @param {number} i - The index of the task within the filteredTasks array.
  */
@@ -9,6 +9,18 @@ function openCard(id, i) {
   document.body.style.overflow = "hidden";
   let smallCard = document.getElementById(task.id);
   smallCard.classList.add("nohover");
+  let mobileTemplate = document.getElementById("mobile-template");
+  mobileTemplate.style.zIndex = "0";
+  renderLargeCard(largeCard, task, i);
+}
+
+/**
+ * Renders different parts and information on the large Card.
+ * @param {number} id - The ID of the task for which the larger card view will be opened.
+ * @param {number} i - The index of the task within the filteredTasks array.
+ * @param {number} largeCard - The container of the LargeCard PopUp Window.
+ */
+function renderLargeCard(largeCard, task, i) {
   labelColor = assignLabelColor(task.category);
   largeCard.innerHTML = generateLargeCardHTML(task, i);
   renderPrioLargeCard(task);
@@ -24,6 +36,8 @@ function openCard(id, i) {
 function closeCard(ID) {
   document.getElementById(ID).style.display = "none";
   document.body.style.overflow = "scroll";
+  let mobileTemplate = document.getElementById("mobile-template");
+  mobileTemplate.style.zIndex = "3";
   renderAllContainersHTML();
 }
 

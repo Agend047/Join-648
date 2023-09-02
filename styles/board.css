@@ -2,9 +2,9 @@ header {
   z-index: 0 !important;
 }
 
-#mobile-template {
+/* #mobile-template {
   z-index: 0;
-}
+} */
 
 .board-main {
   margin-left: 1em;
@@ -366,7 +366,6 @@ input {
 /* CSS SMALL CARD */
 
 .cardSmall {
-  position: relative;
   display: flex;
   flex: 0 0 auto;
   width: 95%;
