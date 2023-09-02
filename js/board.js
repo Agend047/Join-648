@@ -145,9 +145,7 @@ function renderAssignedBadges() {
     const filteredTask = filteredTasks[i];
     const badge = document.getElementById(`profileBadges-${filteredTask.id}`);
     const assignedContacts = filteredTask["assignedTo"];
-
     badge.innerHTML = "";
-
     for (let j = 0; j < assignedContacts.length; j++) {
       const assignedContact = assignedContacts[j];
       badge.innerHTML += generateBadgeHTML(assignedContact);
