@@ -168,6 +168,7 @@
               ondragover="allowDrop(event); addHighlight('todo')"
               ondrop="moveTo('todo'); removeHighlight('todo')"
               ondragleave="removeHighlight('todo')"
+              ontouchend="mobileDrop('todo')"
               class="columns status-column"
             ></div>
           </div>
@@ -215,6 +216,7 @@
               ondragover="allowDrop(event); addHighlight('inprogress')"
               ondrop="moveTo('inprogress'); removeHighlight('inprogress')"
               ondragleave="removeHighlight('inprogress')"
+              ontouchend="mobileDrop('inprogress')"
               class="columns status-column"
             ></div>
           </div>
@@ -261,6 +263,7 @@
               ondragover="allowDrop(event); addHighlight('feedback')"
               ondrop="moveTo('feedback'); removeHighlight('feedback')"
               ondragleave="removeHighlight('feedback')"
+              ontouchend="mobileDrop('feedback')"
               class="columns status-column"
             ></div>
           </div>
@@ -274,6 +277,7 @@
               ondragover="allowDrop(event); addHighlight('done')"
               ondrop="moveTo('done'); removeHighlight('done')"
               ondragleave="removeHighlight('done')"
+              ontouchend="mobileDrop('done')"
               class="columns status-column"
             ></div>
           </div>

@@ -247,11 +247,9 @@ function removeHighlight(ID) {
 }
 
 /* MOUSEMOVE MOBILE DRAG & DROP */
-function mobileDragAndDrop(task) {
-  let start = document.querySelector(`#${task.id}`);
 
-  let startx = 0;
-  let starty = 0;
+function mobileDrag(taskID) {
+  let draggedElement = document.getElementById(taskID);
 
   let todoColumn = document.querySelector("#todo");
   let progressColumn = document.querySelector("#inprogress");
@@ -263,79 +261,49 @@ function mobileDragAndDrop(task) {
   let rectFeedback = feedbackColumn.getBoundingClientRect();
   let rectDone = doneColumn.getBoundingClientRect();
 
+  let startX = 0;
+  let startY = 0;
+
   window.onscroll = function () {
-    rectTodo = todoColumn.getBoundingClientRect();
+    rectTodo = todoColumn.getBoundingClientRect(); //gibt die Koordinaten der DropArea zurück
     rectProgress = progressColumn.getBoundingClientRect();
     rectFeedback = feedbackColumn.getBoundingClientRect();
     rectDone = doneColumn.getBoundingClientRect();
   };
 
   if (
-    start.getAttribute("draggable") &&
-    start.getAttribute("draggable") === "true"
+    draggedElement.getAttribute("draggable") &&
+    draggedElement.getAttribute("draggable") === "true"
   ) {
-    start.addEventListener("touchstart", function (eve) {
-      let touchobj = eve.changedTouches[0]; // erster Finger des touchstart-Events
-      startx = parseInt(touchobj.clientX); // x-Koordinaten des Fingers
-      starty = parseInt(touchobj.clientY); // y-Koordinaten des Fingers
-      eve.preventDefault();
-    });
-
-    start.addEventListener("touchmove", function (eve) {
-      let touchobj = eve.changedTouches[0]; // immer noch der erste Finger
-      let distx = parseInt(touchobj.clientX) - startx;
-      let disty = parseInt(touchobj.clientY) - starty;
-      eve.preventDefault();
+    draggedElement.addEventListener("touchstart", function (event) {
+      let touchobj = event.changedTouches[0]; // erster Finger des touchstart-Events
+      startX = parseInt(touchobj.clientX); // x-Koordinaten des Fingers
+      startY = parseInt(touchobj.clientY); // y-Koordinaten des Fingers
+      event.preventDefault();
     });
   }
 
-  start.addEventListener("touchend", function (eve) {
-    let touchobj = eve.changedTouches[0];
-    if (
-      touchobj.clientX > rectTodo.left &&
-      touchobj.clientX < rectTodo.right &&
-      touchobj.clientY > rectTodo.top &&
-      touchobj.clientY < rectTodo.bottom
-    ) {
-      let clone = start.cloneNode(start);
-      todoColumn.appendChild(clone);
-      start.parentNode.removeChild(start);
-    }
+  draggedElement.addEventListener("touchmove", function (event) {
+    let touchobj = event.changedTouches[0]; // immer noch der erste Finger
+    const distx = parseInt(touchobj.clientX) - startX;
+    const disty = parseInt(touchobj.clientY) - startY;
+    event.preventDefault();
+  });
 
-    if (
-      touchobj.clientX > rectProgress.left &&
-      touchobj.clientX < rectProgress.right &&
-      touchobj.clientY > rectProgress.top &&
-      touchobj.clientY < rectProgress.bottom
-    ) {
-      let clone = start.cloneNode(start);
-      progressColumn.appendChild(clone);
-      start.parentNode.removeChild(start);
-    }
-
+  draggedElement.addEventListener("touchend", function (event) {
+    let touchobj = event.changedTouches[0];
     if (
       touchobj.clientX > rectFeedback.left &&
       touchobj.clientX < rectFeedback.right &&
       touchobj.clientY > rectFeedback.top &&
       touchobj.clientY < rectFeedback.bottom
     ) {
-      let clone = start.cloneNode(start);
+      let clone = draggedElement.cloneNode(draggedElement);
       feedbackColumn.appendChild(clone);
-      start.parentNode.removeChild(start);
+      draggedElement.parentNode.removeChild(draggedElement);
     }
 
-    if (
-      touchobj.clientX > rectDone.left &&
-      touchobj.clientX < rectDone.right &&
-      touchobj.clientY > rectDone.top &&
-      touchobj.clientY < rectDone.bottom
-    ) {
-      let clone = start.cloneNode(start);
-      doneColumn.appendChild(clone);
-      start.parentNode.removeChild(start);
-    }
-
-    eve.preventDefault();
+    event.preventDefault();
   });
 }
 

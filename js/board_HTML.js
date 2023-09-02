@@ -12,7 +12,7 @@
 // i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
   return /*html*/ `
-                <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
+                <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" ontouchmove="mobileDrag(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
                   <div class="category">
                     <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
                   </div>
