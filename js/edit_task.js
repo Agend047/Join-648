@@ -5,9 +5,7 @@
  */
 function editTask(taskID) {
   selectedTask = getTaskByID(taskID);
-  document.getElementById("popUp").style.display = "none";
   let editCard = document.getElementById("popUpContainer");
-  document.body.style.overflow = "hidden";
   editCard.innerHTML = generateEditTaskHTML(taskID);
   markPrioForEdit(taskID);
   setSelectedContactIdsArray(selectedTask["assignedTo"]);
@@ -15,7 +13,7 @@ function editTask(taskID) {
 }
 
 /**
- * 
+ *
  * @param {Array} selectedContacts The Contacts
  */
 function setSelectedContactIdsArray(selectedContacts) {
@@ -72,7 +70,7 @@ function generateEditTaskHTML(taskID) {
           <div class="edit-card-header">
               
             <img
-                onclick="closeCard('editPopUp')"
+                onclick="closeCard('popUpContainer')"
                 id="btnCloseCard"
                 class="btn-close-card"
                 src="./assets/img/close-btn.svg"
@@ -316,7 +314,7 @@ function generateEditTaskHTML(taskID) {
               type="submit"
             >
               <span>Ok</span
-              ><img src="./assets/img/check.png" alt="create task" />
+              ><img src="./assets/img/check.png" alt="Ok" />
             </button>
           </div>
         </form>
@@ -326,7 +324,7 @@ function generateEditTaskHTML(taskID) {
         <img src="./assets/img/board-icn-small.png" />
       </div>
       </div>
-      <div class="background" onclick="closeCard('editPopUp')"></div>
+      <div class="background" onclick="closeCard('popUpContainer')"></div>
     </div>
     `;
 }

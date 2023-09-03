@@ -3,16 +3,17 @@
  * @param {number} id - The ID of the task for which the larger card view will be opened.
  * @param {number} i - The index of the task within the filteredTasks array.
  */
-function openCard(id, i) {
-  let task = getTaskByID(id);
+function openCard(id) {
+  task = getTaskByID(id);
   let largeCard = document.getElementById("popUpContainer");
+  largeCard.style.display = "flex";
   document.body.style.overflow = "hidden";
   let smallCard = document.getElementById(task.id);
   smallCard.classList.add("nohover");
   let mobileTemplate = document.getElementById("mobile-template");
   mobileTemplate.style.zIndex = "0";
-  renderLargeCard(largeCard, task, i);
-  flyInCard(task.id);
+  renderLargeCard(largeCard);
+  slideInCard();
 }
 
 /**
@@ -21,12 +22,12 @@ function openCard(id, i) {
  * @param {number} i - The index of the task within the filteredTasks array.
  * @param {number} largeCard - The container of the LargeCard PopUp Window.
  */
-function renderLargeCard(largeCard, task, i) {
+function renderLargeCard(largeCard) {
   labelColor = assignLabelColor(task.category);
-  largeCard.innerHTML = generateLargeCardHTML(task, i);
-  renderPrioLargeCard(task);
-  renderAssignedUserList(task);
-  renderSubtasksList(task);
+  largeCard.innerHTML = generateLargeCardHTML();
+  renderPrioLargeCard();
+  renderAssignedUserList();
+  renderSubtasksList();
   initCheckboxes();
 }
 
@@ -34,31 +35,39 @@ function renderLargeCard(largeCard, task, i) {
  * Closes the PopUp (large Card view) by hiding it and restoring the scrolling behavior of the body content.
  * @param {string} ID - The ID of the card view element to be closed.
  */
-function closeCard(task, ID) {
-  flyInCard(task);
-  document.getElementById(ID).style.display = "none";
-  document.body.style.overflow = "scroll";
-  let mobileTemplate = document.getElementById("mobile-template");
-  mobileTemplate.style.zIndex = "3";
-  renderAllContainersHTML();
+function closeCard(ID, switchPopUp = false) {
+  if (switchPopUp) {
+    let largeCard = document.getElementById("popUpContainer");
+    renderLargeCard(largeCard);
+  } else {
+    slideOutCard(ID);
+    document.body.style.overflow = "scroll";
+    let mobileTemplate = document.getElementById("mobile-template");
+    mobileTemplate.style.zIndex = "3";
+    renderAllContainersHTML();
+  }
 }
 
 /**
- * Makes Slide In Animation when opening the Large Card
+ * Creates slide In Animation when opening the Large Card PopUp
  */
-function flyInCard(taskID) {
-  let card = document.getElementById(`popUp-${taskID}`);
-  if (card.classList.contains("visually-hidden")) {
-    setTimeout(function () {
-      card.classList.remove("visually-hidden");
-      card.classList.add("popUp");
-    }, 2); // Delay the animation by a small amount (adjust as needed)
-  } else {
-    setTimeout(function () {
-      card.classList.add("visually-hidden");
-      card.classList.remove("popUp");
-    }, 10); // Delay the animation by a small amount (adjust as needed)
-  }
+function slideInCard() {
+  let popUp = document.getElementById(`popUp-${task.id}`);
+  popUp.style.transform = "translateX(100%)";
+  popUp.style.cssText =
+    "animation:slide-in .25s ease; animation-fill-mode: forwards;";
+}
+
+/**
+ * Creates slide Out Animation when closing the Large Card PopUp
+ */
+function slideOutCard(ID) {
+  let popUp = document.querySelector(".popUp");
+  popUp.style.cssText =
+    "animation:slide-out .20s ease; animation-fill-mode: forwards;";
+  setTimeout(() => {
+    document.getElementById(ID).style.display = "none";
+  }, 200);
 }
 
 function initSubtaskInput() {
@@ -247,7 +256,7 @@ async function orderTasks(newTask) {
   } else {
     taskList[getTaskIndexByID(selectedTask.id)] = newTask;
     await setItemInBackend("taskList", JSON.stringify(taskList));
-    closeCard("editPopUp");
+    closeCard("editPopUp", true);
     initBoardPage();
   }
 }

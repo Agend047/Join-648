@@ -113,14 +113,14 @@ function generatePlaceholderHTML(status) {
  * @param {number} i - The index of the task.
  * @returns {string} The generated HTML code for the PopUp.
  */
-function generateLargeCardHTML(task, i) {
+function generateLargeCardHTML() {
   return /*html*/ `
-          <div id="popUp-${task.id}" class="visually-hidden">
+          <div id="popUp-${task.id}" class="popUp">
               <div id="largeCard" class="largeCard">
                 <div class="large-card-header">
                   <div id="categoryLabel" style="background: ${labelColor};" class="categoryLabel">${task.category}</div>
                   <img
-                    onclick="updateSubtasksStatus(${task.id}); closeCard(${task.id}, 'popUp-${task.id}');"
+                    onclick="updateSubtasksStatus(${task.id}); closeCard('popUpContainer');"
                     id="btnCloseCard"
                     class="btn-close-card"
                     src="./assets/img/close-btn.svg"
@@ -128,8 +128,8 @@ function generateLargeCardHTML(task, i) {
                 </div>
       
                 <div class="large-card-content">
-                  <h1 class="title-large-card" id="title-${i}">${task.title}</h1>
-                  <p class="description" id="description-${i}">${task.description}</p>
+                  <h1 class="title-large-card">${task.title}</h1>
+                  <p class="description">${task.description}</p>
                   <table>
                     <tr>
                       <td class="col-width">Due date:</td>
@@ -169,7 +169,7 @@ function generateLargeCardHTML(task, i) {
                   </div>
                 </div>
               </div>
-              <div class="background" onclick="updateSubtasksStatus(${task.id}); closeCard(${task.id}, 'popUp-${task.id}');"></div>
+              <div class="background" onclick="updateSubtasksStatus(${task.id}); closeCard('popUpContainer');"></div>
           </div>
         `;
 }

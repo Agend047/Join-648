@@ -1,6 +1,7 @@
 let currentDraggedElement;
 let labelColor;
 let filteredTasks;
+let task;
 
 /**
  * Initializes functions of the Board.
@@ -316,7 +317,7 @@ async function deleteTask(taskID) {
   let taskIndex = getTaskIndexByID(taskID);
   taskList.splice(taskIndex, 1);
   await setItemInBackend("taskList", JSON.stringify(taskList));
-  closeCard("popUp");
+  closeCard("popUpContainer");
   renderAllContainersHTML();
 }
 
@@ -324,7 +325,7 @@ async function deleteTask(taskID) {
  * Renders the priority icon on the larger card view based on the task's priority.
  * @param {object} task - The task within the taskList, retrieved by a specific id.
  */
-function renderPrioLargeCard(task) {
+function renderPrioLargeCard() {
   for (let i = 0; i < taskList.length; i++) {
     const prioLargeCard = document.getElementById("largeCardPrio");
     const assignedPrio = taskList[i]["priority"];
@@ -337,7 +338,7 @@ function renderPrioLargeCard(task) {
  * Renders the list of assigned users or contacts on the larger card view.
  * @param {object} task - The current task within the taskList by ID.
  */
-function renderAssignedUserList(task) {
+function renderAssignedUserList() {
   const list = document.getElementById("assignedSection");
   let html = "";
 
@@ -354,7 +355,7 @@ function renderAssignedUserList(task) {
  * Writes the subtask into the open PopUp Card
  * @param {Object} task The Task we want to show
  */
-function renderSubtasksList(task) {
+function renderSubtasksList() {
   const list = document.getElementById("subtaskList");
   list.innerHTML = "";
 

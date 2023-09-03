@@ -517,18 +517,29 @@ input {
 
 /* CSS LARGE CARD */
 
-.background {
-  position: fixed;
+.popUpContainer {
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.15);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: -1;
 }
 
 .popUp {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -537,20 +548,26 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition-duration: 0.1s;
+  overflow: hidden;
+  transform: translateX(0%);
 }
 
-.visually-hidden {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: -50%;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: unset;
-  overflow: hidden;
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .largeCard {
@@ -757,18 +774,13 @@ td {
 }
 
 @media (min-width: 440px) {
-  .largeCard {
-    height: calc(100vh - 80px);
-    max-height: 900px;
-  }
-}
-
-@media (min-width: 440px) {
   .title-large-card {
     font-size: 3.8125rem;
   }
 
   .largeCard {
+    height: calc(100vh - 80px);
+    max-height: 900px;
     font-size: 1.25rem;
     padding: 0rem 2.5rem 0rem 2.5rem;
     gap: 1.5rem;
@@ -848,8 +860,8 @@ input[type="radio"] {
 .editCard {
   display: flex;
   width: 90vw;
-  height: calc(100vh - 50px);
-  max-height: 860px;
+  height: calc(100vh - 60px);
+  max-height: 670px;
   font-size: 1rem;
   padding: 0rem 1.5rem 0 1.5rem;
   flex-direction: column;
@@ -939,6 +951,13 @@ label input {
   }
 }
 
+@media (min-width: 440px) {
+  .editCard {
+    height: calc(100vh - 80px);
+    max-height: 900px;
+  }
+}
+
 @media (min-width: 450px) {
   .input-prio-container {
     justify-content: space-between;
@@ -952,17 +971,10 @@ label input {
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 590px) {
   .editCard {
     width: 32.8125rem;
     font-size: 1.25rem;
-  }
-}
-
-@media (min-width: 820px) {
-  .editCard {
-    height: auto;
-    max-height: 91vh;
   }
 }
 
