@@ -250,6 +250,21 @@ async function validateOverlayAddcontactForm(e) {
   }
 }
 
+function validateDueDateInput(formElement) {
+  debugger;
+  let today = new Date();
+  today.setHours(0,0,0,0);
+  let inputDate = new Date(formElement.value);
+  inputDate.setHours(0,0,0,0);
+  if (inputDate < today) {
+    formElement.setCustomValidity('Date must not be in the past.');
+  } else if (formElement.validity.valueMissing) {
+    formElement.setCustomValidity('This field is required.');
+  } else {
+    formElement.setCustomValidity('');
+  }
+}
+
 async function addContactWithinTaskForm() {
   const newContact = await createContact();
   sortContacts();
@@ -284,6 +299,9 @@ async function validateAddTaskForm(e) {
         case "category-input":
           formElement.readOnly = false;
           validateCategoryInput(formElement);
+          break;
+        case 'due-date-input':
+          validateDueDateInput(formElement);
           break;
       }
     }
