@@ -1,7 +1,6 @@
 /**
  * Opens a larger card (PopUp) view for the current task on click.
  * @param {number} id - The ID of the task for which the larger card view will be opened.
- * @param {number} i - The index of the task within the filteredTasks array.
  */
 function openCard(id) {
   task = getTaskByID(id);
@@ -18,8 +17,6 @@ function openCard(id) {
 
 /**
  * Renders different parts and information on the large Card.
- * @param {number} id - The ID of the task for which the larger card view will be opened.
- * @param {number} i - The index of the task within the filteredTasks array.
  * @param {number} largeCard - The container of the LargeCard PopUp Window.
  */
 function renderLargeCard(largeCard) {
@@ -60,6 +57,7 @@ function slideInCard() {
 
 /**
  * Creates slide Out Animation when closing the Large Card PopUp
+ * @param {string} ID - The ID of the card view element to be closed.
  */
 function slideOutCard(ID) {
   let popUp = document.querySelector(".popUp");
