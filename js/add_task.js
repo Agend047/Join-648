@@ -50,14 +50,15 @@ async function getContacts() {
   contactList = await getItemFromBackend("contactList");
 }
 
-function initClearBtn(ev) {
+function initClearBtn() {
   document.getElementById("clear-btn").addEventListener("click", (ev) => {
     ev.preventDefault();
     document.getElementById("addtask-form").reset();
     document.getElementById("selected-contacts").innerHTML = "";
     document.getElementById("subtaskList").innerHTML = "";
-    renderAssignedToContactList(contactList);
     selectedContactIds = [];
+    renderAssignedToContactList(contactList);
+    initAssignedToSelectItems(document.getElementById('assigned-to-options'));
   });
 }
 
