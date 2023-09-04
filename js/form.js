@@ -1,3 +1,4 @@
+/**prevents live validation of form and adds appropriate validation function to submit event of the form. adds icon change function to password inputs */
 function initForm() {
     const forms = document.forms;
     for (let i = 0; i < forms.length; i++) {
@@ -34,6 +35,7 @@ function initForm() {
     }
 }
 
+/**loops through user inputs and checks standard validation. If not successful, error messages are displayed. */
 function validateStandardForm(e) {
     const form = e.target;
     let formIsValid = true;
@@ -52,6 +54,7 @@ function validateStandardForm(e) {
     } else { showNotification('notification', form.action); }
 }
 
+/**validates that entered password is correct for the selected user email */
 function validatePassword(formElement, email) {
     if (formElement.value !== getUserByEmail(email).password) {
         formElement.setCustomValidity('Wrong password. Ups! Try again.');
@@ -60,6 +63,7 @@ function validatePassword(formElement, email) {
     }
 }
 
+/**validates that entered passwords in both password inputs match. */
 function validatePasswordConfirmation(formElement) {
     const password1 = document.getElementById('password-input').value;
     const password2 = document.getElementById('confirm-password-input').value;
@@ -70,6 +74,7 @@ function validatePasswordConfirmation(formElement) {
     }
 }
 
+/**toggles password icons. Upon focus, it changes from lock to crossed eye. Click on eye symbol toggles between crossed out and not crossed out */
 function togglePasswordIcon(e) {
     const inputEl = this;
     const iconEl = inputEl.nextElementSibling;
@@ -89,6 +94,7 @@ function togglePasswordIcon(e) {
     }
 }
 
+/**in addition to togglePasswordIcon function, this changes the input type between text and password to show/hide the entered password */
 function togglePasswordVisibility() {
     const iconEl = this;
     const inputEl = iconEl.previousElementSibling;
