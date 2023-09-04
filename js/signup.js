@@ -1,3 +1,4 @@
+/**calls init functions for form, checkboxes, back navigation and policy checkbox */
 function init() {
     initForm();
     initCheckboxes();
@@ -5,6 +6,7 @@ function init() {
     initPolicyCheckbox(); //MUST be excecuted after initCheckboxes!
 }
 
+/**validates all fields are filled out and password entries match each other. */
 async function validateSignUpForm(e) {
     const form = e.target;
     let formIsValid = true;
@@ -29,6 +31,7 @@ async function validateSignUpForm(e) {
     }
 }
 
+/**gets values from add user form and adds a new user to array, then saves array to backend */
 async function addUser() {
     let newUser = {
         name: document.getElementById('name-input').value,
@@ -40,6 +43,7 @@ async function addUser() {
     await setItemInBackend('userList', JSON.stringify(userList));
 }
 
+/**called upon successful sign up. triggers notification animation and positions notification right above the form button */
 function showSignUpNotification(elementId, refElementId) {
     let top = document.getElementById(refElementId).getBoundingClientRect().top + 'px';
     document.documentElement.style.setProperty('--notification-top-target', top);
@@ -49,11 +53,13 @@ function showSignUpNotification(elementId, refElementId) {
     }, 800);
 }
 
+/**adds function to privacy policy checkbox and disables button */
 function initPolicyCheckbox() {
     document.getElementById('accept-privacy-policy').addEventListener('click', toggleSignUpBtn);
     document.getElementById('sign-up-btn').disabled = true;
 }
 
+/**when the privacy policy checkbox is checked by the user, enables the sign up button */
 function toggleSignUpBtn(e) {
     document.getElementById('sign-up-btn').disabled = !e.target.classList.contains('checked');
 }

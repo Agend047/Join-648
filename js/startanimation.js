@@ -1,3 +1,4 @@
+/**checks if app is already started. If not, logo for start animation is set to either desktop or mobile and animation is triggered */
 function handleStartAnimation() {
     const appStarted = getSessionData();
     if (!appStarted) {
@@ -10,12 +11,14 @@ function handleStartAnimation() {
     }
 }
 
+/**gets appStarted value from session storage to determin if this is the session launch */
 function getSessionData() {
     const appStarted = JSON.parse(sessionStorage.getItem('appStarted'));
     if (!appStarted) { sessionStorage.setItem('appStarted', 'true'); }
     return appStarted;
 }
 
+/**adds html required for start animation */
 function getAnimationHtml() {
     document.body.innerHTML += `<div id="splash-login-bg"></div>
     <img

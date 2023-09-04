@@ -1,9 +1,11 @@
+/**calls init functions for form, checkboxes and back navigation icon */
 function init() {
     initForm();
     initCheckboxes();
     initBackNavigator();
 }
 
+/**validates that both password fields are filled out and have the same value */
 function validateResetPasswordForm(e) {
     e.preventDefault();
     const form = e.target;

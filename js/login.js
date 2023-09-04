@@ -1,5 +1,6 @@
 const headerEl = document.getElementById("header");
 
+/**calls animation and init functions and gets data from backend */
 function init() {
   handleStartAnimation();
   initForm();
@@ -9,6 +10,7 @@ function init() {
   getStoredUserData();
 }
 
+/**adds function to guest login btn to save status to session storage */
 function initGuestLoginBtn() {
   document
     .getElementById("guest-login-btn")
@@ -17,6 +19,7 @@ function initGuestLoginBtn() {
     );
 }
 
+/**sets login form fields if remember me checkox was checked last time */
 function getStoredUserData() {
   if (loginData) {
     document.getElementById("email-input").value = loginData.email;
@@ -25,6 +28,7 @@ function getStoredUserData() {
   }
 }
 
+/**checks if user exists. if yes, it checks the entered password against the stored password */
 function validateLoginForm(e) {
   e.preventDefault();
   const form = e.target;
@@ -51,6 +55,7 @@ function validateLoginForm(e) {
   }
 }
 
+/**called upon successful login validation. If remember me checkbox is checked current user data is written into local storage, otherwise to session storage. In both cases, activeUser is set in session storage. */
 function proceedLogin(user) {
   if (document.getElementById("remember-me").classList.contains("checked")) {
     localStorage.setItem("loggedIn", JSON.stringify(true));
@@ -64,6 +69,7 @@ function proceedLogin(user) {
   window.location.href = "./summary.html";
 }
 
+/**validates if entered email address exists in users list. */
 function validateLoginEmailInput(formElement) {
   if (getUserByEmail(formElement.value)) {
     formElement.setCustomValidity("");

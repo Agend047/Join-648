@@ -1,3 +1,4 @@
+/**adds functions for toggling the (un)checked checkbox icons and hover effect */
 function initCheckboxes() {
     const checkboxes = document.getElementsByClassName('checkbox');
     for (let i = 0; i < checkboxes.length; i++) {
@@ -8,6 +9,7 @@ function initCheckboxes() {
     }
 }
 
+/**adds hover effect to back icon */
 function initBackNavigator() {
     const backNavigator = document.getElementById('back-navigation-img');
     if (!backNavigator) { return; }
@@ -15,6 +17,7 @@ function initBackNavigator() {
     backNavigator.addEventListener('mouseout', toggleBackIconOnHover);
 }
 
+/**changes back icon on hover */
 function toggleBackIconOnHover(ev) {
     if (ev.type === 'mouseover') {
         this.src = './assets/img/arrow-left-hover.png';
@@ -23,6 +26,7 @@ function toggleBackIconOnHover(ev) {
     }
 }
 
+/**changes checkbox icon on hover */
 function toggleCheckboxHover(ev) {
     if (ev.type === 'mouseover') {
         if (this.classList.contains('checked')) {
