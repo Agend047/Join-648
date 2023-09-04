@@ -33,7 +33,7 @@ async function initAddTaskPage() {
   getTaskDestination()
 }
 
-
+/**Adds close function to close buttons of Add contact overlay form */
 function initAddContactOverlayForm() {
   const dialogEl = document.getElementById("add-contact-overlay");
   const closeBtns = dialogEl.querySelectorAll(".close-icn");
@@ -50,6 +50,7 @@ async function getContacts() {
   contactList = await getItemFromBackend("contactList");
 }
 
+/**adds reset function to clear btn, resetting the entire add task form */
 function initClearBtn() {
   document.getElementById("clear-btn").addEventListener("click", (ev) => {
     ev.preventDefault();
@@ -62,6 +63,7 @@ function initClearBtn() {
   });
 }
 
+/**adds selectCategory function to eacj category option */
 function initCategorySelectItems(list) {
   const categoryOptions = list.querySelectorAll("li");
   for (let i = 0; i < categoryOptions.length; i++) {
@@ -70,6 +72,7 @@ function initCategorySelectItems(list) {
   }
 }
 
+/**adds toggleContactSelection function to each contact list item in assigned to dropdown */
 function initAssignedToSelectItems(list) {
   const contacts = list.querySelectorAll("li");
   for (let i = 0; i < contacts.length; i++) {
@@ -78,12 +81,14 @@ function initAssignedToSelectItems(list) {
   }
 }
 
+/**sets category dropdown input to selected value and collapses dropdown */
 function selectCategory(e) {
   const input = document.getElementById("category-input");
   input.value = e.target.textContent;
   collapseDropdown();
 }
 
+/**expands or collapses a clicked dropdown based on its current state */
 function toggleDropdown(ev) {
   ev.stopPropagation();
   if (ev.currentTarget.tagName === "DIV") {
@@ -99,6 +104,7 @@ function toggleDropdown(ev) {
   }
 }
 
+/**expands dropdown: changing arrow image from down to up, displaying the list with options and setting a backdrop so nothing else can be selected */
 function expandDropdown() {
   const inputContainer = formControl.querySelector(".input");
   const dropdownImg = inputContainer.querySelector("img");
@@ -111,6 +117,7 @@ function expandDropdown() {
   backdrop.classList.toggle("d-none");
 }
 
+/**collapses dropdown: changing arrow image from up to down, hiding the options list and backdrop */
 function collapseDropdown() {
   const inputContainer = formControl.querySelector(".input");
   const dropdownImg = inputContainer.querySelector("img");
@@ -123,6 +130,8 @@ function collapseDropdown() {
   backdrop.classList.toggle("d-none");
 }
 
+
+/**toggles the subtask icons for either default (+) or editing (cancel and save) */
 function toggleSubtaskIcons() {
   if (subtaskEl.firstElementChild.value === "") {
     const elements = subtaskEl.getElementsByTagName("img");
@@ -133,15 +142,18 @@ function toggleSubtaskIcons() {
   }
 }
 
+/**sets focus to provided element */
 function setFocusToElement(element) {
   element.focus();
 }
 
+/**deletes input text of subtask input and toggles buttons */
 function cancelSubtask() {
   document.getElementById("subtasks-input").value = "";
   toggleSubtaskIcons();
 }
 
+/**adds subtask to array, resets subtask input to default and renders subtask list */
 function addSubtask() {
   const input = document.getElementById("subtasks-input");
   if (input.value) {
@@ -153,6 +165,7 @@ function addSubtask() {
   }
 }
 
+/**loops through subtasksList array and calls render function for each subtask */
 function renderSubtasksInForm() {
   const subtasksList = document.getElementById("subtaskList");
   subtasksList.innerHTML = "";
@@ -163,6 +176,7 @@ function renderSubtasksInForm() {
   }
 }
 
+/**renders one subtask list item */
 function renderNewListItemHtml(subtask, index) {
   let html;
   html = '<li class="subtask">';
@@ -171,6 +185,7 @@ function renderNewListItemHtml(subtask, index) {
   return html;
 }
 
+/**renders innerHtml of one subtask list item */
 function renderListItemHtml(subtask, index) {
   return /*html*/ `
     <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" class="no-validation" readonly value="${subtask}"/>
@@ -182,11 +197,13 @@ function renderListItemHtml(subtask, index) {
     /><img src="./assets/img/subtask-save.png" class="input-icon cursor-pointer" onclick="updateSubtask(${index})"/></div>`;
 }
 
+/**deletes selected subtask from array and renders subtasks */
 function deleteSubtask(index) {
   subtasks.splice(index, 1);
   renderSubtasksInForm();
 }
 
+/**sets subtask inline into edit mode */
 function editSubtask(index) {
   const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
@@ -194,6 +211,7 @@ function editSubtask(index) {
   subtaskListEl.querySelector("input").readOnly = false;
 }
 
+/**saves edit to subtask array and render innerHtml of subtask */
 function updateSubtask(index) {
   const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
@@ -203,6 +221,7 @@ function updateSubtask(index) {
   subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
 }
 
+/**changes html (background-color and checkbox) of assigned to option reflecting user's (de)selection of option */
 function toggleContactSelection(event) {
   const listItem = event.currentTarget;
   listItem.classList.toggle("selected");
@@ -223,10 +242,12 @@ function toggleContactSelection(event) {
   }
 }
 
+/**gets contact from contactlist by its Id */
 function getContactById(id) {
   return contactList.find((contact) => contact.id === id);
 }
 
+/**validates form and displays error messages if not successful. If successful, contact is added and form is closed */
 async function validateOverlayAddcontactForm(e) {
   const form = document.getElementById("overlay-add-contact-form");
   let formIsValid = true;
@@ -250,6 +271,7 @@ async function validateOverlayAddcontactForm(e) {
   }
 }
 
+/**validates due date input to ensure it's neither empty nor the selected date is in the past */
 function validateDueDateInput(formElement) {
   debugger;
   let today = new Date();
@@ -265,6 +287,7 @@ function validateDueDateInput(formElement) {
   }
 }
 
+/**creates contact, saves it in backend, adds it to the selected assigned to options, adds contact bubble and resets add contact form */
 async function addContactWithinTaskForm() {
   const newContact = await createContact();
   sortContacts();
@@ -278,6 +301,7 @@ async function addContactWithinTaskForm() {
   document.getElementById("overlay-add-contact-form").reset();
 }
 
+/**validates add task form and calls custom validations if required */
 async function validateAddTaskForm(e) {
   e.preventDefault();
   const form = e.target;
@@ -332,6 +356,7 @@ async function validateAddTaskForm(e) {
   }
 }
 
+/**validates that category is selected */
 function validateCategoryInput(formElement) {
   if (formElement.value === "Select task category") {
     formElement.setCustomValidity("This field is required.");
@@ -340,6 +365,7 @@ function validateCategoryInput(formElement) {
   }
 }
 
+/**validates that priority is selected */
 function validatePrioInput(formElement) {
   const inputs = formElement.getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {
@@ -351,6 +377,7 @@ function validatePrioInput(formElement) {
   return "This field is required.";
 }
 
+/**loops through contacts and checks selectedContactIds array to check if the contact is selected. Sets arguments for call of render function for list items. */
 function renderAssignedToContactList(contacts) {
   const list = document.getElementById("assigned-to-options");
   let html = "";
@@ -371,6 +398,7 @@ function renderAssignedToContactList(contacts) {
   list.innerHTML = html;
 }
 
+/**renders assigned to contact list item depending on whether that contact is currently selected */
 function renderAssignedToContactListItemHtml(
   contact,
   selectedAttrValue,
@@ -384,6 +412,7 @@ function renderAssignedToContactListItemHtml(
   return html;
 }
 
+/**filters assigned to contact list based on user input. checks for each name if it starts with user input */
 function filterAssignedToContacts() {
   const searchTerm = document
     .getElementById("assigned-to-input")
