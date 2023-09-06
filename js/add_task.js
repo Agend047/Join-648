@@ -30,7 +30,7 @@ async function initAddTaskPage() {
   renderAssignedToContactList(contactList);
   initSelectInputs();
   renderSubtasksInForm();
-  getTaskDestination()
+  getTaskDestination();
 }
 
 /**Adds close function to close buttons of Add contact overlay form */
@@ -59,7 +59,7 @@ function initClearBtn() {
     document.getElementById("subtaskList").innerHTML = "";
     selectedContactIds = [];
     renderAssignedToContactList(contactList);
-    initAssignedToSelectItems(document.getElementById('assigned-to-options'));
+    initAssignedToSelectItems(document.getElementById("assigned-to-options"));
   });
 }
 
@@ -130,7 +130,6 @@ function collapseDropdown() {
   backdrop.classList.toggle("d-none");
 }
 
-
 /**toggles the subtask icons for either default (+) or editing (cancel and save) */
 function toggleSubtaskIcons() {
   if (subtaskEl.firstElementChild.value === "") {
@@ -157,7 +156,7 @@ function cancelSubtask() {
 function addSubtask() {
   const input = document.getElementById("subtasks-input");
   if (input.value) {
-    subtasks.push({ text: input.value, status: 'todo' });
+    subtasks.push({ text: input.value, status: "todo" });
     input.value = "";
     input.focus();
     toggleSubtaskIcons();
@@ -275,15 +274,15 @@ async function validateOverlayAddcontactForm(e) {
 function validateDueDateInput(formElement) {
   debugger;
   let today = new Date();
-  today.setHours(0,0,0,0);
+  today.setHours(0, 0, 0, 0);
   let inputDate = new Date(formElement.value);
-  inputDate.setHours(0,0,0,0);
+  inputDate.setHours(0, 0, 0, 0);
   if (inputDate < today) {
-    formElement.setCustomValidity('Date must not be in the past.');
+    formElement.setCustomValidity("Date must not be in the past.");
   } else if (formElement.validity.valueMissing) {
-    formElement.setCustomValidity('This field is required.');
+    formElement.setCustomValidity("This field is required.");
   } else {
-    formElement.setCustomValidity('');
+    formElement.setCustomValidity("");
   }
 }
 
@@ -324,7 +323,7 @@ async function validateAddTaskForm(e) {
           formElement.readOnly = false;
           validateCategoryInput(formElement);
           break;
-        case 'due-date-input':
+        case "due-date-input":
           validateDueDateInput(formElement);
           break;
       }
@@ -436,3 +435,10 @@ function filterAssignedToContacts() {
     }
   }
 }
+
+/** Disable selection of previous dates in datepicker */
+// Get the current date in the "YYYY-MM-DD" format
+const currentDate = new Date().toISOString().split("T")[0];
+
+// Set the min attribute of the input field to the current date
+document.getElementById("due-date-input").min = currentDate;
