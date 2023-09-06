@@ -218,6 +218,10 @@ a {
   cursor: pointer;
 }
 
+.svg_mobile_txt {
+  font: 500 24px sans-serif;
+}
+
 #desktop_sider {
   position: fixed;
   height: 100vh;
@@ -418,11 +422,11 @@ a {
 }
 
 /* Date Input */
-input[type="date"]{
+input[type="date"] {
   font-size: var(--fs-normal);
 }
 
-::-webkit-calendar-picker-indicator { 
+::-webkit-calendar-picker-indicator {
   content: url("/assets/img/event.png");
   object-fit: contain;
   width: 24px;
