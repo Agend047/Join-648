@@ -441,4 +441,5 @@ function filterAssignedToContacts() {
 const currentDate = new Date().toISOString().split("T")[0];
 
 // Set the min attribute of the input field to the current date
-document.getElementById("due-date-input").min = currentDate;
+try { document.getElementById("due-date-input").min = currentDate }
+catch { }
