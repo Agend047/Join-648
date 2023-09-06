@@ -12,7 +12,7 @@ function getAddContactElements() {
   backdrop = document.getElementById("backdrop");
 }
 
-/**The order for the functions, so the Add-Task page works correct. */
+/**The order for the functions, so the Add-Task page works correctly. */
 async function initAddTaskPage() {
   getAddContactElements();
   initSubtaskInput();
@@ -30,6 +30,7 @@ async function initAddTaskPage() {
   renderAssignedToContactList(contactList);
   initSelectInputs();
   renderSubtasksInForm();
+  setMinDateForPicker()
   getTaskDestination();
 }
 
@@ -441,5 +442,6 @@ function filterAssignedToContacts() {
 const currentDate = new Date().toISOString().split("T")[0];
 
 // Set the min attribute of the input field to the current date
-try { document.getElementById("due-date-input").min = currentDate }
-catch { }
+function setMinDateForPicker() {
+  document.getElementById("due-date-input").min = currentDate
+}
