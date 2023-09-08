@@ -154,13 +154,18 @@ function cancelSubtask() {
 }
 
 /**adds subtask to array, resets subtask input to default and renders subtask list */
-function addSubtask() {
+function addSubtask(ev) {
   const input = document.getElementById("subtasks-input");
-  if (input.value) {
+  if (input.value && (ev.type === "click" || (ev.type === "keypress" && ev.key === "Enter"))) {
     subtasks.push({ text: input.value, status: "todo" });
     input.value = "";
     input.focus();
-    toggleSubtaskIcons();
+    if (ev.type === 'click') {
+      toggleSubtaskIcons();
+    }
+    if (ev.type === "keypress" && ev.key === "Enter") {
+      ev.preventDefault();
+    }
     renderSubtasksInForm();
   }
 }
@@ -171,7 +176,6 @@ function renderSubtasksInForm() {
   subtasksList.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
     const subtask = subtasks[i].text;
-
     subtasksList.innerHTML += renderNewListItemHtml(subtask, i);
   }
 }
@@ -189,7 +193,7 @@ function renderNewListItemHtml(subtask, index) {
 function renderListItemHtml(subtask, index) {
   return /*html*/ `
     <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" class="no-validation" readonly value="${subtask}"/>
-    <div class="subtask-read-icons subtask-icons"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
+    <div class="subtask-read-icons subtask-icons d-none align-items-center"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
       src="./assets/img/subtask-separator.png"
     /><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/></div>
     <div class="subtask-edit-icons subtask-icons"><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/><img
@@ -273,7 +277,6 @@ async function validateOverlayAddcontactForm(e) {
 
 /**validates due date input to ensure it's neither empty nor the selected date is in the past */
 function validateDueDateInput(formElement) {
-  debugger;
   let today = new Date();
   today.setHours(0, 0, 0, 0);
   let inputDate = new Date(formElement.value);
