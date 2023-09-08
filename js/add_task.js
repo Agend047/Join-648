@@ -154,13 +154,15 @@ function cancelSubtask() {
 }
 
 /**adds subtask to array, resets subtask input to default and renders subtask list */
-function addSubtask() {
+function addSubtask(ev) {
   const input = document.getElementById("subtasks-input");
-  if (input.value) {
+  if (input.value && (ev.type === "click" || (ev.type === "keypress" && ev.key === "Enter"))) {
     subtasks.push({ text: input.value, status: "todo" });
     input.value = "";
     input.focus();
-    toggleSubtaskIcons();
+    if (ev.type === 'click') {
+      toggleSubtaskIcons();
+    }
     renderSubtasksInForm();
   }
 }
@@ -171,7 +173,6 @@ function renderSubtasksInForm() {
   subtasksList.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
     const subtask = subtasks[i].text;
-
     subtasksList.innerHTML += renderNewListItemHtml(subtask, i);
   }
 }

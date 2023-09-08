@@ -80,6 +80,7 @@ function initSubtaskInput() {
     .getElementById("cancel-subtask")
     .addEventListener("click", cancelSubtask);
   document.getElementById("save-subtask").addEventListener("click", addSubtask);
+  document.getElementById('subtasks-input').addEventListener('keypress', addSubtask)
 }
 
 function initSelectInputs() {
