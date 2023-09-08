@@ -15,6 +15,8 @@ function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
                 <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" ontouchmove="mobileDrag(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
                   <div class="category">
                     <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
+                    <img id="mobile-move-${task.id}" class="btn-move" src="./assets/img/icon_move.svg"
+                  />
                   </div>
                   <div>
                     <h1 class="title" id="title-${i}">${task.title}</h1>

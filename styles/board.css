@@ -404,7 +404,8 @@ input {
 .category {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cardSmall .categoryLabel {
@@ -418,6 +419,18 @@ input {
   font-weight: 400;
   line-height: 120%;
   color: white;
+}
+
+.btn-move {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+}
+
+.btn-move:hover {
+  background-color: #eeeeee;
+  border-radius: 50%;
 }
 
 .cardSmall .title {

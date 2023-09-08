@@ -62,9 +62,28 @@ function updateHTML(status, id) {
  * It calls seperate functions to update the ProgressBar, the Assigned User Badges and the Prio Icons.
  */
 function renderSmallCard() {
+  showMobileMoveTaskButton();
   renderProgressSection();
   renderAssignedBadges();
   renderPrio();
+}
+
+/**
+ * displays or hides the Button to move a Task on a mobile Device according to the Screen Type.
+ * Checks wether the Screentype is "desktop", if so: hides button, if not, displays it.
+ */
+function showMobileMoveTaskButton() {
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const filteredTask = filteredTasks[i];
+    const mobileMoveButton = document.getElementById(
+      `mobile-move-${filteredTask.id}`
+    );
+    if (screenType == "desktop") {
+      mobileMoveButton.style.display = "none";
+    } else {
+      mobileMoveButton.style.display = "block";
+    }
+  }
 }
 
 /**

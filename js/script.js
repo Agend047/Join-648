@@ -122,6 +122,7 @@ async function getTemplates() {
 window.onresize = function () {
   if (getScreenType() != loaded) {
     getTemplates();
+    initBoardPage(); //Updates the Tasks and hides or removes the mobile-move Button
   }
 };
 
@@ -169,10 +170,8 @@ function unloadTemplate(toUnloadID) {
 /**
  * Initials of current User are going to be written into the Header Circle.
  * If there are no, then its a "G" for "Guest User".
- * @param {string} userInitials - Initials of current User.
- *
  */
-function showInitialsHeader(userInitials) {
+function showInitialsHeader() {
   let svgText = document.getElementById("svg_text");
   if (activeUser) {
     svgText.textContent = activeUser.initials;
@@ -245,7 +244,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch { }
+    } catch {}
   }, 200);
 }
 
@@ -347,9 +346,9 @@ async function getItemFromBackend(key) {
 }
 
 /**
- * 
- * @param {*} elementId 
- * @param {*} targetHref 
+ *
+ * @param {*} elementId
+ * @param {*} targetHref
  */
 function showNotification(elementId, targetHref) {
   document.documentElement.style.setProperty(
@@ -394,7 +393,7 @@ function logOut() {
 /**
  * Creates the balls, in wich the contact initials are shwon.
  * @param {Object} contact Contact out of the ContactList
- * @returns 
+ * @returns
  */
 function renderContactBubbleHtml(contact) {
   return /*html*/ `<svg
