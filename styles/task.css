@@ -224,6 +224,7 @@ textarea {
   display: flex;
   align-items: center;
   padding: 0.5em;
+  min-height: 50px;
 }
 
 .input input {
@@ -250,6 +251,19 @@ textarea {
 
 .subtask-edit .bullet-icon {
   display: none;
+}
+
+.subtask:not(.subtask-edit):hover {
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 0.7em;
+}
+
+.subtask:not(.subtask-edit):hover input{
+  cursor: default;
+}
+
+.subtask:not(.subtask-edit):hover .subtask-read-icons {
+  display: block;
 }
 
 .subtask-edit .subtask-read-icons {
