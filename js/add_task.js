@@ -163,6 +163,9 @@ function addSubtask(ev) {
     if (ev.type === 'click') {
       toggleSubtaskIcons();
     }
+    if (ev.type === "keypress" && ev.key === "Enter") {
+      ev.preventDefault();
+    }
     renderSubtasksInForm();
   }
 }
@@ -274,7 +277,6 @@ async function validateOverlayAddcontactForm(e) {
 
 /**validates due date input to ensure it's neither empty nor the selected date is in the past */
 function validateDueDateInput(formElement) {
-  debugger;
   let today = new Date();
   today.setHours(0, 0, 0, 0);
   let inputDate = new Date(formElement.value);
