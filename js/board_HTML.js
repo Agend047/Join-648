@@ -13,17 +13,15 @@
 function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
   return /*html*/ `
                 <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" ontouchmove="mobileDrag(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
-                  <div class="category">
+                  <div id="category-${task.id}" class="category">
                     <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
-                    <img id="mobile-move-${task.id}" class="btn-move" onclick="flyInMenu('mobile_task_menu', event)" src="./assets/img/icon_move.svg"
+                    <img id="mobile-move-${task.id}" class="btn-move" onclick="flyInMenu('mobile_move_menu-${task.id}', event)" src="./assets/img/icon_move.svg"
                   />
-
-                  <span id="mobile_task_menu" class="d-flex flex-direction-col float_in_menu">
+                  <span id="mobile_move_menu-${task.id}" class="d-flex flex-direction-col mobile_task_menu float_in_menu">
                     <a class="MenuButton" href="#" onclick="toLegal()">In Progress</a>
                     <a class="MenuButton" href="#" onclick="toPrivacy()">Feedback</a>
                     <a class="MenuButton" href="#" onclick="logOut()">Done</a>
                   </span>
-
                   </div>
                   <div>
                     <h1 class="title" id="title-${i}">${task.title}</h1>

@@ -226,6 +226,7 @@ function hideMenusMobile() {
 
 /**
  * Brings in Menu for header
+ * Stop Propagation necessary for Mobile Menu on SmallCard, so a click doesnt open the LargeCard PopUp.
  */
 function flyInMenu(wichMenu, event) {
   event.stopPropagation();
@@ -237,7 +238,6 @@ function flyInMenu(wichMenu, event) {
   if (wichMenu == "header_menu_id") {
     hideArrow();
   }
-  menu.style.opacity = "1";
 }
 
 /**If theres an Arrow, it get hidden with a little delay */

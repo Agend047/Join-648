@@ -42,7 +42,7 @@ function updateHTML(status, id) {
     taskContainer.innerHTML = generatePlaceholderHTML(placeholderText);
   } else {
     for (let i = 0; i < filteredTasks.length; i++) {
-      const task = filteredTasks[i];
+      task = filteredTasks[i];
       let totalSubtasks = getSubtasksCount(i);
       let subtasksDone = getSubtasksDone(i);
       labelColor = assignLabelColor(task.category);
@@ -85,6 +85,8 @@ function showMobileMoveTaskButton() {
     }
   }
 }
+
+function openMobileMoveMenu(task, event) {}
 
 /**
  * Renders the Section that displays the progress on the Subtasks on the Small Card of a specific filtered Task.

@@ -286,7 +286,6 @@ a {
 
 .float_in_menu {
   position: fixed;
-  opacity: 0;
   right: -100%;
   transition: 500ms;
   border-radius: 15px 0px 15px 15px;

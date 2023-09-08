@@ -382,6 +382,7 @@ input {
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   margin: 10px; /*room for box-shadow, so its not cut off*/
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .cardSmall:not(.nohover):hover {
@@ -408,8 +409,8 @@ input {
   justify-content: space-between;
 }
 
-#mobile_task_menu {
-  top: 100px;
+.mobile_task_menu {
+  top: 60px;
   width: 105px;
   height: auto;
   background-color: #2a3647;
