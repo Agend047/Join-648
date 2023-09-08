@@ -227,15 +227,17 @@ function hideMenusMobile() {
 /**
  * Brings in Menu for header
  */
-function flyInMenu(wichMenu) {
+function flyInMenu(wichMenu, event) {
+  event.stopPropagation();
   let menu = document.getElementById(wichMenu);
   let styleRight = menu.style.right;
   styleRight == "3vw"
-    ? (menu.style.right = "-200px")
+    ? (menu.style.right = "-100%")
     : (menu.style.right = "3vw");
   if (wichMenu == "header_menu_id") {
     hideArrow();
   }
+  menu.style.opacity = "1";
 }
 
 /**If theres an Arrow, it get hidden with a little delay */

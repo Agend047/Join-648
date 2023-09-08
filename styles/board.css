@@ -408,6 +408,15 @@ input {
   justify-content: space-between;
 }
 
+#mobile_task_menu {
+  top: 100px;
+  width: 105px;
+  height: auto;
+  background-color: #2a3647;
+  color: #cdcdcd;
+  z-index: 50;
+}
+
 .cardSmall .categoryLabel {
   display: flex;
   padding: 0.25rem 1rem;

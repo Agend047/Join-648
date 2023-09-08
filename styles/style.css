@@ -286,7 +286,8 @@ a {
 
 .float_in_menu {
   position: fixed;
-  right: -200px;
+  opacity: 0;
+  right: -100%;
   transition: 500ms;
   border-radius: 15px 0px 15px 15px;
 }
@@ -433,7 +434,6 @@ input[type="date"] {
   height: 24px;
   cursor: pointer;
 }
-
 
 /* Utility classes */
 
