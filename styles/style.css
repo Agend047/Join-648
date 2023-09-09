@@ -53,6 +53,11 @@
   box-sizing: inherit;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 /*use following template if any third-party components are used that require box-sizing: content-box	
 .third-party-component {	
 box-sizing: content-box;	}*/

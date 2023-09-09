@@ -94,7 +94,7 @@ function generateMenuItems(task) {
     const category = statusArr[i];
     if (task.status !== category) {
       let moveToFunction = getMoveFunctionByStatus(task, category);
-      menuItems += `<a class="MenuButton" href="#" onclick="${moveToFunction}">${
+      menuItems += `<a class="MenuButton" href="#${category}-headline" onclick="${moveToFunction}">${
         category.charAt(0).toUpperCase() + category.slice(1)
       }</a>`;
     }
