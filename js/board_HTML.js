@@ -11,45 +11,34 @@
  */
 // i = i in filteredTasks! Attention!
 function generateSmallCardHTML(totalSubtasks, subtasksDone, task, i) {
+  let menuItems = generateMenuItems(task);
   return /*html*/ `
-                <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" ontouchmove="mobileDrag(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
-                  <div id="category-${task.id}" class="category">
-                    <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
-                    <img id="mobile-move-${task.id}" class="btn-move" onclick="flyInMenu('mobile_move_menu-${task.id}', event)" src="./assets/img/icon_move.svg"
-                  />
-                  <span id="mobile_move_menu-${task.id}" class="d-flex flex-direction-col mobile_task_menu float_in_menu">
-                    <a class="MenuButton" href="#" onclick="toLegal()">In Progress</a>
-                    <a class="MenuButton" href="#" onclick="toPrivacy()">Feedback</a>
-                    <a class="MenuButton" href="#" onclick="logOut()">Done</a>
-                  </span>
-                  </div>
-                  <div>
-                    <h1 class="title" id="title-${i}">${task.title}</h1>
-                    <p class="description" id="description-${i}">${task.description}</p>
-                  </div>
-                  <div class="progress-section" id="progress-section-${task.id}">
-                    <div id="progress">
-                      <div
-                      id="progress-bar-${task.id}"
-                        class="progress-bar"
-                        role="progressbar"
-                        aria-valuenow="75"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                    <div>${subtasksDone}/${totalSubtasks} Subtasks</div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="w-100 d-flex justify-content-space-btw align-items-center">
-                      <div class="profileBadges" id="profileBadges-${task.id}">
-                      </div>
-                      <div class="prioIcon" id="prioIcon-${task.id}">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;
+    <div id="${task.id}" draggable="true" ondragstart="startDragging(${task.id})" ontouchmove="mobileDrag(${task.id})" class="cardSmall" onclick="openCard(${task.id}, ${i})">
+      <div id="category-${task.id}" class="category">
+        <div class="categoryLabel" style="background: ${labelColor};" id="categoryLabel">${task.category}</div>
+        <img id="mobile-move-${task.id}" class="btn-move" onclick="openMobileMoveMenu(${task.id}, event)" src="./assets/img/icon_move.svg" />
+      </div>
+      <span id="mobile-move-menu-${task.id}" class="d-flex flex-direction-col mobile_task_menu float_in_menu">
+        ${menuItems}
+      </span>
+      <div>
+        <h1 class="title" id="title-${i}">${task.title}</h1>
+        <p class="description" id="description-${i}">${task.description}</p>
+      </div>
+      <div class="progress-section" id="progress-section-${task.id}">
+        <div id="progress">
+          <div id="progress-bar-${task.id}" class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div>${subtasksDone}/${totalSubtasks} Subtasks</div>
+      </div>
+      <div class="card-footer">
+        <div class="w-100 d-flex justify-content-space-btw align-items-center">
+          <div class="profileBadges" id="profileBadges-${task.id}"></div>
+          <div class="prioIcon" id="prioIcon-${task.id}"></div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 /**

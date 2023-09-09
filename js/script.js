@@ -226,10 +226,8 @@ function hideMenusMobile() {
 
 /**
  * Brings in Menu for header
- * Stop Propagation necessary for Mobile Menu on SmallCard, so a click doesnt open the LargeCard PopUp.
  */
-function flyInMenu(wichMenu, event) {
-  event.stopPropagation();
+function flyInMenu(wichMenu) {
   let menu = document.getElementById(wichMenu);
   let styleRight = menu.style.right;
   styleRight == "3vw"
