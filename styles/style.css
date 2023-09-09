@@ -55,7 +55,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 100px;
 }
 
 /*use following template if any third-party components are used that require box-sizing: content-box	
