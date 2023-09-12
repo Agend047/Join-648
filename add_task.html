@@ -122,7 +122,6 @@
                 <!-- was requiered HERE -->
                 <input
                   readonly
-                  
                   id="assigned-to-input"
                   value="Select contacts to assign"
                   class="custom-validation"
@@ -248,12 +247,12 @@
             </div>
             <div class="form-control">
               <label for="due-date-input">Due date</label>
-                <input 
-                  class="input custom-validation"
-                  required
-                  type="date"
-                  id="due-date-input"
-                />
+              <input
+                class="input custom-validation"
+                required
+                type="date"
+                id="due-date-input"
+              />
               <div class="error-container">
                 <div class="error-message" id="due-date-input-error"></div>
               </div>
@@ -319,7 +318,11 @@
           </div>
         </div>
         <div class="create-btn-container">
-          <button id="clear-btn" class="btn btn-secondary btn-text-icon">
+          <button
+            id="clear-btn"
+            type="button"
+            class="btn btn-secondary btn-text-icon"
+          >
             <span>Clear</span
             ><svg
               width="25"
@@ -338,8 +341,9 @@
             </svg>
           </button>
           <button
+            id="submit-task-form-btn"
             class="btn btn-primary btn-create-task btn-text-icon"
-            type="submit"
+            type="button"
           >
             <span>Create Task</span
             ><img src="./assets/img/check.png" alt="create task" />

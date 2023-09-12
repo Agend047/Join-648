@@ -17,8 +17,9 @@ async function initAddTaskPage() {
   getAddContactElements();
   initSubtaskInput();
   initForm();
-  if (location.href.endsWith("add_task.html")) {
+  if (location.href.includes("add_task.html")) {
     initClearBtn();
+    document.getElementById('submit-task-form-btn').addEventListener('click', () => { document.getElementById('addtask-form').requestSubmit() });
     initAddContactOverlayForm();
     document
       .getElementById("add-contact-btn")
@@ -156,15 +157,15 @@ function cancelSubtask() {
 /**adds subtask to array, resets subtask input to default and renders subtask list */
 function addSubtask(ev) {
   const input = document.getElementById("subtasks-input");
+  if (ev.type === "keypress" && ev.key === "Enter") {
+    ev.preventDefault();
+  }
   if (input.value && (ev.type === "click" || (ev.type === "keypress" && ev.key === "Enter"))) {
     subtasks.push({ text: input.value, status: "todo" });
     input.value = "";
     input.focus();
     if (ev.type === 'click') {
       toggleSubtaskIcons();
-    }
-    if (ev.type === "keypress" && ev.key === "Enter") {
-      ev.preventDefault();
     }
     renderSubtasksInForm();
   }
