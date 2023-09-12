@@ -192,7 +192,7 @@ function renderNewListItemHtml(subtask, index) {
 /**renders innerHtml of one subtask list item */
 function renderListItemHtml(subtask, index) {
   return /*html*/ `
-    <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" class="no-validation" readonly value="${subtask}"/>
+    <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" ondblclick="editSubtask(${index})" class="no-validation" readonly value="${subtask}"/>
     <div class="subtask-read-icons subtask-icons d-none align-items-center"><img src="./assets/img/pencil.png" class='edit-subtask-icon input-icon cursor-pointer' onclick="editSubtask(${index})"/><img
       src="./assets/img/subtask-separator.png"
     /><img src="./assets/img/trash-bin.png" class="input-icon cursor-pointer" onclick="deleteSubtask(${index})"/></div>
