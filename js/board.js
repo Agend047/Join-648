@@ -78,12 +78,21 @@ function showMobileMoveTaskButton() {
     const mobileMoveButton = document.getElementById(
       `mobile-move-${filteredTask.id}`
     );
-    if (screenType == "desktop") {
+    if (is_touch_enabled() == false) {
       mobileMoveButton.style.display = "none";
     } else {
       mobileMoveButton.style.display = "block";
     }
   }
+}
+
+/** detects touch interaction and returns true if it is touch device */
+function is_touch_enabled() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
 }
 
 /** Renders the Menu Items: checks the Task Status and renders the stati that dont correspond with the task status into the Menu */
@@ -317,67 +326,6 @@ function addHighlight(ID) {
  */
 function removeHighlight(ID) {
   document.getElementById(ID).classList.remove("drag-area-highlight");
-}
-
-/* MOUSEMOVE MOBILE DRAG & DROP */
-
-function mobileDrag(taskID) {
-  let draggedElement = document.getElementById(taskID);
-
-  let todoColumn = document.querySelector("#todo");
-  let progressColumn = document.querySelector("#inprogress");
-  let feedbackColumn = document.querySelector("#feedback");
-  let doneColumn = document.querySelector("#done");
-
-  let rectTodo = todoColumn.getBoundingClientRect();
-  let rectProgress = progressColumn.getBoundingClientRect();
-  let rectFeedback = feedbackColumn.getBoundingClientRect();
-  let rectDone = doneColumn.getBoundingClientRect();
-
-  let startX = 0;
-  let startY = 0;
-
-  window.onscroll = function () {
-    rectTodo = todoColumn.getBoundingClientRect(); //gibt die Koordinaten der DropArea zurück
-    rectProgress = progressColumn.getBoundingClientRect();
-    rectFeedback = feedbackColumn.getBoundingClientRect();
-    rectDone = doneColumn.getBoundingClientRect();
-  };
-
-  if (
-    draggedElement.getAttribute("draggable") &&
-    draggedElement.getAttribute("draggable") === "true"
-  ) {
-    draggedElement.addEventListener("touchstart", function (event) {
-      let touchobj = event.changedTouches[0]; // erster Finger des touchstart-Events
-      startX = parseInt(touchobj.clientX); // x-Koordinaten des Fingers
-      startY = parseInt(touchobj.clientY); // y-Koordinaten des Fingers
-      event.preventDefault();
-    });
-  }
-
-  draggedElement.addEventListener("touchmove", function (event) {
-    let touchobj = event.changedTouches[0]; // immer noch der erste Finger
-    const distx = parseInt(touchobj.clientX) - startX;
-    const disty = parseInt(touchobj.clientY) - startY;
-    event.preventDefault();
-  });
-
-  draggedElement.addEventListener("touchend", function (event) {
-    let touchobj = event.changedTouches[0];
-    if (
-      touchobj.clientX > rectFeedback.left &&
-      touchobj.clientX < rectFeedback.right &&
-      touchobj.clientY > rectFeedback.top &&
-      touchobj.clientY < rectFeedback.bottom
-    ) {
-      let clone = draggedElement.cloneNode(draggedElement);
-      feedbackColumn.appendChild(clone);
-      draggedElement.parentNode.removeChild(draggedElement);
-    }
-
-    event.preventDefault();
-  });
 }
 
 /* End of Drag & Drop functions
