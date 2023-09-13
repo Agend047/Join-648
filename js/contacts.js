@@ -10,6 +10,7 @@ async function showContacts() {
     let list = document.getElementById('ListDiv');
     list.innerHTML = '';
     let userDiv = document.getElementById('userDiv');
+    makeUserDiv(userDiv)
     let assignedLetter = '';
 
     getUserContact(userDiv);
@@ -339,7 +340,6 @@ function cleanupMess() {
     let stage = document.getElementById('contacts_stage');
     stage.innerHTML = '';
 }
-
 
 /**
  * Just closes divs, but doesnt delete Data
