@@ -15,7 +15,8 @@ async function initSummary() {
  * This function adjusts the greeting message and user name display accordingly.
  */
 function greetUser() {
-  const isGuestUser = location.search.includes("guestuser=true");
+  const isGuestUser = location.search.includes("guestuser=true")
+  sessionStorage.setItem("activeUser", JSON.stringify(false));
   if (screenType === "mobile" && isGuestUser) {
     loadHelloPageMobile();
     greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");

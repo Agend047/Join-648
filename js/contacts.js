@@ -13,7 +13,7 @@ async function showContacts() {
     makeUserDiv(userDiv)
     let assignedLetter = '';
 
-    getUserContact(userDiv);
+    if (activeUser) { getUserContact(userDiv) }
 
     for (i in contactList) {
         let contact = contactList[i];
@@ -465,7 +465,6 @@ function getUserContact() {
         }
     }
     if (!found && activeUser) {
-        console.log('test')
         createUserContact()
     }
 }
