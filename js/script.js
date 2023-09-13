@@ -146,7 +146,7 @@ async function getMatchingTemplate(toLoadID, toUnloadID) {
     showInitialsHeader(userInitials);
     markCorrectMenuPoint();
     if (hideSiderMenu) {
-      if (screenType == "mobile") {
+      if (screenType == "mobile" && loggedIn != true) {
         hideMenusMobile();
       } else {
         hideMenusDesktop();
@@ -214,13 +214,10 @@ function hideMenusDesktop() {
 function hideMenusMobile() {
   let mobFooterLinks = document.getElementById("mobile_footer_links");
   mobFooterLinks.style.display = "none";
-
-  if (loggedIn != true) {
-    let initialSVG = document.getElementById("header_svg");
-    initialSVG.style.display = "none";
-    let mobileFooter = document.getElementById("mobile_footer_links");
-    mobileFooter.style.display = "none";
-  }
+  let initialSVG = document.getElementById("header_svg");
+  initialSVG.style.display = "none";
+  let mobileFooter = document.getElementById("mobile_footer_links");
+  mobileFooter.style.display = "none";
 }
 
 /**

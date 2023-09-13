@@ -18,6 +18,7 @@ async function showContacts() {
     for (i in contactList) {
         let contact = contactList[i];
         createSorter(list, assignedLetter, contact)
+        assignedLetter = contact.startingLetter;
         if (contact.id != activeUser.id) { writeContact(list, i, contact) }
         else if (contact.id == activeUser.id) { writeContact(userDiv, i, contact) }
     }
@@ -51,7 +52,6 @@ function createSorter(list, assignedLetter, contact) {
             <figure class="letter_div">${contact.startingLetter}</figure>
             <figure class="seperate_div"></figure>
         `
-        assignedLetter = contact.startingLetter;
     }
 }
 

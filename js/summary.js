@@ -236,7 +236,7 @@ function formatUpcomingDeadline() {
  * @returns {Array} An array containing the names of the months.
  */
 function getMonth() {
-  let months = [
+  return [
     "Januar",
     "Februar",
     "März",
@@ -250,7 +250,6 @@ function getMonth() {
     "November",
     "Dezember",
   ];
-  return months;
 }
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
