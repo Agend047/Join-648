@@ -5,35 +5,77 @@ let ballColorCollection = ['#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8'
  * Creates the visible contact list out of the backend Data.
  */
 async function showContacts() {
-    let list = document.getElementById('contacts_list');
+    contactList = await getItemFromBackend('contactList');
+
+    let list = document.getElementById('ListDiv');
+    let userDiv = document.getElementById('userDiv');
     list.innerHTML = '';
     let assignedLetter = '';
-    contactList = await getItemFromBackend('contactList');
+
     for (i in contactList) {
         let contact = contactList[i];
-        if (assignedLetter != contact.startingLetter) {
-            list.innerHTML += /*html*/`
-                <figure class="letter_div">${contact.startingLetter}</figure>
-                <figure class="seperate_div"></figure>
-            `
-            assignedLetter = contact.startingLetter;
-        }
-        list.innerHTML += /*html*/`
-            <span id="contact_div${i}"class="Contact_div d-flex align-items-center" onclick="openContact(${i})">
-                <div class="Initiald_svg_div">
-                    <svg width="50" height="50" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="21" cy="21" r="20" fill="${contact.color}" stroke="white" stroke-width="2" />
-                         <text style="font-size: small;" x="11" y="25" fill="white">${contact.initials}</text>
-                    </svg>
-                </div>
-                <div class="Name_Mail_div">
-                    <p>${contact.name}</p>
-                    <p class="Mail_text">${contact.e_mail}</p>
-                </div>
-            </span>
-        `
+        createSorter(list, assignedLetter, contact)
+        if (contact.id != activeUser.id) { writeContact(list, i, contact) }
+        else if (contact.id == activeUser.id) { writeContact(userDiv, i, contact) }
     }
 }
+
+/**
+ * Creating the Alphabetical sorter between the contacts.
+ * @param {HTMLElement} list The Element, we want to place the 
+ * @param {String} assignedLetter one Letter- The onne the contacts Name is starting with, and we want to use as seperator
+ * @param {Object} contact the Contact, we want to add to the list
+ */
+function createSorter(list, assignedLetter, contact) {
+    if (assignedLetter != contact.startingLetter && contact.id != activeUser.id) {
+        list.innerHTML += /*html*/`
+            <figure class="letter_div">${contact.startingLetter}</figure>
+            <figure class="seperate_div"></figure>
+        `
+        assignedLetter = contact.startingLetter;
+    }
+}
+
+/**
+ * Now the Contact gets written into the place, he belongs to.
+ * @param {HTMLElement} place Either the main-list, or the uper place, reserved for the current User.
+ * @param {Number} i Number of Contact in the array 'contactList', given by the for-loop .
+ * @param {Object} contact the Contact, we want to add to the list.
+ */
+function writeContact(place, i, contact) {
+    place.innerHTML += /*html*/`
+    <span id="contact_div${i}"class="Contact_div d-flex align-items-center" onclick="openContact(${i})">
+        <div class="Initiald_svg_div">
+            <svg width="50" height="50" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="21" cy="21" r="20" fill="${contact.color}" stroke="white" stroke-width="2" />
+                 <text style="font-size: small;" x="11" y="25" fill="white">${contact.initials}</text>
+            </svg>
+        </div>
+        <div class="Name_Mail_div">
+            <p>${contact.name}</p>
+            <p class="Mail_text">${contact.e_mail}</p>
+        </div>
+    </span>
+`
+}
+
+/** HOW TO SHOW THE ACIVE USER AT THE TOP?
+ * 
+ * 1. if-Abfrage in writeContactList()- wenn id von activeUser drankommt, dann
+ * aktuelles HTML in Variable schreiben, 
+ * Liste resetten, 
+ * 'YOU' und currentUser reinschreiben,
+ * HTML der zuvor geschriebenen Liste einfach unten dranhängen, (durch die Variable)
+ * weitermachen
+ * 
+ * 2. Zunächst activeUSer heraussuchen,
+ * diesen anzeigen,
+ * rest anzeigen.
+ * If Abfrage, die immer abfragt, der Contact der avtiveUser ist
+ * Falls ja: continue, else: HTML schreiben.
+ */
+
+
 
 /**sets shader */
 function activateShader() {

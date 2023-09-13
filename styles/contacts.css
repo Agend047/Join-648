@@ -19,6 +19,10 @@
     height: 80vh;
 }
 
+#userDiv {
+    width: 100%;
+}
+
 .Primary_contacts_btn {
     width: 100%;
     padding: 12px 0px;
@@ -65,6 +69,7 @@
 .Initiald_svg_div {
     width: 80px;
     justify-content: left;
+    color: darkRed
 }
 
 .Name_Mail_div p {
