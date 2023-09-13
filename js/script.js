@@ -122,7 +122,6 @@ async function getTemplates() {
 window.onresize = function () {
   if (getScreenType() != loaded) {
     getTemplates();
-    initBoardPage(); //Updates the Tasks and hides or removes the mobile-move Button
   }
 };
 
