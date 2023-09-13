@@ -41,7 +41,7 @@ async function addUser() {
         name: document.getElementById('name-input').value,
         email: document.getElementById('email-input').value,
         password: document.getElementById('password-input').value, //ja, wir wissen, dass man das in der Praxis nicht so macht =)
-        initials: getInitials(),
+        initials: getInitials(document.getElementById('name-input').value),
         id: await getContactID(),
     }
     userList.push(newUser);
@@ -60,7 +60,7 @@ async function newUserToContact(newUser) {
         name: newUser.name,
         e_mail: newUser.email,
         phone: ' ',
-        initials: getInitials(),
+        initials: getInitials(newUser.name),
         color: getColor(),
     }
     contactList.push(newContact)

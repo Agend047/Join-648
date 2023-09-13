@@ -244,7 +244,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch {}
+    } catch { }
   }, 200);
 }
 
@@ -259,11 +259,14 @@ function getDocumentName() {
 }
 
 /**
+ * Getting Initials of Contacts for the InitialBalls.
+ * Sometimes no input field is near, so we use the input on call
+ * @param {String} input Name of an already registered User, in case there is no input field.
  * @returns Initials of the name in the input field, used for Contacts and new Users
  */
-function getInitials() {
-  let name = document.getElementById("name-input");
-  let nameArray = name.value.split(" ");
+function getInitials(input) {
+  let name = input
+  let nameArray = name.split(" ");
   return getStartingLetter(nameArray[0]) + getStartingLetter(nameArray[1]);
 }
 

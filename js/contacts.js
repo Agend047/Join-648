@@ -8,9 +8,11 @@ async function showContacts() {
     contactList = await getItemFromBackend('contactList');
 
     let list = document.getElementById('ListDiv');
-    let userDiv = document.getElementById('userDiv');
     list.innerHTML = '';
+    let userDiv = document.getElementById('userDiv');
     let assignedLetter = '';
+
+    getUserContact(userDiv);
 
     for (i in contactList) {
         let contact = contactList[i];
@@ -21,8 +23,24 @@ async function showContacts() {
 }
 
 /**
+ * On top of the List gets the current user shown as contact. Here the surrounding things get written.
+ * Or it will be hidden, if currently a guest is using Join.
+ * @param {HTMLElement} userDiv The Element we want to work in
+ */
+function makeUserDiv(userDiv) {
+    if (!activeUser) {
+        userDiv.style.display = 'none';
+    } else {
+        userDiv.innerHTML = /*html*/`
+        <figure class="letter_div">YOU</figure>
+        <figure class="seperate_div"></figure> 
+    `
+    }
+}
+
+/**
  * Creating the Alphabetical sorter between the contacts.
- * @param {HTMLElement} list The Element, we want to place the 
+ * @param {HTMLElement} list The Element, we want to place the seperator in.
  * @param {String} assignedLetter one Letter- The onne the contacts Name is starting with, and we want to use as seperator
  * @param {Object} contact the Contact, we want to add to the list
  */
@@ -255,7 +273,7 @@ function editContact(i) {
     contact.name = document.getElementById('name-input').value;
     contact.e_mail = document.getElementById('email-input').value;
     contact.phone = document.getElementById('phone-input').value;
-    contact.initials = getInitials();
+    contact.initials = getInitials(document.getElementById('name-input').value);
 }
 
 /** Checks, if the contact is the user,
@@ -366,7 +384,7 @@ async function createContact() {
         name: document.getElementById('name-input').value,
         e_mail: document.getElementById('email-input').value,
         phone: document.getElementById('phone-input').value,
-        initials: getInitials(),
+        initials: getInitials(document.getElementById('name-input').value),
         color: getColor(),
     }
     contactList.push(newContact)
@@ -431,4 +449,41 @@ function openMobCombiMenu() {
 function closeMobCombMenu() {
     flyInMenu('mobile_contacts_menu')
     deactivateShader('BlockDiv');
+}
+
+
+/**
+ * This check only exists, because other users may delete a Contact, ich is actually a user.
+ * It checks, if the User is inside the contactList as well, so it can be shown
+ */
+function getUserContact() {
+    let found = false;
+    for (i in contactList) {
+        if (contactList[i].id === activeUser.id) {
+            found = true;
+            break
+        }
+    }
+    if (!found && activeUser) {
+        console.log('test')
+        createUserContact()
+    }
+}
+
+/**
+ * This function is just here, because its a project, used for showing different people.
+ * If somebody deletes a Contact, wich also is a user, then we need to re-create this contact.
+ */
+function createUserContact() {
+    let newContact = {
+        id: activeUser.id,
+        startingLetter: getStartingLetter(activeUser.name),
+        name: activeUser.name,
+        e_mail: activeUser.email,
+        phone: ' ',
+        initials: getInitials(activeUser.name),
+        color: getColor(),
+    }
+    contactList.push(newContact)
+    saveContacts()
 }
