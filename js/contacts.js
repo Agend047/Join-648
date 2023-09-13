@@ -59,24 +59,6 @@ function writeContact(place, i, contact) {
 `
 }
 
-/** HOW TO SHOW THE ACIVE USER AT THE TOP?
- * 
- * 1. if-Abfrage in writeContactList()- wenn id von activeUser drankommt, dann
- * aktuelles HTML in Variable schreiben, 
- * Liste resetten, 
- * 'YOU' und currentUser reinschreiben,
- * HTML der zuvor geschriebenen Liste einfach unten dranhängen, (durch die Variable)
- * weitermachen
- * 
- * 2. Zunächst activeUSer heraussuchen,
- * diesen anzeigen,
- * rest anzeigen.
- * If Abfrage, die immer abfragt, der Contact der avtiveUser ist
- * Falls ja: continue, else: HTML schreiben.
- */
-
-
-
 /**sets shader */
 function activateShader() {
     let shader = document.getElementById('shader_div');
