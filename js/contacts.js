@@ -2,7 +2,7 @@ let ballColorCollection = ['#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8'
 // If no Color: #D1D1D1
 
 /**
- * Creates the visible contact list out of the backend Data 
+ * Creates the visible contact list out of the backend Data.
  */
 async function showContacts() {
     let list = document.getElementById('contacts_list');
@@ -205,6 +205,7 @@ function prepareContactProcessDiv(contact, i) {
         cancelBtn.innerHTML = /*html*/`Cancel  <img src=" assets/img/cancel_icon_black.png" alt="">`;
         submitBtn.innerHTML = /*html*/`Add Contact
          <img src="assets/img/check.png" alt="">`
+
         form.onsubmit = function () {
             startContactCreation();
         };

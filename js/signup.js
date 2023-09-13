@@ -26,21 +26,44 @@ async function validateSignUpForm(e) {
     if (!formIsValid) {
         form.classList.add('is-validated');
     } else {
-        await addUser();
+        let newUser = await addUser();
+        await newUserToContact(newUser);
+        saveContacts();
         showSignUpNotification('notification', 'notification-ref');
     }
 }
 
-/**gets values from add user form and adds a new user to array, then saves array to backend */
+/**gets values from add user form and adds a new user to array, then saves array to backend 
+ * @returns the new USer for further work.
+*/
 async function addUser() {
     let newUser = {
         name: document.getElementById('name-input').value,
         email: document.getElementById('email-input').value,
         password: document.getElementById('password-input').value, //ja, wir wissen, dass man das in der Praxis nicht so macht =)
         initials: getInitials(),
+        id: await getContactID(),
     }
     userList.push(newUser);
     await setItemInBackend('userList', JSON.stringify(userList));
+    return newUser
+}
+
+/**
+ * Saving the new registered User as Contact for himself.
+ * @param {Object} newUser The just registered new User
+ */
+async function newUserToContact(newUser) {
+    let newContact = {
+        id: newUser.id,
+        startingLetter: getStartingLetter(newUser.name),
+        name: newUser.name,
+        e_mail: newUser.email,
+        phone: ' ',
+        initials: getInitials(),
+        color: getColor(),
+    }
+    contactList.push(newContact)
 }
 
 /**called upon successful sign up. triggers notification animation and positions notification right above the form button */
