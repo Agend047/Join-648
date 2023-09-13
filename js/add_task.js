@@ -220,10 +220,10 @@ function editSubtask(index) {
 function updateSubtask(index) {
   const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
-  const subtask = subtaskListEl.querySelector("input").value;
+  const subtaskText = subtaskListEl.querySelector("input").value;
   subtaskListEl.classList.remove("subtask-edit");
-  subtasks[index] = subtask;
-  subtaskListEl.innerHTML = renderListItemHtml(subtask, index);
+  subtasks[index].text = subtaskText;
+  subtaskListEl.innerHTML = renderListItemHtml(subtaskText, index);
 }
 
 /**changes html (background-color and checkbox) of assigned to option reflecting user's (de)selection of option */
