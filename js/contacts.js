@@ -258,10 +258,31 @@ function editContact(i) {
     contact.initials = getInitials();
 }
 
-/**Showing an alert over a shader, before final deleting. */
+/** Checks, if the contact is the user,
+ * Showing an alert over a shader, before final deleting. 
+ */
 function startDeleteProcess(i) {
     activateShader()
-    showConfirmAlert(i)
+
+    if (contactList[i].id == activeUser.id) {
+        showBlockAlert()
+    } else {
+        showConfirmAlert(i)
+    }
+}
+
+function showBlockAlert() {
+    let deleteAlert = document.getElementById('delete_question')
+
+    deleteAlert.innerHTML = /*html*/`
+        <div class="align-items-center">
+            <p>You can not delete yourself!</p>
+            <div id="" class="delete_btn_div">
+                <button class="btn btn-secondary" onclick="closeContactProcess('delete_question')">Cancel</button>
+            </div>
+        </div>
+    `
+    deleteAlert.style.display = 'block';
 }
 
 /**Fills the delete-confirm-alert with information and functions. */
