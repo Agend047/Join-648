@@ -24,6 +24,7 @@ async function initForAllPages() {
   verifyUserStatus();
   await getDataFromBackend();
 }
+
 /**
  * Checks localstorage if the user is logged in.
  * Else will check Sessionstorage, and sets loggedIn to 'true' or 'false'.

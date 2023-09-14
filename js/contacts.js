@@ -13,13 +13,15 @@ async function showContacts() {
     makeUserDiv(userDiv)
     let assignedLetter = '';
 
-    if (activeUser) { getUserContact(userDiv) }
+    if (activeUser) { isUserInContacts(userDiv) }
 
     for (i in contactList) {
         let contact = contactList[i];
-        createSorter(list, assignedLetter, contact)
-        assignedLetter = contact.startingLetter;
-        if (contact.id != activeUser.id) { writeContact(list, i, contact) }
+        if (contact.id != activeUser.id) {
+            createSorter(list, assignedLetter, contact)
+            writeContact(list, i, contact)
+            assignedLetter = contact.startingLetter;
+        }
         else if (contact.id == activeUser.id) { writeContact(userDiv, i, contact) }
     }
 }
@@ -421,10 +423,7 @@ async function saveContacts() {
  */
 function sortContacts() {
     contactList.sort(function (a, b) {
-        a = a.startingLetter.toLowerCase();
-        b = b.startingLetter.toLowerCase();
-
-        return a < b ? -1 : a > b ? 1 : 0;
+        return a['name'].localeCompare(b['name'])
     });
 }
 
@@ -454,17 +453,17 @@ function closeMobCombMenu() {
 
 /**
  * This check only exists, because other users may delete a Contact, ich is actually a user.
- * It checks, if the User is inside the contactList as well, so it can be shown
+ * It checks, if the User is inside the contactList as well, so it can be shown. Otherwise it will start the Creation of the User-Contact.
  */
-function getUserContact() {
-    let found = false;
+function isUserInContacts() {
+    let userFound = false;
     for (i in contactList) {
         if (contactList[i].id === activeUser.id) {
-            found = true;
+            userFound = true;
             break
         }
     }
-    if (!found && activeUser) {
+    if (!userFound && activeUser) {
         createUserContact()
     }
 }
