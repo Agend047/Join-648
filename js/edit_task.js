@@ -311,6 +311,7 @@ function generateEditTaskHTML(taskID) {
             
             <button
               class="btn btn-primary btn-create-task btn-text-icon"
+              onclick='deactivateSearchInput()'
               type="submit"
             >
               <span>Ok</span

@@ -128,7 +128,7 @@ function activateSearchInput(e) {
 }
 
 function deactivateSearchInput(e) {
-  e.stopPropagation();
+  try { e.stopPropagation() } catch { };
   formControl = document.getElementById("assigned-to-form-control");
   const input = formControl.querySelector("input");
   const inputContainer = formControl.querySelector(".input");
