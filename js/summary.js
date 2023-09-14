@@ -16,7 +16,7 @@ async function initSummary() {
  */
 function greetUser() {
   const isGuestUser = location.search.includes("guestuser=true")
-  sessionStorage.setItem("activeUser", JSON.stringify(false));
+  setActiveUser(isGuestUser)
   if (screenType === "mobile" && isGuestUser) {
     loadHelloPageMobile();
     greetGuestUser(isGuestUser, "greetingMobile", "userNameMobile");
@@ -29,6 +29,17 @@ function greetUser() {
   } else if (screenType === "desktop" && activeUser) {
     showGreeting("greetingDesktop");
     document.getElementById("userNameDesktop").innerHTML = activeUser.name;
+  }
+}
+
+/**
+ * If Login came as Guest, activeUser will be set on "false"
+ * @param {boolean} isGuestUser If Guets login is used, this will be true, else it will be false.
+ */
+function setActiveUser(isGuestUser) {
+  if (isGuestUser) {
+    sessionStorage.setItem("activeUser", JSON.stringify(false));
+    activeUser = false;
   }
 }
 
