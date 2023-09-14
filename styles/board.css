@@ -747,7 +747,7 @@ td {
 
 .footer-btn:hover span {
   color: var(--accent-color);
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .footer-btn:hover span.delete-icon {
