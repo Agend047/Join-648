@@ -65,7 +65,9 @@ function initClearBtn() {
   });
 }
 
-/**adds selectCategory function to eacj category option */
+/**adds selectCategory function to eacj category option
+ * @param {HTMLUListElement} list Unordered list that contains the category options
+ */
 function initCategorySelectItems(list) {
   const categoryOptions = list.querySelectorAll("li");
   for (let i = 0; i < categoryOptions.length; i++) {
@@ -74,7 +76,9 @@ function initCategorySelectItems(list) {
   }
 }
 
-/**adds toggleContactSelection function to each contact list item in assigned to dropdown */
+/**adds toggleContactSelection function to each contact list item in assigned to dropdown
+ * @param {HTMLUListElement} list ul Element that contains the contacts as li elements
+ */
 function initAssignedToSelectItems(list) {
   const contacts = list.querySelectorAll("li");
   for (let i = 0; i < contacts.length; i++) {
@@ -143,7 +147,9 @@ function toggleSubtaskIcons() {
   }
 }
 
-/**sets focus to provided element */
+/**sets focus to provided element
+ * @param {HTMLElement} element Element which the focus is set to.
+*/
 function setFocusToElement(element) {
   element.focus();
 }
@@ -181,7 +187,10 @@ function renderSubtasksInForm() {
   }
 }
 
-/**renders one subtask list item */
+/**renders one subtask list item
+ * @param {object} subtask The subtask object to render.
+ * @param {number} index Index of subtask to render in subtask array.
+ */
 function renderNewListItemHtml(subtask, index) {
   let html;
   html = '<li class="subtask">';
@@ -190,7 +199,10 @@ function renderNewListItemHtml(subtask, index) {
   return html;
 }
 
-/**renders innerHtml of one subtask list item */
+/**renders innerHtml of one subtask list item
+ * @param {object} subtask The subtask object to render.
+ * @param {number} index Index of subtask to render in subtask array.
+ */
 function renderListItemHtml(subtask, index) {
   return /*html*/ `
     <img src="./assets/img/bullet.png" class='bullet-icon'><input type="text" ondblclick="editSubtask(${index})" class="no-validation" readonly value="${subtask}"/>
@@ -202,13 +214,17 @@ function renderListItemHtml(subtask, index) {
     /><img src="./assets/img/subtask-save.png" class="input-icon cursor-pointer" onclick="updateSubtask(${index})"/></div>`;
 }
 
-/**deletes selected subtask from array and renders subtasks */
+/**deletes selected subtask from array and renders subtasks
+ * @param {number} index Index of subtask to be deleted.
+ */
 function deleteSubtask(index) {
   subtasks.splice(index, 1);
   renderSubtasksInForm();
 }
 
-/**sets subtask inline into edit mode */
+/**sets subtask inline into edit mode
+ * @param {number} index Index of subtask to be edited.
+ */
 function editSubtask(index) {
   const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
@@ -216,7 +232,9 @@ function editSubtask(index) {
   subtaskListEl.querySelector("input").readOnly = false;
 }
 
-/**saves edit to subtask array and render innerHtml of subtask */
+/**saves edit to subtask array and render innerHtml of subtask
+ * @param {number} index Index of subtask to be updated.
+ */
 function updateSubtask(index) {
   const subtasksList = document.getElementById("subtaskList");
   const subtaskListEl = subtasksList.children[index];
@@ -247,7 +265,9 @@ function toggleContactSelection(event) {
   }
 }
 
-/**gets contact from contactlist by its Id */
+/**gets contact from contactlist by its Id
+ * @param {number} id Id of contact in backend.
+ */
 function getContactById(id) {
   return contactList.find((contact) => contact.id === id);
 }
@@ -276,7 +296,9 @@ async function validateOverlayAddcontactForm(e) {
   }
 }
 
-/**validates due date input to ensure it's neither empty nor the selected date is in the past */
+/**validates due date input to ensure it's neither empty nor the selected date is in the past
+ * @param {HTMLElement} formElement Input element for due date to be validated.
+ */
 function validateDueDateInput(formElement) {
   let today = new Date();
   today.setHours(0, 0, 0, 0);
