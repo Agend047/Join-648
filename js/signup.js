@@ -9,19 +9,7 @@ function init() {
 /**validates all fields are filled out and password entries match each other. */
 async function validateSignUpForm(e) {
     const form = e.target;
-    let formIsValid = true;
-    const formElements = form.querySelectorAll('input, textarea, select');
-    for (let i = 0; i < formElements.length; i++) {
-        const formElement = formElements[i];
-        if (formElement.id === 'confirm-password-input') {
-            validatePasswordConfirmation(formElement);
-        }
-        formElement.checkValidity();
-        if (!formElement.validity.valid) {
-            formIsValid = false;
-        }
-        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
-    }
+    let formIsValid = validateSignUpFormElements(form);
     e.preventDefault();
     if (!formIsValid) {
         form.classList.add('is-validated');
@@ -30,6 +18,37 @@ async function validateSignUpForm(e) {
         await newUserToContact(newUser);
         saveContacts();
         showSignUpNotification('notification', 'notification-ref');
+    }
+}
+
+function validateSignUpFormElements(form) {
+    let formIsValid = true;
+    const formElements = form.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < formElements.length; i++) {
+        const formElement = formElements[i];
+        validateSignUpFormElement(formElement);
+        if (!formElement.validity.valid) {
+            formIsValid = false;
+        }
+        document.getElementById(`${formElement.id}-error`).textContent = formElement.validationMessage;
+    }
+    return formIsValid;
+}
+
+function validateSignUpFormElement(formElement) {
+    if (formElement.id === 'confirm-password-input') {
+        validatePasswordConfirmation(formElement);
+    } else if (formElement.id === 'name-input') {
+        validateName(formElement);
+    }
+    formElement.checkValidity();
+}
+
+function validateName(formElement) {
+    if (formElement.value.trim().split(' ').length > 1) {
+        formElement.setCustomValidity('');
+    } else {
+        formElement.setCustomValidity('Please enter first and last name.');
     }
 }
 
