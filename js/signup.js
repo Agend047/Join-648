@@ -85,6 +85,7 @@ function initPolicyCheckbox() {
 /**when the privacy policy checkbox is checked by the user, enables the sign up button */
 function toggleSignUpBtn(e) {
     document.getElementById('sign-up-btn').disabled = !e.target.classList.contains('checked');
+    document.getElementById('accept-privacy-policy-hint').classList.toggle('d-none');
 }
 
 window.onload = init;
