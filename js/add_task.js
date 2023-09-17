@@ -331,36 +331,26 @@ async function addContactWithinTaskForm() {
 async function validateAddTaskForm(e) {
   e.preventDefault();
   const form = e.target;
-  let formIsValid = true;
-  let prioValidationMessage;
   const formElements = form.querySelectorAll(
     'input:not([type="radio"]):not(.no-validation), textarea, div.custom-validation'
   );
+  let formIsValid = validateAddTaskFormElements(formElements);
+  if (!formIsValid) {
+    form.classList.add("is-validated");
+  } else {
+    await saveTask();
+  }
+}
+
+function validateAddTaskFormElements(formElements) {
+  let formIsValid = true;
   for (let i = 0; i < formElements.length; i++) {
     const formElement = formElements[i];
     if (formElement.classList.contains("custom-validation")) {
-      switch (formElement.id) {
-        case "assigned-to-input":
-          formElement.readOnly = false;
-          break;
-        case "prio-inputs":
-          prioValidationMessage = validatePrioInput(formElement);
-          break;
-        case "category-input":
-          formElement.readOnly = false;
-          validateCategoryInput(formElement);
-          break;
-        case "due-date-input":
-          validateDueDateInput(formElement);
-          break;
-      }
+      handleCustomValidationForAddTask(formElement);
     }
     if (formElement.id === "prio-inputs") {
-      if (prioValidationMessage !== "") {
-        formIsValid = false;
-      }
-      document.getElementById(`${formElement.id}-error`).textContent =
-        prioValidationMessage;
+      if (!validatePrioInput(formElement)) { formIsValid = false; }
     } else {
       document.getElementById(`${formElement.id}-error`).textContent =
         formElement.validationMessage;
@@ -375,10 +365,21 @@ async function validateAddTaskForm(e) {
       formElement.readOnly = true;
     }
   }
-  if (!formIsValid) {
-    form.classList.add("is-validated");
-  } else {
-    await saveTask();
+  return formIsValid;
+}
+
+function handleCustomValidationForAddTask(formElement) {
+  switch (formElement.id) {
+    case "assigned-to-input":
+      formElement.readOnly = false;
+      break;
+    case "category-input":
+      formElement.readOnly = false;
+      validateCategoryInput(formElement);
+      break;
+    case "due-date-input":
+      validateDueDateInput(formElement);
+      break;
   }
 }
 
@@ -393,14 +394,19 @@ function validateCategoryInput(formElement) {
 
 /**validates that priority is selected */
 function validatePrioInput(formElement) {
+  debugger;
   const inputs = formElement.getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {
     const input = inputs[i];
     if (input.checked) {
-      return "";
+      document.getElementById(`${formElement.id}-error`).textContent =
+        "";
+      return true;
     }
   }
-  return "This field is required.";
+  document.getElementById(`${formElement.id}-error`).textContent =
+    "This field is required";
+  return false;
 }
 
 /**loops through contacts and checks selectedContactIds array to check if the contact is selected. Sets arguments for call of render function for list items. */
