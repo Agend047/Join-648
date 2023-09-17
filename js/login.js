@@ -55,7 +55,10 @@ function validateLoginForm(e) {
   }
 }
 
-/**called upon successful login validation. If remember me checkbox is checked current user data is written into local storage, otherwise to session storage. In both cases, activeUser is set in session storage. */
+/**called upon successful login validation.
+ * If remember me checkbox is checked, current user data is written into local storage, otherwise to session storage.
+ * In both cases, activeUser is set in session storage.
+ * @param {object} user Data of user that is logging in. */
 function proceedLogin(user) {
   if (document.getElementById("remember-me").classList.contains("checked")) {
     localStorage.setItem("loggedIn", JSON.stringify(true));
@@ -69,7 +72,9 @@ function proceedLogin(user) {
   window.location.href = "./summary.html";
 }
 
-/**validates if entered email address exists in users list. */
+/**validates if entered email address exists in users list.
+ * @param {HTMLElement} formElement Input element to validate.
+ */
 function validateLoginEmailInput(formElement) {
   if (getUserByEmail(formElement.value)) {
     formElement.setCustomValidity("");

@@ -342,6 +342,9 @@ async function validateAddTaskForm(e) {
   }
 }
 
+/**Loops through all add task form elements and validates them.
+ * @param {Array} formElements Form elements for add task form.
+ */
 function validateAddTaskFormElements(formElements) {
   let formIsValid = true;
   for (let i = 0; i < formElements.length; i++) {
@@ -368,6 +371,9 @@ function validateAddTaskFormElements(formElements) {
   return formIsValid;
 }
 
+/**calls input-specific validation functions.
+ * @param {HTMLElement} formElement Form element to be validated.
+ */
 function handleCustomValidationForAddTask(formElement) {
   switch (formElement.id) {
     case "assigned-to-input":
@@ -383,7 +389,9 @@ function handleCustomValidationForAddTask(formElement) {
   }
 }
 
-/**validates that category is selected */
+/**validates that category is selected
+ * @param {HTMLElement} formElement Category input element.
+ */
 function validateCategoryInput(formElement) {
   if (formElement.value === "Select task category") {
     formElement.setCustomValidity("This field is required.");
@@ -392,7 +400,9 @@ function validateCategoryInput(formElement) {
   }
 }
 
-/**validates that priority is selected */
+/**validates that priority is selected
+ * @param {HTMLElement} formElement Prio elements container element.
+ */
 function validatePrioInput(formElement) {
   debugger;
   const inputs = formElement.getElementsByTagName("input");
@@ -409,7 +419,9 @@ function validatePrioInput(formElement) {
   return false;
 }
 
-/**loops through contacts and checks selectedContactIds array to check if the contact is selected. Sets arguments for call of render function for list items. */
+/**loops through contacts and checks selectedContactIds array to check if the contact is selected. Sets arguments for call of render function for list items.
+ * @param {Array} contacts Array of contacts to be rendered.
+ */
 function renderAssignedToContactList(contacts) {
   const list = document.getElementById("assigned-to-options");
   let html = "";
@@ -430,7 +442,11 @@ function renderAssignedToContactList(contacts) {
   list.innerHTML = html;
 }
 
-/**renders assigned to contact list item depending on whether that contact is currently selected */
+/**renders assigned to contact list item depending on whether that contact is currently selected
+ * @param {object} contact Contact record to be rendered.
+ * @param {string} selectedAttrValue Value to be added to classList of rendered element. Indicates if contact is currently selected.
+ * @param {string} checkboxSrc Value for checkbox image src attribute to show appropriate checked or unchecked checkbox img.
+ */
 function renderAssignedToContactListItemHtml(
   contact,
   selectedAttrValue,
@@ -451,11 +467,26 @@ function filterAssignedToContacts() {
     .value.toLowerCase();
   const assignedToList = document.getElementById("assigned-to-options");
   const listItems = assignedToList.querySelectorAll("li");
+  renderFilteredAssignedToContacts(searchTerm, listItems);
+}
+
+/**Shows all contact options when user deletes text from search box.
+ * @param {NodeList} listItems li elements to be shown.
+ */
+function resetFilteredAssignedtoContacts(listItems) {
+  for (let i = 0; i < listItems.length; i++) {
+    const listItem = listItems[i];
+    listItem.style.display = "flex";
+  }
+}
+
+/**Hides or shows list items based on user input.
+ * @param {string} searchTerm String entered by user to filter contact list.
+ * @param {NodeList} listItems li elements representing contacts.
+ */
+function renderFilteredAssignedToContacts(searchTerm, listItems) {
   if (searchTerm === "") {
-    for (let i = 0; i < listItems.length; i++) {
-      const listItem = listItems[i];
-      listItem.style.display = "flex";
-    }
+    resetFilteredAssignedtoContacts(listItems);
   } else {
     const results = filterContactListByName(searchTerm);
     for (let i = 0; i < listItems.length; i++) {

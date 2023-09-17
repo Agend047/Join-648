@@ -21,6 +21,9 @@ async function validateSignUpForm(e) {
     }
 }
 
+/**Validates input elements for sign up form.
+ * @param {HTMLElement} form Form element.
+ */
 function validateSignUpFormElements(form) {
     let formIsValid = true;
     const formElements = form.querySelectorAll('input, textarea, select');
@@ -35,6 +38,9 @@ function validateSignUpFormElements(form) {
     return formIsValid;
 }
 
+/**Validates a single element of sign up form.
+ * @param {HTMLElement} formElement Input element to be validated.
+ */
 function validateSignUpFormElement(formElement) {
     if (formElement.id === 'confirm-password-input') {
         validatePasswordConfirmation(formElement);
@@ -44,6 +50,9 @@ function validateSignUpFormElement(formElement) {
     formElement.checkValidity();
 }
 
+/**Validates name in sign up form to ensure both first and last name have been entered.
+ * @param {HTMLElement} formElement Input element.
+ */
 function validateName(formElement) {
     if (formElement.value.trim().split(' ').length > 1) {
         formElement.setCustomValidity('');
@@ -85,7 +94,10 @@ async function newUserToContact(newUser) {
     contactList.push(newContact)
 }
 
-/**called upon successful sign up. triggers notification animation and positions notification right above the form button */
+/**called upon successful sign up. triggers notification animation and positions notification right above the form button.
+ * @param {string} elementId Notification element id.
+ * @param {string} refElementId Reference element id to position the notification vertically.
+ */
 function showSignUpNotification(elementId, refElementId) {
     let top = document.getElementById(refElementId).getBoundingClientRect().top + 'px';
     document.documentElement.style.setProperty('--notification-top-target', top);

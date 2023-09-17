@@ -4,27 +4,7 @@ function initForm() {
     for (let i = 0; i < forms.length; i++) {
         const form = forms[i];
         form.noValidate = true;
-        let validationFunction;
-        switch (form.id) {
-            case 'login-form':
-                validationFunction = validateLoginForm;
-                break;
-            case 'signup-form':
-                validationFunction = validateSignUpForm;
-                break;
-            case 'resetpassword-form':
-                validationFunction = validateResetPasswordForm;
-                break;
-            case 'addtask-form':
-                validationFunction = validateAddTaskForm;
-                break;
-            case 'overlay-add-contact-form':
-                validationFunction = validateOverlayAddcontactForm;
-                break;
-            default:
-                validationFunction = validateStandardForm;
-                break;
-        }
+        let validationFunction = setValidationFunction(form);
         form.addEventListener('submit', validationFunction);
         const passwordInputs = form.querySelectorAll('[type="password"]:has(+ img)');
         for (let i = 0; i < passwordInputs.length; i++) {
@@ -32,6 +12,26 @@ function initForm() {
             passwordInput.addEventListener('focus', togglePasswordIcon);
             passwordInput.addEventListener('blur', togglePasswordIcon);
         }
+    }
+}
+
+/**Sets validation function for form.
+ * @param {HTMLElement} form Form element for which validation function needs to be set.
+ */
+function setValidationFunction(form) {
+    switch (form.id) {
+        case 'login-form':
+            return validateLoginForm;
+        case 'signup-form':
+            return validateSignUpForm;
+        case 'resetpassword-form':
+            return validateResetPasswordForm;
+        case 'addtask-form':
+            return validateAddTaskForm;
+        case 'overlay-add-contact-form':
+            return validateOverlayAddcontactForm;
+        default:
+            return validateStandardForm;
     }
 }
 
