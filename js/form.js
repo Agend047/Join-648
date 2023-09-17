@@ -54,7 +54,10 @@ function validateStandardForm(e) {
     } else { showNotification('notification', form.action); }
 }
 
-/**validates that entered password is correct for the selected user email */
+/**validates that entered password is correct for the selected user email
+ * @param {HTMLElement} formElement Active form element.
+ * @param {string} email Email of user whose password needs to be validated.
+ */
 function validatePassword(formElement, email) {
     if (formElement.value !== getUserByEmail(email).password) {
         formElement.setCustomValidity('Wrong password. Ups! Try again.');
@@ -63,7 +66,9 @@ function validatePassword(formElement, email) {
     }
 }
 
-/**validates that entered passwords in both password inputs match. */
+/**validates that entered passwords in both password inputs match.
+ * @param {HTMLElement} formElement Form element to be validated.
+ */
 function validatePasswordConfirmation(formElement) {
     const password1 = document.getElementById('password-input').value;
     const password2 = document.getElementById('confirm-password-input').value;
