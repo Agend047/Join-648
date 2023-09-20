@@ -258,9 +258,10 @@ async function orderTasks(newTask) {
     showNotification("notification", "./board.html");
   } else {
     taskList[getTaskIndexByID(selectedTask.id)] = newTask;
+    task = newTask;
     await setItemInBackend("taskList", JSON.stringify(taskList));
     initBoardPage();
-    closeCard("editPopUp", true);
+    closeCard("editPopUp", true); 
   }
 }
 

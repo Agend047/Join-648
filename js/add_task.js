@@ -377,7 +377,6 @@ function validateCategoryInput(formElement) {
  * @param {HTMLElement} formElement Prio elements container element.
  */
 function validatePrioInput(formElement) {
-  debugger;
   const inputs = formElement.getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {
     const input = inputs[i];
