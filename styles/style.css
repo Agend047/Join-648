@@ -216,6 +216,7 @@ a {
 #header_help_icon_d:hover {
   width: 25px;
   height: 25px;
+  margin-right: 15px;
 }
 
 #header_svg:hover {
