@@ -68,6 +68,7 @@ function slideOutCard(ID) {
   }, 200);
 }
 
+/**Sets up functions for subtask input and focus to input element */
 function initSubtaskInput() {
   subtaskEl.firstElementChild.addEventListener("focus", toggleSubtaskIcons);
   subtaskEl.firstElementChild.addEventListener("blur", toggleSubtaskIcons);
@@ -85,6 +86,9 @@ function initSubtaskInput() {
     .addEventListener("keypress", addSubtask);
 }
 
+/**Initializes select inputs to offer dropdown functionality.
+ * Adds functions to dropdown options.
+ */
 function initSelectInputs() {
   const selectElements = document.getElementsByClassName("select-input");
   for (let i = 0; i < selectElements.length; i++) {
@@ -107,6 +111,7 @@ function initSelectInputs() {
   }
 }
 
+/**sets up assigned to search field for filtering assigned to contact list. */
 function activateSearchInput(e) {
   e.stopPropagation();
   formControl = document.getElementById("assigned-to-form-control");
@@ -129,6 +134,7 @@ function activateSearchInput(e) {
   backdrop.addEventListener("click", deactivateSearchInput);
 }
 
+/**Resets assigned to search field to read only mode. */
 function deactivateSearchInput(e) {
   try {
     e.stopPropagation();
@@ -154,6 +160,9 @@ function deactivateSearchInput(e) {
   backdrop.removeEventListener("click", deactivateSearchInput);
 }
 
+/**Filters contact list by name.
+ * @param {string} nameQuery Name to search for.
+ */
 function filterContactListByName(nameQuery) {
   const results = contactList.filter((contact) => {
     const names = contact.name.toLowerCase().split(" ");
@@ -187,6 +196,7 @@ async function saveTask() {
   orderTasks(newTask);
 }
 
+/**Creates array based on selected contacts in add task form. */
 function getAssignedToArrayFromForm() {
   let assignedToArray = [];
   const selectedContactElements = document
@@ -199,6 +209,7 @@ function getAssignedToArrayFromForm() {
   return assignedToArray;
 }
 
+/**Evaluates which priority is selected and returns the priority value. */
 function getPriorityFromForm() {
   const prioInputs = document
     .getElementById("prio-inputs")
