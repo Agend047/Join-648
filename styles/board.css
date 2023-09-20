@@ -724,6 +724,7 @@ td {
 .footer-btn {
   display: flex;
   font-weight: 400;
+  min-width: 85px;
   gap: 0.4rem;
   padding: 0;
   cursor: pointer;
@@ -747,7 +748,7 @@ td {
 
 .footer-btn:hover span {
   color: var(--accent-color);
-  /* font-weight: 700; */
+  font-weight: 700;
 }
 
 .footer-btn:hover span.delete-icon {
