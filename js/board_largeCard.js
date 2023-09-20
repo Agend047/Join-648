@@ -30,14 +30,14 @@ function renderLargeCard(largeCard) {
 
 /**
  * Closes the PopUp (large Card view) by hiding it and restoring the scrolling behavior of the body content.
- * @param {string} ID - The ID of the card view element to be closed.
+ * @param {string} elementID - The ID of the card view element to be closed.
  */
-function closeCard(ID, switchPopUp = false) {
+async function closeCard(elementID, switchPopUp = false) {
   if (switchPopUp) {
     let largeCard = document.getElementById("popUpContainer");
     renderLargeCard(largeCard);
   } else {
-    slideOutCard(ID);
+    slideOutCard(elementID);
     document.body.style.overflow = "scroll";
     let mobileTemplate = document.getElementById("mobile-template");
     mobileTemplate.style.zIndex = "3";
@@ -80,7 +80,9 @@ function initSubtaskInput() {
     .getElementById("cancel-subtask")
     .addEventListener("click", cancelSubtask);
   document.getElementById("save-subtask").addEventListener("click", addSubtask);
-  document.getElementById('subtasks-input').addEventListener('keypress', addSubtask)
+  document
+    .getElementById("subtasks-input")
+    .addEventListener("keypress", addSubtask);
 }
 
 function initSelectInputs() {
@@ -128,7 +130,9 @@ function activateSearchInput(e) {
 }
 
 function deactivateSearchInput(e) {
-  try { e.stopPropagation() } catch { };
+  try {
+    e.stopPropagation();
+  } catch {}
   formControl = document.getElementById("assigned-to-form-control");
   const input = formControl.querySelector("input");
   const inputContainer = formControl.querySelector(".input");
@@ -255,8 +259,8 @@ async function orderTasks(newTask) {
   } else {
     taskList[getTaskIndexByID(selectedTask.id)] = newTask;
     await setItemInBackend("taskList", JSON.stringify(taskList));
-    closeCard("editPopUp", true);
     initBoardPage();
+    closeCard("editPopUp", true);
   }
 }
 
