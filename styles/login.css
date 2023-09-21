@@ -52,6 +52,15 @@ main {
   align-items: center;
 }
 
+#accept-policy {
+  display: flex; 
+  width: 240px
+}
+
+#accept-policy a {
+  margin-left: 5px;
+}
+
 footer {
   display: flex;
   flex-wrap: wrap;
