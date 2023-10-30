@@ -138,7 +138,7 @@ function activateSearchInput(e) {
 function deactivateSearchInput(e) {
   try {
     e.stopPropagation();
-  } catch {}
+  } catch { }
   formControl = document.getElementById("assigned-to-form-control");
   const input = formControl.querySelector("input");
   const inputContainer = formControl.querySelector(".input");
@@ -266,13 +266,13 @@ async function orderTasks(newTask) {
   if (selectedTask === null) {
     taskList.push(newTask);
     await setItemInBackend("taskList", JSON.stringify(taskList));
-    showNotification("notification", "./board.html");
+    showNotification("notification", "/Join/board.html");
   } else {
     taskList[getTaskIndexByID(selectedTask.id)] = newTask;
     task = newTask;
     await setItemInBackend("taskList", JSON.stringify(taskList));
     initBoardPage();
-    closeCard("editPopUp", true); 
+    closeCard("editPopUp", true);
   }
 }
 

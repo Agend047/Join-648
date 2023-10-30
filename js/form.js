@@ -6,7 +6,7 @@ function initForm() {
         form.noValidate = true;
         let validationFunction = setValidationFunction(form);
         form.addEventListener('submit', validationFunction);
-        const passwordInputs = form.querySelectorAll('[type="password"]:has(+ img)');
+        const passwordInputs = form.querySelectorAll(`[type="password"]:has(+ img)`);
         for (let i = 0; i < passwordInputs.length; i++) {
             const passwordInput = passwordInputs[i];
             passwordInput.addEventListener('focus', togglePasswordIcon);

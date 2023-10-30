@@ -103,7 +103,7 @@ function showSignUpNotification(elementId, refElementId) {
     document.documentElement.style.setProperty('--notification-top-target', top);
     document.getElementById(elementId).classList.add('triggered');
     setTimeout(() => {
-        window.location.href = './login.html';
+        window.location.href = '/Join/login.html';
     }, 800);
 }
 

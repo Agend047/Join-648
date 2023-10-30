@@ -23,6 +23,10 @@
     width: 100%;
 }
 
+#ListDiv {
+    width: 100%;
+}
+
 .Primary_contacts_btn {
     width: 100%;
     padding: 12px 0px;
@@ -172,12 +176,12 @@
 }
 
 #delete_contact_btn:hover img {
-    content: url('/assets/img/contacts_deleteContacts-active_icon.png');
+    content: url('/Join/assets/img/contacts_deleteContacts-active_icon.png');
 
 }
 
 #edit_contact_btn:hover img {
-    content: url('/assets/img/contacts_editContacts-active_icon.png');
+    content: url('/Join/assets/img/contacts_editContacts-active_icon.png');
 }
 
 
@@ -341,7 +345,7 @@
 }
 
 .Close_btn:hover img {
-    content: url('/assets/img/cancel_icon_blue.png');
+    content: url('/Join/assets/img/cancel_icon_blue.png');
 }
 
 #delete_question {
@@ -410,6 +414,10 @@
     padding-bottom: 16px;
 }
 
+#mainForm {
+    padding-left: 46px;
+}
+
 #cProcess_sider {
     background-color: #2A3647;
     color: white;
@@ -448,7 +456,7 @@
 }
 
 .Cancel_btn:hover img {
-    content: url('/assets/img/cancel_icon_blue.png');
+    content: url('/Join/assets/img/cancel_icon_blue.png');
 }
 
 @media (max-width: 588px) {
@@ -468,18 +476,20 @@
         right: 0;
         bottom: 0;
         border-radius: 40px;
-        height: 88%;
+        height: 70%;
+        width: 80%;
     }
 
     #cProcess_sider {
         display: flex;
-        width: 100vw;
-        height: 100%;
+        width: 100%;
+        height: 45%;
         padding: 30px;
         justify-content: center;
         flex-direction: column;
         border-bottom-left-radius: 0;
         border-top-right-radius: 40px;
+        margin-top: -12%;
     }
 
     #cProcess_logo {
@@ -489,17 +499,16 @@
     #cProcess_ball {
         margin: 0;
         margin-top: -40px;
-        width: 80px;
     }
 
     .Close_btn img {
-        content: url('/assets/img/close-white.png');
+        content: url('/Join/assets/img/close-white.png');
         background-color: var(--secondary-bg-color);
         margin-bottom: -10px;
     }
 
     .Close_btn:hover img {
-        content: url('/assets/img/close-white.png')
+        content: url('/Join/assets/img/close-white.png')
     }
 
     #mobile_contacts_menu {
@@ -511,5 +520,11 @@
 
     #delete_question {
         left: 14vw;
+    }
+
+    @media (max-width: 420px) {
+        .Contact_proccess_div {
+            width: 100%;
+        }
     }
 }

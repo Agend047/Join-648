@@ -24,7 +24,7 @@ function validateResetPasswordForm(e) {
     }
     if (!formIsValid) {
         form.classList.add('is-validated');
-    } else { showNotification('notification', "./login.html"); }
+    } else { showNotification('notification', "/Join/login.html"); }
 }
 
 window.onload = init;

@@ -48,7 +48,7 @@ function verifyUserStatus() {
     !window.location.href.endsWith("legal_notes.html") &&
     !loggedIn
   ) {
-    window.location.href = "./login.html";
+    window.location.href = "/Join/login.html";
   }
 }
 
@@ -241,7 +241,7 @@ function hideArrow() {
     try {
       let arrow = document.querySelector(".Back_Arrow");
       arrow.classList.toggle("d-none");
-    } catch { }
+    } catch { console.log(Error) }
   }, 200);
 }
 
@@ -250,7 +250,7 @@ function hideArrow() {
  */
 function getDocumentName() {
   var path = window.location.pathname;
-  var path = path.split("/").pop();
+  var path = path.split("/Join/").pop(); //CHANGED
   let page = path.split(".html");
   return page[0];
 }
@@ -290,19 +290,19 @@ function saveDocName() {
  */
 function getHelp() {
   saveDocName();
-  window.location.href = "/help.html";
+  window.location.href = "/Join//help.html";
 }
 
 /** Saves current page and leads to legal notes. */
 function toLegal() {
   saveDocName();
-  window.open("/legal_notes.html", "_blank");
+  window.open("/Join/legal_notes.html", "_blank");
 }
 
 /** Saves current page and leads to privacy police.*/
 function toPrivacy() {
   saveDocName();
-  window.open("/privacy_policy.html", "_blank");
+  window.open("/Join/privacy_policy.html", "_blank");
 }
 
 /**
@@ -315,7 +315,7 @@ function backToOrigin() {
     let test = JSON.parse(originSideFromLocalStorage);
     originSide = test;
     localStorage.removeItem(originSide);
-    window.location.href = "/" + originSide + ".html";
+    window.location.href = "/Join/" + originSide + ".html";
   }
 }
 
@@ -387,7 +387,7 @@ function logOut() {
   sessionStorage.setItem("loggedIn", "false");
   sessionStorage.setItem("activeUser", "false");
   window.sessionStorage.setItem("loggedIn", "false");
-  window.location.href = "/login.html";
+  window.location.href = "/Join/login.html";
 }
 
 /**
